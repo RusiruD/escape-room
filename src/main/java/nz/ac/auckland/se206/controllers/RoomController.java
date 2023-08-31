@@ -1,10 +1,17 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.animation.AnimationTimer;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.scene.input.KeyCode;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -12,13 +19,96 @@ import nz.ac.auckland.se206.GameState;
 /** Controller class for the room view. */
 public class RoomController {
 
+  private BooleanProperty wPressed = new SimpleBooleanProperty();
+  private BooleanProperty aPressed = new SimpleBooleanProperty();
+  private BooleanProperty sPressed = new SimpleBooleanProperty();
+  private BooleanProperty dPressed = new SimpleBooleanProperty();
+
+  private BooleanBinding keyPressed = wPressed.or(aPressed).or(sPressed).or(dPressed);
+
+  private int movementSpeed = 2;
+
+  @FXML private Rectangle player;
+  @FXML private Pane room;
+
   @FXML private Rectangle door;
   @FXML private Rectangle window;
   @FXML private Rectangle vase;
 
+  
+  AnimationTimer timer = new AnimationTimer() {
+    @Override
+    public void handle(long timestamp) {
+
+      if (wPressed.get()) {
+        player.setY(player.getY() - movementSpeed);
+      }
+
+      if (aPressed.get()) {
+        player.setX(player.getX() - movementSpeed);
+      }
+
+      if (sPressed.get()) {
+        player.setY(player.getY() + movementSpeed);
+      }
+
+      if (dPressed.get()) {
+        player.setX(player.getX() + movementSpeed);
+      }
+    }
+  };
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
+    movementSetup();
+
+    keyPressed.addListener((observable, aBoolean, t1) -> {
+      if (!aBoolean) {
+        timer.start();
+      } else {
+        timer.stop();
+      }
+    });
+  }
+
+  public void movementSetup() {
+    room.setOnKeyPressed(e -> {
+      if (e.getCode() == KeyCode.W) {
+        wPressed.set(true);
+      }
+
+      if (e.getCode() == KeyCode.A) {
+        aPressed.set(true);
+      }
+
+      if (e.getCode() == KeyCode.S) {
+        sPressed.set(true);
+      }
+
+      if (e.getCode() == KeyCode.D) {
+        dPressed.set(true);
+      }
+
+    });
+
+    room.setOnKeyReleased(e -> {
+      if (e.getCode() == KeyCode.W) {
+        wPressed.set(false);
+      }
+
+      if (e.getCode() == KeyCode.A) {
+        aPressed.set(false);
+      }
+
+      if (e.getCode() == KeyCode.S) {
+        sPressed.set(false);
+      }
+
+      if (e.getCode() == KeyCode.D) {
+        dPressed.set(false);
+      }
+    });
   }
 
   /**
