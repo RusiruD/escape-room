@@ -12,6 +12,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -39,7 +40,6 @@ public class RoomController {
   AnimationTimer timer = new AnimationTimer() {
     @Override
     public void handle(long timestamp) {
-
       if (wPressed.get()) {
         player.setY(player.getY() - movementSpeed);
       }
@@ -74,39 +74,37 @@ public class RoomController {
 
   public void movementSetup() {
     room.setOnKeyPressed(e -> {
-      if (e.getCode() == KeyCode.W) {
-        wPressed.set(true);
-      }
-
-      if (e.getCode() == KeyCode.A) {
-        aPressed.set(true);
-      }
-
-      if (e.getCode() == KeyCode.S) {
-        sPressed.set(true);
-      }
-
-      if (e.getCode() == KeyCode.D) {
-        dPressed.set(true);
+      switch (e.getCode()) {
+        case W: 
+          wPressed.set(true);
+          break;
+        case A:
+          aPressed.set(true);
+          break;
+        case S:
+          sPressed.set(true);
+          break;
+        case D:
+          dPressed.set(true);
+          break;
       }
 
     });
 
     room.setOnKeyReleased(e -> {
-      if (e.getCode() == KeyCode.W) {
-        wPressed.set(false);
-      }
-
-      if (e.getCode() == KeyCode.A) {
-        aPressed.set(false);
-      }
-
-      if (e.getCode() == KeyCode.S) {
-        sPressed.set(false);
-      }
-
-      if (e.getCode() == KeyCode.D) {
-        dPressed.set(false);
+      switch (e.getCode()) {
+        case W: 
+          wPressed.set(false);
+          break;
+        case A:
+          aPressed.set(false);
+          break;
+        case S:
+          sPressed.set(false);
+          break;
+        case D:
+          dPressed.set(false);
+          break;
       }
     });
   }
