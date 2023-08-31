@@ -30,6 +30,8 @@ public class RoomController {
   private int movementSpeed = 2;
 
   @FXML private Rectangle player;
+  @FXML private Rectangle collider;
+
   @FXML private Pane room;
 
   @FXML private Rectangle door;
@@ -37,7 +39,7 @@ public class RoomController {
   @FXML private Rectangle vase;
 
   
-  AnimationTimer timer = new AnimationTimer() {
+  AnimationTimer playerTimer = new AnimationTimer() {
     @Override
     public void handle(long timestamp) {
       if (wPressed.get()) {
@@ -58,6 +60,13 @@ public class RoomController {
     }
   };
 
+  AnimationTimer collisionTimer = new AnimationTimer() {
+    @Override
+    public void handle(long timestamp) {
+      checkCollision(player, collider);
+    }
+  };
+
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
     // Initialization code goes here
@@ -65,9 +74,11 @@ public class RoomController {
 
     keyPressed.addListener((observable, aBoolean, t1) -> {
       if (!aBoolean) {
-        timer.start();
+        playerTimer.start();
+        collisionTimer.start();
       } else {
-        timer.stop();
+        playerTimer.stop();
+        collisionTimer.stop();
       }
     });
   }
@@ -107,6 +118,12 @@ public class RoomController {
           break;
       }
     });
+  }
+
+  private void checkCollision(Rectangle player, Rectangle colliderObject) {
+    if (player.getBoundsInParent().intersects(colliderObject.getBoundsInParent())) {
+      System.out.println("collision");
+    }
   }
 
   /**
