@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
+import nz.ac.auckland.se206.controllers.CorridorController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
@@ -16,6 +17,8 @@ import nz.ac.auckland.se206.SceneManager.AppUi;
 public class App extends Application {
 
   private static Scene scene;
+
+  private static Parent root;
 
   public static void main(final String[] args) {
     launch();
@@ -51,10 +54,14 @@ public class App extends Application {
     SceneManager.addScreen(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addScreen(AppUi.CORRIDOR, loadFxml("corridor"));
 
-    Parent root = SceneManager.getUiRoot(AppUi.CORRIDOR);
+    root = SceneManager.getUiRoot(AppUi.CORRIDOR);
     scene = new Scene(root, 600.0, 600.0);
     stage.setScene(scene);
     stage.show();
+    focus();
+  }
+
+  public static void focus() {
     root.requestFocus();
   }
 

@@ -3,9 +3,11 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
@@ -63,11 +65,7 @@ public class CorridorController {
     }
   };
 
-  /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
-    // Initialization code goes here
-    movementSetup();
-
     keyPressed.addListener((observable, aBoolean, t1) -> {
       if (!aBoolean) {
         playerTimer.start();
@@ -79,49 +77,58 @@ public class CorridorController {
     });
   }
 
-  public void movementSetup() {
-    room.setOnKeyPressed(e -> {
-      switch (e.getCode()) {
-        case W:
-          wPressed.set(true);
-          break;
-        case A:
-          aPressed.set(true);
-          break;
-        case S:
-          sPressed.set(true);
-          break;
-        case D:
-          dPressed.set(true);
-          break;
-      }
-    });
-
-    room.setOnKeyReleased(e -> {
-      switch (e.getCode()) {
-        case W:
-          wPressed.set(false);
-          break;
-        case A:
-          aPressed.set(false);
-          break;
-        case S:
-          sPressed.set(false);
-          break;
-        case D:
-          dPressed.set(false);
-          break;
-      }
-    });
-  }
-
   private void checkCollision(Rectangle player, Rectangle colliderObject) {
     if (player.getBoundsInParent().intersects(colliderObject.getBoundsInParent())) {
       try {
+        stopMovement();
         App.setRoot(SceneManager.AppUi.CHAT);
       } catch (IOException e) {
         e.printStackTrace();
       }
+    }
+  }
+
+  private void stopMovement() {
+    wPressed.set(false);
+    aPressed.set(false);
+    sPressed.set(false);
+    dPressed.set(false);
+  }
+
+  @FXML
+  public void onKeyPressed(KeyEvent event) {
+    System.out.println("key " + event.getCode() + " pressed");
+    switch (event.getCode()) {
+      case W:
+        wPressed.set(true);
+        break;
+      case A:
+        aPressed.set(true);
+        break;
+      case S:
+        sPressed.set(true);
+        break;
+      case D:
+        dPressed.set(true);
+        break;
+    }
+  }
+
+  @FXML
+  public void onKeyReleased(KeyEvent event) {
+    switch (event.getCode()) {
+      case W:
+        wPressed.set(false);
+        break;
+      case A:
+        aPressed.set(false);
+        break;
+      case S:
+        sPressed.set(false);
+        break;
+      case D:
+        dPressed.set(false);
+        break;
     }
   }
 

@@ -105,5 +105,6 @@ public class ChatController {
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
     App.setRoot(SceneManager.AppUi.CORRIDOR);
+    App.focus();
   }
 }
