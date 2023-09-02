@@ -27,7 +27,7 @@ public class CorridorController {
   @FXML
   private Rectangle player;
   @FXML
-  private Rectangle collider;
+  private Rectangle door1;
   @FXML
   private Rectangle left;
   @FXML
@@ -110,7 +110,7 @@ public class CorridorController {
       player.setY(bottom.getY() - player.getHeight() - 1);
     }
 
-    if (player.getBoundsInParent().intersects(collider.getBoundsInParent())) {
+    if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.CHAT);
