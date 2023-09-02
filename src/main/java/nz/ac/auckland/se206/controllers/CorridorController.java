@@ -3,19 +3,14 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 
 public class CorridorController {
@@ -33,6 +28,14 @@ public class CorridorController {
   private Rectangle player;
   @FXML
   private Rectangle collider;
+  @FXML
+  private Rectangle left;
+  @FXML
+  private Rectangle top;
+  @FXML
+  private Rectangle right;
+  @FXML
+  private Rectangle bottom;
 
   @FXML
   private Pane room;
@@ -77,8 +80,37 @@ public class CorridorController {
     });
   }
 
-  private void checkCollision(Rectangle player, Rectangle colliderObject) {
-    if (player.getBoundsInParent().intersects(colliderObject.getBoundsInParent())) {
+  private void checkCollision(Rectangle player, Rectangle object) {
+
+    // hit left wall
+    if (player.getBoundsInParent().intersects(left.getBoundsInParent())) {
+      stopMovement();
+      player.setLayoutX(left.getLayoutX());
+      player.setX(left.getX() + left.getWidth() + 1);
+    }
+
+    // hit right wall
+    if (player.getBoundsInParent().intersects(right.getBoundsInParent())) {
+      stopMovement();
+      player.setLayoutX(right.getLayoutX());
+      player.setX(right.getX() - player.getWidth() - 1);
+    }
+
+    // hit top wall
+    if (player.getBoundsInParent().intersects(top.getBoundsInParent())) {
+      stopMovement();
+      player.setLayoutY(top.getLayoutY());
+      player.setY(top.getY() + top.getHeight() + 1);
+    }
+
+    // hit bottom wall
+    if (player.getBoundsInParent().intersects(bottom.getBoundsInParent())) {
+      stopMovement();
+      player.setLayoutY(bottom.getLayoutY());
+      player.setY(bottom.getY() - player.getHeight() - 1);
+    }
+
+    if (player.getBoundsInParent().intersects(collider.getBoundsInParent())) {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.CHAT);
@@ -97,7 +129,6 @@ public class CorridorController {
 
   @FXML
   public void onKeyPressed(KeyEvent event) {
-    System.out.println("key " + event.getCode() + " pressed");
     switch (event.getCode()) {
       case W:
         wPressed.set(true);
@@ -110,6 +141,8 @@ public class CorridorController {
         break;
       case D:
         dPressed.set(true);
+        break;
+      default:
         break;
     }
   }
@@ -128,6 +161,8 @@ public class CorridorController {
         break;
       case D:
         dPressed.set(false);
+        break;
+      default:
         break;
     }
   }

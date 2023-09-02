@@ -5,7 +5,11 @@
 
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
-      <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="283.0" layoutY="265.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-      <Rectangle fx:id="collider" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="200.0" layoutX="499.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+      <Rectangle fx:id="collider" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="151.0" layoutX="345.0" layoutY="155.0" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+      <Rectangle fx:id="top" arcHeight="5.0" arcWidth="5.0" height="41.0" layoutX="69.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
+      <Rectangle fx:id="bottom" arcHeight="5.0" arcWidth="5.0" height="41.0" layoutX="69.0" layoutY="345.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
+      <Rectangle fx:id="left" arcHeight="5.0" arcWidth="5.0" height="406.0" layoutX="14.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
+      <Rectangle fx:id="right" arcHeight="5.0" arcWidth="5.0" height="406.0" layoutX="494.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
+      <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="229.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
    </children>
 </Pane>
