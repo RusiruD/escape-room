@@ -64,7 +64,7 @@ public class CorridorController {
   AnimationTimer collisionTimer = new AnimationTimer() {
     @Override
     public void handle(long timestamp) {
-      checkCollision(player, collider);
+      checkCollision();
     }
   };
 
@@ -80,7 +80,7 @@ public class CorridorController {
     });
   }
 
-  private void checkCollision(Rectangle player, Rectangle object) {
+  private void checkCollision() {
 
     // hit left wall
     if (player.getBoundsInParent().intersects(left.getBoundsInParent())) {
