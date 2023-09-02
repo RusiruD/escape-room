@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane fx:id="room" focusTraversable="true" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+   <children>
+      <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="283.0" layoutY="265.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+      <Rectangle fx:id="collider" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="200.0" layoutX="499.0" layoutY="154.0" stroke="BLACK" strokeType="INSIDE" width="65.0" />
+   </children>
+</Pane>
