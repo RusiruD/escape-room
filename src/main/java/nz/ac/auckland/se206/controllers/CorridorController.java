@@ -110,6 +110,7 @@ public class CorridorController {
       player.setY(bottom.getY() - player.getHeight() - 1);
     }
 
+    // hit door1
     if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
       try {
         stopMovement();
