@@ -16,6 +16,7 @@ import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
 
 /** Controller class for the room view. */
 public class RoomController {
@@ -99,7 +100,6 @@ public class RoomController {
           dPressed.set(true);
           break;
       }
-
     });
 
     room.setOnKeyReleased(e -> {
@@ -173,7 +173,7 @@ public class RoomController {
 
     if (!GameState.isRiddleResolved) {
       showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      App.setRoot("chat");
+      App.setRoot(SceneManager.AppUi.CHAT);
       return;
     }
 
