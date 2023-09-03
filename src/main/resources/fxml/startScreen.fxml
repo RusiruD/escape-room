@@ -17,5 +17,7 @@
       <ChoiceBox fx:id="timerChoice" layoutX="196.0" layoutY="188.0" prefWidth="150.0" />
       <Button fx:id="btnStart" layoutX="398.0" layoutY="334.0" mnemonicParsing="false" onAction="#onStartGame" text="Button" />
       <Label layoutX="196.0" layoutY="172.0" text="Choose how much time you have" textFill="#fffdfd" />
+      <ChoiceBox fx:id="difficultyChoice" layoutX="236.0" layoutY="110.0" prefWidth="150.0" />
+      <Label layoutX="224.0" layoutY="69.0" text="Choose the difficulty you want to play at" textFill="#fffdfd" />
    </children>
 </Pane>
