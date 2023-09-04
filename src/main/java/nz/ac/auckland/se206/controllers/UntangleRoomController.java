@@ -10,6 +10,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -17,9 +18,14 @@ import javafx.scene.shape.*;
 /** Drag the anchors around to change a polygon's points. */
 public class UntangleRoomController {
   
-  @FXML StackPane pane;
+  @FXML Pane pane;
+  @FXML Rectangle keyItem;
+
+  private boolean isSolved = false;
 
   public void initialize() {
+    keyItem.setVisible(false);
+    keyItem.mouseTransparentProperty().set(true);
     Polygon polygon = createStartingTriangle();
     
     Group root = new Group();
@@ -40,10 +46,10 @@ public class UntangleRoomController {
         220d, 250d
     );
 
-    polygon.setStroke(Color.GOLD);
+    polygon.setStroke(Color.rgb(210, 15, 57, 1));
     polygon.setStrokeWidth(4);
     polygon.setStrokeLineCap(StrokeLineCap.ROUND);
-    polygon.setFill(Color.CORNSILK.deriveColor(0, 1.2, 1, 0.6));
+    polygon.setFill(Color.rgb(230, 69, 83, 0.4));
 
     return polygon;
   }
@@ -85,22 +91,27 @@ public class UntangleRoomController {
         Shape intersection = Shape.intersect(lines.get(i), lines.get(j));
         if (intersection.getBoundsInLocal().getWidth() != -1) {
           System.out.println("Lines " + i + " and " + j + " intersect" + intersection.getBoundsInLocal().getWidth());
-          //return;
+          return;
         }
       }
     }
     //for debug
-    Group liness = new Group();
-    liness.getChildren().addAll(lines);
-    pane.getChildren().add(liness);
+    // Group liness = new Group();
+    // liness.getChildren().addAll(lines);
+    // pane.getChildren().add(liness);
     
     System.out.println(polygon);
-    System.out.println();
     puzzleSolved();
   }
 
   private void puzzleSolved() {
+    if (isSolved) {
+      return;
+    }
+    isSolved = true;
     System.out.println("Puzzle solved");
+    keyItem.setVisible(true);
+    keyItem.mouseTransparentProperty().set(false);
   }
 
   private ObservableList<Anchor> createControlAnchorsFor(final ObservableList<Double> points) {
@@ -124,7 +135,7 @@ public class UntangleRoomController {
         }
       });
 
-      anchors.add(new Anchor(Color.GOLD, xProperty, yProperty));
+      anchors.add(new Anchor(Color.rgb(230, 69, 83, 0.6), xProperty, yProperty));
     }
 
     return anchors;
@@ -196,5 +207,10 @@ public class UntangleRoomController {
 
     // records relative x and y co-ordinates.
     private class Delta { double x, y; }
+  }
+
+  public void getKey() {
+    keyItem.setVisible(false);
+    //TODO: add key to inventory
   }
 }
