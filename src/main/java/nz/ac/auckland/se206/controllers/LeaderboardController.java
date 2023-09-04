@@ -5,32 +5,40 @@ import java.util.Comparator;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.ScoreEntry;
 
 public class LeaderboardController {
   
   @FXML VBox leaderboard;
+  @FXML StackPane graph;
 
   private ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 
+  private int SCALE_FACTOR = 200;
+
   public void initialize() {
-    scores.add(new ScoreEntry("John Doe1", 0, 0));
-    scores.add(new ScoreEntry("John Doe2", 0, 10));
-    scores.add(new ScoreEntry("John Doe3", 0, 20));
-    scores.add(new ScoreEntry("John Doe4", 0, 30));
-    scores.add(new ScoreEntry("John Doe5", 0, 40));
-    scores.add(new ScoreEntry("John Doe6", 0, 50));
-    scores.add(new ScoreEntry("John Doe7", 0, 60));
-    scores.add(new ScoreEntry("John Doe8", 0, 70));
-    scores.add(new ScoreEntry("John Doe9", 0, 80));
-    scores.add(new ScoreEntry("John Doe10", 0, 90));
+    scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe2", 0, 10, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe3", 0, 20, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe7", 0, 60, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe8", 0, 70, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4, 0.2, 0.4, 0.3}));
     sortScores();
+    createGraph();
   }
 
   public void addTime(int time, int position, boolean isFinal) {
@@ -116,6 +124,67 @@ public class LeaderboardController {
     }
     int time = temp.getTime();
     addTime(time, scores.indexOf(temp), true);
+    setGraph(temp);
+  }
+
+  private void createGraph() {
+    double[] max  = {1, 1, 1, 1, 1, 1};
+    double[] point8 = {0.8, 0.8, 0.8, 0.8, 0.8, 0.8};
+    double[] point6 = {0.6, 0.6, 0.6, 0.6, 0.6, 0.6};
+    double[] point4 = {0.4, 0.4, 0.4, 0.4, 0.4, 0.4};
+    double[] point2 = {0.2, 0.2, 0.2, 0.2, 0.2, 0.2};
+    double[] data = scores.get(scores.size() - 1).getStatPoints();
+    Polygon graphMax = createGraphHelper(max);
+    graphMax.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+    graphMax.setFill(Color.TRANSPARENT);
+
+    Polygon graphPoint8 = createGraphHelper(point8);
+    graphPoint8.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+    graphPoint8.setFill(Color.TRANSPARENT);
+
+    Polygon graphPoint6 = createGraphHelper(point6);
+    graphPoint6.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+    graphPoint6.setFill(Color.TRANSPARENT);
+
+    Polygon graphPoint4 = createGraphHelper(point4);
+    graphPoint4.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+    graphPoint4.setFill(Color.TRANSPARENT);
+
+    Polygon graphPoint2 = createGraphHelper(point2);
+    graphPoint2.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+    graphPoint2.setFill(Color.TRANSPARENT);
+
+    Group lines = new Group();
+    for (int i = 0; i < max.length; i++) {
+      double angle = 2 * Math.PI * i / max.length;
+      double radius = max[i] * SCALE_FACTOR;
+      Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      Line line = new Line(0, 0, point.getX(), point.getY());
+      line.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+      lines.getChildren().add(line);;
+    }
+    graph.getChildren().add(lines);
+
+    Polygon graphData = createGraphHelper(data);
+
+    graphData.setFill(Color.CORNSILK.deriveColor(0, 1.2, 1, 0.8));
+    graphData.setStroke(Color.BLACK);
+    System.out.println(graphData.getLayoutX() + " " + graphData.getLayoutY());
+    graph.getChildren().addAll(graphMax, graphPoint8, graphPoint6, graphPoint4, graphPoint2, graphData);
+  }
+
+  private Polygon createGraphHelper(double[] data) {
+    Polygon polygon = new Polygon();
+    for (int i = 0; i < data.length; i++) {
+      double angle = 2 * Math.PI * i / data.length;
+      double radius = data[i] * SCALE_FACTOR;
+      Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      polygon.getPoints().addAll(point.getX(), point.getY());
+    }
+    return polygon;
+  }
+
+  private void setGraph(ScoreEntry temp) {
   }
 
   // private int calcPosChange(int pos) {

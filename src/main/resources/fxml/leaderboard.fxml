@@ -6,12 +6,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LeaderboardController">
    <children>
-      <VBox fx:id="leaderboard" alignment="TOP_CENTER" layoutX="733.0" layoutY="45.0" prefHeight="710.0" prefWidth="500.0" style="-fx-background-color: #d3d3d3;" AnchorPane.rightAnchor="47.0">
+      <VBox fx:id="leaderboard" alignment="TOP_CENTER" layoutX="733.0" layoutY="45.0" prefHeight="710.0" prefWidth="500.0" style="-fx-background-color: #d3d3d3;" AnchorPane.bottomAnchor="45.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="45.0">
          <children>
             <HBox fx:id="boardTitle" alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT" prefHeight="50.0" prefWidth="500.0" style="-fx-background-color: linear-gradient(to bottom, #3a404d, #181c26);">
                <children>
@@ -31,5 +32,6 @@
                </children></HBox>
          </children>
       </VBox>
+      <StackPane fx:id="graph" layoutX="70.0" layoutY="45.0" prefHeight="710.0" prefWidth="600.0" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="600.0" AnchorPane.topAnchor="45.0" />
    </children>
 </AnchorPane>
