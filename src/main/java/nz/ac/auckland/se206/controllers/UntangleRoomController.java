@@ -16,6 +16,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
 /** Drag the anchors around to change a polygon's points. */
+//see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
+//and 
 public class UntangleRoomController {
   
   @FXML Pane pane;
@@ -39,11 +41,11 @@ public class UntangleRoomController {
     Polygon polygon = new Polygon();
 
     polygon.getPoints().setAll(
-        200d, 90d,
-        110d, 110d,
-        250d, 130d,
-        130d, 190d,
-        220d, 250d
+        450d, 80d,
+        720d, 425d,
+        195d, 160d,
+        690d, 160d,
+        225d, 410d
     );
 
     polygon.setStroke(Color.rgb(210, 15, 57, 1));
@@ -91,7 +93,7 @@ public class UntangleRoomController {
         Shape intersection = Shape.intersect(lines.get(i), lines.get(j));
         if (intersection.getBoundsInLocal().getWidth() != -1) {
           System.out.println("Lines " + i + " and " + j + " intersect" + intersection.getBoundsInLocal().getWidth());
-          return;
+          //return;
         }
       }
     }
@@ -135,7 +137,7 @@ public class UntangleRoomController {
         }
       });
 
-      anchors.add(new Anchor(Color.rgb(230, 69, 83, 0.6), xProperty, yProperty));
+      anchors.add(new Anchor(Color.rgb(230, 69, 83, 0.8), xProperty, yProperty));
     }
 
     return anchors;
