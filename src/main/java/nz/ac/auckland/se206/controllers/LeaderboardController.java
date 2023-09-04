@@ -9,7 +9,6 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -42,7 +41,6 @@ public class LeaderboardController {
     scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4, 0.2, 0.4, 0.3}));
     sortScores();
-    createGraph();
   }
 
   public void addTime(String name, int time, int position, boolean isFinal) {
@@ -129,35 +127,25 @@ public class LeaderboardController {
     int time = temp.getTime();
     String name = temp.getName();
     addTime(name, time, scores.indexOf(temp), true);
-    setGraph(temp);
+    createGraph(temp);
   }
 
-  private void createGraph() {
+  private void createGraph(ScoreEntry scoreEntry) {
     double[] max  = {1, 1, 1, 1, 1, 1};
     double[] point8 = {0.8, 0.8, 0.8, 0.8, 0.8, 0.8};
     double[] point6 = {0.6, 0.6, 0.6, 0.6, 0.6, 0.6};
     double[] point4 = {0.4, 0.4, 0.4, 0.4, 0.4, 0.4};
     double[] point2 = {0.2, 0.2, 0.2, 0.2, 0.2, 0.2};
-    double[] data = scores.get(scores.size() - 1).getStatPoints();
     Polygon graphMax = createGraphHelper(max);
-    graphMax.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
     graphMax.setFill(Color.BEIGE.deriveColor(0, 1.2, 1, 0.6));
 
     Polygon graphPoint8 = createGraphHelper(point8);
-    graphPoint8.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
-    graphPoint8.setFill(Color.TRANSPARENT);
 
     Polygon graphPoint6 = createGraphHelper(point6);
-    graphPoint6.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
-    graphPoint6.setFill(Color.TRANSPARENT);
 
     Polygon graphPoint4 = createGraphHelper(point4);
-    graphPoint4.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
-    graphPoint4.setFill(Color.TRANSPARENT);
 
     Polygon graphPoint2 = createGraphHelper(point2);
-    graphPoint2.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
-    graphPoint2.setFill(Color.TRANSPARENT);
 
     Group lines = new Group();
     for (int i = 0; i < max.length; i++) {
@@ -182,16 +170,13 @@ public class LeaderboardController {
       label.setStyle("-fx-text-fill: black; -fx-font-size: 20;");
       labels.getChildren().add(label);
     }
-
+    //2 
     graph.getChildren().add(lines);
     graph.getChildren().add(labels);
-
-    Polygon graphData = createGraphHelper(data);
-
-    graphData.setFill(Color.CORNSILK.deriveColor(0, 1.2, 1, 0.8));
-    graphData.setStroke(Color.BLACK);
-    System.out.println(graphData.getLayoutX() + " " + graphData.getLayoutY());
-    graph.getChildren().addAll(graphMax, graphPoint8, graphPoint6, graphPoint4, graphPoint2, graphData);
+    //5 -> 7 children total (0-6) datat would be 8th (7) child
+    graph.getChildren().addAll(graphMax, graphPoint8, graphPoint6, graphPoint4, graphPoint2);
+    System.out.println(graph.getChildren().size());
+    setGraph(scoreEntry);
   }
 
   private Polygon createGraphHelper(double[] data) {
@@ -201,11 +186,22 @@ public class LeaderboardController {
       double radius = data[i] * SCALE_FACTOR;
       Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
       polygon.getPoints().addAll(point.getX(), point.getY());
+      polygon.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+      polygon.setFill(Color.TRANSPARENT);
     }
     return polygon;
   }
 
-  private void setGraph(ScoreEntry temp) {
+  private void setGraph(ScoreEntry scoreEntry) {
+    if (graph.getChildren().size() > 7) {
+      System.out.println("Removed: "+graph.getChildren().get(7));
+      graph.getChildren().remove(7);
+    }
+    double[] data = scoreEntry.getStatPoints();
+    Polygon graphData = createGraphHelper(data);
+    graphData.setFill(Color.CORNSILK.deriveColor(0, 1.2, 1, 0.8));
+    graphData.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 1));
+    graph.getChildren().add(graphData);
   }
 
   // private int calcPosChange(int pos) {
