@@ -10,7 +10,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
@@ -19,8 +18,6 @@ import javafx.scene.shape.*;
 public class UntangleRoomController {
   
   @FXML StackPane pane;
-
-  private boolean isSolved = false;
 
   public void initialize() {
     Polygon polygon = createStartingTriangle();
@@ -88,14 +85,14 @@ public class UntangleRoomController {
         Shape intersection = Shape.intersect(lines.get(i), lines.get(j));
         if (intersection.getBoundsInLocal().getWidth() != -1) {
           System.out.println("Lines " + i + " and " + j + " intersect" + intersection.getBoundsInLocal().getWidth());
-          return;
+          //return;
         }
       }
     }
     //for debug
-    // Group liness = new Group();
-    // liness.getChildren().addAll(lines);
-    // pane.getChildren().add(liness);
+    Group liness = new Group();
+    liness.getChildren().addAll(lines);
+    pane.getChildren().add(liness);
     
     System.out.println(polygon);
     System.out.println();

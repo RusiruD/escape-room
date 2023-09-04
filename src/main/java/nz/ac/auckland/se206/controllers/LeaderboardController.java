@@ -21,6 +21,10 @@ public class LeaderboardController {
   
   @FXML VBox leaderboard;
   @FXML StackPane graph;
+  @FXML Label curretProfile;
+  @FXML Label label1;
+  @FXML Label label2;
+  @FXML Label label3;
 
   private ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 
@@ -41,7 +45,7 @@ public class LeaderboardController {
     createGraph();
   }
 
-  public void addTime(int time, int position, boolean isFinal) {
+  public void addTime(String name, int time, int position, boolean isFinal) {
     HBox entry = new HBox();
     entry.setPrefHeight(60);
 
@@ -52,7 +56,6 @@ public class LeaderboardController {
     HBox secondHalf = new HBox();
     secondHalf.setPrefWidth(250);
     secondHalf.setAlignment(Pos.CENTER_RIGHT);
-
 
     String hexcode = getColour(position);
 
@@ -79,7 +82,7 @@ public class LeaderboardController {
       return;
     }
 
-    Label nameLabel = new Label("John Doe");
+    Label nameLabel = new Label(name);
     nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
     firstHalf.getChildren().add(nameLabel);
 
@@ -117,13 +120,15 @@ public class LeaderboardController {
         //   posDiff = calcPosChange(i);
         // }
         scores.get(i).setLeaderboardPos(i);
-        addTime(score, i, false);
+        String name = scores.get(i).getName();
+        addTime(name, score, i, false);
       } else {
-        addTime(-1, i, false);
+        addTime(null, -1, i, false);
       }
     }
     int time = temp.getTime();
-    addTime(time, scores.indexOf(temp), true);
+    String name = temp.getName();
+    addTime(name, time, scores.indexOf(temp), true);
     setGraph(temp);
   }
 
@@ -136,7 +141,7 @@ public class LeaderboardController {
     double[] data = scores.get(scores.size() - 1).getStatPoints();
     Polygon graphMax = createGraphHelper(max);
     graphMax.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
-    graphMax.setFill(Color.TRANSPARENT);
+    graphMax.setFill(Color.BEIGE.deriveColor(0, 1.2, 1, 0.6));
 
     Polygon graphPoint8 = createGraphHelper(point8);
     graphPoint8.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
@@ -161,9 +166,25 @@ public class LeaderboardController {
       Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
       Line line = new Line(0, 0, point.getX(), point.getY());
       line.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
-      lines.getChildren().add(line);;
+      lines.getChildren().add(line);
     }
+
+    //to change - get array of string of labels then append to group
+    String[] statStrings = {"lorem ipsum", "lorem ipsum", "lorem ipsum", "lorem ipsum", "lorem ipsum", "lorem ipsum"};
+    Group labels = new Group();
+    for (int i = 0; i < max.length; i++) {
+      double angle = 2 * Math.PI * i / max.length;
+      double radius = max[i] * SCALE_FACTOR + 55;
+      Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      Label label = new Label(statStrings[i]);
+      label.setLayoutX(point.getX());
+      label.setLayoutY(point.getY());
+      label.setStyle("-fx-text-fill: black; -fx-font-size: 20;");
+      labels.getChildren().add(label);
+    }
+
     graph.getChildren().add(lines);
+    graph.getChildren().add(labels);
 
     Polygon graphData = createGraphHelper(data);
 
