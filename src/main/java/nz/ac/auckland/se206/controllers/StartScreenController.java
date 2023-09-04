@@ -2,9 +2,13 @@ package nz.ac.auckland.se206.controllers;
 import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class StartScreenController {
 
@@ -30,22 +34,24 @@ public class StartScreenController {
   private void onStartGame(ActionEvent event) {
     String s=timerChoice.getValue();
     String x=difficultyChoice.getValue();
-    System.out.println(s);
-    System.out.println(x);
+    GameState.gameTime=s;
+    GameState.difficultyLevel=x;
             TimerCounter time = new TimerCounter();
 
     // App.setRoot(SceneManager.AppUi.ROOM);
     
     if(s.equals("2 Minutes")){
-        System.out.println("f");
     time.twoMinutes();
     }
     else if(s.equals("4 Minutes")){
-        System.out.println("d");
         time.fourMinutes();
     }
-    else{System.out.println("w");
+else{    
 time.sixMinutes();}
+Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
+    
+    //sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
   }
 
 
