@@ -46,6 +46,7 @@ public class App extends Application {
     Parent root = loadFxml("room");
     SceneManager.addUi(SceneManager.AppUi.ROOM, root);
     SceneManager.addUi(SceneManager.AppUi.UNTANGLE, loadFxml("untangleRoom"));
+    SceneManager.addUi(SceneManager.AppUi.LEADERBOARD, loadFxml("leaderboard"));
     scene = new Scene(root, 600, 470);
     stage.setScene(scene);
     stage.show();

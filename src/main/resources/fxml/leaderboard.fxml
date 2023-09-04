@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.LeaderboardController">
+   <children>
+      <VBox fx:id="leaderboard" alignment="TOP_CENTER" layoutX="785.0" layoutY="47.0" prefHeight="713.0" prefWidth="453.0" spacing="15.0" style="-fx-background-color: grey;" />
+   </children>
+</AnchorPane>

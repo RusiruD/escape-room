@@ -90,10 +90,9 @@ public class RoomController {
   @FXML
   public void clickVase(MouseEvent event) {
     System.out.println("vase clicked");
-    if (GameState.isRiddleResolved && !GameState.isKeyFound) {
-      showDialog("Info", "Key Found", "You found a key under the vase!");
-      GameState.isKeyFound = true;
-    }
+    Rectangle vase = (Rectangle) event.getSource();
+    Scene scene = vase.getScene();
+    scene.setRoot(SceneManager.getUiRoot(SceneManager.AppUi.LEADERBOARD));
   }
 
   /**

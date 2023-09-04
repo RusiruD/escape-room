@@ -11,13 +11,14 @@ import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
 
 /** Drag the anchors around to change a polygon's points. */
 public class UntangleRoomController {
   
-  @FXML Pane pane;
+  @FXML StackPane pane;
 
   private boolean isSolved = false;
 
