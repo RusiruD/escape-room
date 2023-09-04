@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.UntangleRoomController">
+<AnchorPane maxHeight="800.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-image: url('..\images\background.png');" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.UntangleRoomController">
    <children>
+      <ImageView fitHeight="800.0" fitWidth="1280.0" layoutX="29.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../images/background.png" />
+         </image>
+      </ImageView>
       <Pane fx:id="pane" layoutX="203.0" layoutY="126.0" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: rgb(92, 95, 119, 0.4);" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="100.0" />
       <Rectangle fx:id="keyItem" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="61.0" layoutX="610.0" layoutY="624.0" onMouseClicked="#getKey" stroke="BLACK" strokeType="INSIDE" width="60.0" AnchorPane.bottomAnchor="100.0" />
    </children>
