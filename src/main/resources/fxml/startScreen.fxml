@@ -6,6 +6,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartScreenController">
    <children>
@@ -14,10 +15,26 @@
             <Image url="@../images/caves-background-1.jpg" />
          </image>
       </ImageView>
-      <ChoiceBox fx:id="timerChoice" layoutX="196.0" layoutY="188.0" prefWidth="150.0" />
-      <Button fx:id="btnStart" layoutX="398.0" layoutY="334.0" mnemonicParsing="false" onAction="#onStartGame" text="Start" />
-      <Label layoutX="196.0" layoutY="172.0" text="Choose how much time you have" textFill="#fffdfd" />
-      <ChoiceBox fx:id="difficultyChoice" layoutX="256.0" layoutY="267.0" prefWidth="150.0" />
-      <Label layoutX="210.0" layoutY="250.0" text="Choose the difficulty you want to play at" textFill="#fffdfd" />
+      <ChoiceBox fx:id="timerChoice" layoutX="195.0" layoutY="222.0" prefWidth="150.0" />
+      <Button fx:id="btnStart" layoutX="228.0" layoutY="317.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="51.0" prefWidth="83.0" text="Start" />
+      <Label layoutX="213.0" layoutY="191.0" text="Time to complete" textFill="#ef1414">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <ChoiceBox fx:id="difficultyChoice" layoutX="196.0" layoutY="276.0" prefWidth="150.0" />
+      <Label layoutX="240.0" layoutY="256.0" text="Difficulty" textFill="#e40909">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label layoutX="85.0" layoutY="14.0" text="Welcome To The Dungeon" textFill="#e01313">
+         <font>
+            <Font name="System Bold" size="35.0" />
+         </font>
+      </Label>
+      <Label layoutX="111.0" layoutY="68.0" prefHeight="115.0" prefWidth="412.0" text="Background Information goes here&#10;" textFill="RED" wrapText="true">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
