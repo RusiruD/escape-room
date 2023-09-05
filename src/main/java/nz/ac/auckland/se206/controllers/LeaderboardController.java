@@ -9,6 +9,7 @@ import javafx.geometry.Point2D;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -18,12 +19,14 @@ import nz.ac.auckland.se206.ScoreEntry;
 
 public class LeaderboardController {
   
-  @FXML VBox leaderboard;
   @FXML StackPane graph;
+  @FXML ScrollPane scrollPane;
   @FXML Label curretProfile;
   @FXML Label label1;
   @FXML Label label2;
   @FXML Label label3;
+  @FXML VBox leaderboard;
+  @FXML VBox leaderboardContainer;
 
   private ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 
@@ -36,10 +39,21 @@ public class LeaderboardController {
     scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] {0, 0, 0, 0, 0, 0}));
-    scores.add(new ScoreEntry("John Doe7", 0, 60, new double[] {0, 0, 0, 0, 0, 0}));
-    scores.add(new ScoreEntry("John Doe8", 0, 70, new double[] {0, 0, 0, 0, 0, 0}));
-    scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0, 0}));
-    scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4, 0.2, 0.4, 0.3}));
+    // scores.add(new ScoreEntry("John Doe7", 0, 60, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe8", 0, 70, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4, 0.2, 0.4, 0.3}));
+
+    // scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe2", 0, 10, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe3", 0, 20, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe7", 0, 60, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe8", 0, 70, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0, 0}));
+    // scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4, 0.2, 0.4, 0.3}));
     sortScores();
   }
 
@@ -100,17 +114,21 @@ public class LeaderboardController {
     // secondHalf.getChildren().add(movementLabel);
 
     Label timeLabel = new Label("Time: " + time);
-    timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
+    timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 15 0 10;");
     secondHalf.getChildren().add(timeLabel);
 
     entry.getChildren().addAll(firstHalf, secondHalf);
+    if (isFinal) {
+      leaderboardContainer.getChildren().add(entry);
+      return;
+    }
     leaderboard.getChildren().add(entry);
   }
 
   private void sortScores() {
     ScoreEntry temp = scores.get(scores.size() - 1);
     scores.sort(Comparator.comparing(ScoreEntry::getTime));
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < scores.size(); i++) {
       if (i < scores.size()) {
         int score = scores.get(i).getTime();
         //int posDiff = 0;
@@ -222,7 +240,7 @@ public class LeaderboardController {
   // }
 
   private String getColour(int i) {
-    switch (i) {
+    switch (i % 10) {
       case 0:
         return "#fa6855";
       case 1:
