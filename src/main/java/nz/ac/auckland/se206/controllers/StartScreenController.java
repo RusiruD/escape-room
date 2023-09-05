@@ -32,18 +32,18 @@ public class StartScreenController {
     }
     @FXML
   private void onStartGame(ActionEvent event) {
-    String s=timerChoice.getValue();
-    String x=difficultyChoice.getValue();
-    GameState.gameTime=s;
-    GameState.difficultyLevel=x;
+    String chosenTimeLimit=timerChoice.getValue();
+    String chosenDifficulty=difficultyChoice.getValue();
+    GameState.gameTime=chosenTimeLimit;
+    GameState.difficultyLevel=chosenDifficulty;
             TimerCounter time = new TimerCounter();
 
     // App.setRoot(SceneManager.AppUi.ROOM);
     
-    if(s.equals("2 Minutes")){
+    if(chosenTimeLimit.equals("2 Minutes")){
     time.twoMinutes();
     }
-    else if(s.equals("4 Minutes")){
+    else if(chosenTimeLimit.equals("4 Minutes")){
         time.fourMinutes();
     }
 else{    
