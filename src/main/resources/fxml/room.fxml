@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -15,7 +16,7 @@
       </ImageView>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="43.0" prefWidth="150.0" promptText="Inventory" />
       <Label layoutX="39.0" layoutY="14.0" text="Inventory" textFill="WHITE" />
-      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="25.0" fitWidth="40.0" layoutX="14.0" layoutY="368.0" onMouseClicked="#onParchment1Clicked" onMouseEntered="#onParchment1MouseEntered" onMouseExited="#onParchment1MouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="25.0" fitWidth="40.0" layoutX="54.0" layoutY="305.0" onMouseClicked="#onParchment1Clicked" onMouseEntered="#onParchment1MouseEntered" onMouseExited="#onParchment1MouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
@@ -25,7 +26,7 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="34.0" fitWidth="31.0" layoutX="257.0" layoutY="380.0" onMouseClicked="#onParchment2Clicked" onMouseEntered="#onParchment2MouseEntered" onMouseExited="#onParchment2MouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="34.0" fitWidth="31.0" layoutX="595.0" layoutY="370.0" onMouseClicked="#onParchment2Clicked" onMouseEntered="#onParchment2MouseEntered" onMouseExited="#onParchment2MouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
@@ -35,5 +36,31 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
+      <ImageView fx:id="imgTable" fitHeight="152.0" fitWidth="266.0" layoutX="38.0" layoutY="349.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/table.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment4duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="24.0" fitWidth="40.0" layoutX="123.0" layoutY="352.0" onMouseClicked="#onParchment4DuplicateClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment1duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="24.0" fitWidth="50.0" layoutX="163.0" layoutY="352.0" onMouseClicked="#onParchment1DuplicateClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment3duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="34.0" fitWidth="40.0" layoutX="123.0" layoutY="373.0" onMouseClicked="#onParchment3DuplicateClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment2duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="24.0" fitWidth="40.0" layoutX="163.0" layoutY="373.0" onMouseClicked="#onParchment4DuplicateClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <TextArea fx:id="chatTextArea" layoutX="264.0" layoutY="135.0" prefHeight="200.0" prefWidth="200.0" visible="false" />
    </children>
 </Pane>

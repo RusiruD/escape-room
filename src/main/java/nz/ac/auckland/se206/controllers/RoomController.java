@@ -4,11 +4,18 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class RoomController {
 
@@ -21,6 +28,15 @@ public class RoomController {
   @FXML private ImageView parchment3;
 
   @FXML private ImageView parchment4;
+  @FXML private ImageView parchment1duplicate;
+
+  @FXML private ImageView parchment2duplicate;
+
+  @FXML private ImageView parchment3duplicate;
+  @FXML private TextArea chatTextArea;
+
+  private ChatCompletionRequest chatCompletionRequest;
+  @FXML private ImageView parchment4duplicate;
 
   @FXML
   void onParchment1MouseEntered(MouseEvent event) {
@@ -88,6 +104,18 @@ public class RoomController {
   }
 
   @FXML
+  void onParchment1DuplicateClicked(MouseEvent event) {}
+
+  @FXML
+  void onParchment2DuplicateClicked(MouseEvent event) {}
+
+  @FXML
+  void onParchment3DuplicateClicked(MouseEvent event) {}
+
+  @FXML
+  void onParchment4DuplicateClicked(MouseEvent event) {}
+
+  @FXML
   void onParchment2Clicked(MouseEvent event) {
     // Add parchment2 to the ComboBox
     inventoryChoiceBox.getItems().add("parchment 2");
@@ -114,14 +142,63 @@ public class RoomController {
     parchment4.setDisable(true);
   }
 
+  int x = 0;
+
+  @FXML
+  void onTableClicked(MouseEvent event) {
+    // Check if a parchment is selected in the combo box
+    String selectedParchment = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+
+    if (selectedParchment != null && selectedParchment.contains("parchment")) {
+      inventoryChoiceBox.getItems().remove(selectedParchment);
+      if (selectedParchment.equals("parchment 1")) {
+        if (x == 3) {
+          chatTextArea.setVisible(true);
+        }
+        x++;
+        System.out.println(x);
+        parchment1duplicate.setVisible(true);
+        parchment1duplicate.setDisable(false);
+      }
+      if (selectedParchment.equals("parchment 2")) {
+        if (x == 3) {
+          chatTextArea.setVisible(true);
+        }
+        x++;
+        System.out.println(x);
+        parchment2duplicate.setVisible(true);
+        parchment2duplicate.setDisable(false);
+      }
+      if (selectedParchment.equals("parchment 3")) {
+        if (x == 3) {
+          chatTextArea.setVisible(true);
+        }
+        x++;
+        System.out.println(x);
+        parchment3duplicate.setVisible(true);
+        parchment3duplicate.setDisable(false);
+      }
+      if (selectedParchment.equals("parchment 4")) {
+        if (x == 3) {
+          chatTextArea.setVisible(true);
+        }
+        x++;
+        System.out.println(x);
+        parchment4duplicate.setVisible(true);
+        parchment4duplicate.setDisable(false);
+      }
+
+      System.out.println(selectedParchment);
+    } else {
+      System.out.println("nothing");
+    }
+  }
+
   // Add more methods for handling other parchments if needed
 
   // You can also add more event handlers for your specific requirements
 
   /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
-    // Initialization code goes here
-  }
 
   /**
    * Handles the key pressed event.
@@ -204,5 +281,48 @@ public class RoomController {
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
+  }
+
+  /**
+   * Initializes the chat view, loading the riddle.
+   *
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   */
+  @FXML
+  public void initialize() throws ApiProxyException {
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("boxing bag")));
+  }
+
+  /**
+   * Appends a chat message to the chat text area.
+   *
+   * @param msg the chat message to append
+   */
+  private void appendChatMessage(ChatMessage msg) {
+    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+  }
+
+  /**
+   * Runs the GPT model with a given chat message.
+   *
+   * @param msg the chat message to process
+   * @return the response chat message
+   * @throws ApiProxyException if there is an error communicating with the API proxy
+   */
+  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    chatCompletionRequest.addMessage(msg);
+    try {
+      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
+      chatCompletionRequest.addMessage(result.getChatMessage());
+      appendChatMessage(result.getChatMessage());
+      return result.getChatMessage();
+    } catch (ApiProxyException e) {
+      // TODO handle exception appropriately
+      e.printStackTrace();
+      return null;
+    }
   }
 }
