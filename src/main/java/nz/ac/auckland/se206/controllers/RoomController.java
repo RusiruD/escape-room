@@ -30,6 +30,9 @@ public class RoomController {
   @FXML private ImageView parchment3;
 
   @FXML private ImageView riddle;
+  @FXML private ImageView boulder;
+  private double xOffset = 0;
+  private double yOffset = 0;
 
   @FXML private ImageView parchment4;
   @FXML private ImageView parchment1duplicate;
@@ -358,7 +361,21 @@ public class RoomController {
   public void initialize() throws ApiProxyException {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("boxing bag")));
+    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
+
+    boulder.setOnMousePressed(
+        (MouseEvent event) -> {
+          xOffset = event.getSceneX() - boulder.getLayoutX();
+          yOffset = event.getSceneY() - boulder.getLayoutY();
+        });
+
+    boulder.setOnMouseDragged(
+        (MouseEvent event) -> {
+          double newX = event.getSceneX() - xOffset;
+          double newY = event.getSceneY() - yOffset;
+          boulder.setLayoutX(newX);
+          boulder.setLayoutY(newY);
+        });
   }
 
   /**
