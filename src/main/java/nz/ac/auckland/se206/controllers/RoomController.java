@@ -1,11 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
@@ -24,7 +26,8 @@ public class RoomController {
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private ImageView parchment1;
-
+  @FXML private ImageView imgArt;
+  @FXML private Slider slider;
   @FXML private ImageView parchment2;
 
   @FXML private ImageView parchment3;
@@ -359,6 +362,12 @@ public class RoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    imgArt
+        .rotateProperty()
+        .bind(
+            Bindings.createDoubleBinding(
+                () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
+
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
