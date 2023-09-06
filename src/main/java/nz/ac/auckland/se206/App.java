@@ -47,7 +47,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
     SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
     Parent root = loadFxml("startScreen");
-    scene = new Scene(root, 600, 470);
+    scene = new Scene(root, 700, 570);
     stage.setScene(scene);
     stage.show();
     root.requestFocus();

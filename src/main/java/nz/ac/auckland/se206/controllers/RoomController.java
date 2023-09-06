@@ -1,8 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -27,6 +29,8 @@ public class RoomController {
 
   @FXML private ImageView parchment3;
 
+  @FXML private ImageView riddle;
+
   @FXML private ImageView parchment4;
   @FXML private ImageView parchment1duplicate;
 
@@ -37,6 +41,15 @@ public class RoomController {
 
   private ChatCompletionRequest chatCompletionRequest;
   @FXML private ImageView parchment4duplicate;
+  @FXML private Button btnHideRiddle;
+
+  @FXML
+  void HideRiddle(ActionEvent event) {
+    chatTextArea.setVisible(false);
+    chatTextArea.setDisable(true);
+    btnHideRiddle.setDisable(true);
+    btnHideRiddle.setVisible(false);
+  }
 
   @FXML
   void onParchment1MouseEntered(MouseEvent event) {
@@ -57,6 +70,20 @@ public class RoomController {
     // Increase the size of parchment1 by 150%
     parchment3.setScaleX(1.5);
     parchment3.setScaleY(1.5);
+  }
+
+  @FXML
+  void onRiddleMouseEntered(MouseEvent event) {
+    // Increase the size of parchment1 by 150%
+    riddle.setScaleX(1.5);
+    riddle.setScaleY(1.5);
+  }
+
+  @FXML
+  void onRiddleMouseExited(MouseEvent event) {
+    // Reset the size of parchment1 to 100%
+    riddle.setScaleX(1.0);
+    riddle.setScaleY(1.0);
   }
 
   @FXML
@@ -110,6 +137,17 @@ public class RoomController {
   void onParchment2DuplicateClicked(MouseEvent event) {}
 
   @FXML
+  void onRiddleClicked(MouseEvent event) {
+    riddle.setVisible(false);
+    riddle.setDisable(true);
+    chatTextArea.setVisible(true);
+    chatTextArea.setDisable(false);
+    inventoryChoiceBox.getItems().add("riddle");
+    btnHideRiddle.setDisable(false);
+    btnHideRiddle.setVisible(true);
+  }
+
+  @FXML
   void onParchment3DuplicateClicked(MouseEvent event) {}
 
   @FXML
@@ -148,44 +186,72 @@ public class RoomController {
   void onTableClicked(MouseEvent event) {
     // Check if a parchment is selected in the combo box
     String selectedParchment = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+    if (selectedParchment != null && selectedParchment.contains("riddle")) {
+      inventoryChoiceBox.getItems().remove(selectedParchment);
+
+      riddle.setVisible(true);
+      riddle.setDisable(false);
+      return;
+    }
 
     if (selectedParchment != null && selectedParchment.contains("parchment")) {
       inventoryChoiceBox.getItems().remove(selectedParchment);
       if (selectedParchment.equals("parchment 1")) {
         if (x == 3) {
-          chatTextArea.setVisible(true);
+
+          parchment1duplicate.setVisible(false);
+          parchment2duplicate.setVisible(false);
+          parchment3duplicate.setVisible(false);
+          parchment4duplicate.setVisible(false);
+          return;
         }
         x++;
         System.out.println(x);
         parchment1duplicate.setVisible(true);
-        parchment1duplicate.setDisable(false);
       }
       if (selectedParchment.equals("parchment 2")) {
         if (x == 3) {
-          chatTextArea.setVisible(true);
+          riddle.setVisible(true);
+          riddle.setDisable(false);
+
+          parchment1duplicate.setVisible(false);
+          parchment2duplicate.setVisible(false);
+          parchment3duplicate.setVisible(false);
+
+          parchment4duplicate.setVisible(false);
+          return;
         }
         x++;
-        System.out.println(x);
         parchment2duplicate.setVisible(true);
-        parchment2duplicate.setDisable(false);
       }
       if (selectedParchment.equals("parchment 3")) {
         if (x == 3) {
-          chatTextArea.setVisible(true);
+          riddle.setVisible(true);
+          riddle.setDisable(false);
+
+          parchment1duplicate.setVisible(false);
+          parchment2duplicate.setVisible(false);
+          parchment3duplicate.setVisible(false);
+          parchment4duplicate.setVisible(false);
+          return;
         }
         x++;
         System.out.println(x);
         parchment3duplicate.setVisible(true);
-        parchment3duplicate.setDisable(false);
       }
       if (selectedParchment.equals("parchment 4")) {
         if (x == 3) {
-          chatTextArea.setVisible(true);
+          riddle.setVisible(true);
+          riddle.setDisable(false);
+
+          parchment1duplicate.setVisible(false);
+          parchment3duplicate.setVisible(false);
+          parchment4duplicate.setVisible(false);
+          return;
         }
         x++;
         System.out.println(x);
         parchment4duplicate.setVisible(true);
-        parchment4duplicate.setDisable(false);
       }
 
       System.out.println(selectedParchment);
