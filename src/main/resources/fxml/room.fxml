@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="751.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="751.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fx:id="imgBackground" fitHeight="522.0" fitWidth="752.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -18,27 +18,27 @@
       </ImageView>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="43.0" prefWidth="150.0" promptText="Inventory" />
       <Label layoutX="39.0" layoutY="14.0" text="Inventory" textFill="WHITE" />
-      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="25.0" fitWidth="40.0" layoutX="54.0" layoutY="305.0" onMouseClicked="#onParchment1Clicked" onMouseEntered="#onParchment1MouseEntered" onMouseExited="#onParchment1MouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="25.0" fitWidth="40.0" layoutX="11.0" layoutY="305.0" onMouseClicked="#onParchment1Clicked" onMouseEntered="#onParchment1MouseEntered" onMouseExited="#onParchment1MouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="parchment4" blendMode="HARD_LIGHT" fitHeight="33.0" fitWidth="31.0" layoutX="564.0" layoutY="287.0" onMouseClicked="#onParchment4Clicked" onMouseEntered="#onParchment4MouseEntered" onMouseExited="#onParchment4MouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="parchment4" blendMode="HARD_LIGHT" fitHeight="33.0" fitWidth="31.0" layoutX="593.0" layoutY="286.0" onMouseClicked="#onParchment4Clicked" onMouseEntered="#onParchment4MouseEntered" onMouseExited="#onParchment4MouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="34.0" fitWidth="31.0" layoutX="595.0" layoutY="370.0" onMouseClicked="#onParchment2Clicked" onMouseEntered="#onParchment2MouseEntered" onMouseExited="#onParchment2MouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="34.0" fitWidth="31.0" layoutX="695.0" layoutY="431.0" onMouseClicked="#onParchment2Clicked" onMouseEntered="#onParchment2MouseEntered" onMouseExited="#onParchment2MouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="parchment3" blendMode="HARD_LIGHT" fitHeight="58.0" fitWidth="31.0" layoutX="208.0" layoutY="253.0" onMouseClicked="#onParchment3Clicked" onMouseEntered="#onParchment3MouseEntered" onMouseExited="#onParchment3MouseExited" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="parchment3" blendMode="HARD_LIGHT" fitHeight="58.0" fitWidth="31.0" layoutX="191.0" layoutY="267.0" onMouseClicked="#onParchment3Clicked" onMouseEntered="#onParchment3MouseEntered" onMouseExited="#onParchment3MouseExited" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="imgTable" fitHeight="152.0" fitWidth="266.0" layoutX="38.0" layoutY="349.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgTable" fitHeight="152.0" fitWidth="266.0" layoutX="31.0" layoutY="344.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />
          </image>
@@ -71,15 +71,16 @@
       </ImageView>
       <Button fx:id="btnHideRiddle" disable="true" layoutX="449.0" layoutY="361.0" mnemonicParsing="false" onAction="#HideRiddle" text="Hide" visible="false" />
       <Slider fx:id="slider" blendMode="SOFT_LIGHT" layoutX="203.0" layoutY="172.0" prefHeight="8.0" prefWidth="56.0" rotate="90.0" />
-      <ImageView fx:id="imgArt" blendMode="HARD_LIGHT" fitHeight="50.0" fitWidth="50.0" layoutX="540.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgArt" blendMode="HARD_LIGHT" fitHeight="50.0" fitWidth="50.0" layoutX="540.0" layoutY="154.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
          <image>
             <Image url="@../images/art.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="109.0" fitWidth="133.0" layoutX="342.0" layoutY="233.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="109.0" fitWidth="133.0" layoutX="422.0" layoutY="343.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
          <image>
             <Image url="@../images/a_0.png" />
          </image>
       </ImageView>
+      <Label fx:id="lblTime" layoutX="610.0" layoutY="27.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE" />
    </children>
 </Pane>

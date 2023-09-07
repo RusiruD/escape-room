@@ -34,7 +34,8 @@ public class StartScreenController {
     String chosenDifficulty = difficultyChoice.getValue();
     GameState.gameTime = chosenTimeLimit;
     GameState.difficultyLevel = chosenDifficulty;
-    TimerCounter time = new TimerCounter();
+
+    TimerCounter time = new TimerCounter(RoomController.getInstance());
 
     // App.setRoot(SceneManager.AppUi.ROOM);
 

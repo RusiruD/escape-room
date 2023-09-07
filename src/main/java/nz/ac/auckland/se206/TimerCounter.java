@@ -3,17 +3,20 @@ package nz.ac.auckland.se206;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
+import nz.ac.auckland.se206.controllers.RoomController;
 
 public class TimerCounter {
 
   private int timeCounter1;
   private int timeCounter2;
   private int timeCounter3;
+  private RoomController roomController;
 
-  public TimerCounter() {
+  public TimerCounter(RoomController roomController) {
+    this.roomController = roomController;
     timeCounter1 = 120;
-    timeCounter2=240;
-    timeCounter3=360;
+    timeCounter2 = 240;
+    timeCounter3 = 360;
   }
 
   public void twoMinutes() {
@@ -34,7 +37,7 @@ public class TimerCounter {
                     () -> {
 
                       // Updating the timer counter across the multiple screens
-                      /*App.getRoomController().updateTime(string);
+                      roomController.updateTimerLabel(string); /*
                       App.getChatController().updateTime(string);
                       App.getKeypadController().updateTime(string);
                       App.getHelpController().updateTime(string);
@@ -53,7 +56,6 @@ public class TimerCounter {
             1000);
   }
 
-  
   public void fourMinutes() {
     new Timer()
         .schedule(
@@ -70,7 +72,7 @@ public class TimerCounter {
 
                 Platform.runLater(
                     () -> {
-
+                      roomController.updateTimerLabel(string);
                       // Updating the timer counter across the multiple screens
                       /*App.getRoomController().updateTime(string);
                       App.getChatController().updateTime(string);
@@ -98,7 +100,7 @@ public class TimerCounter {
 
               @Override
               public void run() {
-                timeCounter2--;
+                timeCounter3--;
 
                 // Formatting the seconds to be in a presentable/readable format
                 int min = timeCounter3 / 60;
@@ -107,7 +109,7 @@ public class TimerCounter {
 
                 Platform.runLater(
                     () -> {
-
+                      roomController.updateTimerLabel(string);
                       // Updating the timer counter across the multiple screens
                       /*App.getRoomController().updateTime(string);
                       App.getChatController().updateTime(string);
@@ -127,8 +129,10 @@ public class TimerCounter {
             0,
             1000);
   }
+
   private void gameOver() {
-    //Dialogue.showDialog("Game Over", "You've lost! :(", "You ran out of time to solve the riddle!");
+    // Dialogue.showDialog("Game Over", "You've lost! :(", "You ran out of time to solve the
+    // riddle!");
     System.exit(0);
   }
 }

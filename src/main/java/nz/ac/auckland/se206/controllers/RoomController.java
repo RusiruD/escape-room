@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
@@ -22,6 +23,11 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class RoomController {
+  private static RoomController instance;
+
+  public static RoomController getInstance() {
+    return instance;
+  }
 
   @FXML private ComboBox<String> inventoryChoiceBox;
 
@@ -29,7 +35,7 @@ public class RoomController {
   @FXML private ImageView imgArt;
   @FXML private Slider slider;
   @FXML private ImageView parchment2;
-
+  @FXML private Label lblTime;
   @FXML private ImageView parchment3;
 
   @FXML private ImageView riddle;
@@ -190,6 +196,7 @@ public class RoomController {
 
   @FXML
   void onTableClicked(MouseEvent event) {
+
     // Check if a parchment is selected in the combo box
     String selectedParchment = inventoryChoiceBox.getSelectionModel().getSelectedItem();
     if (selectedParchment != null && selectedParchment.contains("riddle")) {
@@ -356,6 +363,11 @@ public class RoomController {
     System.out.println("window clicked");
   }
 
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
+  }
+
   /**
    * Initializes the chat view, loading the riddle.
    *
@@ -363,6 +375,7 @@ public class RoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    instance = this;
     System.out.println(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
     System.out.println(
         "CSS File URL: " + getClass().getResource("/css/roomStylesheet.css").toExternalForm());
