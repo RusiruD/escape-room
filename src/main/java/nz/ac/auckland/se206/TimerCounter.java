@@ -37,8 +37,9 @@ public class TimerCounter {
                     () -> {
 
                       // Updating the timer counter across the multiple screens
-                      roomController.updateTimerLabel(string); /*
-                      App.getChatController().updateTime(string);
+                      roomController.updateTimerLabel(string);
+
+                      /*App.getChatController().updateTime(string);
                       App.getKeypadController().updateTime(string);
                       App.getHelpController().updateTime(string);
                       App.getDrawerController().updateTime(string);*/
