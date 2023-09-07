@@ -204,7 +204,8 @@ public class RoomController {
       inventoryChoiceBox.getItems().remove(selectedParchment);
       if (selectedParchment.equals("parchment 1")) {
         if (x == 3) {
-
+          riddle.setVisible(true);
+          riddle.setDisable(false);
           parchment1duplicate.setVisible(false);
           parchment2duplicate.setVisible(false);
           parchment3duplicate.setVisible(false);
@@ -362,6 +363,15 @@ public class RoomController {
    */
   @FXML
   public void initialize() throws ApiProxyException {
+    System.out.println(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
+    System.out.println(
+        "CSS File URL: " + getClass().getResource("/css/roomStylesheet.css").toExternalForm());
+    System.out.println("Style Classes: " + chatTextArea.getStyleClass());
+    chatTextArea
+        .getStylesheets()
+        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
+    chatTextArea.getStyleClass().add("text-area .content");
+    btnHideRiddle.getStyleClass().add("custom-button");
     imgArt
         .rotateProperty()
         .bind(
