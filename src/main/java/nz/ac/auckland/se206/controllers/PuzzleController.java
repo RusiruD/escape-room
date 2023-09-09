@@ -12,8 +12,8 @@ import nz.ac.auckland.se206.SceneManager.AppUi;;
 
 public class PuzzleController {
 
-    private int[][] tiles;
-    private int[][] solution;
+    private String[][] tiles;
+    private String[][] solution;
     @FXML
     private ImageView one, two, three, four, five, six, zero, eight, nine;
     private boolean hasSelection = false;
@@ -21,8 +21,9 @@ public class PuzzleController {
     private ImageView secondSelection;
 
     public void initialize() {
-        tiles = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 0, 8, 9 } };
-        solution = new int[][] { { 1, 2, 3 }, { 4, 5, 6 }, { 9, 8, 0 } };
+        tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" }, { "zero", "eight", "nine" } };
+        solution = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
+                { "nine", "eight", "zero" } };
     }
 
     @FXML
@@ -47,12 +48,28 @@ public class PuzzleController {
     }
 
     private void swapTiles(ImageView a, ImageView b) {
-        double aX = a.getLayoutX();
-        double aY = a.getLayoutY();
-        a.setLayoutX(b.getLayoutX());
-        a.setLayoutY(b.getLayoutY());
-        b.setLayoutX(aX);
-        b.setLayoutY(aY);
+        int[] aPos = findPos(a.getId());
+        int[] bPos = findPos(b.getId());
+        if (Math.abs(aPos[0] - bPos[0]) == 1 ^ Math.abs(aPos[1] - bPos[1]) == 1) {
+            tiles[aPos[0]][aPos[1]] = b.getId();
+            tiles[bPos[0]][bPos[1]] = a.getId();
+            double aX = a.getLayoutX();
+            double aY = a.getLayoutY();
+            a.setLayoutX(b.getLayoutX());
+            a.setLayoutY(b.getLayoutY());
+            b.setLayoutX(aX);
+            b.setLayoutY(aY);
+        }
     }
 
+    private int[] findPos(String s) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (tiles[i][j].equals(s)) {
+                    return new int[] { i, j };
+                }
+            }
+        }
+        return null;
+    }
 }
