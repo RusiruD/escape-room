@@ -25,6 +25,7 @@ public class App extends Application {
 
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
     scene.setRoot(SceneManager.getUiRoot(appUi));
+    root.requestFocus();
   }
 
   /**
@@ -55,7 +56,7 @@ public class App extends Application {
     SceneManager.addScreen(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
     SceneManager.addScreen(AppUi.PUZZLE, loadFxml("puzzle"));
 
-    root = SceneManager.getUiRoot(AppUi.PUZZLE);
+    root = SceneManager.getUiRoot(AppUi.CORRIDOR);
     scene = new Scene(root, 600.0, 600.0);
     stage.setScene(scene);
     stage.show();

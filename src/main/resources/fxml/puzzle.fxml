@@ -23,7 +23,7 @@
             <Image url="@../images/numbers/three.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="four" fitHeight="106.0" fitWidth="114.0" layoutX="20.0" layoutY="129.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="four" fitHeight="106.0" fitWidth="121.0" layoutX="20.0" layoutY="129.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/four.jpg" />
          </image>

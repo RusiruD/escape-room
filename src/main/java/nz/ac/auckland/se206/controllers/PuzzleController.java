@@ -1,12 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 import javafx.fxml.FXML;
+import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager.AppUi;;
 
 public class PuzzleController {
@@ -18,7 +19,6 @@ public class PuzzleController {
   private boolean hasSelection = false;
   private ImageView firstSelection;
   private ImageView secondSelection;
-  private boolean solved = false;
 
   public void initialize() {
     tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" }, { "zero", "eight", "nine" } };
@@ -31,25 +31,25 @@ public class PuzzleController {
     App.setRoot(AppUi.PUZZLEROOM);
   }
 
-  private void clicked(ImageView object) throws IOException {
-
+  private void clicked(ImageView object) {
     if (!hasSelection) {
       hasSelection = true;
       firstSelection = object;
+      firstSelection.setBlendMode(BlendMode.RED);
     } else {
       hasSelection = false;
       secondSelection = object;
       swapTiles(firstSelection, secondSelection);
+      firstSelection.setBlendMode(BlendMode.SRC_OVER);
     }
-
   }
 
   @FXML
   private void clickedTile(MouseEvent event) throws IOException {
-    clicked(((ImageView) event.getSource()));
+    clicked((ImageView) event.getSource());
   }
 
-  private void swapTiles(ImageView a, ImageView b) throws IOException {
+  private void swapTiles(ImageView a, ImageView b) {
     int[] aPos = findPos(a.getId());
     int[] bPos = findPos(b.getId());
     if (Math.abs(aPos[0] - bPos[0]) == 1 ^ Math.abs(aPos[1] - bPos[1]) == 1) {
@@ -62,17 +62,7 @@ public class PuzzleController {
       b.setLayoutX(aX);
       b.setLayoutY(aY);
     }
-    int counter = 0;
-    for (int i = 0; i < 3; i++) {
-      for (int j = 0; j < 3; j++) {
-        if (tiles[i][j].equals(solution[i][j]))
-          counter++;
-      }
-    }
-    if (counter == 9) {
-      App.setRoot(AppUi.PUZZLEROOM);
-      return;
-    }
+    checkSolution();
   }
 
   private int[] findPos(String s) {
@@ -83,5 +73,18 @@ public class PuzzleController {
       }
     }
     return null;
+  }
+
+  private void checkSolution() {
+    int counter = 0;
+    for (int i = 0; i < 3; i++) {
+      for (int j = 0; j < 3; j++) {
+        if (tiles[i][j].equals(solution[i][j]))
+          counter++;
+      }
+    }
+    if (counter == 9) {
+      GameState.puzzleRoomSolved = true;
+    }
   }
 }
