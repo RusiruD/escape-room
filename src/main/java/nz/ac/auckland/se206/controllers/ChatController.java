@@ -8,6 +8,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -17,21 +18,24 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 /** Controller class for the chat view. */
 public class ChatController {
-  @FXML private TextArea chatTextArea;
-  @FXML private TextField inputText;
-  @FXML private Button sendButton;
+  @FXML
+  private TextArea chatTextArea;
+  @FXML
+  private TextField inputText;
+  @FXML
+  private Button sendButton;
 
   private ChatCompletionRequest chatCompletionRequest;
 
   /**
    * Initializes the chat view, loading the riddle.
    *
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   @FXML
   public void initialize() throws ApiProxyException {
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("vase")));
   }
 
@@ -49,7 +53,8 @@ public class ChatController {
    *
    * @param msg the chat message to process
    * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
@@ -70,8 +75,9 @@ public class ChatController {
    * Sends a message to the GPT model.
    *
    * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
+   * @throws IOException       if there is an I/O error
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
@@ -92,11 +98,13 @@ public class ChatController {
    * Navigates back to the previous view.
    *
    * @param event the action event triggered by the go back button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
+   * @throws IOException       if there is an I/O error
    */
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot("room");
+    App.setRoot(SceneManager.AppUi.CORRIDOR);
+    App.focus();
   }
 }

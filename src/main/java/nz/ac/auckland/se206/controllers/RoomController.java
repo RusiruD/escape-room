@@ -8,13 +8,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.SceneManager;
 
 /** Controller class for the room view. */
 public class RoomController {
 
-  @FXML private Rectangle door;
-  @FXML private Rectangle window;
-  @FXML private Rectangle vase;
+  @FXML
+  private Rectangle door;
+  @FXML
+  private Rectangle window;
+  @FXML
+  private Rectangle vase;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -44,9 +48,9 @@ public class RoomController {
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
-   * @param title the title of the dialog box
+   * @param title      the title of the dialog box
    * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
+   * @param message    the message content of the dialog box
    */
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -68,7 +72,7 @@ public class RoomController {
 
     if (!GameState.isRiddleResolved) {
       showDialog("Info", "Riddle", "You need to resolve the riddle!");
-      App.setRoot("chat");
+      App.setRoot(SceneManager.AppUi.CHAT);
       return;
     }
 
