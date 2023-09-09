@@ -100,6 +100,23 @@ public class RoomController {
   }
 
   @FXML
+  void allowImageToBeDragged(ImageView image) {
+    image.setOnMousePressed(
+        (MouseEvent event) -> {
+          xOffset = event.getSceneX() - image.getLayoutX();
+          yOffset = event.getSceneY() - image.getLayoutY();
+        });
+
+    image.setOnMouseDragged(
+        (MouseEvent event) -> {
+          double newX = event.getSceneX() - xOffset;
+          double newY = event.getSceneY() - yOffset;
+          image.setLayoutX(newX);
+          image.setLayoutY(newY);
+        });
+  }
+
+  @FXML
   void onParchment1MouseEntered(MouseEvent event) {
     // Increase the size of parchment1 by 150%
     enlarge(parchment1);
@@ -165,16 +182,6 @@ public class RoomController {
   }
 
   @FXML
-  void onRiddleClicked(MouseEvent event) {
-
-    chatTextArea.setVisible(true);
-    chatTextArea.setDisable(false);
-    addToInventory(riddle);
-    btnHideRiddle.setDisable(false);
-    btnHideRiddle.setVisible(true);
-  }
-
-  @FXML
   void onParchment2Clicked(MouseEvent event) {
     // Add parchment2 to the ComboBox
     addToInventory(parchment2);
@@ -192,81 +199,79 @@ public class RoomController {
     addToInventory(parchment4);
   }
 
-  int x = 0;
+  @FXML
+  void onRiddleClicked(MouseEvent event) {
+
+    chatTextArea.setVisible(true);
+    chatTextArea.setDisable(false);
+    addToInventory(riddle);
+    btnHideRiddle.setDisable(false);
+    btnHideRiddle.setVisible(true);
+  }
+
+  int parchmentPieces = 0;
 
   @FXML
   void onTableClicked(MouseEvent event) {
 
     // Check if a parchment is selected in the combo box
-    String selectedParchment = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-    if (selectedParchment != null && selectedParchment.contains("riddle")) {
-      inventoryChoiceBox.getItems().remove(selectedParchment);
+    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+    if (selectedItem != null && selectedItem.contains("riddle")) {
+      inventoryChoiceBox.getItems().remove(selectedItem);
 
       showRiddleWithoutButton();
       return;
     }
 
-    if (selectedParchment != null && selectedParchment.contains("parchment")) {
-      inventoryChoiceBox.getItems().remove(selectedParchment);
-      if (selectedParchment.equals("parchment1")) {
+    if (selectedItem != null && selectedItem.contains("parchment")) {
+      inventoryChoiceBox.getItems().remove(selectedItem);
+      if (selectedItem.equals("parchment1")) {
 
-        if (x == 3) {
+        if (parchmentPieces == 3) {
           showRiddle();
           hideParchment();
           return;
         }
-        x++;
-        System.out.println(x);
+        parchmentPieces++;
+
         parchment1duplicate.setVisible(true);
       }
-      if (selectedParchment.equals("parchment2")) {
-        if (x == 3) {
+      if (selectedItem.equals("parchment2")) {
+        if (parchmentPieces == 3) {
           showRiddle();
 
           hideParchment();
           return;
         }
-        x++;
+        parchmentPieces++;
         parchment2duplicate.setVisible(true);
       }
-      if (selectedParchment.equals("parchment3")) {
-        if (x == 3) {
+      if (selectedItem.equals("parchment3")) {
+        if (parchmentPieces == 3) {
           showRiddle();
           hideParchment();
           return;
         }
-        x++;
-        System.out.println(x);
+        parchmentPieces++;
+
         parchment3duplicate.setVisible(true);
       }
-      if (selectedParchment.equals("parchment4")) {
-        if (x == 3) {
+      if (selectedItem.equals("parchment4")) {
+        if (parchmentPieces == 3) {
           showRiddle();
 
           hideParchment();
           return;
         }
-        x++;
+        parchmentPieces++;
 
         parchment4duplicate.setVisible(true);
       }
 
     } else {
-      System.out.println("nothing");
+
     }
   }
-
-  // Add more methods for handling other parchments if needed
-
-  // You can also add more event handlers for your specific requirements
-
-  /** Initializes the room view, it is called when the room loads. */
-
-  /**
-   * Handles the key pressed event.
-   *
-   * @param event the key event
-   */
 
   /**
    * Displays a dialog box with the given title, header text, and message.
@@ -283,24 +288,6 @@ public class RoomController {
     alert.showAndWait();
   }
 
-  /**
-   * Handles the click event on the door.
-   *
-   * @param event the mouse event
-   * @throws IOException if there is an error loading the chat view
-   */
-
-  /**
-   * Handles the click event on the vase.
-   *
-   * @param event the mouse event
-   */
-
-  /**
-   * Handles the click event on the window.
-   *
-   * @param event the mouse event
-   */
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
@@ -314,10 +301,7 @@ public class RoomController {
   @FXML
   public void initialize() throws ApiProxyException {
     instance = this;
-    System.out.println(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
-    System.out.println(
-        "CSS File URL: " + getClass().getResource("/css/roomStylesheet.css").toExternalForm());
-    System.out.println("Style Classes: " + chatTextArea.getStyleClass());
+
     chatTextArea
         .getStylesheets()
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
@@ -333,19 +317,7 @@ public class RoomController {
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
 
-    boulder.setOnMousePressed(
-        (MouseEvent event) -> {
-          xOffset = event.getSceneX() - boulder.getLayoutX();
-          yOffset = event.getSceneY() - boulder.getLayoutY();
-        });
-
-    boulder.setOnMouseDragged(
-        (MouseEvent event) -> {
-          double newX = event.getSceneX() - xOffset;
-          double newY = event.getSceneY() - yOffset;
-          boulder.setLayoutX(newX);
-          boulder.setLayoutY(newY);
-        });
+    allowImageToBeDragged(boulder);
   }
 
   /**
