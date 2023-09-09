@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.SceneManager.AppUi;
-import nz.ac.auckland.se206.controllers.CorridorController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
@@ -53,8 +52,9 @@ public class App extends Application {
     SceneManager.addScreen(AppUi.ROOM, loadFxml("room"));
     SceneManager.addScreen(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addScreen(AppUi.CORRIDOR, loadFxml("corridor"));
+    SceneManager.addScreen(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
 
-    root = SceneManager.getUiRoot(AppUi.CORRIDOR);
+    root = SceneManager.getUiRoot(AppUi.PUZZLEROOM);
     scene = new Scene(root, 600.0, 600.0);
     stage.setScene(scene);
     stage.show();
