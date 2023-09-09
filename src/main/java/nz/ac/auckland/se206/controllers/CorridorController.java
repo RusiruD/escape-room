@@ -114,7 +114,7 @@ public class CorridorController {
     if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
       try {
         stopMovement();
-        App.setRoot(SceneManager.AppUi.CHAT);
+        App.setRoot(SceneManager.AppUi.PUZZLEROOM);
       } catch (IOException e) {
         e.printStackTrace();
       }
