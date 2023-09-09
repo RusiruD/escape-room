@@ -32,11 +32,12 @@ public class PuzzleController {
   }
 
   private void clicked(ImageView object) {
-    if (!hasSelection) {
+
+    if (!hasSelection && !object.equals(zero)) {
       hasSelection = true;
       firstSelection = object;
       firstSelection.setBlendMode(BlendMode.RED);
-    } else {
+    } else if (hasSelection) {
       hasSelection = false;
       secondSelection = object;
       swapTiles(firstSelection, secondSelection);
@@ -52,6 +53,10 @@ public class PuzzleController {
   private void swapTiles(ImageView a, ImageView b) {
     int[] aPos = findPos(a.getId());
     int[] bPos = findPos(b.getId());
+
+    if (!a.equals(zero) && !b.equals(zero))
+      return;
+
     if (Math.abs(aPos[0] - bPos[0]) == 1 ^ Math.abs(aPos[1] - bPos[1]) == 1) {
       tiles[aPos[0]][aPos[1]] = b.getId();
       tiles[bPos[0]][bPos[1]] = a.getId();
