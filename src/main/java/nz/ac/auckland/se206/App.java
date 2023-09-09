@@ -55,7 +55,7 @@ public class App extends Application {
     SceneManager.addScreen(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
     SceneManager.addScreen(AppUi.PUZZLE, loadFxml("puzzle"));
 
-    root = SceneManager.getUiRoot(AppUi.CORRIDOR);
+    root = SceneManager.getUiRoot(AppUi.PUZZLE);
     scene = new Scene(root, 600.0, 600.0);
     stage.setScene(scene);
     stage.show();
