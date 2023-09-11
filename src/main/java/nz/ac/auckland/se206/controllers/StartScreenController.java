@@ -16,6 +16,8 @@ public class StartScreenController {
 
   @FXML
   private void initialize() {
+
+    // Add items to the choice box
     timerChoice.getItems().add("2 Minutes");
     timerChoice.getItems().add("4 Minutes");
     timerChoice.getItems().add("6 Minutes");
@@ -30,11 +32,14 @@ public class StartScreenController {
 
   @FXML
   private void onStartGame(ActionEvent event) {
+
+    // Get the chosen values from the choice box
     String chosenTimeLimit = timerChoice.getValue();
     String chosenDifficulty = difficultyChoice.getValue();
     GameState.gameTime = chosenTimeLimit;
     GameState.difficultyLevel = chosenDifficulty;
 
+    // Create a new timer object
     TimerCounter time = new TimerCounter(RoomController.getInstance());
 
     // App.setRoot(SceneManager.AppUi.ROOM);

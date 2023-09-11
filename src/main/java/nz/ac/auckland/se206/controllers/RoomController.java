@@ -89,8 +89,6 @@ public class RoomController {
   void showRiddle() {
     riddle.setVisible(true);
     riddle.setDisable(false);
-    btnHideRiddle.setDisable(false);
-    btnHideRiddle.setVisible(true);
   }
 
   @FXML
@@ -214,15 +212,18 @@ public class RoomController {
   @FXML
   void onTableClicked(MouseEvent event) {
 
-    // Check if a parchment is selected in the combo box
+    // Check if a riddle is selected in the combo box
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+
     if (selectedItem != null && selectedItem.contains("riddle")) {
       inventoryChoiceBox.getItems().remove(selectedItem);
 
       showRiddleWithoutButton();
       return;
     }
-
+    // if a parchment piece is selected it is made visible in the scene
+    // and the parchment piece is removed from the combo box
+    // if already three pieces are visible the riddle is shown instead
     if (selectedItem != null && selectedItem.contains("parchment")) {
       inventoryChoiceBox.getItems().remove(selectedItem);
       if (selectedItem.equals("parchment1")) {
@@ -302,11 +303,13 @@ public class RoomController {
   public void initialize() throws ApiProxyException {
     instance = this;
 
+    // style the chat text area and hide button
     chatTextArea
         .getStylesheets()
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
     chatTextArea.getStyleClass().add("text-area .content");
     btnHideRiddle.getStyleClass().add("custom-button");
+    // Bind the rotation of the image to the slider value
     imgArt
         .rotateProperty()
         .bind(
@@ -316,7 +319,7 @@ public class RoomController {
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
-
+    // Allow the boulder to be dragged and dropped
     allowImageToBeDragged(boulder);
   }
 
