@@ -26,7 +26,7 @@
     /* Make text bold */
     -fx-font-size: 18px;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
-    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-image: url('/images/parchmentbg.jpg');
     -fx-background-size: cover;
 }
 
@@ -34,7 +34,7 @@
 
 
 .choice-box .context-menu {
-    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-image: url('/images/parchmentbg.jpg');
 }
 
 /* Style the text inside the ChoiceBox dropdown */
@@ -56,7 +56,7 @@
     /* Make text bold */
     -fx-font-size: 18px;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
-    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-image: url('/images/parchmentbg.jpg');
     -fx-background-size: cover;
 }
 
@@ -68,11 +68,11 @@
     /* Make text bold */
     -fx-font-size: 18px;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
-    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-image: url('/images/parchmentbg.jpg');
 }
 
 .combo-box .list-cell {
-    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-image: url('/images/parchmentbg.jpg');
 }
 
 /* Style the text inside the ChoiceBox dropdown */
@@ -85,7 +85,7 @@
 
 
 .text-area .content {
-    -fx-background-image: url("/images/parchmentbg3.jpg");
+    -fx-background-image: url("/images/parchmentbg.jpg");
     -fx-background-color: rgba(255, 255, 255, 0.1);
     /* Set the background color */
     -fx-font-family: "Papyrus";
