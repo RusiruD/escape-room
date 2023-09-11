@@ -15,10 +15,77 @@
 }
 
 
+.choice-box {
+    /*-fx-background-color: #774c1c;
+    -fx-border-color: #d4af37;*/
+
+    -fx-font-family: 'MedievalFont', sans-serif;
+    -fx-text-fill: black;
+    /* Set text color to black */
+    -fx-font-weight: bolder;
+    /* Make text bold */
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
+    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-size: cover;
+}
+
+
+
+
+.choice-box .context-menu {
+    -fx-background-image: url('/images/parchmentbg3.jpg');
+}
+
+/* Style the text inside the ChoiceBox dropdown */
+.choice-box .list-cell {
+    -fx-text-fill: black;
+    /* Set the text color */
+    -fx-font-weight: bolder;
+    -fx-font-size: 18px;
+}
+
+.combo-box {
+    /*-fx-background-color: #774c1c;
+    -fx-border-color: #d4af37;*/
+
+    -fx-font-family: 'MedievalFont', sans-serif;
+    -fx-text-fill: black;
+    /* Set text color to black */
+    -fx-font-weight: bolder;
+    /* Make text bold */
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
+    -fx-background-image: url('/images/parchmentbg3.jpg');
+    -fx-background-size: cover;
+}
+
+
+.start-button {
+    -fx-text-fill: black;
+    /* Set text color to black */
+    -fx-font-weight: bolder;
+    /* Make text bold */
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
+    -fx-background-image: url('/images/parchmentbg3.jpg');
+}
+
+.combo-box .list-cell {
+    -fx-background-image: url('/images/parchmentbg3.jpg');
+}
+
+/* Style the text inside the ChoiceBox dropdown */
+.combo-box-popup .list-cell {
+    -fx-text-fill: black;
+    /* Set the text color */
+    -fx-font-weight: bolder;
+    -fx-font-size: 18px;
+}
 
 
 .text-area .content {
-    -fx-background-image: url("/images/parchment.jpg");
+    -fx-background-image: url("/images/parchmentbg3.jpg");
     -fx-background-color: rgba(255, 255, 255, 0.1);
     /* Set the background color */
     -fx-font-family: "Papyrus";

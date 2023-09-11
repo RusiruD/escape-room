@@ -302,6 +302,7 @@ public class RoomController {
   @FXML
   public void initialize() throws ApiProxyException {
     instance = this;
+    inventoryChoiceBox.getItems().add("");
 
     // style the chat text area and hide button
     chatTextArea

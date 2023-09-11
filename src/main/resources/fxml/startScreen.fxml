@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartScreenController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="624.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartScreenController">
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
@@ -16,7 +16,7 @@
          </image>
       </ImageView>
       <ChoiceBox fx:id="timerChoice" layoutX="477.0" layoutY="226.0" prefWidth="150.0" />
-      <Button fx:id="btnStart" layoutX="512.0" layoutY="424.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="51.0" prefWidth="83.0" text="Start" />
+      <Button fx:id="btnStart" layoutX="512.0" layoutY="424.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="51.0" prefWidth="83.0" styleClass="start-button" stylesheets="@../css/roomStylesheet.css" text="Start" />
       <Label layoutX="494.0" layoutY="188.0" text="Time to complete" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />

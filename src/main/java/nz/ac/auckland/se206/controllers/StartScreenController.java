@@ -53,7 +53,8 @@ public class StartScreenController {
     }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
-
+    timerChoice.getStyleClass().add("choice-box");
+    difficultyChoice.getStyleClass().add("choice-box");
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.FIRST_ROOM));
   }
 }
