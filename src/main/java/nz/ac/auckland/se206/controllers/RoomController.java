@@ -20,6 +20,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class RoomController {
   private static RoomController instance;
 
+
   public static RoomController getInstance() {
     return instance;
   }
@@ -277,9 +278,9 @@ public class RoomController {
   /**
    * Displays a dialog box with the given title, header text, and message.
    *
-   * @param title the title of the dialog box
+   * @param title      the title of the dialog box
    * @param headerText the header text of the dialog box
-   * @param message the message content of the dialog box
+   * @param message    the message content of the dialog box
    */
   private void showDialog(String title, String headerText, String message) {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -303,6 +304,7 @@ public class RoomController {
   public void initialize() throws ApiProxyException {
     instance = this;
 
+
     // style the chat text area and hide button
     chatTextArea
         .getStylesheets()
@@ -315,6 +317,7 @@ public class RoomController {
         .bind(
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
+
 
     chatCompletionRequest =
         new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
