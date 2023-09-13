@@ -24,3 +24,7 @@
 .popUp VBox Text {
   -fx-font-size: 15px;
 }
+
+.popUp StackPane ImageView:hover {
+  -fx-cursor: hand;
+}

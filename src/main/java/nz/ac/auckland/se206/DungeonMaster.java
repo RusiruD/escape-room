@@ -1,14 +1,16 @@
 package nz.ac.auckland.se206;
 
+import javafx.animation.Animation;
+import javafx.animation.TranslateTransition;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 
 public class DungeonMaster {
   private Pane popUp;
@@ -42,6 +44,21 @@ public class DungeonMaster {
     ImageView nextButton = new ImageView("images/down.png");
     nextButton.setFitHeight(20);
     nextButton.setFitWidth(20);
+    nextButton.setOnMouseClicked(e -> {
+      // String nextText = getNextText();
+
+    });
+    nextButton.setOnMouseEntered(e -> {
+
+    });
+
+    TranslateTransition translateTransition = new TranslateTransition();
+    translateTransition.setDuration(Duration.millis(500));
+    translateTransition.setNode(nextButton);
+    translateTransition.setToY(5);
+    translateTransition.setAutoReverse(true);
+    translateTransition.setCycleCount(Animation.INDEFINITE);
+    translateTransition.play();
 
     StackPane dialogueContainer = new StackPane();
     dialogueContainer.getChildren().addAll(dialogueBox, nextButton);
