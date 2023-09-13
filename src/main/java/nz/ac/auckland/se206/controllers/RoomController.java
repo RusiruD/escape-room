@@ -20,36 +20,51 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class RoomController {
   private static RoomController instance;
 
-
   public static RoomController getInstance() {
     return instance;
   }
 
-  @FXML private ComboBox<String> inventoryChoiceBox;
+  @FXML
+  private ComboBox<String> inventoryChoiceBox;
 
-  @FXML private ImageView parchment1;
-  @FXML private ImageView imgArt;
-  @FXML private Slider slider;
-  @FXML private ImageView parchment2;
-  @FXML private Label lblTime;
-  @FXML private ImageView parchment3;
+  @FXML
+  private ImageView parchment1;
+  @FXML
+  private ImageView imgArt;
+  @FXML
+  private Slider slider;
+  @FXML
+  private ImageView parchment2;
+  @FXML
+  private Label lblTime;
+  @FXML
+  private ImageView parchment3;
 
-  @FXML private ImageView riddle;
-  @FXML private ImageView boulder;
+  @FXML
+  private ImageView riddle;
+  @FXML
+  private ImageView boulder;
   private double xOffset = 0;
   private double yOffset = 0;
 
-  @FXML private ImageView parchment4;
-  @FXML private ImageView parchment1duplicate;
+  @FXML
+  private ImageView parchment4;
+  @FXML
+  private ImageView parchment1duplicate;
 
-  @FXML private ImageView parchment2duplicate;
+  @FXML
+  private ImageView parchment2duplicate;
 
-  @FXML private ImageView parchment3duplicate;
-  @FXML private TextArea chatTextArea;
+  @FXML
+  private ImageView parchment3duplicate;
+  @FXML
+  private TextArea chatTextArea;
 
   private ChatCompletionRequest chatCompletionRequest;
-  @FXML private ImageView parchment4duplicate;
-  @FXML private Button btnHideRiddle;
+  @FXML
+  private ImageView parchment4duplicate;
+  @FXML
+  private Button btnHideRiddle;
 
   @FXML
   void enlarge(ImageView image) {
@@ -298,12 +313,12 @@ public class RoomController {
   /**
    * Initializes the chat view, loading the riddle.
    *
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   @FXML
   public void initialize() throws ApiProxyException {
     instance = this;
-
 
     // style the chat text area and hide button
     chatTextArea
@@ -318,9 +333,7 @@ public class RoomController {
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
 
-
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
     // Allow the boulder to be dragged and dropped
     allowImageToBeDragged(boulder);
@@ -340,7 +353,8 @@ public class RoomController {
    *
    * @param msg the chat message to process
    * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
+   * @throws ApiProxyException if there is an error communicating with the API
+   *                           proxy
    */
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
