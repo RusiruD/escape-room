@@ -5,8 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.SceneManager;
 
@@ -19,6 +21,9 @@ public class RoomController {
   private Rectangle window;
   @FXML
   private Rectangle vase;
+
+  @FXML
+  private Pane popUp;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() {
@@ -106,5 +111,9 @@ public class RoomController {
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    Pane dialog = dungeonMaster.getPopUp();
+    dialog.getStyleClass().add("popUp");
+    popUp.getChildren().add(dialog);
   }
 }

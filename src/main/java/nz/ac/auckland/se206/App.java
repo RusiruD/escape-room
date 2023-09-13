@@ -54,7 +54,7 @@ public class App extends Application {
     SceneManager.addScreen(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addScreen(AppUi.CORRIDOR, loadFxml("corridor"));
 
-    root = SceneManager.getUiRoot(AppUi.CORRIDOR);
+    root = SceneManager.getUiRoot(AppUi.ROOM);
     scene = new Scene(root, 600.0, 600.0);
     stage.setScene(scene);
     stage.show();
