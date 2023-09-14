@@ -123,7 +123,12 @@ public class RoomController {
     };
     task.setOnSucceeded(e -> {
       System.out.println("home task succeeded");
-      popUp.getChildren().add(task.getValue());
+      Pane dialogue = task.getValue();
+      popUp.getChildren().add(dialogue);
+      dialogue.getStyleClass().add("popUp");
+      dialogue.setOnMouseClicked(event1 -> {
+        dungeonMaster.update();
+      });
     });
     Thread thread = new Thread(task);
     thread.setDaemon(true);

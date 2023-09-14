@@ -62,6 +62,9 @@ public class DungeonMaster {
     ImageView nextButton = new ImageView("images/down.png");
     nextButton.setFitHeight(20);
     nextButton.setFitWidth(20);
+    if (messages.length == 1) {
+      nextButton.visibleProperty().set(false);
+    }
 
     TranslateTransition translateTransition = new TranslateTransition();
     translateTransition.setDuration(Duration.millis(500));
@@ -118,6 +121,7 @@ public class DungeonMaster {
     thread.setDaemon(true);
     thread.start();
 
+    // waits until task is done
     ExecutorService executor = Executors.newSingleThreadExecutor();
     CountDownLatch latch = new CountDownLatch(1);
     // create executor service to wait until task is done
@@ -139,7 +143,7 @@ public class DungeonMaster {
       e1.printStackTrace();
     }
     System.out.println("done");
-
+    executor.shutdown();
     return getPopUp();
   }
 
@@ -155,9 +159,12 @@ public class DungeonMaster {
   }
 
   public void nextMessage() {
+    // popup -> dialog container -> dialog box -> text
+    Text dialogue = (Text) ((VBox) ((StackPane) popUp.getChildren().get(1)).getChildren().get(0)).getChildren().get(1);
     System.out.println("mss " + messages.length + " " + messageIndex);
     if (messageIndex < messages.length) {
       System.out.println("next message: " + messages[messageIndex]);
+      dialogue.setText(messages[messageIndex]);
       messageIndex++;
     } else {
       popUp.setOnMouseClicked(e -> {
