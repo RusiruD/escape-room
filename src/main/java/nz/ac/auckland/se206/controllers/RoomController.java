@@ -1,6 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.KeyEvent;
@@ -112,8 +115,21 @@ public class RoomController {
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Pane dialog = dungeonMaster.getPopUp();
-    dialog.getStyleClass().add("popUp");
-    popUp.getChildren().add(dialog);
+    Task<Pane> task = new Task<Pane>() {
+      @Override
+      protected Pane call() throws Exception {
+        return dungeonMaster.getText();
+      }
+    };
+    task.setOnSucceeded(e -> {
+      System.out.println("home task succeeded");
+      popUp.getChildren().add(task.getValue());
+    });
+    Thread thread = new Thread(task);
+    thread.setDaemon(true);
+    thread.start();
+    // dialog.getStyleClass().add("popUp");
+    // popUp.getChildren().add(dialog);
+
   }
 }
