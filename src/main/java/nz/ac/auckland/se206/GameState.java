@@ -8,8 +8,7 @@ public class GameState {
 
   /** Indicates whether the key has been found. */
   public static boolean isKeyFound = false;
-  public static String difficultyLevel="";
-  public static String gameTime="";
-  
+  public static String difficultyLevel = "";
+  public static String gameTime = "";
 
 }

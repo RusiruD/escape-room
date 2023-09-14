@@ -7,7 +7,8 @@ public class SceneManager {
   public enum AppUi {
     START,
     FIRST_ROOM,
-    CORRIDOR
+    CORRIDOR,
+    CHAT,
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

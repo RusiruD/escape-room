@@ -39,10 +39,12 @@ public class TimerCounter {
                       // Updating the timer counter across the multiple screens
                       roomController.updateTimerLabel(string);
 
-                      /*App.getChatController().updateTime(string);
-                      App.getKeypadController().updateTime(string);
-                      App.getHelpController().updateTime(string);
-                      App.getDrawerController().updateTime(string);*/
+                      /*
+                       * App.getChatController().updateTime(string);
+                       * App.getKeypadController().updateTime(string);
+                       * App.getHelpController().updateTime(string);
+                       * App.getDrawerController().updateTime(string);
+                       */
 
                       // Game over condition
                       if (timeCounter1 == 0) {
@@ -75,11 +77,13 @@ public class TimerCounter {
                     () -> {
                       roomController.updateTimerLabel(string);
                       // Updating the timer counter across the multiple screens
-                      /*App.getRoomController().updateTime(string);
-                      App.getChatController().updateTime(string);
-                      App.getKeypadController().updateTime(string);
-                      App.getHelpController().updateTime(string);
-                      App.getDrawerController().updateTime(string);*/
+                      /*
+                       * App.getRoomController().updateTime(string);
+                       * App.getChatController().updateTime(string);
+                       * App.getKeypadController().updateTime(string);
+                       * App.getHelpController().updateTime(string);
+                       * App.getDrawerController().updateTime(string);
+                       */
 
                       // Game over condition
                       if (timeCounter2 == 0) {
@@ -112,11 +116,13 @@ public class TimerCounter {
                     () -> {
                       roomController.updateTimerLabel(string);
                       // Updating the timer counter across the multiple screens
-                      /*App.getRoomController().updateTime(string);
-                      App.getChatController().updateTime(string);
-                      App.getKeypadController().updateTime(string);
-                      App.getHelpController().updateTime(string);
-                      App.getDrawerController().updateTime(string);*/
+                      /*
+                       * App.getRoomController().updateTime(string);
+                       * App.getChatController().updateTime(string);
+                       * App.getKeypadController().updateTime(string);
+                       * App.getHelpController().updateTime(string);
+                       * App.getDrawerController().updateTime(string);
+                       */
 
                       // Game over condition
                       if (timeCounter3 == 0) {
@@ -132,7 +138,8 @@ public class TimerCounter {
   }
 
   private void gameOver() {
-    // Dialogue.showDialog("Game Over", "You've lost! :(", "You ran out of time to solve the
+    // Dialogue.showDialog("Game Over", "You've lost! :(", "You ran out of time to
+    // solve the
     // riddle!");
     System.exit(0);
   }
