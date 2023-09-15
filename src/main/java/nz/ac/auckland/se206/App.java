@@ -26,6 +26,7 @@ public class App extends Application {
 
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
     scene.setRoot(SceneManager.getUiRoot(appUi));
+    root.requestFocus();
   }
 
   /**

@@ -8,6 +8,8 @@ public class SceneManager {
     START,
     FIRST_ROOM,
     CORRIDOR,
+    PUZZLEROOM,
+    PUZZLE,
     CHAT,
   }
 
