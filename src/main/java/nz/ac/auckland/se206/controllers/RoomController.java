@@ -70,19 +70,19 @@ public class RoomController {
   private Button btnHideRiddle;
 
   @FXML
-  void enlarge(ImageView image) {
+  private void enlarge(ImageView image) {
     image.setScaleX(1.5);
     image.setScaleY(1.5);
   }
 
   @FXML
-  void shrink(ImageView image) {
+  private void shrink(ImageView image) {
     image.setScaleX(1.0);
     image.setScaleY(1.0);
   }
 
   @FXML
-  void addToInventory(ImageView image) {
+  private void addToInventory(ImageView image) {
     image.setVisible(false);
     image.setDisable(true);
     // inventoryChoiceBox.getItems().add(image.getId());
@@ -95,7 +95,7 @@ public class RoomController {
   }
 
   @FXML
-  void hideParchment() {
+  private void hideParchment() {
     parchment1duplicate.setVisible(false);
     parchment2duplicate.setVisible(false);
     parchment3duplicate.setVisible(false);
@@ -103,7 +103,7 @@ public class RoomController {
   }
 
   @FXML
-  void hideRiddle() {
+  private void hideRiddle() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideRiddle.setDisable(true);
@@ -111,19 +111,19 @@ public class RoomController {
   }
 
   @FXML
-  void showRiddle() {
+  private void showRiddle() {
     riddle.setVisible(true);
     riddle.setDisable(false);
   }
 
   @FXML
-  void showRiddleWithoutButton() {
+  private void showRiddleWithoutButton() {
     riddle.setVisible(true);
     riddle.setDisable(false);
   }
 
   @FXML
-  void allowImageToBeDragged(ImageView image) {
+  private void allowImageToBeDragged(ImageView image) {
     image.setOnMousePressed(
         (MouseEvent event) -> {
           xOffset = event.getSceneX() - image.getLayoutX();
