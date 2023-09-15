@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -43,16 +42,21 @@ public class StartScreenController {
     GameState.difficultyLevel = chosenDifficulty;
 
     // Create a new timer object
-    TimerCounter time = new TimerCounter(RoomController.getInstance());
-
-    // App.setRoot(SceneManager.AppUi.ROOM);
+    TimerCounter time = new TimerCounter();
+    time.setPuzzleRoomController(PuzzleRoomController.getInstance());
+    time.setRoomController(RoomController.getInstance());
+    time.setCorridorController(CorridorController.getInstance());
+    time.setPuzzleController(PuzzleController.getInstance());
+    Inventory.setPuzzleRoomController(PuzzleRoomController.getInstance());
+    Inventory.setRoomController(RoomController.getInstance());
+    Inventory.setCorridorController(CorridorController.getInstance());
 
     if (chosenTimeLimit.equals("2 Minutes")) {
-      time.twoMinutes();
+      time.timerStart(120);
     } else if (chosenTimeLimit.equals("4 Minutes")) {
-      time.fourMinutes();
+      time.timerStart(240);
     } else {
-      time.sixMinutes();
+      time.timerStart(360);
     }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();

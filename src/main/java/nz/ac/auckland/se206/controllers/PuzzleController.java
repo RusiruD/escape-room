@@ -2,10 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -23,7 +21,17 @@ public class PuzzleController {
   private ImageView firstSelection;
   private ImageView secondSelection;
 
+    @FXML
+  private Label lblTime;
+
+  private static PuzzleController instance;
+
+  public static PuzzleController getInstance() {
+    return instance;
+  }
+
   public void initialize() {
+    instance = this;
     tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" }, { "zero", "eight", "nine" } };
     solution = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
         { "nine", "eight", "zero" } };
@@ -95,4 +103,10 @@ public class PuzzleController {
       GameState.puzzleRoomSolved = true;
     }
   }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
+  }
+
 }

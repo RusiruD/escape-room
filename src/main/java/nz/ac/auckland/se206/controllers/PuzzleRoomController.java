@@ -6,12 +6,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class PuzzleRoomController {
+
+  private static PuzzleRoomController instance;
+
+  @FXML
+  private Label lblTime;
+
+  public static PuzzleRoomController getInstance() {
+    return instance;
+  }
+
+  @FXML
+  private ComboBox<String> inventoryChoiceBox;
+
+  public void initialize() {
+
+    instance = this;
+
+  }
 
   @FXML
   private void clickPuzzle(MouseEvent event) throws IOException {
@@ -38,5 +58,14 @@ public class PuzzleRoomController {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public void updateInventory() {
+    inventoryChoiceBox.setItems(Inventory.getInventory());
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
   }
 }
