@@ -140,90 +140,22 @@ public class RoomController {
   }
 
   @FXML
-  void onParchment1MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment1);
+  private void enlargeItem(MouseEvent event) {
+    enlarge((ImageView) event.getSource());
   }
 
   @FXML
-  void onParchment2MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment2);
+  private void shrinkItem(MouseEvent event) {
+    shrink((ImageView) event.getSource());
   }
 
   @FXML
-  void onParchment3MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment3);
+  private void clickedParchment(MouseEvent event) {
+    addToInventory((ImageView) event.getSource());
   }
 
   @FXML
-  void onRiddleMouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(riddle);
-  }
-
-  @FXML
-  void onRiddleMouseExited(MouseEvent event) {
-    shrink(riddle);
-  }
-
-  @FXML
-  void onParchment4MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment4);
-  }
-
-  @FXML
-  void onParchment1MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment1);
-  }
-
-  @FXML
-  void onParchment2MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment2);
-  }
-
-  @FXML
-  void onParchment3MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment3);
-  }
-
-  @FXML
-  void onParchment4MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment4);
-  }
-
-  @FXML
-  void onParchment1Clicked(MouseEvent event) {
-    // Add parchment1 to the ComboBox
-    addToInventory(parchment1);
-  }
-
-  @FXML
-  void onParchment2Clicked(MouseEvent event) {
-    // Add parchment2 to the ComboBox
-    addToInventory(parchment2);
-  }
-
-  @FXML
-  void onParchment3Clicked(MouseEvent event) {
-    // Add parchment3 to the ComboBox
-    addToInventory(parchment3);
-  }
-
-  @FXML
-  void onParchment4Clicked(MouseEvent event) {
-    // Add parchment4 to the ComboBox
-    addToInventory(parchment4);
-  }
-
-  @FXML
-  void onRiddleClicked(MouseEvent event) {
+  private void onRiddleClicked(MouseEvent event) {
 
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
@@ -233,7 +165,7 @@ public class RoomController {
   }
 
   @FXML
-  void onReturnToCorridorClicked(ActionEvent event) {
+  private void onReturnToCorridorClicked(ActionEvent event) {
     // return to corridor scene
     try {
 
@@ -250,7 +182,7 @@ public class RoomController {
   private int parchmentPieces = 0;
 
   @FXML
-  void onTableClicked(MouseEvent event) {
+  private void onTableClicked(MouseEvent event) {
 
     // Check if a riddle is selected in the combo box
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
