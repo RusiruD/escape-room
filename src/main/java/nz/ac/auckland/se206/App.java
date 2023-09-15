@@ -56,6 +56,8 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addUi(AppUi.CORRIDOR, loadFxml("corridor"));
     SceneManager.addUi(AppUi.START, loadFxml("startScreen"));
+    SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
+    SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
 
     // root = SceneManager.getUiRoot(AppUi.CORRIDOR);
     root = SceneManager.getUiRoot(AppUi.START);
