@@ -3,12 +3,12 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -24,6 +24,8 @@ public class ChatController {
   private TextField inputText;
   @FXML
   private Button sendButton;
+  @FXML
+  private Button btnGoBack;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -103,7 +105,19 @@ public class ChatController {
    * @throws IOException       if there is an I/O error
    */
   @FXML
+
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot(SceneManager.AppUi.CORRIDOR);
+    // return to corridor
+    try {
+
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+
+      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
+      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
+
 }

@@ -1,24 +1,25 @@
-package nz.ac.auckland.se206;
+package nz.ac.auckland.se206.controllers;
 
 import java.util.HashMap;
 import javafx.scene.Parent;
 
 public class SceneManager {
   public enum AppUi {
-    ROOM,
-    CHAT,
+    START,
+    FIRST_ROOM,
     CORRIDOR,
     PUZZLEROOM,
     PUZZLE,
+    CHAT,
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();
 
-  public static void addScreen(AppUi appUi, Parent uiRoot) {
+  public static void addUi(AppUi appUi, Parent uiRoot) {
     sceneMap.put(appUi, uiRoot);
   }
 
-  public static Parent getUiRoot(AppUi appUi) {
-    return sceneMap.get(appUi);
+  public static Parent getUiRoot(AppUi ui) {
+    return sceneMap.get(ui);
   }
 }

@@ -10,4 +10,7 @@ public class GameState {
   public static boolean isKeyFound = false;
 
   public static boolean puzzleRoomSolved = false;
+  public static String difficultyLevel = "";
+  public static String gameTime = "";
+
 }

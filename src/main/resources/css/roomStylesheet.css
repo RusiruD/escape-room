@@ -1,0 +1,110 @@
+.text-area {
+
+    /* Set the background color */
+    -fx-font-family: "Crimson Text";
+    /* Use the Papyrus font */
+    -fx-font-size: 14px;
+    /* Set the font size to 20px */
+    -fx-font-weight: bolder;
+    /* Make the text bold */
+    -fx-text-fill: rgb(0, 0, 0);
+    /* Set text color to black */
+
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    /* Set the background color */
+}
+
+
+.choice-box {
+    /*-fx-background-color: #774c1c;
+    -fx-border-color: #d4af37;*/
+
+    -fx-font-family: 'MedievalFont', sans-serif;
+    -fx-text-fill: black;
+    /* Set text color to black */
+    -fx-font-weight: bolder;
+    /* Make text bold */
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
+    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-size: cover;
+}
+
+
+
+
+.choice-box .context-menu {
+    -fx-background-image: url('/images/parchmentbg.jpg');
+}
+
+/* Style the text inside the ChoiceBox dropdown */
+.choice-box .list-cell {
+    -fx-text-fill: black;
+    /* Set the text color */
+    -fx-font-weight: bolder;
+    -fx-font-size: 18px;
+}
+
+.combo-box {
+    /*-fx-background-color: #774c1c;
+    -fx-border-color: #d4af37;*/
+
+    -fx-font-family: 'MedievalFont', sans-serif;
+    -fx-text-fill: black;
+    /* Set text color to black */
+    -fx-font-weight: bolder;
+    /* Make text bold */
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
+    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-size: cover;
+}
+
+
+.start-button {
+    -fx-text-fill: black;
+    /* Set text color to black */
+    -fx-font-weight: bolder;
+    /* Make text bold */
+    -fx-font-size: 18px;
+    -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
+    -fx-background-image: url('/images/parchmentbg.jpg');
+}
+
+.combo-box .list-cell {
+    -fx-background-image: url('/images/parchmentbg.jpg');
+}
+
+/* Style the text inside the ChoiceBox dropdown */
+.combo-box-popup .list-cell {
+    -fx-text-fill: black;
+    /* Set the text color */
+    -fx-font-weight: bolder;
+    -fx-font-size: 18px;
+}
+
+
+.text-area .content {
+    -fx-background-image: url("/images/parchmentbg.jpg");
+    -fx-background-color: rgba(255, 255, 255, 0.1);
+    /* Set the background color */
+    -fx-font-family: "Papyrus";
+    /* Use the Papyrus font */
+    -fx-font-size: 20px;
+    /* Set the font size to 20px */
+    -fx-font-weight: bold;
+    /* Make the text bold */
+    -fx-text-fill: black;
+    /* Set text color to black */
+}
+
+/* Define a custom style class */
+.custom-button {
+    -fx-background-color: #3498db;
+    -fx-text-fill: #ffffff;
+}
+
+/* Apply the custom style class to a button */
+.button.custom-button {
+    -fx-background-color: #000000;
+}

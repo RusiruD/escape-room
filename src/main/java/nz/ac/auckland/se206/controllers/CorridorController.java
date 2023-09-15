@@ -11,7 +11,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.SceneManager;
 
 public class CorridorController {
 
@@ -28,6 +27,8 @@ public class CorridorController {
   private Rectangle player;
   @FXML
   private Rectangle door1;
+  @FXML
+  private Rectangle door2;
   @FXML
   private Rectangle left;
   @FXML
@@ -119,6 +120,17 @@ public class CorridorController {
         e.printStackTrace();
       }
     }
+    // hit door2
+
+    if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
 
   private void stopMovement() {
