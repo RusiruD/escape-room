@@ -50,14 +50,13 @@ public class StartScreenController {
     Inventory.setPuzzleRoomController(PuzzleRoomController.getInstance());
     Inventory.setRoomController(RoomController.getInstance());
     Inventory.setCorridorController(CorridorController.getInstance());
-    // App.setRoot(SceneManager.AppUi.ROOM);
 
     if (chosenTimeLimit.equals("2 Minutes")) {
-      time.twoMinutes();
+      time.timerStart(120);
     } else if (chosenTimeLimit.equals("4 Minutes")) {
-      time.fourMinutes();
+      time.timerStart(240);
     } else {
-      time.sixMinutes();
+      time.timerStart(360);
     }
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();

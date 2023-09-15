@@ -10,19 +10,10 @@ import nz.ac.auckland.se206.controllers.RoomController;
 
 public class TimerCounter {
 
-  private int timeCounter1;
-  private int timeCounter2;
-  private int timeCounter3;
   private RoomController roomController;
   private PuzzleController puzzleController;
   private CorridorController corridorController;
   private PuzzleRoomController puzzleRoomController;
-
-  public TimerCounter() {
-    timeCounter1 = 120;
-    timeCounter2 = 240;
-    timeCounter3 = 360;
-  }
 
   public void setRoomController(RoomController controller) {
     roomController = controller;
@@ -40,18 +31,20 @@ public class TimerCounter {
     puzzleRoomController = controller;
   }
 
-  public void twoMinutes() {
+  public void timerStart(int time) {
+    final int[] timeCounter = new int[1];
+    timeCounter[0] = time;
     new Timer()
         .schedule(
             new TimerTask() {
 
               @Override
               public void run() {
-                timeCounter1--;
+                timeCounter[0]--;
 
                 // Formatting the seconds to be in a presentable/readable format
-                int min = timeCounter1 / 60;
-                int sec = timeCounter1 - min * 60;
+                int min = timeCounter[0] / 60;
+                int sec = timeCounter[0] - min * 60;
                 String string = min + ":" + String.format("%02d", sec);
 
                 Platform.runLater(
@@ -61,72 +54,7 @@ public class TimerCounter {
                       updateTimers(string);
 
                       // Game over condition
-                      if (timeCounter1 == 0) {
-
-                        this.cancel();
-                        gameOver();
-                      }
-                    });
-              }
-            },
-            0,
-            1000);
-  }
-
-  public void fourMinutes() {
-    new Timer()
-        .schedule(
-            new TimerTask() {
-
-              @Override
-              public void run() {
-                timeCounter2--;
-
-                // Formatting the seconds to be in a presentable/readable format
-                int min = timeCounter2 / 60;
-                int sec = timeCounter2 - min * 60;
-                String string = min + ":" + String.format("%02d", sec);
-
-                Platform.runLater(
-                    () -> {
-                      updateTimers(string);
-                      // Updating the timer counter across the multiple screens
-
-                      // Game over condition
-                      if (timeCounter2 == 0) {
-
-                        this.cancel();
-                        gameOver();
-                      }
-                    });
-              }
-            },
-            0,
-            1000);
-  }
-
-  public void sixMinutes() {
-    new Timer()
-        .schedule(
-            new TimerTask() {
-
-              @Override
-              public void run() {
-                timeCounter3--;
-
-                // Formatting the seconds to be in a presentable/readable format
-                int min = timeCounter3 / 60;
-                int sec = timeCounter3 - min * 60;
-                String string = min + ":" + String.format("%02d", sec);
-
-                Platform.runLater(
-                    () -> {
-                      updateTimers(string);
-                      // Updating the timer counter across the multiple screens
-
-                      // Game over condition
-                      if (timeCounter3 == 0) {
-
+                      if (timeCounter[0] == 0) {
                         this.cancel();
                         gameOver();
                       }
