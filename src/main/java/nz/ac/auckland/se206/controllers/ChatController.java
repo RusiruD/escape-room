@@ -107,6 +107,7 @@ public class ChatController {
   @FXML
 
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    // return to corridor
     try {
 
       Button button = (Button) event.getSource();

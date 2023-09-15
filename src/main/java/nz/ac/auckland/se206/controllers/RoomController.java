@@ -230,6 +230,7 @@ public class RoomController {
 
   @FXML
   void onReturnToCorridorClicked(ActionEvent event) {
+    // return to corridor scene
     try {
 
       Button button = (Button) event.getSource();
