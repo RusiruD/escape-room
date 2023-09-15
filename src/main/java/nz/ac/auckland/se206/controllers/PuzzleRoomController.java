@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -40,9 +39,9 @@ public class PuzzleRoomController {
 
   @FXML
   private void clickedDoor(MouseEvent event) throws IOException {
-
-    if (GameState.puzzleRoomSolved)
+    if (GameState.puzzleRoomSolved) {
       App.setRoot(AppUi.CORRIDOR);
+    }
   }
 
   @FXML

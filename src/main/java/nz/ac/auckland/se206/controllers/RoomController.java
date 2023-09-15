@@ -103,7 +103,7 @@ public class RoomController {
   }
 
   @FXML
-  void HideRiddle() {
+  void hideRiddle() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideRiddle.setDisable(true);
@@ -247,7 +247,7 @@ public class RoomController {
     }
   }
 
-  int parchmentPieces = 0;
+  private int parchmentPieces = 0;
 
   @FXML
   void onTableClicked(MouseEvent event) {
@@ -257,9 +257,7 @@ public class RoomController {
 
     if (selectedItem != null && selectedItem.contains("riddle")) {
 
-      // inventoryChoiceBox.getItems().remove(selectedItem);
       Inventory.removeFromInventory(selectedItem);
-      // updateInventory();
 
       showRiddleWithoutButton();
       return;
@@ -268,9 +266,7 @@ public class RoomController {
     // and the parchment piece is removed from the combo box
     // if already three pieces are visible the riddle is shown instead
     if (selectedItem != null && selectedItem.contains("parchment")) {
-      // inventoryChoiceBox.getItems().remove(selectedItem);
       Inventory.removeFromInventory(selectedItem);
-      // updateInventory();
       if (selectedItem.equals("parchment1")) {
 
         if (parchmentPieces == 3) {
@@ -347,7 +343,8 @@ public class RoomController {
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
 
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2)
+        .setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
     // Allow the boulder to be dragged and dropped
     allowImageToBeDragged(boulder);
