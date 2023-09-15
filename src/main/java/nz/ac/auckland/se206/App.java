@@ -65,6 +65,7 @@ public class App extends Application {
     stage.setScene(scene);
     stage.show();
     focus();
+
   }
 
   public static void focus() {

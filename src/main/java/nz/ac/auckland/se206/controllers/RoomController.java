@@ -4,7 +4,6 @@ import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -12,7 +11,6 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -87,7 +85,13 @@ public class RoomController {
   void addToInventory(ImageView image) {
     image.setVisible(false);
     image.setDisable(true);
-    inventoryChoiceBox.getItems().add(image.getId());
+    // inventoryChoiceBox.getItems().add(image.getId());
+    Inventory.addToInventory(image.getId());
+    updateInventory();
+  }
+
+  public void updateInventory() {
+    inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 
   @FXML
@@ -252,7 +256,10 @@ public class RoomController {
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
     if (selectedItem != null && selectedItem.contains("riddle")) {
-      inventoryChoiceBox.getItems().remove(selectedItem);
+
+      // inventoryChoiceBox.getItems().remove(selectedItem);
+      Inventory.removeFromInventory(selectedItem);
+      // updateInventory();
 
       showRiddleWithoutButton();
       return;
@@ -261,7 +268,9 @@ public class RoomController {
     // and the parchment piece is removed from the combo box
     // if already three pieces are visible the riddle is shown instead
     if (selectedItem != null && selectedItem.contains("parchment")) {
-      inventoryChoiceBox.getItems().remove(selectedItem);
+      // inventoryChoiceBox.getItems().remove(selectedItem);
+      Inventory.removeFromInventory(selectedItem);
+      // updateInventory();
       if (selectedItem.equals("parchment1")) {
 
         if (parchmentPieces == 3) {
@@ -308,21 +317,6 @@ public class RoomController {
     } else {
 
     }
-  }
-
-  /**
-   * Displays a dialog box with the given title, header text, and message.
-   *
-   * @param title      the title of the dialog box
-   * @param headerText the header text of the dialog box
-   * @param message    the message content of the dialog box
-   */
-  private void showDialog(String title, String headerText, String message) {
-    Alert alert = new Alert(Alert.AlertType.INFORMATION);
-    alert.setTitle(title);
-    alert.setHeaderText(headerText);
-    alert.setContentText(message);
-    alert.showAndWait();
   }
 
   @FXML

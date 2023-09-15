@@ -7,7 +7,9 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -41,9 +43,20 @@ public class CorridorController {
   @FXML
   private Pane room;
 
+  @FXML
+  private ComboBox<String> inventoryChoiceBox;
+
+  private static CorridorController instance;
+
+  public static CorridorController getInstance() {
+    return instance;
+  }
+
   AnimationTimer playerTimer = new AnimationTimer() {
+
     @Override
     public void handle(long timestamp) {
+      // updateInventory();
       if (wPressed.get()) {
         player.setY(player.getY() - movementSpeed);
       }
@@ -70,6 +83,7 @@ public class CorridorController {
   };
 
   public void initialize() {
+    instance = this;
     keyPressed.addListener((observable, aBoolean, t1) -> {
       if (!aBoolean) {
         playerTimer.start();
@@ -180,4 +194,12 @@ public class CorridorController {
     }
   }
 
+  @FXML
+  private void clickExit(MouseEvent event) {
+    System.exit(0);
+  }
+
+  public void updateInventory() {
+    inventoryChoiceBox.setItems(Inventory.getInventory());
+  }
 }

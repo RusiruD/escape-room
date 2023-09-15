@@ -2,16 +2,41 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class PuzzleRoomController {
+
+  private static PuzzleRoomController instance;
+
+  public static PuzzleRoomController getInstance() {
+    return instance;
+  }
+
+  @FXML
+  private ComboBox<String> inventoryChoiceBox;
+
+  // AnimationTimer timer = new AnimationTimer() {
+
+  // @Override
+  // public void handle(long timestamp) {
+  // updateInventory();
+  // }
+  // };
+
+  public void initialize() {
+
+    instance = this;
+
+  }
 
   @FXML
   private void clickPuzzle(MouseEvent event) throws IOException {
@@ -38,5 +63,9 @@ public class PuzzleRoomController {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public void updateInventory() {
+    inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 }

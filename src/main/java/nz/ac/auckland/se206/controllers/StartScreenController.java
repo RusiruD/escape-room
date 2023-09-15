@@ -5,7 +5,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
-import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -44,7 +43,9 @@ public class StartScreenController {
 
     // Create a new timer object
     TimerCounter time = new TimerCounter(RoomController.getInstance());
-
+    Inventory.setPuzzleRoomController(PuzzleRoomController.getInstance());
+    Inventory.setRoomController(RoomController.getInstance());
+    Inventory.setCorridorController(CorridorController.getInstance());
     // App.setRoot(SceneManager.AppUi.ROOM);
 
     if (chosenTimeLimit.equals("2 Minutes")) {
