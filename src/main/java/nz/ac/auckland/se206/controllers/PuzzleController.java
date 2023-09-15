@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlendMode;
@@ -16,12 +15,29 @@ public class PuzzleController {
   private String[][] tiles;
   private String[][] solution;
   @FXML
-  private ImageView one, two, three, four, five, six, zero, eight, nine;
+  private ImageView one;
+  @FXML
+  private ImageView two;
+  @FXML
+  private ImageView three;
+  @FXML
+  private ImageView four;
+  @FXML
+  private ImageView five;
+  @FXML
+  private ImageView six;
+  @FXML
+  private ImageView zero;
+  @FXML
+  private ImageView eight;
+  @FXML
+  private ImageView nine;
+
   private boolean hasSelection = false;
   private ImageView firstSelection;
   private ImageView secondSelection;
 
-    @FXML
+  @FXML
   private Label lblTime;
 
   private static PuzzleController instance;
@@ -32,7 +48,8 @@ public class PuzzleController {
 
   public void initialize() {
     instance = this;
-    tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" }, { "zero", "eight", "nine" } };
+    tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
+        { "zero", "eight", "nine" } };
     solution = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
         { "nine", "eight", "zero" } };
   }
@@ -65,8 +82,9 @@ public class PuzzleController {
     int[] aPos = findPos(a.getId());
     int[] bPos = findPos(b.getId());
 
-    if (!a.equals(zero) && !b.equals(zero))
+    if (!a.equals(zero) && !b.equals(zero)) {
       return;
+    }
 
     if (Math.abs(aPos[0] - bPos[0]) == 1 ^ Math.abs(aPos[1] - bPos[1]) == 1) {
       tiles[aPos[0]][aPos[1]] = b.getId();
@@ -95,8 +113,9 @@ public class PuzzleController {
     int counter = 0;
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        if (tiles[i][j].equals(solution[i][j]))
+        if (tiles[i][j].equals(solution[i][j])) {
           counter++;
+        }
       }
     }
     if (counter == 9) {

@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -44,7 +43,7 @@ public class CorridorController {
   @FXML
   private Pane room;
 
-    @FXML
+  @FXML
   private Label lblTime;
 
   @FXML
@@ -56,7 +55,7 @@ public class CorridorController {
     return instance;
   }
 
-  AnimationTimer playerTimer = new AnimationTimer() {
+  private AnimationTimer playerTimer = new AnimationTimer() {
 
     @Override
     public void handle(long timestamp) {
@@ -79,7 +78,7 @@ public class CorridorController {
     }
   };
 
-  AnimationTimer collisionTimer = new AnimationTimer() {
+  private AnimationTimer collisionTimer = new AnimationTimer() {
     @Override
     public void handle(long timestamp) {
       checkCollision();

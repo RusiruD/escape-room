@@ -70,19 +70,19 @@ public class RoomController {
   private Button btnHideRiddle;
 
   @FXML
-  void enlarge(ImageView image) {
+  private void enlarge(ImageView image) {
     image.setScaleX(1.5);
     image.setScaleY(1.5);
   }
 
   @FXML
-  void shrink(ImageView image) {
+  private void shrink(ImageView image) {
     image.setScaleX(1.0);
     image.setScaleY(1.0);
   }
 
   @FXML
-  void addToInventory(ImageView image) {
+  private void addToInventory(ImageView image) {
     image.setVisible(false);
     image.setDisable(true);
     // inventoryChoiceBox.getItems().add(image.getId());
@@ -95,7 +95,7 @@ public class RoomController {
   }
 
   @FXML
-  void hideParchment() {
+  private void hideParchment() {
     parchment1duplicate.setVisible(false);
     parchment2duplicate.setVisible(false);
     parchment3duplicate.setVisible(false);
@@ -103,7 +103,7 @@ public class RoomController {
   }
 
   @FXML
-  void HideRiddle() {
+  private void hideRiddle() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideRiddle.setDisable(true);
@@ -111,19 +111,19 @@ public class RoomController {
   }
 
   @FXML
-  void showRiddle() {
+  private void showRiddle() {
     riddle.setVisible(true);
     riddle.setDisable(false);
   }
 
   @FXML
-  void showRiddleWithoutButton() {
+  private void showRiddleWithoutButton() {
     riddle.setVisible(true);
     riddle.setDisable(false);
   }
 
   @FXML
-  void allowImageToBeDragged(ImageView image) {
+  private void allowImageToBeDragged(ImageView image) {
     image.setOnMousePressed(
         (MouseEvent event) -> {
           xOffset = event.getSceneX() - image.getLayoutX();
@@ -140,90 +140,22 @@ public class RoomController {
   }
 
   @FXML
-  void onParchment1MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment1);
+  private void enlargeItem(MouseEvent event) {
+    enlarge((ImageView) event.getSource());
   }
 
   @FXML
-  void onParchment2MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment2);
+  private void shrinkItem(MouseEvent event) {
+    shrink((ImageView) event.getSource());
   }
 
   @FXML
-  void onParchment3MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment3);
+  private void clickedParchment(MouseEvent event) {
+    addToInventory((ImageView) event.getSource());
   }
 
   @FXML
-  void onRiddleMouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(riddle);
-  }
-
-  @FXML
-  void onRiddleMouseExited(MouseEvent event) {
-    shrink(riddle);
-  }
-
-  @FXML
-  void onParchment4MouseEntered(MouseEvent event) {
-    // Increase the size of parchment1 by 150%
-    enlarge(parchment4);
-  }
-
-  @FXML
-  void onParchment1MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment1);
-  }
-
-  @FXML
-  void onParchment2MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment2);
-  }
-
-  @FXML
-  void onParchment3MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment3);
-  }
-
-  @FXML
-  void onParchment4MouseExited(MouseEvent event) {
-    // Reset the size of parchment1 to 100%
-    shrink(parchment4);
-  }
-
-  @FXML
-  void onParchment1Clicked(MouseEvent event) {
-    // Add parchment1 to the ComboBox
-    addToInventory(parchment1);
-  }
-
-  @FXML
-  void onParchment2Clicked(MouseEvent event) {
-    // Add parchment2 to the ComboBox
-    addToInventory(parchment2);
-  }
-
-  @FXML
-  void onParchment3Clicked(MouseEvent event) {
-    // Add parchment3 to the ComboBox
-    addToInventory(parchment3);
-  }
-
-  @FXML
-  void onParchment4Clicked(MouseEvent event) {
-    // Add parchment4 to the ComboBox
-    addToInventory(parchment4);
-  }
-
-  @FXML
-  void onRiddleClicked(MouseEvent event) {
+  private void onRiddleClicked(MouseEvent event) {
 
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
@@ -233,7 +165,7 @@ public class RoomController {
   }
 
   @FXML
-  void onReturnToCorridorClicked(ActionEvent event) {
+  private void onReturnToCorridorClicked(ActionEvent event) {
     // return to corridor scene
     try {
 
@@ -247,19 +179,17 @@ public class RoomController {
     }
   }
 
-  int parchmentPieces = 0;
+  private int parchmentPieces = 0;
 
   @FXML
-  void onTableClicked(MouseEvent event) {
+  private void onTableClicked(MouseEvent event) {
 
     // Check if a riddle is selected in the combo box
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
     if (selectedItem != null && selectedItem.contains("riddle")) {
 
-      // inventoryChoiceBox.getItems().remove(selectedItem);
       Inventory.removeFromInventory(selectedItem);
-      // updateInventory();
 
       showRiddleWithoutButton();
       return;
@@ -268,9 +198,7 @@ public class RoomController {
     // and the parchment piece is removed from the combo box
     // if already three pieces are visible the riddle is shown instead
     if (selectedItem != null && selectedItem.contains("parchment")) {
-      // inventoryChoiceBox.getItems().remove(selectedItem);
       Inventory.removeFromInventory(selectedItem);
-      // updateInventory();
       if (selectedItem.equals("parchment1")) {
 
         if (parchmentPieces == 3) {
@@ -347,7 +275,8 @@ public class RoomController {
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
 
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2)
+        .setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
     // Allow the boulder to be dragged and dropped
     allowImageToBeDragged(boulder);
