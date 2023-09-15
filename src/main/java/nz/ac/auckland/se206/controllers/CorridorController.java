@@ -8,6 +8,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -42,6 +43,9 @@ public class CorridorController {
 
   @FXML
   private Pane room;
+
+    @FXML
+  private Label lblTime;
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
@@ -201,5 +205,10 @@ public class CorridorController {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
   }
 }

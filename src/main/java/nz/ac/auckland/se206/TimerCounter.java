@@ -3,6 +3,9 @@ package nz.ac.auckland.se206;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
+import nz.ac.auckland.se206.controllers.CorridorController;
+import nz.ac.auckland.se206.controllers.PuzzleController;
+import nz.ac.auckland.se206.controllers.PuzzleRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 
 public class TimerCounter {
@@ -11,12 +14,30 @@ public class TimerCounter {
   private int timeCounter2;
   private int timeCounter3;
   private RoomController roomController;
+  private PuzzleController puzzleController;
+  private CorridorController corridorController;
+  private PuzzleRoomController puzzleRoomController;
 
-  public TimerCounter(RoomController roomController) {
-    this.roomController = roomController;
+  public TimerCounter() {
     timeCounter1 = 120;
     timeCounter2 = 240;
     timeCounter3 = 360;
+  }
+
+  public void setRoomController(RoomController controller) {
+    roomController = controller;
+  }
+
+  public void setPuzzleController(PuzzleController controller) {
+    puzzleController = controller;
+  }
+
+  public void setCorridorController(CorridorController controller) {
+    corridorController = controller;
+  }
+
+  public void setPuzzleRoomController(PuzzleRoomController controller) {
+    puzzleRoomController = controller;
   }
 
   public void twoMinutes() {
@@ -37,14 +58,7 @@ public class TimerCounter {
                     () -> {
 
                       // Updating the timer counter across the multiple screens
-                      roomController.updateTimerLabel(string);
-
-                      /*
-                       * App.getChatController().updateTime(string);
-                       * App.getKeypadController().updateTime(string);
-                       * App.getHelpController().updateTime(string);
-                       * App.getDrawerController().updateTime(string);
-                       */
+                      updateTimers(string);
 
                       // Game over condition
                       if (timeCounter1 == 0) {
@@ -75,15 +89,8 @@ public class TimerCounter {
 
                 Platform.runLater(
                     () -> {
-                      roomController.updateTimerLabel(string);
+                      updateTimers(string);
                       // Updating the timer counter across the multiple screens
-                      /*
-                       * App.getRoomController().updateTime(string);
-                       * App.getChatController().updateTime(string);
-                       * App.getKeypadController().updateTime(string);
-                       * App.getHelpController().updateTime(string);
-                       * App.getDrawerController().updateTime(string);
-                       */
 
                       // Game over condition
                       if (timeCounter2 == 0) {
@@ -114,15 +121,8 @@ public class TimerCounter {
 
                 Platform.runLater(
                     () -> {
-                      roomController.updateTimerLabel(string);
+                      updateTimers(string);
                       // Updating the timer counter across the multiple screens
-                      /*
-                       * App.getRoomController().updateTime(string);
-                       * App.getChatController().updateTime(string);
-                       * App.getKeypadController().updateTime(string);
-                       * App.getHelpController().updateTime(string);
-                       * App.getDrawerController().updateTime(string);
-                       */
 
                       // Game over condition
                       if (timeCounter3 == 0) {
@@ -138,9 +138,13 @@ public class TimerCounter {
   }
 
   private void gameOver() {
-    // Dialogue.showDialog("Game Over", "You've lost! :(", "You ran out of time to
-    // solve the
-    // riddle!");
     System.exit(0);
+  }
+
+  private void updateTimers(String string) {
+    roomController.updateTimerLabel(string);
+    puzzleController.updateTimerLabel(string);
+    puzzleRoomController.updateTimerLabel(string);
+    corridorController.updateTimerLabel(string);
   }
 }

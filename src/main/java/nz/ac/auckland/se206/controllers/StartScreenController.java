@@ -42,7 +42,11 @@ public class StartScreenController {
     GameState.difficultyLevel = chosenDifficulty;
 
     // Create a new timer object
-    TimerCounter time = new TimerCounter(RoomController.getInstance());
+    TimerCounter time = new TimerCounter();
+    time.setPuzzleRoomController(PuzzleRoomController.getInstance());
+    time.setRoomController(RoomController.getInstance());
+    time.setCorridorController(CorridorController.getInstance());
+    time.setPuzzleController(PuzzleController.getInstance());
     Inventory.setPuzzleRoomController(PuzzleRoomController.getInstance());
     Inventory.setRoomController(RoomController.getInstance());
     Inventory.setCorridorController(CorridorController.getInstance());
