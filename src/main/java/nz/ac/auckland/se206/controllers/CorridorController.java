@@ -28,6 +28,8 @@ public class CorridorController {
   @FXML
   private Rectangle door1;
   @FXML
+  private Rectangle door2;
+  @FXML
   private Rectangle left;
   @FXML
   private Rectangle top;
@@ -118,6 +120,17 @@ public class CorridorController {
         e.printStackTrace();
       }
     }
+    // hit door2
+
+    if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
 
   private void stopMovement() {

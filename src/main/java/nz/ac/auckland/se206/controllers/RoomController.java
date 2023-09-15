@@ -1,7 +1,9 @@
 package nz.ac.auckland.se206.controllers;
 
 import javafx.beans.binding.Bindings;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -10,6 +12,8 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -26,7 +30,8 @@ public class RoomController {
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
-
+  @FXML
+  private Button btnReturnToCorridor;
   @FXML
   private ImageView parchment1;
   @FXML
@@ -221,6 +226,21 @@ public class RoomController {
     addToInventory(riddle);
     btnHideRiddle.setDisable(false);
     btnHideRiddle.setVisible(true);
+  }
+
+  @FXML
+  void onReturnToCorridorClicked(ActionEvent event) {
+    // return to corridor scene
+    try {
+
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+
+      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
+      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   int parchmentPieces = 0;
