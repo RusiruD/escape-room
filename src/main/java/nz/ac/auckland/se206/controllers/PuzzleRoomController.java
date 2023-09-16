@@ -10,12 +10,14 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
-public class PuzzleRoomController {
+public class PuzzleRoomController implements Controller {
 
   private static PuzzleRoomController instance;
+
 
   @FXML
   private Label lblTime;
@@ -25,6 +27,9 @@ public class PuzzleRoomController {
   public static PuzzleRoomController getInstance() {
     return instance;
   }
+
+  @FXML
+  private Label lblTime;
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
@@ -56,7 +61,7 @@ public class PuzzleRoomController {
   }
 
   @FXML
-  void onReturnToCorridorClicked(ActionEvent event) {
+  private void onReturnToCorridorClicked(ActionEvent event) {
     // return to corridor scene
     try {
 
