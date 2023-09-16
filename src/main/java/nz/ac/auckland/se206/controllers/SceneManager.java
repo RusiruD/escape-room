@@ -15,6 +15,8 @@ public class SceneManager {
     PUZZLEROOM,
     PUZZLE,
     CHAT,
+    UNTANGLE,
+    LEADERBOARD
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

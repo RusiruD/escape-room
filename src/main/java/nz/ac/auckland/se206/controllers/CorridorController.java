@@ -17,7 +17,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Controller;
 
-
 public class CorridorController implements Controller {
 
   private static CorridorController instance;
@@ -43,6 +42,8 @@ public class CorridorController implements Controller {
   private Rectangle door1;
   @FXML
   private Rectangle door2;
+  @FXML
+  private Rectangle door3;
   @FXML
   private Rectangle left;
   @FXML
@@ -144,12 +145,22 @@ public class CorridorController implements Controller {
         e.printStackTrace();
       }
     }
-    // hit door2
 
+    // hit door2
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    // hit door3
+    if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.UNTANGLE);
       } catch (IOException e) {
         e.printStackTrace();
       }

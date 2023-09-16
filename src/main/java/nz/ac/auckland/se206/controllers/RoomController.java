@@ -31,7 +31,6 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class RoomController implements Controller {
   private static RoomController instance;
 
-  // Initialization code goes here
   public static RoomController getInstance() {
     return instance;
   }
