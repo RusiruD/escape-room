@@ -16,12 +16,18 @@ import nz.ac.auckland.se206.App;
 
 public class CorridorController {
 
-  private BooleanProperty wPressed = new SimpleBooleanProperty();
-  private BooleanProperty aPressed = new SimpleBooleanProperty();
-  private BooleanProperty sPressed = new SimpleBooleanProperty();
-  private BooleanProperty dPressed = new SimpleBooleanProperty();
+  private static CorridorController instance;
 
-  private BooleanBinding keyPressed = wPressed.or(aPressed).or(sPressed).or(dPressed);
+  public static CorridorController getInstance() {
+    return instance;
+  }
+
+  private BooleanProperty forwardPressed = new SimpleBooleanProperty();
+  private BooleanProperty leftPressed = new SimpleBooleanProperty();
+  private BooleanProperty backwardPressed = new SimpleBooleanProperty();
+  private BooleanProperty rightPressed = new SimpleBooleanProperty();
+
+  private BooleanBinding keyPressed = forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
 
@@ -49,30 +55,24 @@ public class CorridorController {
   @FXML
   private ComboBox<String> inventoryChoiceBox;
 
-  private static CorridorController instance;
-
-  public static CorridorController getInstance() {
-    return instance;
-  }
-
   private AnimationTimer playerTimer = new AnimationTimer() {
 
     @Override
     public void handle(long timestamp) {
       // updateInventory();
-      if (wPressed.get()) {
+      if (forwardPressed.get()) {
         player.setY(player.getY() - movementSpeed);
       }
 
-      if (aPressed.get()) {
+      if (leftPressed.get()) {
         player.setX(player.getX() - movementSpeed);
       }
 
-      if (sPressed.get()) {
+      if (backwardPressed.get()) {
         player.setY(player.getY() + movementSpeed);
       }
 
-      if (dPressed.get()) {
+      if (rightPressed.get()) {
         player.setX(player.getX() + movementSpeed);
       }
     }
@@ -87,8 +87,8 @@ public class CorridorController {
 
   public void initialize() {
     instance = this;
-    keyPressed.addListener((observable, aBoolean, t1) -> {
-      if (!aBoolean) {
+    keyPressed.addListener((observable, boolValue, randomVar) -> {
+      if (!boolValue) {
         playerTimer.start();
         collisionTimer.start();
       } else {
@@ -151,26 +151,26 @@ public class CorridorController {
   }
 
   private void stopMovement() {
-    wPressed.set(false);
-    aPressed.set(false);
-    sPressed.set(false);
-    dPressed.set(false);
+    forwardPressed.set(false);
+    leftPressed.set(false);
+    backwardPressed.set(false);
+    rightPressed.set(false);
   }
 
   @FXML
   public void onKeyPressed(KeyEvent event) {
     switch (event.getCode()) {
       case W:
-        wPressed.set(true);
+        forwardPressed.set(true);
         break;
       case A:
-        aPressed.set(true);
+        leftPressed.set(true);
         break;
       case S:
-        sPressed.set(true);
+        backwardPressed.set(true);
         break;
       case D:
-        dPressed.set(true);
+        rightPressed.set(true);
         break;
       default:
         break;
@@ -181,16 +181,16 @@ public class CorridorController {
   public void onKeyReleased(KeyEvent event) {
     switch (event.getCode()) {
       case W:
-        wPressed.set(false);
+        forwardPressed.set(false);
         break;
       case A:
-        aPressed.set(false);
+        leftPressed.set(false);
         break;
       case S:
-        sPressed.set(false);
+        backwardPressed.set(false);
         break;
       case D:
-        dPressed.set(false);
+        rightPressed.set(false);
         break;
       default:
         break;

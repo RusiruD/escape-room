@@ -16,12 +16,12 @@ public class PuzzleRoomController {
 
   private static PuzzleRoomController instance;
 
-  @FXML
-  private Label lblTime;
-
   public static PuzzleRoomController getInstance() {
     return instance;
   }
+
+  @FXML
+  private Label lblTime;
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
@@ -45,7 +45,7 @@ public class PuzzleRoomController {
   }
 
   @FXML
-  void onReturnToCorridorClicked(ActionEvent event) {
+  private void onReturnToCorridorClicked(ActionEvent event) {
     // return to corridor scene
     try {
 

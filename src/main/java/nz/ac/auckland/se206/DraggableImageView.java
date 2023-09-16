@@ -6,8 +6,8 @@ import javafx.scene.input.MouseEvent;
 
 public class DraggableImageView {
 
-  private double xOffset = 0;
-  private double yOffset = 0;
+  private double horizontalOffset = 0;
+  private double verticalOffset = 0;
 
   public void makeDraggable(ImageView imageView) {
     // Mouse Pressed Event
@@ -16,8 +16,8 @@ public class DraggableImageView {
           @Override
           public void handle(MouseEvent event) {
             // Record the initial mouse cursor position
-            xOffset = event.getSceneX() - imageView.getLayoutX();
-            yOffset = event.getSceneY() - imageView.getLayoutY();
+            horizontalOffset = event.getSceneX() - imageView.getLayoutX();
+            verticalOffset = event.getSceneY() - imageView.getLayoutY();
           }
         });
 
@@ -27,8 +27,8 @@ public class DraggableImageView {
           @Override
           public void handle(MouseEvent event) {
             // Calculate new position based on mouse cursor position
-            double newX = event.getSceneX() - xOffset;
-            double newY = event.getSceneY() - yOffset;
+            double newX = event.getSceneX() - horizontalOffset;
+            double newY = event.getSceneY() - verticalOffset;
 
             // Set the new position for the image
             imageView.setLayoutX(newX);

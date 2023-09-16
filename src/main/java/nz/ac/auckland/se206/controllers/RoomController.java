@@ -50,6 +50,8 @@ public class RoomController {
   private double xOffset = 0;
   private double yOffset = 0;
 
+  private int parchmentPieces = 0;
+
   @FXML
   private ImageView parchment4;
   @FXML
@@ -178,8 +180,6 @@ public class RoomController {
       e.printStackTrace();
     }
   }
-
-  private int parchmentPieces = 0;
 
   @FXML
   private void onTableClicked(MouseEvent event) {
