@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fx:id="imgBackground" fitHeight="620.0" fitWidth="1100.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/6619203653_ddea7af96c_b.jpg" />
+            <Image url="@../images/RoomBackground.jpg" />
          </image>
       </ImageView>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="60.0" prefWidth="150.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
@@ -80,9 +80,14 @@
             <Image url="@../images/art.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="109.0" fitWidth="133.0" layoutX="511.0" layoutY="332.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+      <ImageView fx:id="key1" fitHeight="78.0" fitWidth="141.0" layoutX="512.0" layoutY="346.0" onMouseClicked="#onKey1Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/a_0.png" />
+            <Image url="@../images/key.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="109.0" fitWidth="133.0" layoutX="507.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+         <image>
+            <Image url="@../images/boulder.png" />
          </image>
       </ImageView>
       <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="942.0" layoutY="12.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">

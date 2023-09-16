@@ -8,12 +8,15 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Controller;
+
 
 public class CorridorController implements Controller {
 
@@ -35,6 +38,8 @@ public class CorridorController implements Controller {
   @FXML
   private Rectangle player;
   @FXML
+  private Rectangle treasureChest;
+  @FXML
   private Rectangle door1;
   @FXML
   private Rectangle door2;
@@ -46,7 +51,8 @@ public class CorridorController implements Controller {
   private Rectangle right;
   @FXML
   private Rectangle bottom;
-
+  @FXML
+  private ImageView sword;
   @FXML
   private Pane room;
 
@@ -196,6 +202,36 @@ public class CorridorController implements Controller {
       default:
         break;
     }
+  }
+
+  @FXML
+  public void onTreasureChestClicked(MouseEvent event) {
+    System.out.println("clicked");
+    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true) {
+      sword.setVisible(true);
+      sword.setDisable(false);
+      sword.toFront();
+
+    }
+    if (selectedItem != null) {
+      if (selectedItem.contains("key1")) {
+        Inventory.removeFromInventory(selectedItem);
+
+        GameState.isLock1Unlocked = true;
+      } else if (selectedItem.contains("key2")) {
+        Inventory.removeFromInventory(selectedItem);
+        GameState.isLock2Unlocked = true;
+      }
+    }
+
+  }
+
+  @FXML
+  public void onSwordClicked(MouseEvent event) {
+    Inventory.addToInventory("sword");
+    sword.setVisible(false);
+    sword.setDisable(true);
   }
 
   @FXML

@@ -11,6 +11,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -43,7 +44,8 @@ public class RoomController implements Controller {
   private Label lblTime;
   @FXML
   private ImageView parchment3;
-
+  @FXML
+  private ImageView key1;
   @FXML
   private ImageView riddle;
   @FXML
@@ -165,6 +167,12 @@ public class RoomController implements Controller {
     addToInventory(riddle);
     btnHideRiddle.setDisable(false);
     btnHideRiddle.setVisible(true);
+  }
+
+  @FXML
+  private void onKey1Clicked(MouseEvent event) {
+    addToInventory(key1);
+    GameState.isKey1Collected = true;
   }
 
   @FXML

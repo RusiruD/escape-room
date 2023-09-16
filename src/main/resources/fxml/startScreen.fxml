@@ -12,7 +12,7 @@
    <children>
       <ImageView pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/dungeon-door-preview%20(1).png" />
+            <Image url="@../images/StartScreenBackground.png" />
          </image>
       </ImageView>
       <ChoiceBox fx:id="timerChoice" layoutX="477.0" layoutY="226.0" prefWidth="150.0" />

@@ -7,7 +7,12 @@ public class GameState {
   public static boolean isRiddleResolved = false;
 
   /** Indicates whether the key has been found. */
-  public static boolean isKeyFound = false;
+  public static boolean isKey1Collected = false;
+  public static boolean isKey2Collected = false;
+  public static boolean isKey3Collected = false;
+  public static boolean isLock1Unlocked = false;
+  public static boolean isLock2Unlocked = false;
+  public static boolean isLock3Unlocked = false;
 
   public static boolean puzzleRoomSolved = false;
   public static String difficultyLevel = "";
