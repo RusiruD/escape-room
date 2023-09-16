@@ -64,9 +64,7 @@ public class DungeonMaster {
     ImageView nextButton = new ImageView("images/down.png");
     nextButton.setFitHeight(20);
     nextButton.setFitWidth(20);
-    if (messages.length == 1) {
-      nextButton.visibleProperty().set(false);
-    }
+    nextButton.visibleProperty().set(false);
 
     TranslateTransition translateTransition = new TranslateTransition();
     translateTransition.setDuration(Duration.millis(500));
@@ -94,6 +92,30 @@ public class DungeonMaster {
     // ADDING TO POP UP
     popUp.getChildren().addAll(dungeonMasterStack);
     popUp.getChildren().addAll(dialogueContainer);
+
+    // speak first message
+    isSpeaking = true;
+    TextToSpeech tts = new TextToSpeech();
+    Task<Void> speakTask = new Task<Void>() {
+      @Override
+      protected Void call() {
+        tts.speak(messages[0]);
+        return null;
+      }
+    };
+
+    speakTask.setOnSucceeded(e -> {
+      System.out.println("speak task succeeded");
+      isSpeaking = false;
+      if (messages.length > 1) {
+        nextButton.visibleProperty().set(true);
+      }
+    });
+
+    Thread thread = new Thread(speakTask);
+    thread.setDaemon(true);
+    thread.start();
+
     return popUp;
   }
 
@@ -163,7 +185,6 @@ public class DungeonMaster {
 
   public void appendChatMessage(ChatMessage msg) {
     messages = msg.getContent().split("\n");
-    System.out.println("test");
   }
 
   public Pane update() {
