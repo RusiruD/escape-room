@@ -232,10 +232,6 @@ public class DungeonMaster {
     }
   }
 
-  public void setSpeaking(boolean speaking) {
-    isSpeaking = speaking;
-  }
-
   public boolean isSpeaking() {
     return isSpeaking;
   }

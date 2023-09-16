@@ -5,10 +5,14 @@ import java.io.IOException;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
@@ -114,7 +118,6 @@ public class RoomController {
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
-    // TODO: change on click method to not update on exit
     Task<Pane> task = new Task<Pane>() {
       @Override
       protected Pane call() throws Exception {
@@ -126,7 +129,19 @@ public class RoomController {
       Pane dialogue = task.getValue();
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
-      dialogue.setOnMouseClicked(event1 -> {
+      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0)).getChildren()
+          .get(1);
+      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+      exitButton.setOnMouseClicked(event1 -> {
+        popUp.visibleProperty().set(false);
+      });
+      dialogueText.setOnMouseClicked(event1 -> {
+        if (!dungeonMaster.isSpeaking()) {
+          dungeonMaster.update();
+        }
+      });
+      nextButton.setOnMouseClicked(event1 -> {
         if (!dungeonMaster.isSpeaking()) {
           dungeonMaster.update();
         }
