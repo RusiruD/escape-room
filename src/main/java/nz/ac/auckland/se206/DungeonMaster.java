@@ -163,11 +163,14 @@ public class DungeonMaster {
   public void nextMessage() {
     // popup -> dialog container -> dialog box -> text
     Text dialogue = (Text) ((VBox) ((StackPane) popUp.getChildren().get(1)).getChildren().get(0)).getChildren().get(1);
+    ImageView nextButton = (ImageView) ((StackPane) popUp.getChildren().get(1)).getChildren().get(1);
     TextToSpeech tts = new TextToSpeech();
     System.out.println("mss " + messages.length + " " + messageIndex);
     messageIndex++;
+    isSpeaking = true;
     if (messageIndex < messages.length) {
       System.out.println("next message: " + messages[messageIndex]);
+      nextButton.visibleProperty().set(false);
       dialogue.setText(messages[messageIndex]);
       Task<Void> speakTask = new Task<Void>() {
         @Override
@@ -180,6 +183,8 @@ public class DungeonMaster {
       speakTask.setOnSucceeded(e -> {
         System.out.println("speak task succeeded");
         taskDone = true;
+        isSpeaking = false;
+        nextButton.visibleProperty().set(true);
       });
 
       Thread thread = new Thread(speakTask);

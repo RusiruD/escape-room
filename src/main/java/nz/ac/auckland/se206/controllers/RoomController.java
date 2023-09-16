@@ -125,12 +125,9 @@ public class RoomController {
       Pane dialogue = task.getValue();
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
-      // TODO: fix this
       dialogue.setOnMouseClicked(event1 -> {
         if (!dungeonMaster.isSpeaking()) {
-          popUp.visibleProperty().set(false);
           dungeonMaster.update();
-          dungeonMaster.setSpeaking(false);
         }
       });
     });
