@@ -29,12 +29,11 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="sword" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="423.0" layoutY="255.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="sword" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="423.0" layoutY="255.0" onMouseClicked="#onSwordClicked" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/sword.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="treasureChest" arcHeight="5.0" arcWidth="5.0" fill="#f8c200" height="92.0" layoutX="423.0" layoutY="253.0" onMouseClicked="#onTreasureChestClicked" stroke="BLACK" strokeType="INSIDE" width="71.0" />
-      <Label layoutX="423.0" layoutY="253.0" prefHeight="34.0" prefWidth="71.0" text="treasure chest" textOverrun="CLIP" wrapText="true" />
    </children>
 </Pane>

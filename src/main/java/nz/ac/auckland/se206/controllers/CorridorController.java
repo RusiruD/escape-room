@@ -226,6 +226,13 @@ public class CorridorController {
   }
 
   @FXML
+  public void onSwordClicked(MouseEvent event) {
+    Inventory.addToInventory("sword");
+    sword.setVisible(false);
+    sword.setDisable(true);
+  }
+
+  @FXML
   private void clickExit(MouseEvent event) {
     System.exit(0);
   }
