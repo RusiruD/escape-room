@@ -18,18 +18,14 @@ public class PuzzleRoomController implements Controller {
 
   private static PuzzleRoomController instance;
 
-
-  @FXML
-  private Label lblTime;
-  @FXML
-  private ImageView key2;
-
   public static PuzzleRoomController getInstance() {
     return instance;
   }
 
   @FXML
   private Label lblTime;
+  @FXML
+  private ImageView key2;
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
