@@ -30,7 +30,8 @@ public class CorridorController implements Controller {
   private BooleanProperty backwardPressed = new SimpleBooleanProperty();
   private BooleanProperty rightPressed = new SimpleBooleanProperty();
 
-  private BooleanBinding keyPressed = forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
+  private BooleanBinding keyPressed = forwardPressed.or(leftPressed)
+      .or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
 

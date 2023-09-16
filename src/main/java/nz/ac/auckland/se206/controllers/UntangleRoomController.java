@@ -1,23 +1,34 @@
 package nz.ac.auckland.se206.controllers;
 
+import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import java.util.ArrayList;
 import java.util.List;
-import javafx.beans.property.*;
-import javafx.beans.value.*;
-import javafx.collections.*;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.*;
+import javafx.scene.Cursor;
+import javafx.scene.Group;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.*;
-import nz.ac.auckland.se206.Controller;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
+import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.shape.StrokeType;
 
 /** Drag the anchors around to change a polygon's points. */
 // see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
@@ -108,7 +119,8 @@ public class UntangleRoomController implements Controller {
       for (int j = i + 1; j < lines.size(); j++) {
         Shape intersection = Shape.intersect(lines.get(i), lines.get(j));
         if (intersection.getBoundsInLocal().getWidth() != -1) {
-          System.out.println("Lines " + i + " and " + j + " intersect" + intersection.getBoundsInLocal().getWidth());
+          System.out.println("Lines " + i + " and " + j + " intersect" +
+              intersection.getBoundsInLocal().getWidth());
           return;
         }
       }
@@ -138,24 +150,24 @@ public class UntangleRoomController implements Controller {
     for (int i = 0; i < points.size(); i += 2) {
       final int idx = i;
 
-      DoubleProperty xProperty = new SimpleDoubleProperty(points.get(i));
-      DoubleProperty yProperty = new SimpleDoubleProperty(points.get(i + 1));
+      DoubleProperty xval = new SimpleDoubleProperty(points.get(i));
+      DoubleProperty yval = new SimpleDoubleProperty(points.get(i + 1));
 
-      xProperty.addListener(new ChangeListener<Number>() {
+      xval.addListener(new ChangeListener<Number>() {
         @Override
         public void changed(ObservableValue<? extends Number> ov, Number oldX, Number x) {
           points.set(idx, (double) x);
         }
       });
 
-      yProperty.addListener(new ChangeListener<Number>() {
+      yval.addListener(new ChangeListener<Number>() {
         @Override
         public void changed(ObservableValue<? extends Number> ov, Number oldY, Number y) {
           points.set(idx + 1, (double) y);
         }
       });
 
-      anchors.add(new Anchor(Color.rgb(230, 69, 83, 0.8), xProperty, yProperty));
+      anchors.add(new Anchor(Color.rgb(230, 69, 83, 0.8), xval, yval));
     }
 
     return anchors;
@@ -163,7 +175,8 @@ public class UntangleRoomController implements Controller {
 
   // a draggable anchor displayed around a point.
   class Anchor extends Circle {
-    private final DoubleProperty x, y;
+    private final DoubleProperty x;
+    private final DoubleProperty y;
 
     Anchor(Color color, DoubleProperty x, DoubleProperty y) {
       super(x.get(), y.get(), 10);
@@ -232,7 +245,8 @@ public class UntangleRoomController implements Controller {
 
     // records relative x and y co-ordinates.
     private class Delta {
-      double x, y;
+      private double x;
+      private double y;
     }
   }
 
