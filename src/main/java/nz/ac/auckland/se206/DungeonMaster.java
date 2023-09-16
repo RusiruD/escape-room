@@ -1,10 +1,8 @@
 package nz.ac.auckland.se206;
 
 import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;

@@ -11,6 +11,7 @@ import nz.ac.auckland.se206.controllers.PuzzleController;
 import nz.ac.auckland.se206.controllers.PuzzleRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SceneManager;
+import nz.ac.auckland.se206.controllers.UntangleRoomController;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /**
@@ -67,6 +68,7 @@ public class App extends Application {
     SceneManager.addController(RoomController.getInstance());
     SceneManager.addController(CorridorController.getInstance());
     SceneManager.addController(PuzzleController.getInstance());
+    SceneManager.addController(UntangleRoomController.getInstance());
 
     root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 600.0, 600.0);

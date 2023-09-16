@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.beans.property.*;
 import javafx.beans.value.*;
 import javafx.collections.*;
@@ -11,26 +10,39 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.*;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
 // see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
 // and https://stackoverflow.com/questions/15981274/javafx-modify-polygons
-public class UntangleRoomController {
+public class UntangleRoomController implements Controller {
+
+  private static UntangleRoomController instance;
+
+  public static UntangleRoomController getInstance() {
+    return instance;
+  }
 
   @FXML
-  Pane pane;
+  private Pane pane;
   @FXML
-  Rectangle keyItem;
+  private Rectangle keyItem;
+  @FXML
+  private Label lblTime;
+  @FXML
+  private ComboBox<String> inventoryChoiceBox;
 
   private boolean isSolved = false;
 
   public void initialize() {
+    instance = this;
     keyItem.setVisible(false);
     keyItem.mouseTransparentProperty().set(true);
     Polygon polygon = createStartingTriangle();
@@ -242,5 +254,14 @@ public class UntangleRoomController {
     } catch (Exception e) {
       e.printStackTrace();
     }
+  }
+
+  public void updateInventory() {
+    inventoryChoiceBox.setItems(Inventory.getInventory());
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
   }
 }
