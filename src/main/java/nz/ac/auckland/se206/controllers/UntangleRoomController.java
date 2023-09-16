@@ -57,7 +57,7 @@ public class UntangleRoomController {
   }
 
   private void isIntersecting(Polygon polygon) {
-    //TODO: shorten lines so the points don't overlap and cause false intersections
+    //Untangle lines to solve the puzzle
     //for debug
     if (pane.getChildren().size() > 1) {
       pane.getChildren().remove(1);
@@ -93,7 +93,7 @@ public class UntangleRoomController {
         Shape intersection = Shape.intersect(lines.get(i), lines.get(j));
         if (intersection.getBoundsInLocal().getWidth() != -1) {
           System.out.println("Lines " + i + " and " + j + " intersect" + intersection.getBoundsInLocal().getWidth());
-          //return;
+          return;
         }
       }
     }
