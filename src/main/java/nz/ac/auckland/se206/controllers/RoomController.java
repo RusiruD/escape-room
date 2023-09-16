@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
@@ -20,8 +21,12 @@ import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class RoomController implements Controller {
   private static RoomController instance;
@@ -81,8 +86,43 @@ public class RoomController implements Controller {
   private Button btnHideRiddle;
 
   /** Initializes the room view, it is called when the room loads. */
-  public void initialize() {
+  public void initialize() throws ApiProxyException {
     instance = this;
+    chatTextArea
+        .getStylesheets()
+        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
+    chatTextArea.getStyleClass().add("text-area .content");
+    btnHideRiddle.getStyleClass().add("custom-button");
+    // Bind the rotation of the image to the slider value
+    imgArt
+        .rotateProperty()
+        .bind(
+            Bindings.createDoubleBinding(
+                () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
+
+    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
+    // Allow the boulder to be dragged and dropped
+    allowImageToBeDragged(boulder);
+  }
+
+  private void appendChatMessage(ChatMessage msg) {
+    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+  }
+
+  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+    chatCompletionRequest.addMessage(msg);
+    try {
+      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
+      Choice result = chatCompletionResult.getChoices().iterator().next();
+      chatCompletionRequest.addMessage(result.getChatMessage());
+      appendChatMessage(result.getChatMessage());
+      return result.getChatMessage();
+    } catch (ApiProxyException e) {
+      // TODO handle exception appropriately
+      e.printStackTrace();
+      return null;
+    }
   }
 
   @FXML
