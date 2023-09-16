@@ -1,12 +1,12 @@
 package nz.ac.auckland.se206;
 
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -22,11 +22,13 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class DungeonMaster {
   private Pane popUp;
 
   private boolean taskDone = false;
+  private boolean isSpeaking = false;
 
   private String[] messages;
   private int messageIndex = 0;
@@ -161,15 +163,63 @@ public class DungeonMaster {
   public void nextMessage() {
     // popup -> dialog container -> dialog box -> text
     Text dialogue = (Text) ((VBox) ((StackPane) popUp.getChildren().get(1)).getChildren().get(0)).getChildren().get(1);
+    TextToSpeech tts = new TextToSpeech();
     System.out.println("mss " + messages.length + " " + messageIndex);
+    messageIndex++;
     if (messageIndex < messages.length) {
       System.out.println("next message: " + messages[messageIndex]);
       dialogue.setText(messages[messageIndex]);
-      messageIndex++;
+      Task<Void> speakTask = new Task<Void>() {
+        @Override
+        protected Void call() {
+          tts.speak(messages[messageIndex]);
+          return null;
+        }
+      };
+
+      speakTask.setOnSucceeded(e -> {
+        System.out.println("speak task succeeded");
+        taskDone = true;
+      });
+
+      Thread thread = new Thread(speakTask);
+      thread.setDaemon(true);
+      thread.start();
+
+      // waits until finished speaking
+      ExecutorService executor = Executors.newSingleThreadExecutor();
+      CountDownLatch latch = new CountDownLatch(1);
+      // create executor service to wait until task is done
+      executor.submit(() -> {
+        try {
+          while (!taskDone) {
+            System.out.println("waiting");
+            Thread.sleep(250);
+          }
+        } catch (InterruptedException e) {
+          e.printStackTrace();
+        }
+        latch.countDown();
+      });
+
+      try {
+        latch.await();
+      } catch (InterruptedException e1) {
+        e1.printStackTrace();
+      }
+      executor.shutdown();
     } else {
       popUp.setOnMouseClicked(e -> {
         popUp.visibleProperty().set(false);
       });
     }
+  }
+
+  public void setSpeaking(boolean speaking) {
+    isSpeaking = speaking;
+  }
+
+  public boolean isSpeaking() {
+    return isSpeaking;
   }
 }

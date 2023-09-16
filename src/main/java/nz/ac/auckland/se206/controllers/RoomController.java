@@ -2,7 +2,6 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -126,8 +125,13 @@ public class RoomController {
       Pane dialogue = task.getValue();
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
+      // TODO: fix this
       dialogue.setOnMouseClicked(event1 -> {
-        dungeonMaster.update();
+        if (!dungeonMaster.isSpeaking()) {
+          popUp.visibleProperty().set(false);
+          dungeonMaster.update();
+          dungeonMaster.setSpeaking(false);
+        }
       });
     });
     Thread thread = new Thread(task);
