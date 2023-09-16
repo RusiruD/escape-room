@@ -6,8 +6,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.CorridorController;
+import nz.ac.auckland.se206.controllers.PuzzleController;
+import nz.ac.auckland.se206.controllers.PuzzleRoomController;
+import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SceneManager;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this
@@ -26,6 +30,7 @@ public class App extends Application {
 
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
     scene.setRoot(SceneManager.getUiRoot(appUi));
+    root.requestFocus();
   }
 
   /**
@@ -50,19 +55,28 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
-    SceneManager.addScreen(AppUi.ROOM, loadFxml("room"));
-    SceneManager.addScreen(AppUi.CHAT, loadFxml("chat"));
-    SceneManager.addScreen(AppUi.CORRIDOR, loadFxml("corridor"));
 
-    root = SceneManager.getUiRoot(AppUi.ROOM);
+    SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
+    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
+    SceneManager.addUi(AppUi.CORRIDOR, loadFxml("corridor"));
+    SceneManager.addUi(AppUi.START, loadFxml("startScreen"));
+    SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
+    SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
+
+    SceneManager.addController(PuzzleRoomController.getInstance());
+    SceneManager.addController(RoomController.getInstance());
+    SceneManager.addController(CorridorController.getInstance());
+    SceneManager.addController(PuzzleController.getInstance());
+
+    root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 600.0, 600.0);
     stage.setScene(scene);
     stage.show();
     focus();
+
   }
 
   public static void focus() {
     root.requestFocus();
   }
-
 }

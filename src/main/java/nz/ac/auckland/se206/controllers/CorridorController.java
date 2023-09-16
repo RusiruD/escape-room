@@ -1,33 +1,48 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.animation.AnimationTimer;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.SceneManager;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Controller;
 
-public class CorridorController {
 
-  private BooleanProperty wPressed = new SimpleBooleanProperty();
-  private BooleanProperty aPressed = new SimpleBooleanProperty();
-  private BooleanProperty sPressed = new SimpleBooleanProperty();
-  private BooleanProperty dPressed = new SimpleBooleanProperty();
+public class CorridorController implements Controller {
 
-  private BooleanBinding keyPressed = wPressed.or(aPressed).or(sPressed).or(dPressed);
+  private static CorridorController instance;
+
+  public static CorridorController getInstance() {
+    return instance;
+  }
+
+  private BooleanProperty forwardPressed = new SimpleBooleanProperty();
+  private BooleanProperty leftPressed = new SimpleBooleanProperty();
+  private BooleanProperty backwardPressed = new SimpleBooleanProperty();
+  private BooleanProperty rightPressed = new SimpleBooleanProperty();
+
+  private BooleanBinding keyPressed = forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
 
   @FXML
   private Rectangle player;
   @FXML
+  private Rectangle treasureChest;
+  @FXML
   private Rectangle door1;
+  @FXML
+  private Rectangle door2;
   @FXML
   private Rectangle left;
   @FXML
@@ -36,32 +51,41 @@ public class CorridorController {
   private Rectangle right;
   @FXML
   private Rectangle bottom;
-
+  @FXML
+  private ImageView sword;
   @FXML
   private Pane room;
 
-  AnimationTimer playerTimer = new AnimationTimer() {
+  @FXML
+  private Label lblTime;
+
+  @FXML
+  private ComboBox<String> inventoryChoiceBox;
+
+  private AnimationTimer playerTimer = new AnimationTimer() {
+
     @Override
     public void handle(long timestamp) {
-      if (wPressed.get()) {
+      // updateInventory();
+      if (forwardPressed.get()) {
         player.setY(player.getY() - movementSpeed);
       }
 
-      if (aPressed.get()) {
+      if (leftPressed.get()) {
         player.setX(player.getX() - movementSpeed);
       }
 
-      if (sPressed.get()) {
+      if (backwardPressed.get()) {
         player.setY(player.getY() + movementSpeed);
       }
 
-      if (dPressed.get()) {
+      if (rightPressed.get()) {
         player.setX(player.getX() + movementSpeed);
       }
     }
   };
 
-  AnimationTimer collisionTimer = new AnimationTimer() {
+  private AnimationTimer collisionTimer = new AnimationTimer() {
     @Override
     public void handle(long timestamp) {
       checkCollision();
@@ -69,8 +93,9 @@ public class CorridorController {
   };
 
   public void initialize() {
-    keyPressed.addListener((observable, aBoolean, t1) -> {
-      if (!aBoolean) {
+    instance = this;
+    keyPressed.addListener((observable, boolValue, randomVar) -> {
+      if (!boolValue) {
         playerTimer.start();
         collisionTimer.start();
       } else {
@@ -114,34 +139,45 @@ public class CorridorController {
     if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
       try {
         stopMovement();
-        App.setRoot(SceneManager.AppUi.CHAT);
+        App.setRoot(SceneManager.AppUi.PUZZLEROOM);
       } catch (IOException e) {
         e.printStackTrace();
       }
     }
+    // hit door2
+
+    if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
 
   private void stopMovement() {
-    wPressed.set(false);
-    aPressed.set(false);
-    sPressed.set(false);
-    dPressed.set(false);
+    forwardPressed.set(false);
+    leftPressed.set(false);
+    backwardPressed.set(false);
+    rightPressed.set(false);
   }
 
   @FXML
   public void onKeyPressed(KeyEvent event) {
     switch (event.getCode()) {
       case W:
-        wPressed.set(true);
+        forwardPressed.set(true);
         break;
       case A:
-        aPressed.set(true);
+        leftPressed.set(true);
         break;
       case S:
-        sPressed.set(true);
+        backwardPressed.set(true);
         break;
       case D:
-        dPressed.set(true);
+        rightPressed.set(true);
         break;
       default:
         break;
@@ -152,20 +188,63 @@ public class CorridorController {
   public void onKeyReleased(KeyEvent event) {
     switch (event.getCode()) {
       case W:
-        wPressed.set(false);
+        forwardPressed.set(false);
         break;
       case A:
-        aPressed.set(false);
+        leftPressed.set(false);
         break;
       case S:
-        sPressed.set(false);
+        backwardPressed.set(false);
         break;
       case D:
-        dPressed.set(false);
+        rightPressed.set(false);
         break;
       default:
         break;
     }
   }
 
+  @FXML
+  public void onTreasureChestClicked(MouseEvent event) {
+    System.out.println("clicked");
+    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true) {
+      sword.setVisible(true);
+      sword.setDisable(false);
+      sword.toFront();
+
+    }
+    if (selectedItem != null) {
+      if (selectedItem.contains("key1")) {
+        Inventory.removeFromInventory(selectedItem);
+
+        GameState.isLock1Unlocked = true;
+      } else if (selectedItem.contains("key2")) {
+        Inventory.removeFromInventory(selectedItem);
+        GameState.isLock2Unlocked = true;
+      }
+    }
+
+  }
+
+  @FXML
+  public void onSwordClicked(MouseEvent event) {
+    Inventory.addToInventory("sword");
+    sword.setVisible(false);
+    sword.setDisable(true);
+  }
+
+  @FXML
+  private void clickExit(MouseEvent event) {
+    System.exit(0);
+  }
+
+  public void updateInventory() {
+    inventoryChoiceBox.setItems(Inventory.getInventory());
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
+  }
 }
