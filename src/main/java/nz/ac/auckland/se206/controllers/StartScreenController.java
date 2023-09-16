@@ -43,13 +43,6 @@ public class StartScreenController {
 
     // Create a new timer object
     TimerCounter time = new TimerCounter();
-    time.setPuzzleRoomController(PuzzleRoomController.getInstance());
-    time.setRoomController(RoomController.getInstance());
-    time.setCorridorController(CorridorController.getInstance());
-    time.setPuzzleController(PuzzleController.getInstance());
-    Inventory.setPuzzleRoomController(PuzzleRoomController.getInstance());
-    Inventory.setRoomController(RoomController.getInstance());
-    Inventory.setCorridorController(CorridorController.getInstance());
 
     if (chosenTimeLimit.equals("2 Minutes")) {
       time.timerStart(120);

@@ -7,10 +7,11 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
-public class PuzzleController {
+public class PuzzleController implements Controller {
 
   private String[][] tiles;
   private String[][] solution;
@@ -127,6 +128,9 @@ public class PuzzleController {
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
+  }
+
+  public void updateInventory() {
   }
 
 }

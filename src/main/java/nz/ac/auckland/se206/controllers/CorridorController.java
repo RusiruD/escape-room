@@ -13,8 +13,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 
-public class CorridorController {
+public class CorridorController implements Controller {
 
   private static CorridorController instance;
 
