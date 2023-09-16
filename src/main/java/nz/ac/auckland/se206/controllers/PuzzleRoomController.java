@@ -3,8 +3,6 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -58,17 +56,7 @@ public class PuzzleRoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
-    // return to corridor scene
-    try {
-
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
-      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    App.returnToCorridor();
   }
 
   public void updateInventory() {

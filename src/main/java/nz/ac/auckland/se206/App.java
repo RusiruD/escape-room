@@ -81,4 +81,13 @@ public class App extends Application {
   public static void focus() {
     root.requestFocus();
   }
+
+  public static void returnToCorridor() {
+    try {
+      App.setRoot(AppUi.CORRIDOR);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    focus();
+  }
 }

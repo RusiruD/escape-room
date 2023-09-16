@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -21,7 +21,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -228,17 +227,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
-    // return to corridor scene
-    try {
-
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
-      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    App.returnToCorridor();
   }
 
   @FXML

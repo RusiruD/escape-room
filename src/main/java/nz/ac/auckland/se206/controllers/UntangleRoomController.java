@@ -1,7 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.DoubleProperty;
@@ -15,8 +15,6 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -257,17 +255,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
-    // return to corridor scene
-    try {
-
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
-      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    App.returnToCorridor();
   }
 
   public void updateInventory() {
