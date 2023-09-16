@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
    <children>
       <ImageView fitHeight="600.0" fitWidth="1244.0" layoutX="-608.0" pickOnBounds="true">
          <image>
@@ -25,5 +25,10 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
+      <ImageView fx:id="key2" fitHeight="35.0" fitWidth="60.0" layoutX="471.0" layoutY="520.0" onMouseClicked="#onKey2Clicked" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/key.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

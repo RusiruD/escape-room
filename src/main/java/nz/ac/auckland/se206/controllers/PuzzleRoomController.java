@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -18,6 +19,8 @@ public class PuzzleRoomController {
 
   @FXML
   private Label lblTime;
+  @FXML
+  private ImageView key2;
 
   public static PuzzleRoomController getInstance() {
     return instance;
@@ -42,6 +45,14 @@ public class PuzzleRoomController {
     if (GameState.puzzleRoomSolved) {
       App.setRoot(AppUi.CORRIDOR);
     }
+  }
+
+  @FXML
+  private void onKey2Clicked(MouseEvent event) {
+    Inventory.addToInventory("key2");
+    key2.setVisible(false);
+    key2.setDisable(true);
+    GameState.isKey2Collected = true;
   }
 
   @FXML
