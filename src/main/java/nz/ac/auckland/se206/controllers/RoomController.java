@@ -11,6 +11,7 @@ import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -19,7 +20,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
-public class RoomController {
+public class RoomController implements Controller {
   private static RoomController instance;
 
   public static RoomController getInstance() {
@@ -49,6 +50,8 @@ public class RoomController {
   private ImageView boulder;
   private double xOffset = 0;
   private double yOffset = 0;
+
+  private int parchmentPieces = 0;
 
   @FXML
   private ImageView parchment4;
@@ -178,8 +181,6 @@ public class RoomController {
       e.printStackTrace();
     }
   }
-
-  private int parchmentPieces = 0;
 
   @FXML
   private void onTableClicked(MouseEvent event) {

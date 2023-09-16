@@ -7,10 +7,11 @@ import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
-public class PuzzleController {
+public class PuzzleController implements Controller {
 
   private String[][] tiles;
   private String[][] solution;
@@ -79,22 +80,22 @@ public class PuzzleController {
   }
 
   private void swapTiles(ImageView a, ImageView b) {
-    int[] aPos = findPos(a.getId());
-    int[] bPos = findPos(b.getId());
+    int[] apos = findPos(a.getId());
+    int[] bpos = findPos(b.getId());
 
     if (!a.equals(zero) && !b.equals(zero)) {
       return;
     }
 
-    if (Math.abs(aPos[0] - bPos[0]) == 1 ^ Math.abs(aPos[1] - bPos[1]) == 1) {
-      tiles[aPos[0]][aPos[1]] = b.getId();
-      tiles[bPos[0]][bPos[1]] = a.getId();
-      double aX = a.getLayoutX();
-      double aY = a.getLayoutY();
+    if (Math.abs(apos[0] - bpos[0]) == 1 ^ Math.abs(apos[1] - bpos[1]) == 1) {
+      tiles[apos[0]][apos[1]] = b.getId();
+      tiles[bpos[0]][bpos[1]] = a.getId();
+      double ax = a.getLayoutX();
+      double ay = a.getLayoutY();
       a.setLayoutX(b.getLayoutX());
       a.setLayoutY(b.getLayoutY());
-      b.setLayoutX(aX);
-      b.setLayoutY(aY);
+      b.setLayoutX(ax);
+      b.setLayoutY(ay);
     }
     checkSolution();
   }
@@ -102,8 +103,9 @@ public class PuzzleController {
   private int[] findPos(String s) {
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
-        if (tiles[i][j].equals(s))
+        if (tiles[i][j].equals(s)) {
           return new int[] { i, j };
+        }
       }
     }
     return null;
@@ -126,6 +128,9 @@ public class PuzzleController {
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
+  }
+
+  public void updateInventory() {
   }
 
 }

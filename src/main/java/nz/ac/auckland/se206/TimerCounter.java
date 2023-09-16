@@ -3,33 +3,9 @@ package nz.ac.auckland.se206;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
-import nz.ac.auckland.se206.controllers.CorridorController;
-import nz.ac.auckland.se206.controllers.PuzzleController;
-import nz.ac.auckland.se206.controllers.PuzzleRoomController;
-import nz.ac.auckland.se206.controllers.RoomController;
+import nz.ac.auckland.se206.controllers.SceneManager;
 
 public class TimerCounter {
-
-  private RoomController roomController;
-  private PuzzleController puzzleController;
-  private CorridorController corridorController;
-  private PuzzleRoomController puzzleRoomController;
-
-  public void setRoomController(RoomController controller) {
-    roomController = controller;
-  }
-
-  public void setPuzzleController(PuzzleController controller) {
-    puzzleController = controller;
-  }
-
-  public void setCorridorController(CorridorController controller) {
-    corridorController = controller;
-  }
-
-  public void setPuzzleRoomController(PuzzleRoomController controller) {
-    puzzleRoomController = controller;
-  }
 
   public void timerStart(int time) {
     final int[] timeCounter = new int[1];
@@ -70,9 +46,10 @@ public class TimerCounter {
   }
 
   private void updateTimers(String string) {
-    roomController.updateTimerLabel(string);
-    puzzleController.updateTimerLabel(string);
-    puzzleRoomController.updateTimerLabel(string);
-    corridorController.updateTimerLabel(string);
+
+    for (Controller controller : SceneManager.getControllers()) {
+      controller.updateTimerLabel(string);
+    }
+
   }
 }
