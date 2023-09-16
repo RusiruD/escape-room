@@ -121,7 +121,8 @@ public class RoomController {
     Task<Pane> task = new Task<Pane>() {
       @Override
       protected Pane call() throws Exception {
-        return dungeonMaster.getText();
+        return dungeonMaster.getText("user",
+            "I took damage from the window! Tell me a few short sentences about it with no commas.");
       }
     };
     task.setOnSucceeded(e -> {

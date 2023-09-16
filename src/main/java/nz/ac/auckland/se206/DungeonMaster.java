@@ -33,7 +33,8 @@ public class DungeonMaster {
   private String[] messages;
   private int messageIndex = 0;
 
-  private ChatCompletionRequest chatCompletionRequest;
+  private ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2)
+      .setTopP(0.5).setMaxTokens(50);
 
   public Pane getPopUp() {
     popUp = new HBox();
@@ -119,12 +120,12 @@ public class DungeonMaster {
     return popUp;
   }
 
-  public Pane getText() {
+  public Pane getText(String role, String message) {
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
-    chatCompletionRequest.addMessage(new ChatMessage("user", "Can you give me some random chat messages"));
+    ChatMessage chatMessage = new ChatMessage(role, message);
+    chatCompletionRequest.addMessage(chatMessage);
     Task<Void> gptTask = new Task<Void>() {
       @Override
       protected Void call() throws Exception {
