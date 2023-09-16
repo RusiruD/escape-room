@@ -6,22 +6,27 @@ import java.util.List;
 import javafx.beans.property.*;
 import javafx.beans.value.*;
 import javafx.collections.*;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.*;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.*;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
-//see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
-//and https://stackoverflow.com/questions/15981274/javafx-modify-polygons
+// see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
+// and https://stackoverflow.com/questions/15981274/javafx-modify-polygons
 public class UntangleRoomController {
-  
-  @FXML Pane pane;
-  @FXML Rectangle keyItem;
+
+  @FXML
+  Pane pane;
+  @FXML
+  Rectangle keyItem;
 
   private boolean isSolved = false;
 
@@ -29,7 +34,7 @@ public class UntangleRoomController {
     keyItem.setVisible(false);
     keyItem.mouseTransparentProperty().set(true);
     Polygon polygon = createStartingTriangle();
-    
+
     Group root = new Group();
     root.getChildren().add(polygon);
     root.getChildren().addAll(createControlAnchorsFor(polygon.getPoints()));
@@ -45,8 +50,7 @@ public class UntangleRoomController {
         720d, 425d,
         195d, 160d,
         690d, 160d,
-        225d, 410d
-    );
+        225d, 410d);
 
     polygon.setStroke(Color.rgb(210, 15, 57, 1));
     polygon.setStrokeWidth(4);
@@ -57,32 +61,32 @@ public class UntangleRoomController {
   }
 
   private void isIntersecting(Polygon polygon) {
-    //Untangle lines to solve the puzzle
-    //for debug
+    // Untangle lines to solve the puzzle
+    // for debug
     if (pane.getChildren().size() > 1) {
       pane.getChildren().remove(1);
     }
     polygon.getPoints();
 
-    List<Line> lines = new ArrayList<>(); 
+    List<Line> lines = new ArrayList<>();
     for (int i = 0; i < polygon.getPoints().size() - 2; i += 2) {
-      double x1 = polygon.getPoints().get(i) ;
+      double x1 = polygon.getPoints().get(i);
       double y1 = polygon.getPoints().get(i + 1);
       double x2 = polygon.getPoints().get(i + 2);
       double y2 = polygon.getPoints().get(i + 3);
-      //Line line = shortenLine(x1, y1, x2, y2);
-      
+      // Line line = shortenLine(x1, y1, x2, y2);
+
       Line line = new Line(x1, y1, x2, y2);
       line.setScaleX(0.9);
       line.setScaleY(0.9);
-      line.setStroke (Color.GREEN);
+      line.setStroke(Color.GREEN);
       lines.add(line);
     }
     double x1 = polygon.getPoints().get(polygon.getPoints().size() - 2);
     double y1 = polygon.getPoints().get(polygon.getPoints().size() - 1);
     double x2 = polygon.getPoints().get(0);
     double y2 = polygon.getPoints().get(1);
-    Line line = new  Line(x1, y1, x2, y2);
+    Line line = new Line(x1, y1, x2, y2);
     line.setScaleX(0.9);
     line.setScaleY(0.9);
     line.setStroke(Color.BLACK);
@@ -97,11 +101,11 @@ public class UntangleRoomController {
         }
       }
     }
-    //for debug
+    // for debug
     // Group liness = new Group();
     // liness.getChildren().addAll(lines);
     // pane.getChildren().add(liness);
-    
+
     System.out.println(polygon);
     puzzleSolved();
   }
@@ -119,20 +123,22 @@ public class UntangleRoomController {
   private ObservableList<Anchor> createControlAnchorsFor(final ObservableList<Double> points) {
     ObservableList<Anchor> anchors = FXCollections.observableArrayList();
 
-    for (int i = 0; i < points.size(); i+=2) {
+    for (int i = 0; i < points.size(); i += 2) {
       final int idx = i;
 
       DoubleProperty xProperty = new SimpleDoubleProperty(points.get(i));
       DoubleProperty yProperty = new SimpleDoubleProperty(points.get(i + 1));
 
       xProperty.addListener(new ChangeListener<Number>() {
-        @Override public void changed(ObservableValue<? extends Number> ov, Number oldX, Number x) {
+        @Override
+        public void changed(ObservableValue<? extends Number> ov, Number oldX, Number x) {
           points.set(idx, (double) x);
         }
       });
 
       yProperty.addListener(new ChangeListener<Number>() {
-        @Override public void changed(ObservableValue<? extends Number> ov, Number oldY, Number y) {
+        @Override
+        public void changed(ObservableValue<? extends Number> ov, Number oldY, Number y) {
           points.set(idx + 1, (double) y);
         }
       });
@@ -166,7 +172,8 @@ public class UntangleRoomController {
     private void enableDrag() {
       final Delta dragDelta = new Delta();
       setOnMousePressed(new EventHandler<MouseEvent>() {
-        @Override public void handle(MouseEvent mouseEvent) {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
           // record a delta distance for the drag and drop operation.
           dragDelta.x = getCenterX() - mouseEvent.getX();
           dragDelta.y = getCenterY() - mouseEvent.getY();
@@ -174,13 +181,15 @@ public class UntangleRoomController {
         }
       });
       setOnMouseReleased(new EventHandler<MouseEvent>() {
-        @Override public void handle(MouseEvent mouseEvent) {
-          isIntersecting((Polygon)getParent().getChildrenUnmodifiable().get(0));
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+          isIntersecting((Polygon) getParent().getChildrenUnmodifiable().get(0));
           getScene().setCursor(Cursor.HAND);
         }
       });
       setOnMouseDragged(new EventHandler<MouseEvent>() {
-        @Override public void handle(MouseEvent mouseEvent) {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
           double newX = mouseEvent.getX() + dragDelta.x;
           if (newX > 0 && newX < getScene().getWidth()) {
             setCenterX(newX);
@@ -192,14 +201,16 @@ public class UntangleRoomController {
         }
       });
       setOnMouseEntered(new EventHandler<MouseEvent>() {
-        @Override public void handle(MouseEvent mouseEvent) {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
           if (!mouseEvent.isPrimaryButtonDown()) {
             getScene().setCursor(Cursor.HAND);
           }
         }
       });
       setOnMouseExited(new EventHandler<MouseEvent>() {
-        @Override public void handle(MouseEvent mouseEvent) {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
           if (!mouseEvent.isPrimaryButtonDown()) {
             getScene().setCursor(Cursor.DEFAULT);
           }
@@ -208,11 +219,28 @@ public class UntangleRoomController {
     }
 
     // records relative x and y co-ordinates.
-    private class Delta { double x, y; }
+    private class Delta {
+      double x, y;
+    }
   }
 
   public void getKey() {
     keyItem.setVisible(false);
-    //TODO: add key to inventory
+    // TODO: add key to inventory
+  }
+
+  @FXML
+  private void onReturnToCorridorClicked(ActionEvent event) {
+    // return to corridor scene
+    try {
+
+      Button button = (Button) event.getSource();
+      Scene sceneButtonIsIn = button.getScene();
+
+      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
+      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 }
