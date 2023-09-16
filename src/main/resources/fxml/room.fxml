@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fx:id="imgBackground" fitHeight="620.0" fitWidth="1100.0" pickOnBounds="true">
          <image>
@@ -21,7 +21,8 @@
       <Label layoutX="25.0" layoutY="14.0" prefHeight="17.0" prefWidth="125.0" text="Inventory" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
-         </font></Label>
+         </font>
+      </Label>
       <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="25.0" fitWidth="40.0" layoutX="24.0" layoutY="458.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/parchment.jpg" />
@@ -93,7 +94,9 @@
       <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="942.0" layoutY="12.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
-         </font></Label>
+         </font>
+      </Label>
       <Button fx:id="btnReturnToCorridor" layoutX="508.0" layoutY="12.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="35.0" prefWidth="125.0" text="Return to Corridor" />
+      <Pane fx:id="popUp" layoutX="315.0" layoutY="513.0" maxHeight="80.0" maxWidth="550.0" prefHeight="80.0" prefWidth="550.0" style="-fx-background-color: null;" />
    </children>
 </Pane>

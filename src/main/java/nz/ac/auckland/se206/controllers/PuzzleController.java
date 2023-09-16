@@ -13,6 +13,12 @@ import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class PuzzleController implements Controller {
 
+  private static PuzzleController instance;
+
+  public static PuzzleController getInstance() {
+    return instance;
+  }
+
   private String[][] tiles;
   private String[][] solution;
   @FXML
@@ -40,12 +46,6 @@ public class PuzzleController implements Controller {
 
   @FXML
   private Label lblTime;
-
-  private static PuzzleController instance;
-
-  public static PuzzleController getInstance() {
-    return instance;
-  }
 
   public void initialize() {
     instance = this;
