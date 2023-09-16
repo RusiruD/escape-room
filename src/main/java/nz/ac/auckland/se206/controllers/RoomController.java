@@ -1,5 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
+import nz.ac.auckland.se206.DungeonMaster;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -10,23 +20,12 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import nz.ac.auckland.se206.DungeonMaster;
 import javafx.event.ActionEvent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Controller;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class RoomController implements Controller {
   private static RoomController instance;
@@ -99,7 +98,8 @@ public class RoomController implements Controller {
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
 
-    chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest = new ChatCompletionRequest().setN(1)
+        .setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
     // Allow the boulder to be dragged and dropped
     allowImageToBeDragged(boulder);
@@ -227,17 +227,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
-    // return to corridor scene
-    try {
-
-      Button button = (Button) event.getSource();
-      Scene sceneButtonIsIn = button.getScene();
-
-      sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
-      SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    App.returnToCorridor();
   }
 
   @FXML
@@ -325,7 +315,8 @@ public class RoomController implements Controller {
       @Override
       protected Pane call() throws Exception {
         return dungeonMaster.getText("user",
-            "I took damage from the window! Tell me a few short sentences about it with no commas.");
+            "I took damage from the window! Tell me" +
+                " a few short sentences about it with no commas.");
       }
     };
     task.setOnSucceeded(e -> {
@@ -333,10 +324,12 @@ public class RoomController implements Controller {
       Pane dialogue = task.getValue();
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
-      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0)).getChildren()
-          .get(1);
-      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
+          .get(1)).getChildren().get(2);
+      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
+          .get(1)).getChildren().get(0)).getChildren().get(1);
+      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
+          .get(1)).getChildren().get(1);
       exitButton.setOnMouseClicked(event1 -> {
         popUp.visibleProperty().set(false);
       });
