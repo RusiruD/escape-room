@@ -76,10 +76,20 @@ public class DungeonMaster {
     translateTransition.setCycleCount(Animation.INDEFINITE);
     translateTransition.play();
 
+    Rectangle quitButton = new Rectangle();
+    quitButton.setWidth(20);
+    quitButton.setHeight(20);
+    quitButton.setStyle("-fx-fill: #f38ba8");
+    quitButton.setOnMouseClicked(e -> {
+      popUp.visibleProperty().set(false);
+    });
+
     StackPane dialogueContainer = new StackPane();
-    dialogueContainer.getChildren().addAll(dialogueBox, nextButton);
+    dialogueContainer.getChildren().addAll(dialogueBox, nextButton, quitButton);
     nextButton.setTranslateY(25);
     nextButton.setTranslateX(220);
+    quitButton.setTranslateY(-20);
+    quitButton.setTranslateX(220);
 
     // ADDING TO POP UP
     popUp.getChildren().addAll(dungeonMasterStack);
@@ -89,6 +99,8 @@ public class DungeonMaster {
 
   public Pane getText() {
     System.out.println("getting text");
+    messages = null;
+    messageIndex = 0;
     chatCompletionRequest = new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(50);
     chatCompletionRequest.addMessage(new ChatMessage("user", "Can you give me some random chat messages"));
     Task<Void> gptTask = new Task<Void>() {

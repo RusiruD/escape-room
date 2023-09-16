@@ -114,6 +114,7 @@ public class RoomController {
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
+    // TODO: change on click method to not update on exit
     Task<Pane> task = new Task<Pane>() {
       @Override
       protected Pane call() throws Exception {
