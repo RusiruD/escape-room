@@ -122,6 +122,8 @@ public class PuzzleController implements Controller {
     }
     if (counter == 9) {
       GameState.puzzleRoomSolved = true;
+      PuzzleRoomController.key2Visible();
+
     }
   }
 

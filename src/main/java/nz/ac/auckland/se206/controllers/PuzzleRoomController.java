@@ -23,7 +23,7 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private Label lblTime;
   @FXML
-  private ImageView key2;
+  private static ImageView key2;
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
@@ -32,6 +32,12 @@ public class PuzzleRoomController implements Controller {
 
     instance = this;
 
+  }
+
+  @FXML
+  public static void key2Visible() {
+    key2.setVisible(true);
+    key2.setDisable(false);
   }
 
   @FXML
