@@ -129,7 +129,11 @@ public class CorridorController implements Controller {
       }
     };
     Thread thread = new Thread(task);
+    thread.setDaemon(true);
     thread.start();
+    task.setOnSucceeded(event -> {
+      GameState.riddle = riddle;
+    });
   }
 
   private void checkCollision() {
@@ -287,15 +291,20 @@ public class CorridorController implements Controller {
 
   @FXML
   public void getRiddle() {
+    // TODO: fix this maybe try a try catch
     if (!riddle.hasRiddle()) {
       return;
     }
+
     if (riddleCalled) {
       String riddleText = riddle.getRiddle();
       Pane riddlePane = riddle.riddlePane(riddleText);
       riddleDisplay.getChildren().add(riddlePane);
       riddlePane.getStyleClass().add("riddle");
       riddleDisplay.toFront();
+      riddleDisplay.visibleProperty().set(true);
+      riddleDisplay.mouseTransparentProperty().set(false);
+
     } else {
       DungeonMaster dungeonMaster = riddle.getDungeonMaster();
       Pane dialogue = dungeonMaster.getPopUp();
