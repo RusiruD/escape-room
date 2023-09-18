@@ -12,6 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -34,7 +35,8 @@ public class CorridorController implements Controller {
       .or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
-
+  @FXML
+  private Polygon polygon;
   @FXML
   private Rectangle player;
   @FXML
@@ -45,14 +47,7 @@ public class CorridorController implements Controller {
   private Rectangle door2;
   @FXML
   private Rectangle door3;
-  @FXML
-  private Rectangle left;
-  @FXML
-  private Rectangle top;
-  @FXML
-  private Rectangle right;
-  @FXML
-  private Rectangle bottom;
+
   @FXML
   private ImageView sword;
   @FXML
@@ -70,19 +65,28 @@ public class CorridorController implements Controller {
     public void handle(long timestamp) {
       // updateInventory();
       if (forwardPressed.get()) {
-        player.setY(player.getY() - movementSpeed);
+        if (polygon.contains(player.getX(), player.getY() - movementSpeed)) {
+
+          player.setY(player.getY() - movementSpeed);
+        }
       }
 
       if (leftPressed.get()) {
-        player.setX(player.getX() - movementSpeed);
+        if (polygon.contains(player.getX() - movementSpeed, player.getY())) {
+          player.setX(player.getX() - movementSpeed);
+        }
       }
 
       if (backwardPressed.get()) {
-        player.setY(player.getY() + movementSpeed);
+        if (polygon.contains(player.getX(), player.getY() + movementSpeed)) {
+          player.setY(player.getY() + movementSpeed);
+        }
       }
 
       if (rightPressed.get()) {
-        player.setX(player.getX() + movementSpeed);
+        if (polygon.contains(player.getX() + movementSpeed, player.getY())) {
+          player.setX(player.getX() + movementSpeed);
+        }
       }
     }
   };
@@ -95,6 +99,18 @@ public class CorridorController implements Controller {
   };
 
   public void initialize() {
+    System.out.println(polygon.computeAreaInScreen());
+    System.out.println(polygon.boundsInLocalProperty());
+    System.out.println(polygon.boundsInParentProperty());
+    System.out.println(polygon.getBoundsInLocal());
+    System.out.println(polygon.getBoundsInParent());
+    polygon.computeAreaInScreen();
+    polygon.boundsInLocalProperty();
+    polygon.boundsInParentProperty();
+    polygon.getBoundsInLocal();
+    polygon.getBoundsInParent();
+    polygon.getLayoutBounds();
+    // player.setClip(polygon);
     instance = this;
     keyPressed.addListener((observable, boolValue, randomVar) -> {
       if (!boolValue) {
@@ -109,33 +125,35 @@ public class CorridorController implements Controller {
 
   private void checkCollision() {
 
-    // hit left wall
-    if (player.getBoundsInParent().intersects(left.getBoundsInParent())) {
-      stopMovement();
-      player.setLayoutX(left.getLayoutX());
-      player.setX(left.getX() + left.getWidth() + 1);
-    }
-
-    // hit right wall
-    if (player.getBoundsInParent().intersects(right.getBoundsInParent())) {
-      stopMovement();
-      player.setLayoutX(right.getLayoutX());
-      player.setX(right.getX() - player.getWidth() - 1);
-    }
-
-    // hit top wall
-    if (player.getBoundsInParent().intersects(top.getBoundsInParent())) {
-      stopMovement();
-      player.setLayoutY(top.getLayoutY());
-      player.setY(top.getY() + top.getHeight() + 1);
-    }
-
-    // hit bottom wall
-    if (player.getBoundsInParent().intersects(bottom.getBoundsInParent())) {
-      stopMovement();
-      player.setLayoutY(bottom.getLayoutY());
-      player.setY(bottom.getY() - player.getHeight() - 1);
-    }
+    /*
+     * // hit left wall
+     * if (player.getBoundsInParent().intersects(left.getBoundsInParent())) {
+     * stopMovement();
+     * player.setLayoutX(left.getLayoutX());
+     * player.setX(left.getX() + left.getWidth() + 1);
+     * }
+     * 
+     * // hit right wall
+     * if (player.getBoundsInParent().intersects(right.getBoundsInParent())) {
+     * stopMovement();
+     * player.setLayoutX(right.getLayoutX());
+     * player.setX(right.getX() - player.getWidth() - 1);
+     * }
+     * 
+     * // hit top wall
+     * if (player.getBoundsInParent().intersects(top.getBoundsInParent())) {
+     * stopMovement();
+     * player.setLayoutY(top.getLayoutY());
+     * player.setY(top.getY() + top.getHeight() + 1);
+     * }
+     * 
+     * // hit bottom wall
+     * if (player.getBoundsInParent().intersects(bottom.getBoundsInParent())) {
+     * stopMovement();
+     * player.setLayoutY(bottom.getLayoutY());
+     * player.setY(bottom.getY() - player.getHeight() - 1);
+     * }
+     */
 
     // hit door1
     if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
