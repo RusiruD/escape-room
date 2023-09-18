@@ -143,8 +143,8 @@ public class CorridorController implements Controller {
   private void checkCollision() {
 
     // hit door1
-
-    if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
+    // player.getBoundsInParent().intersects(door1.getBoundsInParent())
+    if (door1.contains(player.getX(), player.getY())) {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.PUZZLEROOM);
