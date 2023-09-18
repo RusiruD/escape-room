@@ -27,6 +27,7 @@ public class DungeonMaster {
 
   private boolean taskDone = false;
   private boolean isSpeaking = false;
+  private boolean riddleDone = false;
 
   private String message;
   private String[] messages;
@@ -209,6 +210,7 @@ public class DungeonMaster {
     gptTask.setOnSucceeded(e -> {
       System.out.println("gpt task succeeded");
       taskDone = true;
+      riddleDone = true;
     });
     gptTask.setOnFailed(e -> {
       System.out.println("gpt task failed");
@@ -327,5 +329,9 @@ public class DungeonMaster {
 
   public String[] getMessages() {
     return messages;
+  }
+
+  public boolean isRiddleDone() {
+    return riddleDone;
   }
 }

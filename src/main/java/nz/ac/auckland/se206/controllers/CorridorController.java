@@ -291,12 +291,13 @@ public class CorridorController implements Controller {
 
   @FXML
   public void getRiddle() {
-    // TODO: fix this maybe try a try catch
-    if (!riddle.hasRiddle()) {
+    DungeonMaster dungeonMaster = riddle.getDungeonMaster();
+    if (!dungeonMaster.isRiddleDone()) {
       return;
     }
 
     if (riddleCalled) {
+      // gets the riddle pane if already asked dungeon master for riddle
       String riddleText = riddle.getRiddle();
       Pane riddlePane = riddle.riddlePane(riddleText);
       riddleDisplay.getChildren().add(riddlePane);
@@ -304,12 +305,20 @@ public class CorridorController implements Controller {
       riddleDisplay.toFront();
       riddleDisplay.visibleProperty().set(true);
       riddleDisplay.mouseTransparentProperty().set(false);
+      Pane parent = (Pane) riddleDisplay.getParent();
+
+      // change width of parent
+      parent.setPrefSize(200, 200);
+
+      riddleDisplay.translateXProperty().set(parent.getWidth() / 2 - riddleDisplay.getWidth() / 2);
+      riddleDisplay.translateYProperty().set(parent.getHeight() / 2 - riddleDisplay.getHeight() / 2);
 
     } else {
-      DungeonMaster dungeonMaster = riddle.getDungeonMaster();
+      // gets the dungeon master to speak the riddle dialogue
       Pane dialogue = dungeonMaster.getPopUp();
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
+      // buttons in the dialogue
       Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
           .get(1)).getChildren().get(2);
       Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
