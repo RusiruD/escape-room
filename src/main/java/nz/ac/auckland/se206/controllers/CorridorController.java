@@ -112,17 +112,7 @@ public class CorridorController implements Controller {
 
   public void initialize() {
     // group.setClip(polygon);
-    System.out.println(polygon.computeAreaInScreen());
-    System.out.println(" ");
-    System.out.println(polygon.boundsInLocalProperty());
-    System.out.println(" ");
-    System.out.println(polygon.boundsInParentProperty());
-    System.out.println(" ");
-    System.out.println(polygon.getBoundsInLocal());
-    System.out.println(" ");
-    System.out.println(polygon.getBoundsInParent());
-    System.out.println(" ");
-    System.out.println(polygon.getLayoutBounds());
+
     // player.setClip(polygon);
     instance = this;
     keyPressed.addListener((observable, boolValue, randomVar) -> {
@@ -140,15 +130,6 @@ public class CorridorController implements Controller {
     double x_center = player.getX() + (player.getWidth() / 2);
     double y_center = player.getY() + (player.getHeight() / 2);
 
-    if (!polygon.contains(x_center, y_center)) {
-      System.out.println("daeee");
-    }
-    if (!polygon.getLayoutBounds().contains(player.getLayoutBounds())) {
-      System.out.println("collision");
-    }
-    if (!polygon.getLayoutBounds().intersects(player.getLayoutBounds())) {
-      System.out.println("colsion");
-    }
     if (!player.getBoundsInParent().intersects(polygon.getBoundsInParent())) {
       // Collision detected
       System.out.println("dfwww");
@@ -193,36 +174,35 @@ public class CorridorController implements Controller {
      */
 
     // hit door1
-    /*
-     * if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
-     * try {
-     * stopMovement();
-     * App.setRoot(SceneManager.AppUi.PUZZLEROOM);
-     * } catch (IOException e) {
-     * e.printStackTrace();
-     * }
-     * }
-     * 
-     * // hit door2
-     * if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
-     * try {
-     * stopMovement();
-     * App.setRoot(SceneManager.AppUi.FIRST_ROOM);
-     * } catch (IOException e) {
-     * e.printStackTrace();
-     * }
-     * }
-     * 
-     * // hit door3
-     * if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
-     * try {
-     * stopMovement();
-     * App.setRoot(SceneManager.AppUi.UNTANGLE);
-     * } catch (IOException e) {
-     * e.printStackTrace();
-     * }
-     * }
-     */
+
+    if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.PUZZLEROOM);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    // hit door2
+    if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
+
+    // hit door3
+    if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
+      try {
+        stopMovement();
+        App.setRoot(SceneManager.AppUi.UNTANGLE);
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
 
   }
 
