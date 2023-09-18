@@ -111,9 +111,7 @@ public class CorridorController implements Controller {
   };
 
   public void initialize() {
-    // group.setClip(polygon);
 
-    // player.setClip(polygon);
     instance = this;
     keyPressed.addListener((observable, boolValue, randomVar) -> {
       if (!boolValue) {
@@ -127,51 +125,6 @@ public class CorridorController implements Controller {
   }
 
   private void checkCollision() {
-    double x_center = player.getX() + (player.getWidth() / 2);
-    double y_center = player.getY() + (player.getHeight() / 2);
-
-    if (!player.getBoundsInParent().intersects(polygon.getBoundsInParent())) {
-      // Collision detected
-      System.out.println("dfwww");
-      // Handle the collision as needed
-    }
-
-    if (!polygon.contains(player.getX(), player.getY())) {
-      System.out.println("cn");
-    }
-
-    if (!polygon.contains(player.getTranslateX(), player.getTranslateY())) {
-      System.out.println("cunt");
-    }
-    /*
-     * // hit left wall
-     * if (player.getBoundsInParent().intersects(left.getBoundsInParent())) {
-     * stopMovement();
-     * player.setLayoutX(left.getLayoutX());
-     * player.setX(left.getX() + left.getWidth() + 1);
-     * }
-     * 
-     * // hit right wall
-     * if (player.getBoundsInParent().intersects(right.getBoundsInParent())) {
-     * stopMovement();
-     * player.setLayoutX(right.getLayoutX());
-     * player.setX(right.getX() - player.getWidth() - 1);
-     * }
-     * 
-     * // hit top wall
-     * if (player.getBoundsInParent().intersects(top.getBoundsInParent())) {
-     * stopMovement();
-     * player.setLayoutY(top.getLayoutY());
-     * player.setY(top.getY() + top.getHeight() + 1);
-     * }
-     * 
-     * // hit bottom wall
-     * if (player.getBoundsInParent().intersects(bottom.getBoundsInParent())) {
-     * stopMovement();
-     * player.setLayoutY(bottom.getLayoutY());
-     * player.setY(bottom.getY() - player.getHeight() - 1);
-     * }
-     */
 
     // hit door1
 

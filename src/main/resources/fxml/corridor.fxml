@@ -36,10 +36,10 @@
       </ImageView>
       <Group layoutX="401.0" layoutY="529.0">
          <children>
-            <Polygon fx:id="polygon" fill="DODGERBLUE" points="226.2520751953125, -50.03997802734375, 233.84613037109375, -166.0, -9.15386962890625, -372.0, -386.7478942871094, -68.03997802734375, -205.15386962890625, 149.96002197265625, -50.15386962890625, 149.96002197265625, 37.84613037109375, 149.96002197265625" stroke="BLACK" strokeType="INSIDE" />
-            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="55.0" layoutX="-120.0" layoutY="-357.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="88.0" />
-            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="63.0" layoutX="-203.0" layoutY="-300.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
-            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="108.0" layoutX="-297.0" layoutY="-224.0" rotate="-40.6" stroke="BLACK" strokeType="INSIDE" width="56.0" />
+            <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0" points="226.2520751953125, -50.03997802734375, 233.84613037109375, -166.0, -4.15386962890625, -386.0, -386.7478942871094, -68.03997802734375, -205.15386962890625, 149.96002197265625, -50.15386962890625, 149.96002197265625, 37.84613037109375, 149.96002197265625" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="55.0" layoutX="-136.0" layoutY="-377.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="88.0" />
+            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="75.0" layoutX="-188.0" layoutY="-310.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
+            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="108.0" layoutX="-309.0" layoutY="-237.0" opacity="0.03" rotate="-40.6" stroke="BLACK" strokeType="INSIDE" width="56.0" />
             <Rectangle fx:id="treasureChest" arcHeight="5.0" arcWidth="5.0" fill="#f8c200" height="92.0" layoutX="85.0" layoutY="-216.0" onMouseClicked="#onTreasureChestClicked" stroke="BLACK" strokeType="INSIDE" width="71.0" />
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" height="41.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
          </children>
