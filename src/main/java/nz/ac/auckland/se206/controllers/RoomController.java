@@ -10,6 +10,9 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.DungeonMaster;
+
+import java.util.Random;
+
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -29,6 +32,7 @@ import javafx.scene.control.TextArea;
 
 public class RoomController implements Controller {
   private static RoomController instance;
+  private Random random = new Random();
 
   public static RoomController getInstance() {
     return instance;
@@ -107,6 +111,10 @@ public class RoomController implements Controller {
 
   private void appendChatMessage(ChatMessage msg) {
     chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    setRandomPosition(parchment1);
+    setRandomPosition(parchment2);
+    setRandomPosition(parchment3);
+    setRandomPosition(parchment4);
   }
 
   private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
@@ -143,6 +151,15 @@ public class RoomController implements Controller {
     // inventoryChoiceBox.getItems().add(image.getId());
     Inventory.addToInventory(image.getId());
     updateInventory();
+  }
+
+  private void setRandomPosition(ImageView imageView) {
+
+    double x = random.nextDouble() * (1100 - imageView.getFitWidth());
+    double y = random.nextDouble() * (620 - imageView.getFitHeight());
+    imageView.setLayoutX(x);
+    imageView.setLayoutY(y);
+    System.out.println("x: " + x + " y: " + y);
   }
 
   public void updateInventory() {
