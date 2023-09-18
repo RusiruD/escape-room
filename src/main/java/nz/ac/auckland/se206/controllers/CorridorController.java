@@ -6,6 +6,7 @@ import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
+import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -38,6 +39,10 @@ public class CorridorController implements Controller {
   @FXML
   private Polygon polygon;
   @FXML
+  private Group group;
+
+  @FXML
+
   private Rectangle player;
   @FXML
   private Rectangle treasureChest;
@@ -64,27 +69,34 @@ public class CorridorController implements Controller {
     @Override
     public void handle(long timestamp) {
       // updateInventory();
+      double bottomRightX = player.getX() + player.getWidth();
+      double bottomRightY = player.getY() + player.getHeight();
+
       if (forwardPressed.get()) {
-        if (polygon.contains(player.getX(), player.getY() - movementSpeed)) {
+        if ((polygon.contains(player.getX(), player.getY() - movementSpeed))
+            && (polygon.contains(bottomRightX, bottomRightY - movementSpeed))) {
 
           player.setY(player.getY() - movementSpeed);
         }
       }
 
       if (leftPressed.get()) {
-        if (polygon.contains(player.getX() - movementSpeed, player.getY())) {
+        if (polygon.contains(player.getX() - movementSpeed, player.getY())
+            && polygon.contains(bottomRightX - movementSpeed, bottomRightY)) {
           player.setX(player.getX() - movementSpeed);
         }
       }
 
       if (backwardPressed.get()) {
-        if (polygon.contains(player.getX(), player.getY() + movementSpeed)) {
+        if ((polygon.contains(player.getX(), player.getY() + movementSpeed))
+            && polygon.contains(bottomRightX, bottomRightY + movementSpeed)) {
           player.setY(player.getY() + movementSpeed);
         }
       }
 
       if (rightPressed.get()) {
-        if (polygon.contains(player.getX() + movementSpeed, player.getY())) {
+        if ((polygon.contains(player.getX() + movementSpeed, player.getY()))
+            && polygon.contains(bottomRightX + movementSpeed, bottomRightY)) {
           player.setX(player.getX() + movementSpeed);
         }
       }
@@ -99,17 +111,18 @@ public class CorridorController implements Controller {
   };
 
   public void initialize() {
+    // group.setClip(polygon);
     System.out.println(polygon.computeAreaInScreen());
+    System.out.println(" ");
     System.out.println(polygon.boundsInLocalProperty());
+    System.out.println(" ");
     System.out.println(polygon.boundsInParentProperty());
+    System.out.println(" ");
     System.out.println(polygon.getBoundsInLocal());
+    System.out.println(" ");
     System.out.println(polygon.getBoundsInParent());
-    polygon.computeAreaInScreen();
-    polygon.boundsInLocalProperty();
-    polygon.boundsInParentProperty();
-    polygon.getBoundsInLocal();
-    polygon.getBoundsInParent();
-    polygon.getLayoutBounds();
+    System.out.println(" ");
+    System.out.println(polygon.getLayoutBounds());
     // player.setClip(polygon);
     instance = this;
     keyPressed.addListener((observable, boolValue, randomVar) -> {
@@ -124,7 +137,31 @@ public class CorridorController implements Controller {
   }
 
   private void checkCollision() {
+    double x_center = player.getX() + (player.getWidth() / 2);
+    double y_center = player.getY() + (player.getHeight() / 2);
 
+    if (!polygon.contains(x_center, y_center)) {
+      System.out.println("daeee");
+    }
+    if (!polygon.getLayoutBounds().contains(player.getLayoutBounds())) {
+      System.out.println("collision");
+    }
+    if (!polygon.getLayoutBounds().intersects(player.getLayoutBounds())) {
+      System.out.println("colsion");
+    }
+    if (!player.getBoundsInParent().intersects(polygon.getBoundsInParent())) {
+      // Collision detected
+      System.out.println("dfwww");
+      // Handle the collision as needed
+    }
+
+    if (!polygon.contains(player.getX(), player.getY())) {
+      System.out.println("cn");
+    }
+
+    if (!polygon.contains(player.getTranslateX(), player.getTranslateY())) {
+      System.out.println("cunt");
+    }
     /*
      * // hit left wall
      * if (player.getBoundsInParent().intersects(left.getBoundsInParent())) {
@@ -156,34 +193,36 @@ public class CorridorController implements Controller {
      */
 
     // hit door1
-    if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.PUZZLEROOM);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    // hit door2
-    if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
-
-    // hit door3
-    if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.UNTANGLE);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-    }
+    /*
+     * if (player.getBoundsInParent().intersects(door1.getBoundsInParent())) {
+     * try {
+     * stopMovement();
+     * App.setRoot(SceneManager.AppUi.PUZZLEROOM);
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     * 
+     * // hit door2
+     * if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
+     * try {
+     * stopMovement();
+     * App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     * 
+     * // hit door3
+     * if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
+     * try {
+     * stopMovement();
+     * App.setRoot(SceneManager.AppUi.UNTANGLE);
+     * } catch (IOException e) {
+     * e.printStackTrace();
+     * }
+     * }
+     */
 
   }
 
