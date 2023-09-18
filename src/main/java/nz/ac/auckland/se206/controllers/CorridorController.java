@@ -69,34 +69,28 @@ public class CorridorController implements Controller {
     @Override
     public void handle(long timestamp) {
       // updateInventory();
-      double bottomRightX = player.getX() + player.getWidth();
-      double bottomRightY = player.getY() + player.getHeight();
 
       if (forwardPressed.get()) {
-        if ((polygon.contains(player.getX(), player.getY() - movementSpeed))
-            && (polygon.contains(bottomRightX, bottomRightY - movementSpeed))) {
+        if (playerStaysInRoom(polygon, player, "W")) {
 
           player.setY(player.getY() - movementSpeed);
         }
       }
 
       if (leftPressed.get()) {
-        if (polygon.contains(player.getX() - movementSpeed, player.getY())
-            && polygon.contains(bottomRightX - movementSpeed, bottomRightY)) {
+        if (playerStaysInRoom(polygon, player, "A")) {
           player.setX(player.getX() - movementSpeed);
         }
       }
 
       if (backwardPressed.get()) {
-        if ((polygon.contains(player.getX(), player.getY() + movementSpeed))
-            && polygon.contains(bottomRightX, bottomRightY + movementSpeed)) {
+        if (playerStaysInRoom(polygon, player, "S")) {
           player.setY(player.getY() + movementSpeed);
         }
       }
 
       if (rightPressed.get()) {
-        if ((polygon.contains(player.getX() + movementSpeed, player.getY()))
-            && polygon.contains(bottomRightX + movementSpeed, bottomRightY)) {
+        if (playerStaysInRoom(polygon, player, "D")) {
           player.setX(player.getX() + movementSpeed);
         }
       }
@@ -122,6 +116,28 @@ public class CorridorController implements Controller {
         collisionTimer.stop();
       }
     });
+  }
+
+  private boolean playerStaysInRoom(Polygon polygon, Rectangle player, String direction) {
+    double bottomRightX = player.getX() + player.getWidth();
+    double bottomRightY = player.getY() + player.getHeight();
+
+    if (direction.equals("W")) {
+      return (polygon.contains(player.getX(), player.getY() - movementSpeed))
+          && (polygon.contains(bottomRightX, bottomRightY - movementSpeed));
+    } else if (direction.equals("A")) {
+      return (polygon.contains(player.getX() - movementSpeed, player.getY()))
+          && polygon.contains(bottomRightX - movementSpeed, bottomRightY);
+    } else if (direction.equals("S")) {
+      return (polygon.contains(player.getX(), player.getY() + movementSpeed))
+          && polygon.contains(bottomRightX, bottomRightY + movementSpeed);
+    } else if (direction.equals("D")) {
+      return (polygon.contains(player.getX() + movementSpeed, player.getY()))
+          && polygon.contains(bottomRightX + movementSpeed, bottomRightY);
+    } else {
+      return false;
+    }
+
   }
 
   private void checkCollision() {
