@@ -245,7 +245,7 @@ public class DungeonMaster {
     }
     System.out.println("done");
     executor.shutdown();
-    return message;
+    return this.message;
   }
 
   public void appendChatMessage(ChatMessage msg) {

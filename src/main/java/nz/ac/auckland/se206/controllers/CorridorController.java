@@ -66,6 +66,8 @@ public class CorridorController implements Controller {
 
   @FXML
   private Pane popUp;
+  @FXML
+  private Pane riddleDisplay;
 
   @FXML
   private Label lblTime;
@@ -74,6 +76,7 @@ public class CorridorController implements Controller {
   private ComboBox<String> inventoryChoiceBox;
 
   private Riddle riddle;
+  private Boolean riddleCalled = false;
 
   private AnimationTimer playerTimer = new AnimationTimer() {
 
@@ -287,28 +290,37 @@ public class CorridorController implements Controller {
     if (!riddle.hasRiddle()) {
       return;
     }
-    DungeonMaster dungeonMaster = riddle.getDungeonMaster();
-    Pane dialogue = dungeonMaster.getPopUp();
-    popUp.getChildren().add(dialogue);
-    dialogue.getStyleClass().add("popUp");
-    Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
-        .get(1)).getChildren().get(2);
-    Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
-        .get(1)).getChildren().get(0)).getChildren().get(1);
-    ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
-        .get(1)).getChildren().get(1);
-    exitButton.setOnMouseClicked(event1 -> {
-      popUp.visibleProperty().set(false);
-    });
-    dialogueText.setOnMouseClicked(event1 -> {
-      if (!dungeonMaster.isSpeaking()) {
-        dungeonMaster.update();
-      }
-    });
-    nextButton.setOnMouseClicked(event1 -> {
-      if (!dungeonMaster.isSpeaking()) {
-        dungeonMaster.update();
-      }
-    });
+    if (riddleCalled) {
+      String riddleText = riddle.getRiddle();
+      Pane riddlePane = riddle.riddlePane(riddleText);
+      riddleDisplay.getChildren().add(riddlePane);
+      riddlePane.getStyleClass().add("riddle");
+      riddleDisplay.toFront();
+    } else {
+      DungeonMaster dungeonMaster = riddle.getDungeonMaster();
+      Pane dialogue = dungeonMaster.getPopUp();
+      popUp.getChildren().add(dialogue);
+      dialogue.getStyleClass().add("popUp");
+      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
+          .get(1)).getChildren().get(2);
+      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
+          .get(1)).getChildren().get(0)).getChildren().get(1);
+      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
+          .get(1)).getChildren().get(1);
+      exitButton.setOnMouseClicked(event1 -> {
+        popUp.visibleProperty().set(false);
+      });
+      dialogueText.setOnMouseClicked(event1 -> {
+        if (!dungeonMaster.isSpeaking()) {
+          dungeonMaster.update();
+        }
+      });
+      nextButton.setOnMouseClicked(event1 -> {
+        if (!dungeonMaster.isSpeaking()) {
+          dungeonMaster.update();
+        }
+      });
+      riddleCalled = true;
+    }
   }
 }

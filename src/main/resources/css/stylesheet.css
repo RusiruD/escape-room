@@ -67,3 +67,17 @@
 .popUp StackPane ImageView:hover {
   -fx-cursor: hand;
 }
+
+.riddle {
+  -fx-background-color: #45475a;
+  -fx-border-color: #ffffff;
+  -fx-border-width: 1px;
+  -fx-padding: 10px;
+  -fx-spacing: 10px;
+  -fx-alignment: centre;
+}
+
+.riddle .label {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 15px;
+}
