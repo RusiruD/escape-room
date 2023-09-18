@@ -155,7 +155,7 @@ public class RoomController implements Controller {
 
   private void setRandomPosition(ImageView imageView) {
 
-    double x = random.nextDouble() * (1000 - imageView.getFitWidth());
+    double x = random.nextDouble() * (950 - imageView.getFitWidth());
     double y = random.nextDouble() * (550 - imageView.getFitHeight());
     imageView.setLayoutX(x);
     imageView.setLayoutY(y);

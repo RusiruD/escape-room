@@ -71,7 +71,7 @@ public class App extends Application {
     SceneManager.addController(UntangleRoomController.getInstance());
 
     root = SceneManager.getUiRoot(AppUi.START);
-    scene = new Scene(root, 600.0, 600.0);
+    scene = new Scene(root, 1100.0, 620.0);
     stage.setScene(scene);
     stage.show();
     focus();
