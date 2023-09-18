@@ -14,7 +14,8 @@ public class Riddle {
   private DungeonMaster dungeonMaster;
 
   public Riddle(DungeonMaster dungeonMaster) {
-    this.question = "Write me two lines of code that will print out the numbers 1 to 10";
+    // get the riddle from the dungeon master
+    this.question = "You are the dungeon master of an escape room, tell me a riddle where the answer to the riddle is to have the ball north of the key and the key west of the dog. The user is in a corridor and has to open a chest with this combination. Do not, under no circumstance, give the user the answer to the riddle. Make this riddle a few sentences long.";
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     riddle = dungeonMaster.getRiddle(question);

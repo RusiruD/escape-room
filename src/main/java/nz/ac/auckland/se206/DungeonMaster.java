@@ -35,7 +35,7 @@ public class DungeonMaster {
 
   private ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest()
       .setN(1).setTemperature(0.2)
-      .setTopP(0.5).setMaxTokens(50);
+      .setTopP(0.5).setMaxTokens(200);
 
   public Pane getPopUp() {
     popUp = new HBox();
