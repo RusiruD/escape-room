@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="600.0" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="55.0" layoutX="241.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
       <Rectangle fx:id="top" arcHeight="5.0" arcWidth="5.0" height="41.0" layoutX="69.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
@@ -36,5 +36,7 @@
       </ImageView>
       <Rectangle fx:id="treasureChest" arcHeight="5.0" arcWidth="5.0" fill="#f8c200" height="92.0" layoutX="423.0" layoutY="253.0" onMouseClicked="#onTreasureChestClicked" stroke="BLACK" strokeType="INSIDE" width="71.0" />
       <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="99.0" layoutX="57.0" layoutY="159.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+      <Button fx:id="riddleButton" layoutX="530.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
+      <Pane fx:id="popUp" layoutX="25.0" layoutY="366.0" prefHeight="80.0" prefWidth="550.0" />
    </children>
 </Pane>

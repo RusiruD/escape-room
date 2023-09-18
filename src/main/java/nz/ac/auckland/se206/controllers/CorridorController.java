@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -12,10 +13,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.DungeonMaster;
 
 public class CorridorController implements Controller {
 
@@ -59,10 +65,15 @@ public class CorridorController implements Controller {
   private Pane room;
 
   @FXML
+  private Pane popUp;
+
+  @FXML
   private Label lblTime;
 
   @FXML
   private ComboBox<String> inventoryChoiceBox;
+
+  private Riddle riddle;
 
   private AnimationTimer playerTimer = new AnimationTimer() {
 
@@ -105,6 +116,17 @@ public class CorridorController implements Controller {
         collisionTimer.stop();
       }
     });
+
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    Task<Void> task = new Task<Void>() {
+      @Override
+      public Void call() throws Exception {
+        riddle = new Riddle(dungeonMaster);
+        return null;
+      }
+    };
+    Thread thread = new Thread(task);
+    thread.start();
   }
 
   private void checkCollision() {
@@ -258,5 +280,35 @@ public class CorridorController implements Controller {
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
+  }
+
+  @FXML
+  public void getRiddle() {
+    if (!riddle.hasRiddle()) {
+      return;
+    }
+    DungeonMaster dungeonMaster = riddle.getDungeonMaster();
+    Pane dialogue = dungeonMaster.getPopUp();
+    popUp.getChildren().add(dialogue);
+    dialogue.getStyleClass().add("popUp");
+    Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
+        .get(1)).getChildren().get(2);
+    Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
+        .get(1)).getChildren().get(0)).getChildren().get(1);
+    ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
+        .get(1)).getChildren().get(1);
+    exitButton.setOnMouseClicked(event1 -> {
+      popUp.visibleProperty().set(false);
+    });
+    dialogueText.setOnMouseClicked(event1 -> {
+      if (!dungeonMaster.isSpeaking()) {
+        dungeonMaster.update();
+      }
+    });
+    nextButton.setOnMouseClicked(event1 -> {
+      if (!dungeonMaster.isSpeaking()) {
+        dungeonMaster.update();
+      }
+    });
   }
 }
