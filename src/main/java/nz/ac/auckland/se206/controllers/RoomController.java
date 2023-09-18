@@ -159,7 +159,7 @@ public class RoomController implements Controller {
     double y = random.nextDouble() * (550 - imageView.getFitHeight());
     imageView.setLayoutX(x);
     imageView.setLayoutY(y);
-    System.out.println("x: " + x + " y: " + y);
+
   }
 
   public void updateInventory() {
