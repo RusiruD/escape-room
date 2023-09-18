@@ -220,7 +220,7 @@ public class CorridorController implements Controller {
   public void onTreasureChestClicked(MouseEvent event) {
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true) {
+    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
       sword.setVisible(true);
       sword.setDisable(false);
       sword.toFront();
@@ -234,6 +234,9 @@ public class CorridorController implements Controller {
       } else if (selectedItem.contains("key2")) {
         Inventory.removeFromInventory(selectedItem);
         GameState.isLock2Unlocked = true;
+      } else if (selectedItem.contains("key3")) {
+        Inventory.removeFromInventory(selectedItem);
+        GameState.isLock3Unlocked = true;
       }
     }
 
