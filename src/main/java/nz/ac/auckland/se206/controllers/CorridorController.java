@@ -61,7 +61,8 @@ public class CorridorController implements Controller {
 
   private Rectangle door3;
   @FXML
-  private ImageView sword;
+  private ImageView swordandshield;
+
   @FXML
   private Pane room;
   @FXML
@@ -114,15 +115,21 @@ public class CorridorController implements Controller {
   };
 
   @FXML
-  public void onSwordClicked(MouseEvent event) {
-    Inventory.addToInventory("sword");
-    sword.setVisible(false);
-    sword.setDisable(true);
+  public void onSwordAndShieldClicked(MouseEvent event) {
+    Inventory.addToInventory("sword/shield");
+    swordandshield.setVisible(false);
+    swordandshield.setDisable(true);
+
+    // Then, set the ImageView as the fill for your shape:
+    Image image2 = new Image("/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
+    player.setFill(new ImagePattern(image2));
+
   }
 
   public void initialize() {
     instance = this;
     Image image = new Image("/images/character.png");
+
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
     keyPressed.addListener((observable, boolValue, randomVar) -> {
@@ -250,8 +257,8 @@ public class CorridorController implements Controller {
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
     if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
-      sword.setVisible(true);
-      sword.setDisable(false);
+      swordandshield.setVisible(true);
+      swordandshield.setDisable(false);
 
     } else {
       if (selectedItem != null) {
@@ -271,9 +278,9 @@ public class CorridorController implements Controller {
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
 
-      
+      }
     }
-  }}
+  }
 
   @FXML
   private void clickExit(MouseEvent event) {
