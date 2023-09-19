@@ -254,7 +254,7 @@ public class CorridorController implements Controller {
       sword.setDisable(false);
     } else {
       if (selectedItem != null) {
-        if (selectedItem.equals("1")) {
+        if (selectedItem.equals("key1")) {
           GameState.isLock1Unlocked = true;
           Inventory.removeFromInventory("key1");
           inventoryChoiceBox.getSelectionModel().clearSelection();
