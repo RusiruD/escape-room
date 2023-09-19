@@ -9,18 +9,17 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="620.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
    <children>
-      <ImageView fitHeight="600.0" fitWidth="1244.0" layoutX="-608.0" pickOnBounds="true">
+      <ImageView fitHeight="620.0" fitWidth="792.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/PuzzleBackground.jpg" />
+            <Image url="@../images/out-01.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="puzzleButton" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="279.0" layoutX="115.0" layoutY="107.0" onMouseClicked="#clickPuzzle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="90.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="502.0" layoutX="216.0" layoutY="53.0" onMouseClicked="#clickedDoor" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="307.0" />
-      <Button fx:id="btnReturnToCorridor" layoutX="253.0" layoutY="14.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="35.0" prefWidth="125.0" text="Return to Corridor" />
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="14.0" prefWidth="150.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="461.0" layoutY="16.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Rectangle fx:id="puzzleButton" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="269.0" layoutY="267.0" onMouseClicked="#clickPuzzle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+      <Button fx:id="btnReturnToCorridor" layoutX="258.0" layoutY="16.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="35.0" prefWidth="125.0" text="Return to Corridor" />
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="26.0" layoutY="14.0" prefWidth="150.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="461.0" layoutY="14.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
