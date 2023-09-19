@@ -249,9 +249,27 @@ public class CorridorController implements Controller {
     // Handle click on treasure chest
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true) {
+    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
       sword.setVisible(true);
       sword.setDisable(false);
+    } else {
+      if (selectedItem != null) {
+        if (selectedItem.equals("1")) {
+          GameState.isLock1Unlocked = true;
+          Inventory.removeFromInventory("key1");
+          inventoryChoiceBox.getSelectionModel().clearSelection();
+        }
+        if (selectedItem.equals("key2")) {
+          GameState.isLock2Unlocked = true;
+          Inventory.removeFromInventory("key2");
+          inventoryChoiceBox.getSelectionModel().clearSelection();
+        }
+        if (selectedItem.equals("key3")) {
+          GameState.isLock3Unlocked = true;
+          Inventory.removeFromInventory("key3");
+          inventoryChoiceBox.getSelectionModel().clearSelection();
+        }
+      }
     }
   }
 
