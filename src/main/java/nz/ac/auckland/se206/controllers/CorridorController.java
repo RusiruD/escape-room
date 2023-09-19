@@ -283,7 +283,7 @@ public class CorridorController implements Controller {
         && GameState.isLock1Unlocked == true
         && GameState.isLock3Unlocked == true
         && swordandshield.visibleProperty().get() == false
-        && !Inventory.contains("sword")) {
+        && !Inventory.contains("sword/shield")) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
 

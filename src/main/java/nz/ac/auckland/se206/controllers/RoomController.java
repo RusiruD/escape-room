@@ -80,13 +80,12 @@ public class RoomController implements Controller {
   @FXML private Label lblTime;
   @FXML private ImageView parchment3;
   @FXML private ImageView key1;
-  @FXML private ImageView riddle;
+ 
   @FXML private ImageView boulder;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
   @FXML private ImageView note;
-  private double xOffset = 0;
-  private double yOffset = 0;
+ 
 
   private int parchmentPieces = 0;
   @FXML private ImageView yellowPotion;
@@ -104,7 +103,7 @@ public class RoomController implements Controller {
 
   private ChatCompletionRequest chatCompletionRequest;
   @FXML private ImageView parchment4duplicate;
-  @FXML private Button btnHideRiddle;
+  
 
   @FXML private Button btnHideNote;
 
@@ -115,7 +114,7 @@ public class RoomController implements Controller {
         .getStylesheets()
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
     chatTextArea.getStyleClass().add("text-area .content");
-    btnHideRiddle.getStyleClass().add("custom-button");
+    btnHideNote.getStyleClass().add("custom-button");
     String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
 
     Random random = new Random();
@@ -261,7 +260,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void closeRiddle() {
+  private void closeNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -407,7 +406,7 @@ public class RoomController implements Controller {
   }
 
   /**
-   * Initializes the chat view, loading the riddle.
+   * Initializes the chat view, loading the note.
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
