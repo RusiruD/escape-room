@@ -27,6 +27,9 @@ public class Instructions {
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
+    closeButton.setOnMouseClicked(e -> {
+      instructionsPane.setVisible(false);
+    });
 
     ImageView hintButton = new ImageView("images/question.png");
     hintButton.setFitHeight(20);
