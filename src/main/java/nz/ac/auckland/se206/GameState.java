@@ -2,7 +2,6 @@ package nz.ac.auckland.se206;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableValue;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -12,6 +11,7 @@ public class GameState {
 
   /** Indicates whether the key has been found. */
   public static boolean isKey1Collected = false;
+
   public static boolean isKey2Collected = false;
   public static boolean isKey3Collected = false;
   public static boolean isLock1Unlocked = false;

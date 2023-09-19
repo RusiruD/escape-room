@@ -15,20 +15,17 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
-
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Riddle;
 
 public class CorridorController implements Controller {
 
@@ -45,8 +42,7 @@ public class CorridorController implements Controller {
   private BooleanProperty rightPressed = new SimpleBooleanProperty();
 
   // A binding to check if any movement key is pressed
-  private BooleanBinding keyPressed = forwardPressed.or(leftPressed)
-      .or(backwardPressed).or(rightPressed);
+  private BooleanBinding keyPressed = forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
 
@@ -67,7 +63,6 @@ public class CorridorController implements Controller {
   @FXML
   private Rectangle border1;
   @FXML
-
   private Rectangle door3;
   @FXML
   private ImageView swordandshield;
@@ -139,9 +134,9 @@ public class CorridorController implements Controller {
     swordandshield.setDisable(true);
 
     // Then, set the ImageView as the fill for your shape:
-    Image image2 = new Image("/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
+    Image image2 = new Image(
+        "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
-
   }
 
   public void initialize() {
@@ -150,17 +145,18 @@ public class CorridorController implements Controller {
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
-    keyPressed.addListener((observable, boolValue, randomVar) -> {
-      if (!boolValue) {
-        // Start the player movement and collision detection timers
-        playerTimer.start();
-        collisionTimer.start();
-      } else {
-        // Stop the timers when no movement keys are pressed
-        playerTimer.stop();
-        collisionTimer.stop();
-      }
-    });
+    keyPressed.addListener(
+        (observable, boolValue, randomVar) -> {
+          if (!boolValue) {
+            // Start the player movement and collision detection timers
+            playerTimer.start();
+            collisionTimer.start();
+          } else {
+            // Stop the timers when no movement keys are pressed
+            playerTimer.stop();
+            collisionTimer.stop();
+          }
+        });
 
     DungeonMaster dungeonMaster = new DungeonMaster();
     Task<Void> task = new Task<Void>() {
@@ -173,9 +169,10 @@ public class CorridorController implements Controller {
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
-    task.setOnSucceeded(event -> {
-      GameState.riddle = riddle;
-    });
+    task.setOnSucceeded(
+        event -> {
+          GameState.riddle = riddle;
+        });
   }
 
   // Method to check if the player stays in the room while moving
@@ -289,7 +286,9 @@ public class CorridorController implements Controller {
     // Handle click on treasure chest
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
+    if (GameState.isLock2Unlocked == true
+        && GameState.isLock1Unlocked == true
+        && GameState.isLock3Unlocked == true) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
 
@@ -310,7 +309,6 @@ public class CorridorController implements Controller {
           Inventory.removeFromInventory("key3");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
-
       }
     }
   }
@@ -354,7 +352,9 @@ public class CorridorController implements Controller {
       parent.setPrefSize(200, 200);
 
       riddleDisplay.translateXProperty().set(parent.getWidth() / 2 - riddleDisplay.getWidth() / 2);
-      riddleDisplay.translateYProperty().set(parent.getHeight() / 2 - riddleDisplay.getHeight() / 2);
+      riddleDisplay
+          .translateYProperty()
+          .set(parent.getHeight() / 2 - riddleDisplay.getHeight() / 2);
 
     } else {
       // gets the dungeon master to speak the riddle dialogue
@@ -362,25 +362,27 @@ public class CorridorController implements Controller {
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
       // buttons in the dialogue
-      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(2);
-      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(0)).getChildren().get(1);
-      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(event1 -> {
-        popUp.visibleProperty().set(false);
-      });
-      dialogueText.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
-      nextButton.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
+      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+          .getChildren()
+          .get(1);
+      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+      exitButton.setOnMouseClicked(
+          event1 -> {
+            popUp.visibleProperty().set(false);
+          });
+      dialogueText.setOnMouseClicked(
+          event1 -> {
+            if (!dungeonMaster.isSpeaking()) {
+              dungeonMaster.update();
+            }
+          });
+      nextButton.setOnMouseClicked(
+          event1 -> {
+            if (!dungeonMaster.isSpeaking()) {
+              dungeonMaster.update();
+            }
+          });
       riddleCalled = true;
     }
   }

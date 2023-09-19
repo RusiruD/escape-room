@@ -15,7 +15,12 @@ public class Riddle {
 
   public Riddle(DungeonMaster dungeonMaster) {
     // get the riddle from the dungeon master
-    this.question = "You are the dungeon master of an escape room, tell me a riddle where the answer to the riddle is to have the ball north of the key and the key west of the dog. The user is in a corridor and has to open a chest with this combination. Do not, under no circumstance, give the user the answer to the riddle. Make this riddle a few sentences long.";
+    this.question =
+        "You are the dungeon master of an escape room, tell me a riddle where the answer to the"
+            + " riddle is to have the ball north of the key and the key west of the dog. The user"
+            + " is in a corridor and has to open a chest with this combination. Do not, under no"
+            + " circumstance, give the user the answer to the riddle. Make this riddle a few"
+            + " sentences long.";
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     riddle = dungeonMaster.getRiddle(question);
@@ -40,17 +45,17 @@ public class Riddle {
     ImageView hintButton = new ImageView("images/question.png");
     hintButton.setFitHeight(20);
     hintButton.setFitWidth(20);
-    hintButton.setOnMouseClicked(event -> {
-    });
+    hintButton.setOnMouseClicked(event -> {});
 
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
-    closeButton.setOnMouseClicked(event -> {
-      riddlePane.getParent().visibleProperty().set(false);
-      riddlePane.getParent().mouseTransparentProperty().set(true);
-      riddlePane.getParent().toBack();
-    });
+    closeButton.setOnMouseClicked(
+        event -> {
+          riddlePane.getParent().visibleProperty().set(false);
+          riddlePane.getParent().mouseTransparentProperty().set(true);
+          riddlePane.getParent().toBack();
+        });
 
     stackPane.getChildren().addAll(riddleBox, hintButton, closeButton);
     StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);

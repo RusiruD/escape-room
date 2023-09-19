@@ -11,10 +11,8 @@ import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class StartScreenController {
 
-  @FXML
-  private ChoiceBox<String> timerChoice;
-  @FXML
-  private ChoiceBox<String> difficultyChoice;
+  @FXML private ChoiceBox<String> timerChoice;
+  @FXML private ChoiceBox<String> difficultyChoice;
 
   @FXML
   private void initialize() {
@@ -57,6 +55,5 @@ public class StartScreenController {
     difficultyChoice.getStyleClass().add("choice-box");
     sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
     SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
-
   }
 }
