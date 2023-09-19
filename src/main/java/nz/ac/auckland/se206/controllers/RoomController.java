@@ -30,11 +30,12 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class RoomController implements Controller {
   private static RoomController instance;
-  private Random random = new Random();
 
   public static RoomController getInstance() {
     return instance;
   }
+
+  private Random random = new Random();
 
   @FXML private Pane popUp;
 
@@ -153,7 +154,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void hideRiddle() {
+  private void hideTheRiddle() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideRiddle.setDisable(true);

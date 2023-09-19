@@ -34,6 +34,97 @@ import nz.ac.auckland.se206.GameState;
 // and https://stackoverflow.com/questions/15981274/javafx-modify-polygons
 public class UntangleRoomController implements Controller {
 
+  // a draggable anchor displayed around a point.
+  class Anchor extends Circle {
+
+    // records relative x and y co-ordinates.
+    private class Delta {
+      private double horizontal;
+      private double vertical;
+    }
+
+    private final DoubleProperty horizontal;
+    private final DoubleProperty vertical;
+
+    Anchor(Color color, DoubleProperty x, DoubleProperty y) {
+      super(x.get(), y.get(), 10);
+      setFill(color.deriveColor(1, 1, 1, 0.5));
+      setStroke(color);
+      setStrokeWidth(2);
+      setStrokeType(StrokeType.OUTSIDE);
+
+      this.horizontal = x;
+      this.vertical = y;
+
+      x.bind(centerXProperty());
+      y.bind(centerYProperty());
+      enableDrag();
+    }
+
+    // make a node movable by dragging it around with the mouse.
+    private void enableDrag() {
+      final Delta dragDelta = new Delta();
+      // record a delta distance for the drag and drop operation.
+      setOnMousePressed(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+              // record a delta distance for the drag and drop operation.
+              dragDelta.horizontal = getCenterX() - mouseEvent.getX();
+              dragDelta.vertical = getCenterY() - mouseEvent.getY();
+              getScene().setCursor(Cursor.MOVE);
+            }
+          });
+      // move a node around, when scene is dragged.
+      setOnMouseReleased(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+              isIntersecting((Polygon) getParent().getChildrenUnmodifiable().get(0));
+              getScene().setCursor(Cursor.HAND);
+            }
+          });
+      /// move a node around, when scene is dragged.
+      setOnMouseDragged(
+          new EventHandler<MouseEvent>() {
+            @Override
+            // move a node around, when scene is dragged.
+            public void handle(MouseEvent mouseEvent) {
+              // move a node around, when scene is dragged.
+              double newX = mouseEvent.getX() + dragDelta.horizontal;
+              if (newX > 0 && newX < getScene().getWidth()) {
+                setCenterX(newX);
+              }
+              // move a node around, when scene is dragged.
+              double newY = mouseEvent.getY() + dragDelta.vertical;
+              if (newY > 0 && newY < getScene().getHeight()) {
+                setCenterY(newY);
+              }
+            }
+          });
+      // change the cursor when it is over nodes
+      setOnMouseEntered(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+              if (!mouseEvent.isPrimaryButtonDown()) {
+                getScene().setCursor(Cursor.HAND);
+              }
+            }
+          });
+      // change the cursor back to normal when it is exited
+      setOnMouseExited(
+          new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+              if (!mouseEvent.isPrimaryButtonDown()) {
+                getScene().setCursor(Cursor.DEFAULT);
+              }
+            }
+          });
+    }
+  }
+
   private static UntangleRoomController instance;
 
   public static UntangleRoomController getInstance() {
@@ -47,12 +138,17 @@ public class UntangleRoomController implements Controller {
 
   private boolean isSolved = false;
 
+  // add a new score to the leaderboard
   public void initialize() {
+    // set the instance
     instance = this;
+    // set the key3's visibility and disable it
     key3.setVisible(false);
     key3.mouseTransparentProperty().set(true);
+    // set the inventory choice box
     Polygon polygon = createStartingTriangle();
 
+    // add the polygon to the pane
     Group root = new Group();
     root.getChildren().add(polygon);
     root.getChildren().addAll(createControlAnchorsFor(polygon.getPoints()));
@@ -61,8 +157,10 @@ public class UntangleRoomController implements Controller {
 
   // creates a triangle.
   private Polygon createStartingTriangle() {
+    //  create a triangle
     Polygon polygon = new Polygon();
 
+    // set the points of the
     polygon
         .getPoints()
         .setAll(
@@ -72,6 +170,7 @@ public class UntangleRoomController implements Controller {
             690d, 160d,
             225d, 410d);
 
+    //  set the style of the triangle
     polygon.setStroke(Color.rgb(210, 15, 57, 1));
     polygon.setStrokeWidth(4);
     polygon.setStrokeLineCap(StrokeLineCap.ROUND);
@@ -177,93 +276,6 @@ public class UntangleRoomController implements Controller {
     }
 
     return anchors;
-  }
-
-  // a draggable anchor displayed around a point.
-  class Anchor extends Circle {
-    private final DoubleProperty horizontal;
-    private final DoubleProperty vertical;
-
-    Anchor(Color color, DoubleProperty x, DoubleProperty y) {
-      super(x.get(), y.get(), 10);
-      setFill(color.deriveColor(1, 1, 1, 0.5));
-      setStroke(color);
-      setStrokeWidth(2);
-      setStrokeType(StrokeType.OUTSIDE);
-
-      this.horizontal = x;
-      this.vertical = y;
-
-      x.bind(centerXProperty());
-      y.bind(centerYProperty());
-      enableDrag();
-    }
-
-    // make a node movable by dragging it around with the mouse.
-    private void enableDrag() {
-      final Delta dragDelta = new Delta();
-      // record a delta distance for the drag and drop operation.
-      setOnMousePressed(
-          new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-              // record a delta distance for the drag and drop operation.
-              dragDelta.x = getCenterX() - mouseEvent.getX();
-              dragDelta.y = getCenterY() - mouseEvent.getY();
-              getScene().setCursor(Cursor.MOVE);
-            }
-          });
-      // move a node around, when scene is dragged.
-      setOnMouseReleased(
-          new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-              isIntersecting((Polygon) getParent().getChildrenUnmodifiable().get(0));
-              getScene().setCursor(Cursor.HAND);
-            }
-          });
-      /// move a node around, when scene is dragged.
-      setOnMouseDragged(
-          new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-              double newX = mouseEvent.getX() + dragDelta.x;
-              if (newX > 0 && newX < getScene().getWidth()) {
-                setCenterX(newX);
-              }
-              double newY = mouseEvent.getY() + dragDelta.y;
-              if (newY > 0 && newY < getScene().getHeight()) {
-                setCenterY(newY);
-              }
-            }
-          });
-      // change the cursor when it is over nodes
-      setOnMouseEntered(
-          new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-              if (!mouseEvent.isPrimaryButtonDown()) {
-                getScene().setCursor(Cursor.HAND);
-              }
-            }
-          });
-      // change the cursor back to normal when it is exited
-      setOnMouseExited(
-          new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-              if (!mouseEvent.isPrimaryButtonDown()) {
-                getScene().setCursor(Cursor.DEFAULT);
-              }
-            }
-          });
-    }
-
-    // records relative x and y co-ordinates.
-    private class Delta {
-      private double x;
-      private double y;
-    }
   }
 
   @FXML
