@@ -252,6 +252,7 @@ public class CorridorController implements Controller {
     if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
       sword.setVisible(true);
       sword.setDisable(false);
+
     } else {
       if (selectedItem != null) {
         if (selectedItem.equals("key1")) {
@@ -269,9 +270,10 @@ public class CorridorController implements Controller {
           Inventory.removeFromInventory("key3");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
-      }
+
+      
     }
-  }
+  }}
 
   @FXML
   private void clickExit(MouseEvent event) {
