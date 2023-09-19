@@ -27,22 +27,24 @@ public class CorridorController implements Controller {
     return instance;
   }
 
+  // Boolean properties to track key presses for movement
   private BooleanProperty forwardPressed = new SimpleBooleanProperty();
   private BooleanProperty leftPressed = new SimpleBooleanProperty();
   private BooleanProperty backwardPressed = new SimpleBooleanProperty();
   private BooleanProperty rightPressed = new SimpleBooleanProperty();
 
+  // A binding to check if any movement key is pressed
   private BooleanBinding keyPressed = forwardPressed.or(leftPressed)
       .or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
+
+  // JavaFX UI elements
   @FXML
   private Polygon polygon;
   @FXML
   private Group group;
-
   @FXML
-
   private Rectangle player;
   @FXML
   private Rectangle treasureChest;
@@ -52,43 +54,38 @@ public class CorridorController implements Controller {
   private Rectangle door2;
   @FXML
   private Rectangle door3;
-
   @FXML
   private ImageView sword;
   @FXML
   private Pane room;
-
   @FXML
   private Label lblTime;
-
   @FXML
   private ComboBox<String> inventoryChoiceBox;
 
+  // Animation timer for player movement
   private AnimationTimer playerTimer = new AnimationTimer() {
-
     @Override
     public void handle(long timestamp) {
-      // updateInventory();
-
+      // Handle player movement
       if (forwardPressed.get()) {
         if (playerStaysInRoom(polygon, player, "W")) {
-
           player.setY(player.getY() - movementSpeed);
         }
       }
-
+      // Handle left movement
       if (leftPressed.get()) {
         if (playerStaysInRoom(polygon, player, "A")) {
           player.setX(player.getX() - movementSpeed);
         }
       }
-
+      // Handle backward movement
       if (backwardPressed.get()) {
         if (playerStaysInRoom(polygon, player, "S")) {
           player.setY(player.getY() + movementSpeed);
         }
       }
-
+      // Handle right movement
       if (rightPressed.get()) {
         if (playerStaysInRoom(polygon, player, "D")) {
           player.setX(player.getX() + movementSpeed);
@@ -97,31 +94,38 @@ public class CorridorController implements Controller {
     }
   };
 
+  // Animation timer for collision detection
   private AnimationTimer collisionTimer = new AnimationTimer() {
     @Override
     public void handle(long timestamp) {
+      // Check for collisions with doors and handle navigation
       checkCollision();
     }
   };
 
   public void initialize() {
-
     instance = this;
+
+    // Listener to start/stop timers based on key presses
     keyPressed.addListener((observable, boolValue, randomVar) -> {
       if (!boolValue) {
+        // Start the player movement and collision detection timers
         playerTimer.start();
         collisionTimer.start();
       } else {
+        // Stop the timers when no movement keys are pressed
         playerTimer.stop();
         collisionTimer.stop();
       }
     });
   }
 
+  // Method to check if the player stays in the room while moving
   private boolean playerStaysInRoom(Polygon polygon, Rectangle player, String direction) {
     double bottomRightX = player.getX() + player.getWidth();
     double bottomRightY = player.getY() + player.getHeight();
 
+    // Check if player stays in the room while moving in the specified direction
     if (direction.equals("W")) {
       return (polygon.contains(player.getX(), player.getY() - movementSpeed))
           && (polygon.contains(bottomRightX, bottomRightY - movementSpeed));
@@ -137,14 +141,12 @@ public class CorridorController implements Controller {
     } else {
       return false;
     }
-
   }
 
+  // Method to check collision with doors and handle navigation
   private void checkCollision() {
-
-    // hit door1
-    // player.getBoundsInParent().intersects(door1.getBoundsInParent())
-    if (door1.contains(player.getX(), player.getY())) {
+    // Check collision with door1 and navigate to a new room if needed
+    if (player.intersects(door1.getBoundsInParent())) {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.PUZZLEROOM);
@@ -153,7 +155,7 @@ public class CorridorController implements Controller {
       }
     }
 
-    // hit door2
+    // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
       try {
         stopMovement();
@@ -163,7 +165,7 @@ public class CorridorController implements Controller {
       }
     }
 
-    // hit door3
+    // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
       try {
         stopMovement();
@@ -172,9 +174,9 @@ public class CorridorController implements Controller {
         e.printStackTrace();
       }
     }
-
   }
 
+  // Method to stop player movement
   private void stopMovement() {
     forwardPressed.set(false);
     leftPressed.set(false);
@@ -184,6 +186,7 @@ public class CorridorController implements Controller {
 
   @FXML
   public void onKeyPressed(KeyEvent event) {
+    // Handle key press events
     switch (event.getCode()) {
       case W:
         forwardPressed.set(true);
@@ -204,6 +207,7 @@ public class CorridorController implements Controller {
 
   @FXML
   public void onKeyReleased(KeyEvent event) {
+    // Handle key release events
     switch (event.getCode()) {
       case W:
         forwardPressed.set(false);
@@ -224,45 +228,29 @@ public class CorridorController implements Controller {
 
   @FXML
   public void onTreasureChestClicked(MouseEvent event) {
+    // Handle click on treasure chest
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
     if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true) {
       sword.setVisible(true);
       sword.setDisable(false);
-      sword.toFront();
-
     }
-    if (selectedItem != null) {
-      if (selectedItem.contains("key1")) {
-        Inventory.removeFromInventory(selectedItem);
-
-        GameState.isLock1Unlocked = true;
-      } else if (selectedItem.contains("key2")) {
-        Inventory.removeFromInventory(selectedItem);
-        GameState.isLock2Unlocked = true;
-      }
-    }
-
-  }
-
-  @FXML
-  public void onSwordClicked(MouseEvent event) {
-    Inventory.addToInventory("sword");
-    sword.setVisible(false);
-    sword.setDisable(true);
   }
 
   @FXML
   private void clickExit(MouseEvent event) {
+    // Handle click on exit
     System.exit(0);
   }
 
+  // Method to update inventory in the UI
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 
   @FXML
   public void updateTimerLabel(String time) {
+    // Update the timer label in the UI
     lblTime.setText(time);
   }
 }
