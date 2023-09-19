@@ -7,54 +7,59 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleController">
    <children>
-      <ImageView fx:id="one" fitHeight="106.0" fitWidth="121.0" layoutX="20.0" layoutY="14.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fitHeight="620.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/numbers/one.jpg" />
+            <Image url="@../images/out-0.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="two" fitHeight="106.0" fitWidth="121.0" layoutX="142.0" layoutY="14.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="one" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="49.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/two.jpg" />
+            <Image url="@../images/numbers/N1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" layoutX="264.0" layoutY="14.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="two" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="50.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/three.jpg" />
+            <Image url="@../images/numbers/N2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="four" fitHeight="106.0" fitWidth="121.0" layoutX="20.0" layoutY="129.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="50.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/four.jpg" />
+            <Image url="@../images/numbers/N3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="five" fitHeight="106.0" fitWidth="121.0" layoutX="142.0" layoutY="129.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="four" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="165.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/five.jpg" />
+            <Image url="@../images/numbers/N4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="six" fitHeight="106.0" fitWidth="121.0" layoutX="264.0" layoutY="129.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="five" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="165.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/six.jpg" />
+            <Image url="@../images/numbers/N5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="zero" fitHeight="106.0" fitWidth="121.0" layoutX="20.0" layoutY="245.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="six" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="165.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/bLANK.jpg" />
+            <Image url="@../images/numbers/N6.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="eight" fitHeight="106.0" fitWidth="121.0" layoutX="142.0" layoutY="245.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="zero" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="281.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/Eight.jpg" />
+            <Image url="@../images/numbers/N0.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="nine" fitHeight="106.0" fitWidth="121.0" layoutX="264.0" layoutY="245.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="eight" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="281.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
-            <Image url="@../images/numbers/Nine.jpg" />
+            <Image url="@../images/numbers/N8.png" />
          </image>
       </ImageView>
-      <Button layoutX="439.0" layoutY="151.0" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="62.0" prefWidth="110.0" text="BACK">
+      <ImageView fx:id="nine" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="281.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+         <image>
+            <Image url="@../images/numbers/N9.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="255.0" layoutY="470.0" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="62.0" prefWidth="110.0" text="BACK">
          <font>
             <Font size="24.0" />
          </font>

@@ -37,7 +37,7 @@
   -fx-shape: " ";
 }
 
-.popUp {
+.popUp, .instructions {
   -fx-alignment: center-left;
   -fx-padding: 10px;
   -fx-background-color: #45475a;
@@ -61,9 +61,45 @@
 }
 
 .popUp VBox Text {
-  -fx-font-size: 15px;
+  -fx-font-size: 10px;
 }
 
 .popUp StackPane ImageView:hover {
+  -fx-cursor: hand;
+}
+
+
+.instructions .label {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 15px;
+  -fx-font-weight: bold;
+}
+
+.instructions HBox VBox Text {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 10px;
+}
+.riddle {
+  -fx-background-color: #45475a;
+  -fx-border-color: #ffffff;
+  -fx-border-width: 1px;
+  -fx-alignment: centre;
+}
+
+.riddle .label {
+  -fx-text-fill: #ffffff;
+  -fx-font-size: 15px;
+}
+
+.riddle StackPane {
+  -fx-alignment: center-left;
+}
+
+.riddle StackPane VBox {
+  -fx-alignment: center-left;
+  -fx-padding: 10px;
+}
+
+.riddle StackPane ImageView:hover {
   -fx-cursor: hand;
 }

@@ -2,7 +2,6 @@ package nz.ac.auckland.se206;
 
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
-import javafx.beans.value.ObservableValue;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -12,11 +11,20 @@ public class GameState {
 
   /** Indicates whether the key has been found. */
   public static boolean isKey1Collected = false;
+
   public static boolean isKey2Collected = false;
   public static boolean isKey3Collected = false;
   public static boolean isLock1Unlocked = false;
   public static boolean isLock2Unlocked = false;
   public static boolean isLock3Unlocked = false;
+
+  public static String difficultyLevel = "";
+  public static String gameTime = "";
+
+  public static String firstPotion = "";
+  public static String secondPotion = "";
+
+  public static Riddle riddle;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
 
@@ -31,10 +39,4 @@ public class GameState {
   public static boolean isPuzzleRoomSolved() {
     return puzzleRoomSolved.get();
   }
-
-  public static String firstPotion = "";
-  public static String secondPotion = "";
-  public static String difficultyLevel = "";
-  public static String gameTime = "";
-
 }

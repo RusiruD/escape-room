@@ -37,5 +37,4 @@ public class SceneManager {
   public static void addController(Controller controller) {
     controllers.add(controller);
   }
-
 }

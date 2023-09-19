@@ -1,28 +1,19 @@
 package nz.ac.auckland.se206.controllers;
 
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Controller;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.DungeonMaster;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.Future;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -32,81 +23,85 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.DungeonMaster;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class RoomController implements Controller {
   private static RoomController instance;
-  private Random random = new Random();
 
   public static RoomController getInstance() {
     return instance;
   }
 
-  @FXML
-  private Pane root;
-  @FXML
-  private Pane popUp;
+    public static Color convertStringToColor(String colorName) {
+    switch (colorName) {
+      case "Red Potion":
+        return Color.RED;
+      case "Green Potion":
+        System.out.println("s");
+        return Color.GREEN;
 
-  @FXML
-  private ComboBox<String> inventoryChoiceBox;
-  @FXML
-  private Button btnReturnToCorridor;
-  @FXML
-  private ImageView parchment1;
-  @FXML
-  private ImageView imgArt;
-  @FXML
-  private Slider slider;
-  @FXML
-  private ImageView parchment2;
-  @FXML
-  private Label lblTime;
-  @FXML
-  private ImageView parchment3;
-  @FXML
-  private ImageView key1;
-  @FXML
-  private ImageView riddle;
-  @FXML
-  private ImageView boulder;
-  private double xOffset = 0;
-  private double yOffset = 0;
+      case "Blue Potion":
+        System.out.println("sd");
+        return Color.BLUE;
+      case "Purple Potion":
+        return Color.PURPLE;
+      case "Yellow Potion":
+        System.out.println("sd");
+        return Color.YELLOW;
+
+        // Add more color mappings as needed
+      default:
+        return Color.BLACK;
+    } // Default to black if the color name is not recognized
+  }
+
+  public static Color calculateAverageColor(Color color1, Color color2) {
+    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
+    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
+    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
+
+    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
+  }
+
+  @FXML private Pane root;
+  @FXML private Pane popUp;
+
+  @FXML private ComboBox<String> inventoryChoiceBox;
+  @FXML private Button btnReturnToCorridor;
+  @FXML private ImageView parchment1;
+  @FXML private ImageView imgArt;
+  @FXML private Slider slider;
+  @FXML private ImageView parchment2;
+  @FXML private Label lblTime;
+  @FXML private ImageView parchment3;
+  @FXML private ImageView key1;
+  @FXML private ImageView riddle;
+  @FXML private ImageView boulder;
+  private double horizontalOffset = 0;
+  private double verticalOffset = 0;
 
   private int parchmentPieces = 0;
-  @FXML
-  private ImageView yellowPotion;
-  @FXML
-  private ImageView redPotion;
-  @FXML
-  private ImageView bluePotion;
-  @FXML
-  private ImageView greenPotion;
-  @FXML
-  private ImageView purplePotion;
-  @FXML
-  private ImageView parchment4;
-  @FXML
-  private ImageView parchment1duplicate;
-  @FXML
-  private ImageView cauldron;
-  @FXML
-  private ImageView parchment2duplicate;
+  @FXML private ImageView yellowPotion;
+  @FXML private ImageView redPotion;
+  @FXML private ImageView bluePotion;
+  @FXML private ImageView greenPotion;
+  @FXML private ImageView purplePotion;
+  @FXML private ImageView parchment4;
+  @FXML private ImageView parchment1duplicate;
+  @FXML private ImageView cauldron;
+  @FXML private ImageView parchment2duplicate;
 
-  @FXML
-  private ImageView parchment3duplicate;
-  @FXML
-  private TextArea chatTextArea;
+  @FXML private ImageView parchment3duplicate;
+  @FXML private TextArea chatTextArea;
 
   private ChatCompletionRequest chatCompletionRequest;
-  @FXML
-  private ImageView parchment4duplicate;
-  @FXML
-  private Button btnHideRiddle;
+  @FXML private ImageView parchment4duplicate;
+  @FXML private Button btnHideRiddle;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
@@ -116,7 +111,7 @@ public class RoomController implements Controller {
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
     chatTextArea.getStyleClass().add("text-area .content");
     btnHideRiddle.getStyleClass().add("custom-button");
-    String[] colors = { "Blue", "Yellow", "Purple", "Red", "Green" };
+    String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
 
     Random random = new Random();
 
@@ -132,10 +127,12 @@ public class RoomController implements Controller {
     GameState.secondPotion = secondPotion + " Potion";
 
     chatTextArea.appendText(
-        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the " + firstPotion
+        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
+            + firstPotion
             + " and "
             + secondPotion
-            + " in the cauldron for super strength. \nI pray you succeed where I couldn't. In fading memory,A Lost Soul");
+            + " in the cauldron for super strength. \n"
+            + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Bind the rotation of the image to the slider value
     /*
      * imgArt
@@ -199,13 +196,12 @@ public class RoomController implements Controller {
       Inventory.removeFromInventory(selectedItem);
 
       updateInventory();
-
     }
-    if (potionsincauldron.contains(GameState.firstPotion) && potionsincauldron.contains(GameState.secondPotion)) {
+    if (potionsincauldron.contains(GameState.firstPotion)
+        && potionsincauldron.contains(GameState.secondPotion)) {
       tintScene(root);
       allowImageToBeDragged(boulder);
     }
-
   }
 
   @FXML
@@ -245,7 +241,6 @@ public class RoomController implements Controller {
 
     imageView.setLayoutX(initialX);
     imageView.setLayoutY(initialY);
-
   }
 
   public void updateInventory() {
@@ -261,7 +256,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void hideRiddle() {
+  private void closeRiddle() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideRiddle.setDisable(true);
@@ -280,18 +275,20 @@ public class RoomController implements Controller {
     riddle.setDisable(false);
   }
 
+  // Allow the image to be dragged and dropped
   @FXML
   private void allowImageToBeDragged(ImageView image) {
+    // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
-          xOffset = event.getSceneX() - image.getLayoutX();
-          yOffset = event.getSceneY() - image.getLayoutY();
+          horizontalOffset = event.getSceneX() - image.getLayoutX();
+          verticalOffset = event.getSceneY() - image.getLayoutY();
         });
-
+    // When the mouse is dragged it sets the new position of the image
     image.setOnMouseDragged(
         (MouseEvent event) -> {
-          double newX = event.getSceneX() - xOffset;
-          double newY = event.getSceneY() - yOffset;
+          double newX = event.getSceneX() - horizontalOffset;
+          double newY = event.getSceneY() - verticalOffset;
           image.setLayoutX(newX);
           image.setLayoutY(newY);
         });
@@ -407,83 +404,60 @@ public class RoomController implements Controller {
   /**
    * Initializes the chat view, loading the riddle.
    *
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
+   * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Pane> task = new Task<Pane>() {
-      @Override
-      protected Pane call() throws Exception {
-        return dungeonMaster.getText("user",
-            "I took damage from the window! Tell me" +
-                " a few short sentences about it with no commas.");
-      }
-    };
-    task.setOnSucceeded(e -> {
-      System.out.println("home task succeeded");
-      Pane dialogue = task.getValue();
-      popUp.getChildren().add(dialogue);
-      dialogue.getStyleClass().add("popUp");
-      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(2);
-      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(0)).getChildren().get(1);
-      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(event1 -> {
-        popUp.visibleProperty().set(false);
-      });
-      dialogueText.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
-      nextButton.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
-    });
+    Task<Pane> task =
+        new Task<Pane>() {
+          @Override
+          protected Pane call() throws Exception {
+            return dungeonMaster.getText(
+                "user",
+                "I took damage from the window! Tell me"
+                    + " a few short sentences about it with no commas.");
+          }
+        };
+    task.setOnSucceeded(
+        e -> {
+          System.out.println("home task succeeded");
+          Pane dialogue = task.getValue();
+          popUp.getChildren().add(dialogue);
+          dialogue.getStyleClass().add("popUp");
+          Rectangle exitButton =
+              (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+          Text dialogueText =
+              (Text)
+                  ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+                      .getChildren()
+                      .get(1);
+          ImageView nextButton =
+              (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+          exitButton.setOnMouseClicked(
+              event1 -> {
+                popUp.visibleProperty().set(false);
+              });
+          dialogueText.setOnMouseClicked(
+              event1 -> {
+                if (!dungeonMaster.isSpeaking()) {
+                  dungeonMaster.update();
+                }
+              });
+          nextButton.setOnMouseClicked(
+              event1 -> {
+                if (!dungeonMaster.isSpeaking()) {
+                  dungeonMaster.update();
+                }
+              });
+        });
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
     // dialog.getStyleClass().add("popUp");
     // popUp.getChildren().add(dialog);
 
-  }
-
-  public static Color convertStringToColor(String colorName) {
-    switch (colorName) {
-      case "Red Potion":
-        return Color.RED;
-      case "Green Potion":
-        System.out.println("s");
-        return Color.GREEN;
-
-      case "Blue Potion":
-        System.out.println("sd");
-        return Color.BLUE;
-      case "Purple Potion":
-        return Color.PURPLE;
-      case "Yellow Potion":
-        System.out.println("sd");
-        return Color.YELLOW;
-
-      // Add more color mappings as needed
-      default:
-        return Color.BLACK;
-    } // Default to black if the color name is not recognized
-  }
-
-  public static Color calculateAverageColor(Color color1, Color color2) {
-    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
-    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
-    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
-
-    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
   }
 
   private void tintScene(Pane root) {
@@ -499,15 +473,16 @@ public class RoomController implements Controller {
     root.getChildren().add(tintRectangle);
 
     // Create a timeline animation to control the tint effect
-    Timeline timeline = new Timeline(
-        new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
-        new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.60)),
-        new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
-    timeline.setOnFinished(event -> {
-      root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
-    });
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
+            new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.60)),
+            new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
+    timeline.setOnFinished(
+        event -> {
+          root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
+        });
     // Play the animation
     timeline.play();
-
   }
 }

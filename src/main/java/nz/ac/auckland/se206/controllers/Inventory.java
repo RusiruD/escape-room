@@ -6,8 +6,7 @@ import javafx.fxml.FXML;
 import nz.ac.auckland.se206.Controller;
 
 public class Inventory {
-  @FXML
-  private static ObservableList<String> inventory = FXCollections.observableArrayList();
+  @FXML private static ObservableList<String> inventory = FXCollections.observableArrayList();
 
   public static void addToInventory(String string) {
     inventory.add(string);
