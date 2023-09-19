@@ -48,12 +48,6 @@ public class PuzzleRoomController implements Controller {
     App.setRoot(AppUi.PUZZLE);
   }
 
-  @FXML
-  private void clickedDoor(MouseEvent event) throws IOException {
-    if (GameState.isPuzzleRoomSolved()) {
-      App.setRoot(AppUi.CORRIDOR);
-    }
-  }
 
   @FXML
   private void onKey2Clicked(MouseEvent event) {
