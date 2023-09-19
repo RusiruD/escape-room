@@ -11,11 +11,15 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 import nz.ac.auckland.se206.DungeonMaster;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.concurrent.Future;
 
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -67,12 +71,22 @@ public class RoomController implements Controller {
   private double yOffset = 0;
 
   private int parchmentPieces = 0;
-
+  @FXML
+  private ImageView yellowPotion;
+  @FXML
+  private ImageView redPotion;
+  @FXML
+  private ImageView bluePotion;
+  @FXML
+  private ImageView greenPotion;
+  @FXML
+  private ImageView purplePotion;
   @FXML
   private ImageView parchment4;
   @FXML
   private ImageView parchment1duplicate;
-
+  @FXML
+  private ImageView cauldron;
   @FXML
   private ImageView parchment2duplicate;
 
@@ -95,6 +109,26 @@ public class RoomController implements Controller {
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
     chatTextArea.getStyleClass().add("text-area .content");
     btnHideRiddle.getStyleClass().add("custom-button");
+    String[] colors = { "Blue", "Yellow", "Purple", "Red", "Green" };
+
+    Random random = new Random();
+
+    int firstIndex = random.nextInt(colors.length);
+    String firstPotion = colors[firstIndex];
+    GameState.firstPotion = "" + firstPotion + " Potion";
+    int secondIndex;
+    do {
+      secondIndex = random.nextInt(colors.length);
+    } while (secondIndex == firstIndex); // Ensure the second color is different from the first
+
+    String secondPotion = colors[secondIndex];
+    GameState.secondPotion = secondPotion + " Potion";
+
+    chatTextArea.appendText(
+        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the " + firstPotion
+            + " and "
+            + secondPotion
+            + " in the cauldron for super strength. \nI pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Bind the rotation of the image to the slider value
     imgArt
         .rotateProperty()
@@ -102,11 +136,8 @@ public class RoomController implements Controller {
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
 
-    chatCompletionRequest = new ChatCompletionRequest().setN(1)
-        .setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
     // Allow the boulder to be dragged and dropped
-    allowImageToBeDragged(boulder);
+
   }
 
   private void appendChatMessage(ChatMessage msg) {
@@ -138,6 +169,55 @@ public class RoomController implements Controller {
     image.setScaleY(1.5);
   }
 
+  List<String> potionsincauldron = new ArrayList<>();
+
+  @FXML
+  private void onCauldronClicked(MouseEvent event) {
+
+    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+
+    if (selectedItem != null && selectedItem.contains("redPotion")) {
+      potionsincauldron.add("Red Potion");
+      Inventory.removeFromInventory(selectedItem);
+
+      updateInventory();
+
+    } else if (selectedItem != null && selectedItem.contains("bluePotion")) {
+      potionsincauldron.add("Blue Potion");
+
+      Inventory.removeFromInventory(selectedItem);
+
+      updateInventory();
+
+    } else if (selectedItem != null && selectedItem.contains("greenPotion")) {
+      potionsincauldron.add("Green Potion");
+
+      Inventory.removeFromInventory(selectedItem);
+
+      updateInventory();
+
+    } else if (selectedItem != null && selectedItem.contains("yellowPotion")) {
+      potionsincauldron.add("Yellow Potion");
+
+      Inventory.removeFromInventory(selectedItem);
+
+      updateInventory();
+
+    } else if (selectedItem != null && selectedItem.contains("purplePotion")) {
+      potionsincauldron.add("Purple Potion");
+
+      Inventory.removeFromInventory(selectedItem);
+
+      updateInventory();
+
+    }
+    if (potionsincauldron.contains(GameState.firstPotion) && potionsincauldron.contains(GameState.secondPotion)) {
+      System.out.println("ddd");
+      allowImageToBeDragged(boulder);
+    }
+
+  }
+
   @FXML
   private void shrink(ImageView image) {
     image.setScaleX(1.0);
@@ -146,6 +226,16 @@ public class RoomController implements Controller {
 
   @FXML
   private void addToInventory(ImageView image) {
+    image.setVisible(false);
+    image.setDisable(true);
+    // inventoryChoiceBox.getItems().add(image.getId());
+    Inventory.addToInventory(image.getId());
+    updateInventory();
+  }
+
+  @FXML
+  private void addToInventoryFromScene(MouseEvent event) {
+    ImageView image = (ImageView) event.getSource();
     image.setVisible(false);
     image.setDisable(true);
     // inventoryChoiceBox.getItems().add(image.getId());

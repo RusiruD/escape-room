@@ -32,6 +32,8 @@ public class GameState {
     return puzzleRoomSolved.get();
   }
 
+  public static String firstPotion = "";
+  public static String secondPotion = "";
   public static String difficultyLevel = "";
   public static String gameTime = "";
 
