@@ -449,9 +449,44 @@ public class RoomController implements Controller {
 
   }
 
+  public static Color convertStringToColor(String colorName) {
+    switch (colorName) {
+      case "Red Potion":
+        return Color.RED;
+      case "Green Potion":
+        System.out.println("s");
+        return Color.GREEN;
+
+      case "Blue Potion":
+        System.out.println("sd");
+        return Color.BLUE;
+      case "Purple Potion":
+        return Color.PURPLE;
+      case "Yellow Potion":
+        System.out.println("sd");
+        return Color.YELLOW;
+
+      // Add more color mappings as needed
+      default:
+        return Color.BLACK;
+    } // Default to black if the color name is not recognized
+  }
+
+  public static Color calculateAverageColor(Color color1, Color color2) {
+    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
+    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
+    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
+
+    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
+  }
+
   private void tintScene(Pane root) {
+    Color colour1 = convertStringToColor(GameState.firstPotion);
+    Color colour2 = convertStringToColor(GameState.secondPotion);
+    Color colour3 = calculateAverageColor(colour1, colour2);
     // Create a colored rectangle to overlay the scene
-    Rectangle tintRectangle = new Rectangle(root.getWidth(), root.getHeight(), Color.LIGHTBLUE);
+
+    Rectangle tintRectangle = new Rectangle(root.getWidth(), root.getHeight(), colour3);
     tintRectangle.setOpacity(0); // Initially, make it fully transparent
 
     // Add the rectangle to the root layout
@@ -462,8 +497,11 @@ public class RoomController implements Controller {
         new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
         new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.8)),
         new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
-
+    timeline.setOnFinished(event -> {
+      root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
+    });
     // Play the animation
     timeline.play();
+
   }
 }
