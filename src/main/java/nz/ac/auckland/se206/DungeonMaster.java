@@ -196,20 +196,27 @@ public class DungeonMaster {
     return getPopUp();
   }
 
+  // returns a pane with the text
   public String getRiddle(String message) {
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;
+    // create a chat message
     ChatMessage chatMessage = new ChatMessage("user", message);
     chatCompletionRequest.addMessage(chatMessage);
+    // create a task to get the response
     Task<Void> gptTask =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
+            // get the response
             try {
+              // get the response
               ChatCompletionResult chatCompetionResult = chatCompletionRequest.execute();
               Choice result = chatCompetionResult.getChoices().iterator().next();
+              // if the response is not a riddle, get another response
               chatCompletionRequest.addMessage(result.getChatMessage());
+              // if the response is not a riddle, get another response
               appendChatMessage(result.getChatMessage());
               return null;
             } catch (ApiProxyException e) {

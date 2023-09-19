@@ -38,7 +38,9 @@ public class PuzzleController implements Controller {
   @FXML private Label lblTime;
 
   public void initialize() {
+    // set the instance
     instance = this;
+    // set the tiles and solution
     tiles =
         new String[][] {
           {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
@@ -55,12 +57,15 @@ public class PuzzleController implements Controller {
   }
 
   private void clicked(ImageView object) {
-
+    // if there is no selection, select the object
     if (!hasSelection && !object.equals(zero)) {
+      // set the selection
       hasSelection = true;
       firstSelection = object;
       firstSelection.setBlendMode(BlendMode.RED);
+      // if there is a selection, swap the tiles
     } else if (hasSelection) {
+      // set the selection
       hasSelection = false;
       secondSelection = object;
       swapTiles(firstSelection, secondSelection);
@@ -74,13 +79,16 @@ public class PuzzleController implements Controller {
   }
 
   private void swapTiles(ImageView a, ImageView b) {
+    // find the positions of the tiles
     int[] apos = findPos(a.getId());
     int[] bpos = findPos(b.getId());
 
+    // if one of the tiles is the zero tile, then the other tile must be adjacent to it
     if (!a.equals(zero) && !b.equals(zero)) {
       return;
     }
 
+    // if the tiles are adjacent, swap them
     if (Math.abs(apos[0] - bpos[0]) == 1 ^ Math.abs(apos[1] - bpos[1]) == 1) {
       tiles[apos[0]][apos[1]] = b.getId();
       tiles[bpos[0]][bpos[1]] = a.getId();
@@ -91,6 +99,7 @@ public class PuzzleController implements Controller {
       b.setLayoutX(ax);
       b.setLayoutY(ay);
     }
+    // check if the puzzle is solved
     checkSolution();
   }
 
@@ -105,8 +114,11 @@ public class PuzzleController implements Controller {
     return null;
   }
 
+  // check if the puzzle is solved
   private void checkSolution() {
+    // count the number of tiles in the correct position
     int counter = 0;
+    // check if the tiles are in the correct position
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
         if (tiles[i][j].equals(solution[i][j])) {
@@ -114,6 +126,7 @@ public class PuzzleController implements Controller {
         }
       }
     }
+    // if all the tiles are in the correct position, the puzzle is solved
     if (counter == 9) {
       GameState.setPuzzleRoomSolved(true);
     }

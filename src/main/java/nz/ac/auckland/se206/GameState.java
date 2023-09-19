@@ -18,6 +18,11 @@ public class GameState {
   public static boolean isLock2Unlocked = false;
   public static boolean isLock3Unlocked = false;
 
+  public static String difficultyLevel = "";
+  public static String gameTime = "";
+
+  public static Riddle riddle;
+
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
 
   public static ObservableBooleanValue getPuzzleRoomSolved() {
@@ -31,9 +36,4 @@ public class GameState {
   public static boolean isPuzzleRoomSolved() {
     return puzzleRoomSolved.get();
   }
-
-  public static String difficultyLevel = "";
-  public static String gameTime = "";
-
-  public static Riddle riddle;
 }

@@ -42,90 +42,79 @@ public class CorridorController implements Controller {
   private BooleanProperty rightPressed = new SimpleBooleanProperty();
 
   // A binding to check if any movement key is pressed
-  private BooleanBinding keyPressed = forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
+  private BooleanBinding keyPressed =
+      forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
 
   // JavaFX UI elements
 
-  @FXML
-  private Polygon polygon;
-  @FXML
-  private Group group;
-  @FXML
-  private Rectangle player;
-  @FXML
-  private Rectangle treasureChest;
-  @FXML
-  private Rectangle door1;
-  @FXML
-  private Rectangle door2;
-  @FXML
-  private Rectangle border1;
-  @FXML
-  private Rectangle door3;
-  @FXML
-  private ImageView swordandshield;
+  @FXML private Polygon polygon;
+  @FXML private Group group;
+  @FXML private Rectangle player;
+  @FXML private Rectangle treasureChest;
+  @FXML private Rectangle door1;
+  @FXML private Rectangle door2;
+  @FXML private Rectangle border1;
+  @FXML private Rectangle door3;
+  @FXML private ImageView swordandshield;
 
-  @FXML
-  private Pane room;
-  @FXML
-  private Pane popUp;
-  @FXML
-  private Pane riddleDisplay;
+  @FXML private Pane room;
+  @FXML private Pane popUp;
+  @FXML private Pane riddleDisplay;
 
-  @FXML
-  private Label lblTime;
-  @FXML
-  private ComboBox<String> inventoryChoiceBox;
+  @FXML private Label lblTime;
+  @FXML private ComboBox<String> inventoryChoiceBox;
 
   private Riddle riddle;
   private Boolean riddleCalled = false;
 
   // Animation timer for player movement
 
-  private AnimationTimer playerTimer = new AnimationTimer() {
-    @Override
-    public void handle(long timestamp) {
-      // Handle player movement
-      if (forwardPressed.get()) {
-        player.rotateProperty().set(0);
-        if (playerStaysInRoom(polygon, player, "W")) {
-          player.setY(player.getY() - movementSpeed);
+  private AnimationTimer playerTimer =
+      new AnimationTimer() {
+        @Override
+        public void handle(long timestamp) {
+          // Handle player movement
+          if (forwardPressed.get()) {
+            player.rotateProperty().set(0);
+            if (playerStaysInRoom(polygon, player, "W")) {
+              player.setY(player.getY() - movementSpeed);
+            }
+          }
+          // Handle left movement
+          if (leftPressed.get()) {
+            player.rotateProperty().set(-90);
+            if (playerStaysInRoom(polygon, player, "A")) {
+              player.setX(player.getX() - movementSpeed);
+            }
+          }
+          // Handle backward movement
+          if (backwardPressed.get()) {
+            player.rotateProperty().set(180);
+            if (playerStaysInRoom(polygon, player, "S")) {
+              player.setY(player.getY() + movementSpeed);
+            }
+          }
+          // Handle right movement
+          if (rightPressed.get()) {
+            player.rotateProperty().set(90);
+            if (playerStaysInRoom(polygon, player, "D")) {
+              player.setX(player.getX() + movementSpeed);
+            }
+          }
         }
-      }
-      // Handle left movement
-      if (leftPressed.get()) {
-        player.rotateProperty().set(-90);
-        if (playerStaysInRoom(polygon, player, "A")) {
-          player.setX(player.getX() - movementSpeed);
-        }
-      }
-      // Handle backward movement
-      if (backwardPressed.get()) {
-        player.rotateProperty().set(180);
-        if (playerStaysInRoom(polygon, player, "S")) {
-          player.setY(player.getY() + movementSpeed);
-        }
-      }
-      // Handle right movement
-      if (rightPressed.get()) {
-        player.rotateProperty().set(90);
-        if (playerStaysInRoom(polygon, player, "D")) {
-          player.setX(player.getX() + movementSpeed);
-        }
-      }
-    }
-  };
+      };
 
   // Animation timer for collision detection
-  private AnimationTimer collisionTimer = new AnimationTimer() {
-    @Override
-    public void handle(long timestamp) {
-      // Check for collisions with doors and handle navigation
-      checkCollision();
-    }
-  };
+  private AnimationTimer collisionTimer =
+      new AnimationTimer() {
+        @Override
+        public void handle(long timestamp) {
+          // Check for collisions with doors and handle navigation
+          checkCollision();
+        }
+      };
 
   @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
@@ -134,8 +123,9 @@ public class CorridorController implements Controller {
     swordandshield.setDisable(true);
 
     // Then, set the ImageView as the fill for your shape:
-    Image image2 = new Image(
-        "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
+    Image image2 =
+        new Image(
+            "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
   }
 
@@ -159,13 +149,14 @@ public class CorridorController implements Controller {
         });
 
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task = new Task<Void>() {
-      @Override
-      public Void call() throws Exception {
-        riddle = new Riddle(dungeonMaster);
-        return null;
-      }
-    };
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          public Void call() throws Exception {
+            riddle = new Riddle(dungeonMaster);
+            return null;
+          }
+        };
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
@@ -285,25 +276,29 @@ public class CorridorController implements Controller {
   public void onTreasureChestClicked(MouseEvent event) {
     // Handle click on treasure chest
     System.out.println("clicked");
+    // Check if the player has the sword and shield
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
     if (GameState.isLock2Unlocked == true
         && GameState.isLock1Unlocked == true
         && GameState.isLock3Unlocked == true) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
-
+      // Then, set the ImageView as the fill for your shape:
     } else {
       if (selectedItem != null) {
+        // Check if the player has the key
         if (selectedItem.equals("key1")) {
           GameState.isLock1Unlocked = true;
           Inventory.removeFromInventory("key1");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
+        // Check if the player has the key
         if (selectedItem.equals("key2")) {
           GameState.isLock2Unlocked = true;
           Inventory.removeFromInventory("key2");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
+        // Check if the player has the key
         if (selectedItem.equals("key3")) {
           GameState.isLock3Unlocked = true;
           Inventory.removeFromInventory("key3");
@@ -362,11 +357,15 @@ public class CorridorController implements Controller {
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
       // buttons in the dialogue
-      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-          .getChildren()
-          .get(1);
-      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+      Rectangle exitButton =
+          (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+      Text dialogueText =
+          (Text)
+              ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+                  .getChildren()
+                  .get(1);
+      ImageView nextButton =
+          (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
       exitButton.setOnMouseClicked(
           event1 -> {
             popUp.visibleProperty().set(false);

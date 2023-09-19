@@ -43,11 +43,13 @@ public class PuzzleRoomController implements Controller {
 
   @FXML
   private void onKey2Clicked(MouseEvent event) {
+    // change the key2's visibility and disable it
     key2.visibleProperty().unbind();
     key2.disableProperty().unbind();
     Inventory.addToInventory("key2");
     key2.setVisible(false);
     key2.setDisable(true);
+    // update the game state
     GameState.isKey2Collected = true;
   }
 

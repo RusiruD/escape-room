@@ -33,13 +33,16 @@ public class LeaderboardController {
 
   private int scaleFactor = 200;
 
+  // add a new score to the leaderboard
   public void initialize() {
+    // add some scores to the leaderboard
     scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe2", 0, 10, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe3", 0, 20, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] {0, 0, 0, 0, 0, 0}));
     scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] {0, 0, 0, 0, 0, 0}));
+    // sort the scores
     sortScores();
   }
 
@@ -200,15 +203,19 @@ public class LeaderboardController {
     return polygon;
   }
 
+  // set the graph to the most recent score
   private void setGraph(ScoreEntry scoreEntry) {
+    // remove the old graph
     if (graph.getChildren().size() > 7) {
       System.out.println("Removed: " + graph.getChildren().get(7));
       graph.getChildren().remove(7);
     }
+    // add the new graph
     double[] data = scoreEntry.getStatPoints();
     Polygon graphData = createGraphHelper(data);
     graphData.setFill(Color.CORNSILK.deriveColor(0, 1.2, 1, 0.8));
     graphData.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 1));
+    // add the new graph to the graph
     graph.getChildren().add(graphData);
   }
 
@@ -232,26 +239,37 @@ public class LeaderboardController {
   // depending on integer input, return a colour for the leaderboard
   private String getColour(int i) {
     switch (i % 10) {
+        // red
       case 0:
         return "#fa6855";
+        // orange
       case 1:
         return "#ed5f52";
+        // yellow
       case 2:
         return "#e0574f";
+        // green
       case 3:
         return "#db544e";
+        // blue
       case 4:
         return "#d7514d";
+        // purple
       case 5:
         return "#d24e4c";
+        // pink
       case 6:
         return "#cd4b4b";
+        // red
       case 7:
         return "#c74749";
+        // orange
       case 8:
         return "#c24448";
+        // yellow
       case 9:
         return "#b53f43";
+        // white
       default:
         return "#ffffff";
     }
