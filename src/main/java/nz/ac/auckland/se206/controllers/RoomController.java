@@ -71,7 +71,7 @@ public class RoomController implements Controller {
   @FXML
   private ImageView key1;
   @FXML
-  private ImageView riddle;
+  private ImageView note;
   @FXML
   private ImageView boulder;
   private double xOffset = 0;
@@ -106,7 +106,7 @@ public class RoomController implements Controller {
   @FXML
   private ImageView parchment4duplicate;
   @FXML
-  private Button btnHideRiddle;
+  private Button btnHideNote;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
@@ -115,7 +115,7 @@ public class RoomController implements Controller {
         .getStylesheets()
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
     chatTextArea.getStyleClass().add("text-area .content");
-    btnHideRiddle.getStyleClass().add("custom-button");
+    btnHideNote.getStyleClass().add("custom-button");
     String[] colors = { "Blue", "Yellow", "Purple", "Red", "Green" };
 
     Random random = new Random();
@@ -135,7 +135,7 @@ public class RoomController implements Controller {
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the " + firstPotion
             + " and "
             + secondPotion
-            + " in the cauldron for super strength. \nI pray you succeed where I couldn't. In fading memory,A Lost Soul");
+            + " in the cauldron, the fumes carry the promise of inhuman strength. \nI pray you succeed where I couldn't and escape");
     // Bind the rotation of the image to the slider value
     /*
      * imgArt
@@ -261,23 +261,23 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void hideRiddle() {
+  private void hideNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
-    btnHideRiddle.setDisable(true);
-    btnHideRiddle.setVisible(false);
+    btnHideNote.setDisable(true);
+    btnHideNote.setVisible(false);
   }
 
   @FXML
-  private void showRiddle() {
-    riddle.setVisible(true);
-    riddle.setDisable(false);
+  private void showNote() {
+    note.setVisible(true);
+    note.setDisable(false);
   }
 
   @FXML
-  private void showRiddleWithoutButton() {
-    riddle.setVisible(true);
-    riddle.setDisable(false);
+  private void showNoteWithoutButton() {
+    note.setVisible(true);
+    note.setDisable(false);
   }
 
   @FXML
@@ -313,13 +313,13 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void onRiddleClicked(MouseEvent event) {
+  private void onNoteClicked(MouseEvent event) {
 
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
-    addToInventory(riddle);
-    btnHideRiddle.setDisable(false);
-    btnHideRiddle.setVisible(true);
+    addToInventory(note);
+    btnHideNote.setDisable(false);
+    btnHideNote.setVisible(true);
   }
 
   @FXML
@@ -336,25 +336,25 @@ public class RoomController implements Controller {
   @FXML
   private void onTableClicked(MouseEvent event) {
 
-    // Check if a riddle is selected in the combo box
+    // Check if a note is selected in the combo box
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
-    if (selectedItem != null && selectedItem.contains("riddle")) {
+    if (selectedItem != null && selectedItem.contains("note")) {
 
       Inventory.removeFromInventory(selectedItem);
 
-      showRiddleWithoutButton();
+      showNoteWithoutButton();
       return;
     }
     // if a parchment piece is selected it is made visible in the scene
     // and the parchment piece is removed from the combo box
-    // if already three pieces are visible the riddle is shown instead
+    // if already three pieces are visible the note is shown instead
     if (selectedItem != null && selectedItem.contains("parchment")) {
       Inventory.removeFromInventory(selectedItem);
       if (selectedItem.equals("parchment1")) {
 
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
           hideParchment();
           return;
         }
@@ -364,7 +364,7 @@ public class RoomController implements Controller {
       }
       if (selectedItem.equals("parchment2")) {
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
 
           hideParchment();
           return;
@@ -374,7 +374,7 @@ public class RoomController implements Controller {
       }
       if (selectedItem.equals("parchment3")) {
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
           hideParchment();
           return;
         }
@@ -384,7 +384,7 @@ public class RoomController implements Controller {
       }
       if (selectedItem.equals("parchment4")) {
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
 
           hideParchment();
           return;
@@ -501,7 +501,7 @@ public class RoomController implements Controller {
     // Create a timeline animation to control the tint effect
     Timeline timeline = new Timeline(
         new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
-        new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.60)),
+        new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.55)),
         new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
     timeline.setOnFinished(event -> {
       root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root

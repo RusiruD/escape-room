@@ -51,12 +51,12 @@
          <font>
             <Font name="System Bold" size="12.0" />
          </font></TextArea>
-      <ImageView fx:id="riddle" blendMode="HARD_LIGHT" disable="true" fitHeight="50.0" fitWidth="119.0" layoutX="185.0" layoutY="457.0" onMouseClicked="#onRiddleClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="note" blendMode="HARD_LIGHT" disable="true" fitHeight="50.0" fitWidth="119.0" layoutX="185.0" layoutY="457.0" onMouseClicked="#onNoteClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnHideRiddle" disable="true" layoutX="449.0" layoutY="361.0" mnemonicParsing="false" onAction="#hideRiddle" text="Hide" visible="false" />
+      <Button fx:id="btnHideNote" disable="true" layoutX="449.0" layoutY="361.0" mnemonicParsing="false" onAction="#hideNote" text="Hide" visible="false" />
       <ImageView fx:id="key1" fitHeight="78.0" fitWidth="141.0" layoutX="512.0" layoutY="346.0" onMouseClicked="#onKey1Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/key.png" />
