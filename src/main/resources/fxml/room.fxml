@@ -62,7 +62,7 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="109.0" fitWidth="133.0" layoutX="507.0" layoutY="326.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="130.0" fitWidth="176.0" layoutX="500.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
          <image>
             <Image url="@../images/boulder.png" />
          </image>
@@ -73,26 +73,6 @@
          </font>
       </Label>
       <Button fx:id="btnReturnToCorridor" layoutX="490.0" layoutY="10.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="39.0" prefWidth="200.0" text="Return to Corridor" />
-      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="1036.0" layoutY="452.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment3" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="373.0" layoutY="57.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment4" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="823.0" layoutY="343.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="45.0" layoutY="458.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
       <Pane fx:id="popUp" layoutX="315.0" layoutY="513.0" maxHeight="80.0" maxWidth="550.0" prefHeight="80.0" prefWidth="550.0" style="-fx-background-color: null;" />
       <ImageView fx:id="cauldron" fitHeight="99.0" fitWidth="125.0" layoutX="912.0" layoutY="483.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -122,6 +102,26 @@
       <ImageView fx:id="purplePotion" fitHeight="78.0" fitWidth="95.0" layoutX="185.0" layoutY="319.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion5.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="45.0" layoutY="458.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment4" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="823.0" layoutY="343.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="1036.0" layoutY="452.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/parchment.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="parchment3" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="357.0" layoutY="260.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
    </children>

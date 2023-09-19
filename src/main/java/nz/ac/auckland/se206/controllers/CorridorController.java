@@ -249,6 +249,7 @@ public class CorridorController implements Controller {
     // Handle click on treasure chest
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+
     if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
       sword.setVisible(true);
       sword.setDisable(false);
@@ -271,9 +272,9 @@ public class CorridorController implements Controller {
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
 
-      
+      }
     }
-  }}
+  }
 
   @FXML
   private void clickExit(MouseEvent event) {

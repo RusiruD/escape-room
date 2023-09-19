@@ -234,11 +234,17 @@ public class RoomController implements Controller {
   }
 
   private void setRandomPosition(ImageView imageView) {
+    double minX = 150; // Minimum x-coordinate (left)
+    double minY = 250; // Minimum y-coordinate (top)S
+    double maxX = 920; // Maximum x-coordinate (right)
+    double maxY = 580; // Maximum y-coordinate (bottom)
 
-    double x = random.nextDouble() * (920 - imageView.getFitWidth());
-    double y = random.nextDouble() * (550 - imageView.getFitHeight());
-    imageView.setLayoutX(x);
-    imageView.setLayoutY(y);
+    // Randomly generate initial positions for the images
+    double initialX = Math.random() * (maxX - minX) + minX;
+    double initialY = Math.random() * (maxY - minY) + minY;
+
+    imageView.setLayoutX(initialX);
+    imageView.setLayoutY(initialY);
 
   }
 
@@ -495,7 +501,7 @@ public class RoomController implements Controller {
     // Create a timeline animation to control the tint effect
     Timeline timeline = new Timeline(
         new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
-        new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.8)),
+        new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.60)),
         new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
     timeline.setOnFinished(event -> {
       root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
