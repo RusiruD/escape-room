@@ -130,37 +130,20 @@ public class RoomController implements Controller {
             + secondPotion
             + " in the cauldron for super strength. \nI pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Bind the rotation of the image to the slider value
-    imgArt
-        .rotateProperty()
-        .bind(
-            Bindings.createDoubleBinding(
-                () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
-
-    // Allow the boulder to be dragged and dropped
-
-  }
-
-  private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+    /*
+     * imgArt
+     * .rotateProperty()
+     * .bind(
+     * Bindings.createDoubleBinding(
+     * () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
+     */
     setRandomPosition(parchment1);
     setRandomPosition(parchment2);
     setRandomPosition(parchment3);
     setRandomPosition(parchment4);
-  }
 
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
-    chatCompletionRequest.addMessage(msg);
-    try {
-      ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
-      Choice result = chatCompletionResult.getChoices().iterator().next();
-      chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
-      return result.getChatMessage();
-    } catch (ApiProxyException e) {
-      // TODO handle exception appropriately
-      e.printStackTrace();
-      return null;
-    }
+    // Allow the boulder to be dragged and dropped
+
   }
 
   @FXML
@@ -245,7 +228,7 @@ public class RoomController implements Controller {
 
   private void setRandomPosition(ImageView imageView) {
 
-    double x = random.nextDouble() * (950 - imageView.getFitWidth());
+    double x = random.nextDouble() * (920 - imageView.getFitWidth());
     double y = random.nextDouble() * (550 - imageView.getFitHeight());
     imageView.setLayoutX(x);
     imageView.setLayoutY(y);
