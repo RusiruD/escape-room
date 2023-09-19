@@ -35,4 +35,5 @@ public class GameState {
   public static String difficultyLevel = "";
   public static String gameTime = "";
 
+  public static Riddle riddle;
 }
