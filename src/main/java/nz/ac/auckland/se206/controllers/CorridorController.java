@@ -278,12 +278,15 @@ public class CorridorController implements Controller {
     System.out.println("clicked");
     // Check if the player has the sword and shield
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+
     if (GameState.isLock2Unlocked == true
         && GameState.isLock1Unlocked == true
-        && GameState.isLock3Unlocked == true) {
+        && GameState.isLock3Unlocked == true
+        && swordandshield.visibleProperty().get() == false
+        && !Inventory.contains("sword")) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
-      // Then, set the ImageView as the fill for your shape:
+
     } else {
       if (selectedItem != null) {
         // Check if the player has the key

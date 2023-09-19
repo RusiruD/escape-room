@@ -21,6 +21,9 @@ public class GameState {
   public static String difficultyLevel = "";
   public static String gameTime = "";
 
+  public static String firstPotion = "";
+  public static String secondPotion = "";
+
   public static Riddle riddle;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
