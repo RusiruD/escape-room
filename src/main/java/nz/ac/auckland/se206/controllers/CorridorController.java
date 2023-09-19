@@ -56,6 +56,9 @@ public class CorridorController implements Controller {
   @FXML
   private Rectangle door2;
   @FXML
+  private Rectangle border1;
+  @FXML
+
   private Rectangle door3;
   @FXML
   private ImageView sword;
@@ -72,24 +75,28 @@ public class CorridorController implements Controller {
     public void handle(long timestamp) {
       // Handle player movement
       if (forwardPressed.get()) {
+        player.rotateProperty().set(0);
         if (playerStaysInRoom(polygon, player, "W")) {
           player.setY(player.getY() - movementSpeed);
         }
       }
       // Handle left movement
       if (leftPressed.get()) {
+        player.rotateProperty().set(-90);
         if (playerStaysInRoom(polygon, player, "A")) {
           player.setX(player.getX() - movementSpeed);
         }
       }
       // Handle backward movement
       if (backwardPressed.get()) {
+        player.rotateProperty().set(180);
         if (playerStaysInRoom(polygon, player, "S")) {
           player.setY(player.getY() + movementSpeed);
         }
       }
       // Handle right movement
       if (rightPressed.get()) {
+        player.rotateProperty().set(90);
         if (playerStaysInRoom(polygon, player, "D")) {
           player.setX(player.getX() + movementSpeed);
         }

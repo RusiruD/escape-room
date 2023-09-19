@@ -46,6 +46,7 @@
                </image>
             </ImageView>
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" height="69.0" layoutX="-53.0" layoutY="-75.0" strokeType="INSIDE" strokeWidth="0.0" width="69.0" />
+            <Rectangle fx:id="border1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="77.0" layoutX="-73.0" layoutY="-176.0" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="107.0" />
          </children>
       </Group>
    </children>
