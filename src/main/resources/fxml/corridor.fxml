@@ -29,19 +29,23 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="sword" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="423.0" layoutY="255.0" onMouseClicked="#onSwordClicked" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/sword.png" />
-         </image>
-      </ImageView>
       <Group layoutX="401.0" layoutY="529.0">
          <children>
             <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0" points="248.15386962890625, -182.0, -7.15386962890625, -372.0, -48.15386962890625, -336.0, -81.15386962890625, -426.0, -134.15386962890625, -388.0, -101.15386962890625, -287.0, -125.15386962890625, -271.0, -154.91656494140625, -378.0, -209.15386962890625, -336.0, -170.15386962890625, -224.0, -186.15386962890625, -212.0, -198.15386962890625, -238.0, -224.59857177734375, -212.0, -209.15386962890625, -182.0, -224.59857177734375, -166.0, -302.15386962890625, -271.0, -357.010498046875, -224.0, -272.989501953125, -124.0, -366.15386962890625, -50.03997802734375, -198.15386962890625, 144.0, 47.84613037109375, 150.0, 186.84613037109375, -2.2099609375, 236.84613037109375, -71.2099609375" stroke="BLACK" strokeType="INSIDE" />
             <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="-220.0" layoutY="-376.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
             <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0" layoutX="-367.0" layoutY="-279.0" opacity="0.0" rotate="-40.6" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="treasureChest" arcHeight="5.0" arcWidth="5.0" fill="#f8c200" height="92.0" layoutX="85.0" layoutY="-216.0" onMouseClicked="#onTreasureChestClicked" stroke="BLACK" strokeType="INSIDE" width="71.0" />
             <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="62.0" layoutX="-141.0" layoutY="-453.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="54.0" />
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" height="41.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
+            <ImageView fx:id="treasurechest" fitHeight="77.0" fitWidth="133.0" layoutX="-80.0" layoutY="-176.0" onMouseClicked="#onTreasureChestClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/o.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sword" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="-58.0" layoutY="-173.0" onMouseClicked="#onSwordClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/sword.png" />
+               </image>
+            </ImageView>
          </children>
       </Group>
    </children>
