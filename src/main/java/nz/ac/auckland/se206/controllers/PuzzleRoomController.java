@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-
 import javafx.beans.binding.BooleanExpression;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,32 +21,25 @@ public class PuzzleRoomController implements Controller {
     return instance;
   }
 
-  @FXML
-  private Label lblTime;
-  @FXML
-  private ImageView key2;
+  @FXML private Label lblTime;
+  @FXML private ImageView key2;
 
-  @FXML
-  private ComboBox<String> inventoryChoiceBox;
+  @FXML private ComboBox<String> inventoryChoiceBox;
 
   public void initialize() {
     key2.visibleProperty().bind(GameState.puzzleRoomSolved);
     key2.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
 
     instance = this;
-
   }
 
   @FXML
-  public void key2Visible() {
-
-  }
+  public void key2Visible() {}
 
   @FXML
   private void clickPuzzle(MouseEvent event) throws IOException {
     App.setRoot(AppUi.PUZZLE);
   }
-
 
   @FXML
   private void onKey2Clicked(MouseEvent event) {

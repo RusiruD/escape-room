@@ -21,38 +21,32 @@ public class PuzzleController implements Controller {
 
   private String[][] tiles;
   private String[][] solution;
-  @FXML
-  private ImageView one;
-  @FXML
-  private ImageView two;
-  @FXML
-  private ImageView three;
-  @FXML
-  private ImageView four;
-  @FXML
-  private ImageView five;
-  @FXML
-  private ImageView six;
-  @FXML
-  private ImageView zero;
-  @FXML
-  private ImageView eight;
-  @FXML
-  private ImageView nine;
+  @FXML private ImageView one;
+  @FXML private ImageView two;
+  @FXML private ImageView three;
+  @FXML private ImageView four;
+  @FXML private ImageView five;
+  @FXML private ImageView six;
+  @FXML private ImageView zero;
+  @FXML private ImageView eight;
+  @FXML private ImageView nine;
 
   private boolean hasSelection = false;
   private ImageView firstSelection;
   private ImageView secondSelection;
 
-  @FXML
-  private Label lblTime;
+  @FXML private Label lblTime;
 
   public void initialize() {
     instance = this;
-    tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
-        { "zero", "eight", "nine" } };
-    solution = new String[][] { { "one", "two", "zero" }, { "four", "six", "three" },
-        { "eight", "five", "nine" } };
+    tiles =
+        new String[][] {
+          {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
+        };
+    solution =
+        new String[][] {
+          {"one", "two", "zero"}, {"four", "six", "three"}, {"eight", "five", "nine"}
+        };
   }
 
   @FXML
@@ -104,7 +98,7 @@ public class PuzzleController implements Controller {
     for (int i = 0; i < 3; i++) {
       for (int j = 0; j < 3; j++) {
         if (tiles[i][j].equals(s)) {
-          return new int[] { i, j };
+          return new int[] {i, j};
         }
       }
     }
@@ -122,7 +116,6 @@ public class PuzzleController implements Controller {
     }
     if (counter == 9) {
       GameState.setPuzzleRoomSolved(true);
-
     }
   }
 
@@ -131,7 +124,5 @@ public class PuzzleController implements Controller {
     lblTime.setText(time);
   }
 
-  public void updateInventory() {
-  }
-
+  public void updateInventory() {}
 }

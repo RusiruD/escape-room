@@ -16,20 +16,21 @@ public class Instructions {
     Pane instructionsPane = new Pane();
 
     HBox instructionsBox = new HBox();
-    VBox instructionsVBox = new VBox();
+    VBox instructionsVerticalBox = new VBox();
 
     Label title = new Label("Instructions");
     Label instructionsLabel = new Label(instructions);
 
-    instructionsVBox.getChildren().addAll(title, instructionsLabel);
+    instructionsVerticalBox.getChildren().addAll(title, instructionsLabel);
 
     StackPane stackPane = new StackPane();
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
-    closeButton.setOnMouseClicked(e -> {
-      instructionsPane.setVisible(false);
-    });
+    closeButton.setOnMouseClicked(
+        e -> {
+          instructionsPane.setVisible(false);
+        });
 
     ImageView hintButton = new ImageView("images/question.png");
     hintButton.setFitHeight(20);
@@ -39,7 +40,7 @@ public class Instructions {
     StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
     StackPane.setAlignment(hintButton, Pos.BOTTOM_RIGHT);
 
-    instructionsBox.getChildren().addAll(instructionsVBox, stackPane);
+    instructionsBox.getChildren().addAll(instructionsVerticalBox, stackPane);
 
     instructionsPane.getChildren().addAll(instructionsBox);
   }

@@ -1,21 +1,15 @@
 package nz.ac.auckland.se206.controllers;
 
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.Controller;
-import nz.ac.auckland.se206.gpt.ChatMessage;
-import nz.ac.auckland.se206.gpt.GptPromptEngineering;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.DungeonMaster;
-
 import java.util.Random;
-
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -23,12 +17,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
-import javafx.scene.control.TextArea;
+import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.DungeonMaster;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.gpt.ChatMessage;
+import nz.ac.auckland.se206.gpt.GptPromptEngineering;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
+import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class RoomController implements Controller {
   private static RoomController instance;
@@ -38,54 +36,35 @@ public class RoomController implements Controller {
     return instance;
   }
 
-  @FXML
-  private Pane popUp;
+  @FXML private Pane popUp;
 
-  @FXML
-  private ComboBox<String> inventoryChoiceBox;
-  @FXML
-  private Button btnReturnToCorridor;
-  @FXML
-  private ImageView parchment1;
-  @FXML
-  private ImageView imgArt;
-  @FXML
-  private Slider slider;
-  @FXML
-  private ImageView parchment2;
-  @FXML
-  private Label lblTime;
-  @FXML
-  private ImageView parchment3;
-  @FXML
-  private ImageView key1;
-  @FXML
-  private ImageView riddle;
-  @FXML
-  private ImageView boulder;
-  private double xOffset = 0;
-  private double yOffset = 0;
+  @FXML private ComboBox<String> inventoryChoiceBox;
+  @FXML private Button btnReturnToCorridor;
+  @FXML private ImageView parchment1;
+  @FXML private ImageView imgArt;
+  @FXML private Slider slider;
+  @FXML private ImageView parchment2;
+  @FXML private Label lblTime;
+  @FXML private ImageView parchment3;
+  @FXML private ImageView key1;
+  @FXML private ImageView riddle;
+  @FXML private ImageView boulder;
+  private double horizontalOffset = 0;
+  private double verticalOffset = 0;
 
   private int parchmentPieces = 0;
 
-  @FXML
-  private ImageView parchment4;
-  @FXML
-  private ImageView parchment1duplicate;
+  @FXML private ImageView parchment4;
+  @FXML private ImageView parchment1duplicate;
 
-  @FXML
-  private ImageView parchment2duplicate;
+  @FXML private ImageView parchment2duplicate;
 
-  @FXML
-  private ImageView parchment3duplicate;
-  @FXML
-  private TextArea chatTextArea;
+  @FXML private ImageView parchment3duplicate;
+  @FXML private TextArea chatTextArea;
 
   private ChatCompletionRequest chatCompletionRequest;
-  @FXML
-  private ImageView parchment4duplicate;
-  @FXML
-  private Button btnHideRiddle;
+  @FXML private ImageView parchment4duplicate;
+  @FXML private Button btnHideRiddle;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
@@ -102,8 +81,8 @@ public class RoomController implements Controller {
             Bindings.createDoubleBinding(
                 () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
 
-    chatCompletionRequest = new ChatCompletionRequest().setN(1)
-        .setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(100);
     runGpt(new ChatMessage("user", GptPromptEngineering.getRiddleWithGivenWord("rock")));
     // Allow the boulder to be dragged and dropped
     allowImageToBeDragged(boulder);
@@ -155,11 +134,10 @@ public class RoomController implements Controller {
 
   private void setRandomPosition(ImageView imageView) {
 
-    double x = random.nextDouble() * (950 - imageView.getFitWidth());
-    double y = random.nextDouble() * (550 - imageView.getFitHeight());
-    imageView.setLayoutX(x);
-    imageView.setLayoutY(y);
-
+    double horizontal = random.nextDouble() * (950 - imageView.getFitWidth());
+    double vertical = random.nextDouble() * (550 - imageView.getFitHeight());
+    imageView.setLayoutX(horizontal);
+    imageView.setLayoutY(vertical);
   }
 
   public void updateInventory() {
@@ -194,18 +172,20 @@ public class RoomController implements Controller {
     riddle.setDisable(false);
   }
 
+  // Allow the image to be dragged and dropped
   @FXML
   private void allowImageToBeDragged(ImageView image) {
+    // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
-          xOffset = event.getSceneX() - image.getLayoutX();
-          yOffset = event.getSceneY() - image.getLayoutY();
+          horizontalOffset = event.getSceneX() - image.getLayoutX();
+          verticalOffset = event.getSceneY() - image.getLayoutY();
         });
-
+    // When the mouse is dragged it sets the new position of the image
     image.setOnMouseDragged(
         (MouseEvent event) -> {
-          double newX = event.getSceneX() - xOffset;
-          double newY = event.getSceneY() - yOffset;
+          double newX = event.getSceneX() - horizontalOffset;
+          double newY = event.getSceneY() - verticalOffset;
           image.setLayoutX(newX);
           image.setLayoutY(newY);
         });
@@ -321,46 +301,54 @@ public class RoomController implements Controller {
   /**
    * Initializes the chat view, loading the riddle.
    *
-   * @throws ApiProxyException if there is an error communicating with the API
-   *                           proxy
+   * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   @FXML
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Pane> task = new Task<Pane>() {
-      @Override
-      protected Pane call() throws Exception {
-        return dungeonMaster.getText("user",
-            "I took damage from the window! Tell me" +
-                " a few short sentences about it with no commas.");
-      }
-    };
-    task.setOnSucceeded(e -> {
-      System.out.println("home task succeeded");
-      Pane dialogue = task.getValue();
-      popUp.getChildren().add(dialogue);
-      dialogue.getStyleClass().add("popUp");
-      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(2);
-      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(0)).getChildren().get(1);
-      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(event1 -> {
-        popUp.visibleProperty().set(false);
-      });
-      dialogueText.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
-      nextButton.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
-    });
+    Task<Pane> task =
+        new Task<Pane>() {
+          @Override
+          protected Pane call() throws Exception {
+            return dungeonMaster.getText(
+                "user",
+                "I took damage from the window! Tell me"
+                    + " a few short sentences about it with no commas.");
+          }
+        };
+    task.setOnSucceeded(
+        e -> {
+          System.out.println("home task succeeded");
+          Pane dialogue = task.getValue();
+          popUp.getChildren().add(dialogue);
+          dialogue.getStyleClass().add("popUp");
+          Rectangle exitButton =
+              (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+          Text dialogueText =
+              (Text)
+                  ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+                      .getChildren()
+                      .get(1);
+          ImageView nextButton =
+              (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+          exitButton.setOnMouseClicked(
+              event1 -> {
+                popUp.visibleProperty().set(false);
+              });
+          dialogueText.setOnMouseClicked(
+              event1 -> {
+                if (!dungeonMaster.isSpeaking()) {
+                  dungeonMaster.update();
+                }
+              });
+          nextButton.setOnMouseClicked(
+              event1 -> {
+                if (!dungeonMaster.isSpeaking()) {
+                  dungeonMaster.update();
+                }
+              });
+        });
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
