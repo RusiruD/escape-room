@@ -61,7 +61,7 @@
 }
 
 
-.start-button {
+.button {
     -fx-text-fill: black;
     /* Set text color to black */
     -fx-font-weight: bolder;

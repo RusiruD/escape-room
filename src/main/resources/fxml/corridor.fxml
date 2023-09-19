@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Polygon?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="470.0" prefWidth="600.0" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="679.0" prefWidth="648.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
-      <Pane fx:id="riddleDisplay" layoutX="24.0" layoutY="29.0" prefHeight="412.0" prefWidth="563.0" />
-      <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="55.0" layoutX="241.0" layoutY="28.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
-      <Rectangle fx:id="top" arcHeight="5.0" arcWidth="5.0" height="41.0" layoutX="69.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
-      <Rectangle fx:id="bottom" arcHeight="5.0" arcWidth="5.0" height="41.0" layoutX="69.0" layoutY="345.0" stroke="BLACK" strokeType="INSIDE" width="472.0" />
-      <Rectangle fx:id="left" arcHeight="5.0" arcWidth="5.0" height="406.0" layoutX="14.0" layoutY="3.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
-      <Rectangle fx:id="right" arcHeight="5.0" arcWidth="5.0" height="406.0" layoutX="494.0" layoutY="14.0" stroke="BLACK" strokeType="INSIDE" width="71.0" />
-      <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="41.0" layoutX="229.0" layoutY="176.0" stroke="BLACK" strokeType="INSIDE" width="44.0" />
-      <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="212.0" layoutY="311.0" stroke="BLACK" strokeType="INSIDE" width="79.0" />
-      <Button layoutX="530.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#clickExit" text="Exit">
+      <ImageView fitHeight="679.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/CorridorBackground.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="588.0" layoutY="9.0" mnemonicParsing="false" onMouseClicked="#clickExit" stylesheets="@../css/roomStylesheet.css" text="Exit">
+
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="37.0" layoutY="35.0" prefWidth="150.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="350.0" layoutY="17.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="12.0" layoutY="9.0" prefWidth="150.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="342.0" layoutY="11.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="sword" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="423.0" layoutY="255.0" onMouseClicked="#onSwordClicked" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/sword.png" />
-         </image>
-      </ImageView>
-      <Rectangle fx:id="treasureChest" arcHeight="5.0" arcWidth="5.0" fill="#f8c200" height="92.0" layoutX="423.0" layoutY="253.0" onMouseClicked="#onTreasureChestClicked" stroke="BLACK" strokeType="INSIDE" width="71.0" />
-      <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="99.0" layoutX="57.0" layoutY="159.0" stroke="BLACK" strokeType="INSIDE" width="60.0" />
+
       <Button fx:id="riddleButton" layoutX="530.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
       <Pane fx:id="popUp" layoutX="25.0" layoutY="366.0" prefHeight="80.0" prefWidth="550.0" />
+
+      <Group layoutX="401.0" layoutY="529.0">
+         <children>
+            <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0" points="248.15386962890625, -182.0, -7.15386962890625, -372.0, -48.15386962890625, -336.0, -71.15399169921875, -434.0, -125.15386962890625, -401.0, -100.640625, -301.0, -125.15386962890625, -271.0, -154.91656494140625, -378.0, -209.15386962890625, -336.0, -170.15386962890625, -224.0, -186.15386962890625, -212.0, -198.15386962890625, -238.0, -224.59857177734375, -212.0, -209.15386962890625, -182.0, -224.59857177734375, -166.0, -302.15386962890625, -271.0, -357.010498046875, -224.0, -272.989501953125, -124.0, -366.15386962890625, -50.03997802734375, -198.15386962890625, 144.0, 47.84613037109375, 150.0, 186.84613037109375, -2.2099609375, 236.84613037109375, -71.2099609375" stroke="BLACK" strokeType="INSIDE" />
+            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="-218.0" layoutY="-362.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
+            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0" layoutX="-367.0" layoutY="-279.0" opacity="0.0" rotate="-40.6" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="58.0" layoutX="-111.0" layoutY="-423.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+            <ImageView fx:id="treasurechest" fitHeight="77.0" fitWidth="133.0" layoutX="-80.0" layoutY="-176.0" onMouseClicked="#onTreasureChestClicked" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/TreasureChest.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="sword" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="-58.0" layoutY="-173.0" onMouseClicked="#onSwordClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../images/sword.png" />
+               </image>
+            </ImageView>
+            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" height="50.0" stroke="#f00000" strokeType="INSIDE" strokeWidth="0.0" width="55.0" />
+         </children>
+      </Group>
+
    </children>
 </Pane>

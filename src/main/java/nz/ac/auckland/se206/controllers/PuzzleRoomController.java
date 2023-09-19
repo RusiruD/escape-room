@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+
+import javafx.beans.binding.BooleanExpression;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -29,8 +31,15 @@ public class PuzzleRoomController implements Controller {
   private ComboBox<String> inventoryChoiceBox;
 
   public void initialize() {
+    key2.visibleProperty().bind(GameState.puzzleRoomSolved);
+    key2.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
 
     instance = this;
+
+  }
+
+  @FXML
+  public void key2Visible() {
 
   }
 
@@ -41,13 +50,15 @@ public class PuzzleRoomController implements Controller {
 
   @FXML
   private void clickedDoor(MouseEvent event) throws IOException {
-    if (GameState.puzzleRoomSolved) {
+    if (GameState.isPuzzleRoomSolved()) {
       App.setRoot(AppUi.CORRIDOR);
     }
   }
 
   @FXML
   private void onKey2Clicked(MouseEvent event) {
+    key2.visibleProperty().unbind();
+    key2.disableProperty().unbind();
     Inventory.addToInventory("key2");
     key2.setVisible(false);
     key2.setDisable(true);
