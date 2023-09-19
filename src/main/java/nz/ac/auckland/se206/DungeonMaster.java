@@ -27,13 +27,15 @@ public class DungeonMaster {
 
   private boolean taskDone = false;
   private boolean isSpeaking = false;
+  private boolean riddleDone = false;
 
+  private String message;
   private String[] messages;
   private int messageIndex = 0;
 
   private ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest()
       .setN(1).setTemperature(0.2)
-      .setTopP(0.5).setMaxTokens(50);
+      .setTopP(0.5).setMaxTokens(200);
 
   public Pane getPopUp() {
     popUp = new HBox();
@@ -183,7 +185,73 @@ public class DungeonMaster {
     return getPopUp();
   }
 
+  public String getRiddle(String message) {
+    System.out.println("getting text");
+    messages = null;
+    messageIndex = 0;
+    ChatMessage chatMessage = new ChatMessage("user", message);
+    chatCompletionRequest.addMessage(chatMessage);
+    Task<Void> gptTask = new Task<Void>() {
+      @Override
+      protected Void call() throws Exception {
+        try {
+          ChatCompletionResult chatCompetionResult = chatCompletionRequest.execute();
+          Choice result = chatCompetionResult.getChoices().iterator().next();
+          chatCompletionRequest.addMessage(result.getChatMessage());
+          appendChatMessage(result.getChatMessage());
+          return null;
+        } catch (ApiProxyException e) {
+          e.printStackTrace();
+          return null;
+        }
+      }
+    };
+
+    gptTask.setOnSucceeded(e -> {
+      System.out.println("gpt task succeeded");
+      taskDone = true;
+      riddleDone = true;
+    });
+    gptTask.setOnFailed(e -> {
+      System.out.println("gpt task failed");
+    });
+    gptTask.setOnCancelled(e -> {
+      System.out.println("gpt task cancelled");
+    });
+
+    System.out.print(messages);
+    Thread thread = new Thread(gptTask);
+    thread.setDaemon(true);
+    thread.start();
+
+    // waits until task is done
+    ExecutorService executor = Executors.newSingleThreadExecutor();
+    CountDownLatch latch = new CountDownLatch(1);
+    // create executor service to wait until task is done
+    executor.submit(() -> {
+      try {
+        while (!taskDone) {
+          System.out.println("waiting");
+          Thread.sleep(100);
+        }
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+      latch.countDown();
+    });
+
+    try {
+      latch.await();
+    } catch (InterruptedException e1) {
+      e1.printStackTrace();
+    }
+    System.out.println("done");
+    executor.shutdown();
+    return this.message;
+  }
+
   public void appendChatMessage(ChatMessage msg) {
+    message = msg.getContent();
     messages = msg.getContent().split("\n");
   }
 
@@ -257,5 +325,13 @@ public class DungeonMaster {
 
   public boolean isSpeaking() {
     return isSpeaking;
+  }
+
+  public String[] getMessages() {
+    return messages;
+  }
+
+  public boolean isRiddleDone() {
+    return riddleDone;
   }
 }

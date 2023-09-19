@@ -1,5 +1,9 @@
 package nz.ac.auckland.se206;
 
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.beans.value.ObservableValue;
+
 /** Represents the state of the game. */
 public class GameState {
 
@@ -14,8 +18,22 @@ public class GameState {
   public static boolean isLock2Unlocked = false;
   public static boolean isLock3Unlocked = false;
 
-  public static boolean puzzleRoomSolved = false;
+  public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
+
+  public static ObservableBooleanValue getPuzzleRoomSolved() {
+    return puzzleRoomSolved;
+  }
+
+  public static void setPuzzleRoomSolved(boolean value) {
+    puzzleRoomSolved.set(value);
+  }
+
+  public static boolean isPuzzleRoomSolved() {
+    return puzzleRoomSolved.get();
+  }
+
   public static String difficultyLevel = "";
   public static String gameTime = "";
 
+  public static Riddle riddle;
 }

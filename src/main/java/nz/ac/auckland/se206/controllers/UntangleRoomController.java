@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.GameState;
+
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.DoubleProperty;
@@ -17,6 +19,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -42,7 +45,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private Pane pane;
   @FXML
-  private Rectangle keyItem;
+  private ImageView key3;
   @FXML
   private Label lblTime;
   @FXML
@@ -52,8 +55,8 @@ public class UntangleRoomController implements Controller {
 
   public void initialize() {
     instance = this;
-    keyItem.setVisible(false);
-    keyItem.mouseTransparentProperty().set(true);
+    key3.setVisible(false);
+    key3.mouseTransparentProperty().set(true);
     Polygon polygon = createStartingTriangle();
 
     Group root = new Group();
@@ -138,8 +141,8 @@ public class UntangleRoomController implements Controller {
     }
     isSolved = true;
     System.out.println("Puzzle solved");
-    keyItem.setVisible(true);
-    keyItem.mouseTransparentProperty().set(false);
+    key3.setVisible(true);
+    key3.mouseTransparentProperty().set(false);
   }
 
   private ObservableList<Anchor> createControlAnchorsFor(final ObservableList<Double> points) {
@@ -248,9 +251,12 @@ public class UntangleRoomController implements Controller {
     }
   }
 
-  public void getKey() {
-    keyItem.setVisible(false);
-    // TODO: add key to inventory
+  @FXML
+  private void onKey3Clicked(MouseEvent event) {
+    Inventory.addToInventory("key3");
+    key3.setVisible(false);
+    key3.setDisable(true);
+    GameState.isKey3Collected = true;
   }
 
   @FXML

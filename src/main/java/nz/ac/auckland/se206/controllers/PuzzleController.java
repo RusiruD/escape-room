@@ -51,8 +51,8 @@ public class PuzzleController implements Controller {
     instance = this;
     tiles = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
         { "zero", "eight", "nine" } };
-    solution = new String[][] { { "one", "two", "three" }, { "four", "five", "six" },
-        { "nine", "eight", "zero" } };
+    solution = new String[][] { { "one", "two", "zero" }, { "four", "six", "three" },
+        { "eight", "five", "nine" } };
   }
 
   @FXML
@@ -121,7 +121,8 @@ public class PuzzleController implements Controller {
       }
     }
     if (counter == 9) {
-      GameState.puzzleRoomSolved = true;
+      GameState.setPuzzleRoomSolved(true);
+
     }
   }
 
