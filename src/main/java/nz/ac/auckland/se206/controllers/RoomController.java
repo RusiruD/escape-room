@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.Future;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.beans.binding.Bindings;
 import javafx.concurrent.Task;
 import javafx.fxml.FXML;
@@ -25,8 +28,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -42,6 +47,8 @@ public class RoomController implements Controller {
     return instance;
   }
 
+  @FXML
+  private Pane root;
   @FXML
   private Pane popUp;
 
@@ -195,7 +202,7 @@ public class RoomController implements Controller {
 
     }
     if (potionsincauldron.contains(GameState.firstPotion) && potionsincauldron.contains(GameState.secondPotion)) {
-      System.out.println("ddd");
+      tintScene(root);
       allowImageToBeDragged(boulder);
     }
 
@@ -440,5 +447,23 @@ public class RoomController implements Controller {
     // dialog.getStyleClass().add("popUp");
     // popUp.getChildren().add(dialog);
 
+  }
+
+  private void tintScene(Pane root) {
+    // Create a colored rectangle to overlay the scene
+    Rectangle tintRectangle = new Rectangle(root.getWidth(), root.getHeight(), Color.LIGHTBLUE);
+    tintRectangle.setOpacity(0); // Initially, make it fully transparent
+
+    // Add the rectangle to the root layout
+    root.getChildren().add(tintRectangle);
+
+    // Create a timeline animation to control the tint effect
+    Timeline timeline = new Timeline(
+        new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
+        new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.8)),
+        new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
+
+    // Play the animation
+    timeline.play();
   }
 }
