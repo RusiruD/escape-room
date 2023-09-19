@@ -37,7 +37,7 @@ public class RoomController implements Controller {
     return instance;
   }
 
-    public static Color convertStringToColor(String colorName) {
+  public static Color convertStringToColor(String colorName) {
     switch (colorName) {
       case "Red Potion":
         return Color.RED;
@@ -84,6 +84,9 @@ public class RoomController implements Controller {
   @FXML private ImageView boulder;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
+  @FXML private ImageView note;
+  private double xOffset = 0;
+  private double yOffset = 0;
 
   private int parchmentPieces = 0;
   @FXML private ImageView yellowPotion;
@@ -102,6 +105,8 @@ public class RoomController implements Controller {
   private ChatCompletionRequest chatCompletionRequest;
   @FXML private ImageView parchment4duplicate;
   @FXML private Button btnHideRiddle;
+
+  @FXML private Button btnHideNote;
 
   /** Initializes the room view, it is called when the room loads. */
   public void initialize() throws ApiProxyException {
@@ -259,20 +264,20 @@ public class RoomController implements Controller {
   private void closeRiddle() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
-    btnHideRiddle.setDisable(true);
-    btnHideRiddle.setVisible(false);
+    btnHideNote.setDisable(true);
+    btnHideNote.setVisible(false);
   }
 
   @FXML
-  private void showRiddle() {
-    riddle.setVisible(true);
-    riddle.setDisable(false);
+  private void showNote() {
+    note.setVisible(true);
+    note.setDisable(false);
   }
 
   @FXML
-  private void showRiddleWithoutButton() {
-    riddle.setVisible(true);
-    riddle.setDisable(false);
+  private void showNoteWithoutButton() {
+    note.setVisible(true);
+    note.setDisable(false);
   }
 
   // Allow the image to be dragged and dropped
@@ -310,13 +315,13 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void onRiddleClicked(MouseEvent event) {
+  private void onNoteClicked(MouseEvent event) {
 
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
-    addToInventory(riddle);
-    btnHideRiddle.setDisable(false);
-    btnHideRiddle.setVisible(true);
+    addToInventory(note);
+    btnHideNote.setDisable(false);
+    btnHideNote.setVisible(true);
   }
 
   @FXML
@@ -333,25 +338,25 @@ public class RoomController implements Controller {
   @FXML
   private void onTableClicked(MouseEvent event) {
 
-    // Check if a riddle is selected in the combo box
+    // Check if a note is selected in the combo box
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
-    if (selectedItem != null && selectedItem.contains("riddle")) {
+    if (selectedItem != null && selectedItem.contains("note")) {
 
       Inventory.removeFromInventory(selectedItem);
 
-      showRiddleWithoutButton();
+      showNoteWithoutButton();
       return;
     }
     // if a parchment piece is selected it is made visible in the scene
     // and the parchment piece is removed from the combo box
-    // if already three pieces are visible the riddle is shown instead
+    // if already three pieces are visible the note is shown instead
     if (selectedItem != null && selectedItem.contains("parchment")) {
       Inventory.removeFromInventory(selectedItem);
       if (selectedItem.equals("parchment1")) {
 
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
           hideParchment();
           return;
         }
@@ -361,7 +366,7 @@ public class RoomController implements Controller {
       }
       if (selectedItem.equals("parchment2")) {
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
 
           hideParchment();
           return;
@@ -371,7 +376,7 @@ public class RoomController implements Controller {
       }
       if (selectedItem.equals("parchment3")) {
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
           hideParchment();
           return;
         }
@@ -381,7 +386,7 @@ public class RoomController implements Controller {
       }
       if (selectedItem.equals("parchment4")) {
         if (parchmentPieces == 3) {
-          showRiddle();
+          showNote();
 
           hideParchment();
           return;
