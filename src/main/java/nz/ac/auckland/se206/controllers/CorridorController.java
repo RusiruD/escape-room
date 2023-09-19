@@ -9,10 +9,12 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
@@ -40,6 +42,7 @@ public class CorridorController implements Controller {
   private int movementSpeed = 2;
 
   // JavaFX UI elements
+
   @FXML
   private Polygon polygon;
   @FXML
@@ -103,9 +106,17 @@ public class CorridorController implements Controller {
     }
   };
 
+  @FXML
+  public void onSwordClicked(MouseEvent event) {
+    Inventory.addToInventory("sword");
+    sword.setVisible(false);
+    sword.setDisable(true);
+  }
+
   public void initialize() {
     instance = this;
-
+    Image image = new Image("/images/character.png");
+    player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
     keyPressed.addListener((observable, boolValue, randomVar) -> {
       if (!boolValue) {
