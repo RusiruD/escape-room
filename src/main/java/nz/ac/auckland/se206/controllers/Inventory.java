@@ -23,6 +23,15 @@ public class Inventory {
     update();
   }
 
+  public static void clearInventory() {
+    inventory.clear();
+    update();
+  }
+
+  public static boolean contains(String string) {
+    return inventory.contains(string);
+  }
+
   private static void update() {
 
     for (Controller controller : SceneManager.getControllers()) {

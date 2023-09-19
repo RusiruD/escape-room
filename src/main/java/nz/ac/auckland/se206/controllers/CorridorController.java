@@ -250,7 +250,8 @@ public class CorridorController implements Controller {
     System.out.println("clicked");
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
-    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
+    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true
+        && sword.visibleProperty().get() == false && !Inventory.contains("sword")) {
       sword.setVisible(true);
       sword.setDisable(false);
 
