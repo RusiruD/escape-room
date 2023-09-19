@@ -83,10 +83,8 @@ public class CorridorController implements Controller {
   @FXML
   private ComboBox<String> inventoryChoiceBox;
 
-
   private Riddle riddle;
   private Boolean riddleCalled = false;
-
 
   // Animation timer for player movement
 
@@ -306,9 +304,9 @@ public class CorridorController implements Controller {
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
 
-      
+      }
     }
-  }}
+  }
 
   @FXML
   private void clickExit(MouseEvent event) {
@@ -326,7 +324,6 @@ public class CorridorController implements Controller {
     // Update the timer label in the UI
     lblTime.setText(time);
   }
-
 
   @FXML
   public void getRiddle() {
@@ -381,6 +378,3 @@ public class CorridorController implements Controller {
     }
   }
 }
-
-}
-
