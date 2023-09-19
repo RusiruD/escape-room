@@ -75,8 +75,8 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnHideRiddle" disable="true" layoutX="449.0" layoutY="361.0"
-         mnemonicParsing="false" onAction="#closeRiddle" text="Hide" visible="false" />
+      <Button fx:id="btnHideNote" disable="true" layoutX="449.0" layoutY="361.0"
+         mnemonicParsing="false" onAction="#closeNote" text="Hide" visible="false" />
       <ImageView fx:id="key1" fitHeight="78.0" fitWidth="141.0" layoutX="512.0" layoutY="346.0"
          onMouseClicked="#onKey1Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem"
          pickOnBounds="true" preserveRatio="true">
