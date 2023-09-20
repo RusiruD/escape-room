@@ -124,26 +124,7 @@ public class ChestController implements Controller {
 
     // Create a DungeonMaster and initiate a task to generate a riddle
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          public Void call() throws Exception {
-            // Create a new Riddle object with the provided question
-            riddle = new Riddle(dungeonMaster, question);
-            return null;
-          }
-        };
-
-    // Start a new thread for the task
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-
-    // Set an event handler for when the task is completed, and assign the riddle to the GameState
-    task.setOnSucceeded(
-        event -> {
-          GameState.riddle = riddle;
-        });
+    riddle = new Riddle(dungeonMaster, question);
   }
 
   public void openChest(MouseEvent event) {
@@ -302,9 +283,6 @@ public class ChestController implements Controller {
   @FXML
   public void getRiddle() {
     DungeonMaster dungeonMaster = riddle.getDungeonMaster();
-    if (!dungeonMaster.isRiddleDone()) {
-      return;
-    }
     System.out.println("get riddle");
     if (riddleCalled) {
       System.out.println("riddle pane called");
@@ -321,34 +299,10 @@ public class ChestController implements Controller {
     } else {
       // gets the dungeon master to speak the riddle dialogue
       Pane dialogue = dungeonMaster.getPopUp();
-      popUp.getChildren().add(dialogue);
+      Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+      popUp.getChildren().add(dialogueFormat);
+
       dialogue.getStyleClass().add("popUp");
-      // buttons in the dialogue
-      Rectangle exitButton =
-          (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-      Text dialogueText =
-          (Text)
-              ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                  .getChildren()
-                  .get(1);
-      ImageView nextButton =
-          (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(
-          event1 -> {
-            popUp.visibleProperty().set(false);
-          });
-      dialogueText.setOnMouseClicked(
-          event1 -> {
-            if (!dungeonMaster.isSpeaking()) {
-              dungeonMaster.update();
-            }
-          });
-      nextButton.setOnMouseClicked(
-          event1 -> {
-            if (!dungeonMaster.isSpeaking()) {
-              dungeonMaster.update();
-            }
-          });
       riddleCalled = true;
     }
   }
