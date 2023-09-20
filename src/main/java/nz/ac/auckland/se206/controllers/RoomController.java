@@ -39,6 +39,51 @@ public class RoomController implements Controller {
     return instance;
   }
 
+  public static Color convertStringToColor(String colorName) {
+    switch (colorName) {
+      case "Red Potion":
+        return Color.RED;
+      case "Green Potion":
+        return Color.GREEN;
+
+      case "Blue Potion":
+        return Color.BLUE;
+      case "Purple Potion":
+        return Color.PURPLE;
+      case "Yellow Potion":
+        return Color.YELLOW;
+
+        // Add more color mappings as needed
+      default:
+        return Color.BLACK;
+    } // Default to black if the color name is not recognized
+  }
+
+  public static Color calculateAverageColor(Color color1, Color color2) {
+    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
+    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
+    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
+
+    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
+  }
+
+  @FXML
+  public double getRoomWidth() {
+
+    return potionsRoomPane.getPrefWidth();
+  }
+
+  @FXML
+  public double getRoomHeight() {
+
+    return potionsRoomPane.getPrefHeight();
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
+  }
+
   @FXML private Pane potionsRoomPane;
   @FXML private Pane popUp;
 
@@ -75,7 +120,6 @@ public class RoomController implements Controller {
 
   @FXML private Button btnHideNote;
 
-  
   @FXML
   private void enlarge(ImageView image) {
     image.setScaleX(1.5);
@@ -264,9 +308,10 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOMSTATE.CHEST;
+    GameState.currentRoom = GameState.roomState.CHEST;
   }
-   private void tintScene(Pane potionsRoomPane) {
+
+  private void tintScene(Pane potionsRoomPane) {
     Color colour1 = convertStringToColor(GameState.firstPotion);
     Color colour2 = convertStringToColor(GameState.secondPotion);
     Color colour3 = calculateAverageColor(colour1, colour2);
@@ -295,7 +340,7 @@ public class RoomController implements Controller {
     timeline.play();
   }
 
-   @FXML
+  @FXML
   private void onTableClicked(MouseEvent event) {
 
     // Check if a note is selected in the combo box
@@ -361,52 +406,6 @@ public class RoomController implements Controller {
     }
   }
 
-public static Color convertStringToColor(String colorName) {
-    switch (colorName) {
-      case "Red Potion":
-        return Color.RED;
-      case "Green Potion":
-        return Color.GREEN;
-
-      case "Blue Potion":
-        return Color.BLUE;
-      case "Purple Potion":
-        return Color.PURPLE;
-      case "Yellow Potion":
-        return Color.YELLOW;
-
-        // Add more color mappings as needed
-      default:
-        return Color.BLACK;
-    } // Default to black if the color name is not recognized
-  }
-
-  public static Color calculateAverageColor(Color color1, Color color2) {
-    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
-    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
-    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
-
-    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
-  }
-
-  @FXML
-  public double getRoomWidth() {
-
-    return potionsRoomPane.getPrefWidth();
-  }
-
-  @FXML
-  public double getRoomHeight() {
-
-    return potionsRoomPane.getPrefHeight();
-  }
-
- 
-  @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
-
   /**
    * Initializes the chat view, loading the note.
    *
@@ -463,7 +462,6 @@ public static Color convertStringToColor(String colorName) {
     thread.start();
   }
 
- 
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);

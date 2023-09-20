@@ -55,7 +55,7 @@ public class GptPromptEngineering {
   }
 
   public static String getHint() {
-    String prompt ;
+    String prompt;
     if (GameState.hintsLeft == 999) { // EASY
       prompt =
           initial

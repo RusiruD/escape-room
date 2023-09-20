@@ -46,10 +46,13 @@ public class LeaderboardController {
     sortScores();
   }
 
+  // add a new score to the leaderboard
   public void addTime(String name, int time, int position, boolean isFinal) {
+    // create a new entry
     HBox entry = new HBox();
     entry.setPrefHeight(60);
 
+    // hbox for the first half of the entry
     HBox firstHalf = new HBox();
     firstHalf.setPrefWidth(250);
     firstHalf.setAlignment(Pos.CENTER_LEFT);
@@ -59,41 +62,38 @@ public class LeaderboardController {
     secondHalf.setAlignment(Pos.CENTER_RIGHT);
 
     String hexcode = getColour(position);
-
+    // set the style of the entry
     entry.setStyle("-fx-background-color: " + hexcode + "; -fx-padding: 15;");
     if (isFinal) {
       entry.setStyle(
           "-fx-background-color: linear-gradient(to top, #3a404d, #181c26); -fx-padding: 15;");
     }
     entry.setAlignment(Pos.CENTER);
-
+    // create a stackpane for the position
     StackPane pos = new StackPane();
     Circle circle = new Circle(15);
     circle.setFill(Color.WHITE);
     Label posLabel = new Label(Integer.toString(position + 1));
     posLabel.setStyle("-fx-text-fill: " + hexcode + "; -fx-font-size: 20; -fx-font-weight: bold;");
-
+    // add the position to the stackpane
     pos.getChildren().addAll(circle, posLabel);
     pos.setPadding(new Insets(0, 20, 0, 0));
 
     firstHalf.getChildren().add(pos);
-
+    // if there is no name, add a label saying no name
     if (time == -1) {
       firstHalf.getChildren().add(new Label("No time set"));
       leaderboard.getChildren().add(entry);
       return;
     }
-
+    // add the name and time to the entry
     Label nameLabel = new Label(name);
     nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
     firstHalf.getChildren().add(nameLabel);
-
-    
-
     Label timeLabel = new Label("Time: " + time);
     timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 15 0 10;");
     secondHalf.getChildren().add(timeLabel);
-
+    // add the entry to the leaderboard
     entry.getChildren().addAll(firstHalf, secondHalf);
     if (isFinal) {
       leaderboardContainer.getChildren().add(entry);
@@ -213,23 +213,6 @@ public class LeaderboardController {
     // add the new graph to the graph
     graph.getChildren().add(graphData);
   }
-
-  // private int calcPosChange(int pos) {
-  // int oldPos = scores.get(pos).getLeaderboardPos();
-  // if (oldPos == pos) {
-  // scores.get(pos).setMovement(ScoreEntry.Movement.NONE);
-  // return 0;
-  // } else {
-  // int posDiff = oldPos - pos;
-  // if (posDiff < 0) {
-  // posDiff = posDiff * -1;
-  // scores.get(pos).setMovement(ScoreEntry.Movement.UP);
-  // } else {
-  // scores.get(pos).setMovement(ScoreEntry.Movement.DOWN);
-  // }
-  // return posDiff;
-  // }
-  // }
 
   // depending on integer input, return a colour for the leaderboard
   private String getColour(int i) {
