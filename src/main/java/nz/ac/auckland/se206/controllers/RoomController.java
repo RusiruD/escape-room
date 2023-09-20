@@ -219,7 +219,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void closeNote(ActionEvent event) {
+  private void closeNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -291,7 +291,7 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOM_STATE.CHEST;
+    GameState.currentRoom = GameState.ROOMSTATE.CHEST;
   }
 
   @FXML

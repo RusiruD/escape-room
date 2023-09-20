@@ -88,21 +88,7 @@ public class LeaderboardController {
     nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
     firstHalf.getChildren().add(nameLabel);
 
-    // Label movementLabel = new Label();
-    // movementLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding:
-    // 0 0 0 20;");
-    // switch (scores.get(position).getMovement()) {
-    // case UP:
-    // movementLabel.setText("↑" + posDiff);
-    // break;
-    // case DOWN:
-    // movementLabel.setText("↓" + posDiff);
-    // break;
-    // case NONE:
-    // movementLabel.setText("");
-    // break;
-    // }
-    // secondHalf.getChildren().add(movementLabel);
+    
 
     Label timeLabel = new Label("Time: " + time);
     timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 15 0 10;");

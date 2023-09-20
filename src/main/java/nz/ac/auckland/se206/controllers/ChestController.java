@@ -60,9 +60,9 @@ public class ChestController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
 
-  private final String DEFAULT_COLOUR = "#1e90ff";
-  private final String CORRECT_COLOUR = "#a8e6cf";
-  private final String INCORRECT_COLOUR = "#f38ba8";
+  private final String DEFAULTCOLOUR = "#1e90ff";
+  private final String CORRECTCOLOUR = "#a8e6cf";
+  private final String INCORRECTCOLOUR = "#f38ba8";
 
   private Riddle riddle;
   private Boolean riddleCalled = false;
@@ -150,27 +150,27 @@ public class ChestController implements Controller {
         // get key hole
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
             keyHole1.mouseTransparentProperty().set(true);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
             keyHole2.mouseTransparentProperty().set(true);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
             keyHole3.mouseTransparentProperty().set(true);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
             keyHole4.mouseTransparentProperty().set(true);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
             keyHole5.mouseTransparentProperty().set(true);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
             keyHole6.mouseTransparentProperty().set(true);
             break;
         }
@@ -179,44 +179,44 @@ public class ChestController implements Controller {
         System.out.println("hole " + (i + 1) + " is incorrect");
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
             break;
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
         // set back to default
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
             break;
         }
       }
