@@ -55,7 +55,6 @@ public class DungeonMaster {
 
     // DIALOG
     Text dialogue = new Text(messages[messageIndex]);
-    messageIndex++;
     dialogueBox.getChildren().addAll(name);
     dialogueBox.getChildren().addAll(dialogue);
     dialogue.setWrappingWidth(430);
@@ -211,6 +210,7 @@ public class DungeonMaster {
           new Task<Void>() {
             @Override
             protected Void call() {
+              System.out.println(messages[messageIndex]);
               tts.speak(messages[messageIndex]);
               return null;
             }
@@ -302,6 +302,7 @@ public class DungeonMaster {
   }
 
   public Pane getPopUp() {
+    update();
     return popUp;
   }
 }

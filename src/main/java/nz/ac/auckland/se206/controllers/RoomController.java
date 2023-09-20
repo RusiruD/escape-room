@@ -435,7 +435,8 @@ public class RoomController implements Controller {
           System.out.println("home task succeeded");
           System.out.println(dungeonMaster.getRiddle());
           Pane dialogue = dungeonMaster.getPopUp();
-          popUp.getChildren().add(dialogue);
+          Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+          popUp.getChildren().add(dialogueFormat);
 
           dialogue.getStyleClass().add("popUp");
         });
