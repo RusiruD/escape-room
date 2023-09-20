@@ -52,7 +52,7 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <Button fx:id="btnHideNote" disable="true" layoutX="406.0" layoutY="348.0" mnemonicParsing="false" onAction="#closeNote" prefHeight="38.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Hide" visible="false" />
+      <Button fx:id="btnHideNote" disable="true" layoutX="406.0" layoutY="348.0" mnemonicParsing="false" onAction="#hideNote" prefHeight="38.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Hide" visible="false" />
       <ImageView fx:id="key1" fitHeight="78.0" fitWidth="141.0" layoutX="512.0" layoutY="346.0" onMouseClicked="#onKey1Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/key.png" />

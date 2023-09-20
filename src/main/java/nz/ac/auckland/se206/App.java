@@ -51,6 +51,7 @@ public class App extends Application {
    * @throws IOException If the file is not found.
    */
   private static Parent loadFxml(final String fxml) throws IOException {
+
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
@@ -62,6 +63,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
+
     SceneManager.addUi(AppUi.UNTANGLE, loadFxml("untangleRoom"));
     SceneManager.addUi(AppUi.LEADERBOARD, loadFxml("leaderboard"));
     SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
@@ -114,9 +116,6 @@ public class App extends Application {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    // Focus on the corridor
-    focus();
   }
 
   /**
@@ -124,6 +123,7 @@ public class App extends Application {
    * dimensions.
    */
   public static void goToDoor1() {
+
     try {
       // Set the root view to the first room
       App.setRoot(AppUi.FIRST_ROOM);
@@ -153,6 +153,7 @@ public class App extends Application {
    * dimensions.
    */
   public static void goToDoor2() {
+
     try {
       // Set the root view to the Untangle room
       App.setRoot(AppUi.UNTANGLE);
@@ -172,9 +173,6 @@ public class App extends Application {
     } catch (IOException e) {
       e.printStackTrace();
     }
-
-    // Focus on the new room
-    focus();
   }
 
   /**
@@ -182,6 +180,7 @@ public class App extends Application {
    * dimensions.
    */
   public static void goToDoor3() {
+
     try {
       // Set the root view to the Puzzle room
       App.setRoot(AppUi.PUZZLEROOM);
@@ -199,6 +198,7 @@ public class App extends Application {
       primaryStage.setHeight(puzzleroomHeight + 38);
 
     } catch (IOException e) {
+
       e.printStackTrace();
     }
 
