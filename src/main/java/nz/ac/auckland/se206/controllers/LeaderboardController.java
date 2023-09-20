@@ -190,14 +190,23 @@ public class LeaderboardController {
     setGraph(scoreEntry);
   }
 
+  // create a graph from an array of doubles
   private Polygon createGraphHelper(double[] data) {
+    // create a polygon
     Polygon polygon = new Polygon();
+    // add points to the polygon
     for (int i = 0; i < data.length; i++) {
+      // calculate the angle and radius of the point
       double angle = 2 * Math.PI * i / data.length;
+      // scale the radius
       double radius = data[i] * scaleFactor;
+      // calculate the point
       Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      // add the point to the polygon
       polygon.getPoints().addAll(point.getX(), point.getY());
+      // set the style of the polygon
       polygon.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+      // set the fill of the polygon
       polygon.setFill(Color.TRANSPARENT);
     }
     return polygon;
@@ -239,38 +248,47 @@ public class LeaderboardController {
   // depending on integer input, return a colour for the leaderboard
   private String getColour(int i) {
     switch (i % 10) {
-        // red
       case 0:
-        return "#fa6855";
-        // orange
-      case 1:
-        return "#ed5f52";
-        // yellow
-      case 2:
-        return "#e0574f";
-        // green
-      case 3:
-        return "#db544e";
-        // blue
-      case 4:
-        return "#d7514d";
-        // purple
-      case 5:
-        return "#d24e4c";
-        // pink
-      case 6:
-        return "#cd4b4b";
         // red
-      case 7:
-        return "#c74749";
+        return "#fa6855";
+
+      case 1:
         // orange
-      case 8:
-        return "#c24448";
+        return "#ed5f52";
+
+      case 2:
         // yellow
+        return "#e0574f";
+
+      case 3:
+        // green
+        return "#db544e";
+      case 4:
+        // blue
+        return "#d7514d";
+
+      case 5:
+        // purple
+        return "#d24e4c";
+
+      case 6:
+        // pink
+        return "#cd4b4b";
+
+      case 7:
+        // brown
+        return "#c74749";
+
+      case 8:
+        // grey
+        return "#c24448";
+
       case 9:
+        // black
         return "#b53f43";
-        // white
+
       default:
+        // white
         return "#ffffff";
     }
   }
