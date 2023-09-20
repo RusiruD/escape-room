@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -412,29 +416,34 @@ public class RoomController implements Controller {
   public void clickWindow(MouseEvent event) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Pane> task =
-        new Task<Pane>() {
+    Task<Void> task =
+        new Task<Void>() {
           @Override
-          protected Pane call() throws Exception {
-            return dungeonMaster.getText(
+          protected Void call() throws Exception {
+            dungeonMaster.getText(
                 "user",
                 "I took damage from the window! Tell me"
                     + " a few short sentences about it with no commas.");
+            while (!dungeonMaster.isTaskDone()) {
+              System.out.println("waiting for task to finish");
+            }
+            return null;
           }
         };
     task.setOnSucceeded(
         e -> {
           System.out.println("home task succeeded");
-          Pane dialogue = task.getValue();
-          Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-          popUp.getChildren().add(dialogueFormat);
+          System.out.println(dungeonMaster.getRiddle());
+          Pane dialogue = dungeonMaster.getPopUp();
+          popUp.getChildren().add(dialogue);
 
           dialogue.getStyleClass().add("popUp");
-          
         });
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
+    // waits until task is done
+    
   }
 
   @FXML

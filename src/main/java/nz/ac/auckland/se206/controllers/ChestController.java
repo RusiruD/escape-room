@@ -122,26 +122,7 @@ public class ChestController implements Controller {
 
     // Create a DungeonMaster and initiate a task to generate a riddle
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          public Void call() throws Exception {
-            // Create a new Riddle object with the provided question
-            riddle = new Riddle(dungeonMaster, question);
-            return null;
-          }
-        };
-
-    // Start a new thread for the task
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-
-    // Set an event handler for when the task is completed, and assign the riddle to the GameState
-    task.setOnSucceeded(
-        event -> {
-          GameState.riddle = riddle;
-        });
+    riddle = new Riddle(dungeonMaster, question);
   }
 
   public void openChest(MouseEvent event) {
@@ -298,9 +279,6 @@ public class ChestController implements Controller {
   @FXML
   public void getRiddle() {
     DungeonMaster dungeonMaster = riddle.getDungeonMaster();
-    if (!dungeonMaster.isRiddleDone()) {
-      return;
-    }
     System.out.println("get riddle");
     if (riddleCalled) {
       System.out.println("riddle pane called");

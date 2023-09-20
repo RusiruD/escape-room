@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206;
 
+import javafx.concurrent.Task;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -17,8 +18,22 @@ public class Riddle {
     // get the riddle from the dungeon master
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
-    riddle = dungeonMaster.getRiddle(question);
-    this.hasRiddle = true;
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            dungeonMaster.getText("user", question);
+            return null;
+          }
+        };
+    task.setOnSucceeded(
+        e -> {
+          this.riddle = dungeonMaster.getRiddle();
+          this.hasRiddle = true;
+        });
+    Thread thread = new Thread(task);
+    thread.setDaemon(true);
+    thread.start();
   }
 
   public Pane riddlePane(String riddleText) {
