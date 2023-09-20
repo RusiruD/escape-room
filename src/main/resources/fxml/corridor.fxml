@@ -25,9 +25,9 @@
          </font>
       </Button>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="21.0" prefHeight="38.0" prefWidth="166.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="278.0" layoutY="26.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="278.0" layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
-            <Font name="Old English Text MT" size="24.0" />
+            <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
       <Pane fx:id="popUp" layoutX="25.0" layoutY="366.0" prefHeight="80.0" prefWidth="550.0" />

@@ -63,9 +63,9 @@
             <Image url="@../images/boulder.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="513.0" layoutY="27.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="513.0" layoutY="27.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
-            <Font name="Old English Text MT" size="24.0" />
+            <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
       <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="574.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
