@@ -19,6 +19,13 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class ChatController {
+
+  private static ChatController instance;
+
+  public static ChatController getInstance() {
+    return instance;
+  }
+
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
@@ -27,10 +34,28 @@ public class ChatController {
 
   @FXML
   public void initialize() throws ApiProxyException {
+    instance = this;
+  }
 
-    chatCompletionRequest =
-        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(200);
-    runGpt(new ChatMessage("user", GptPromptEngineering.getHint()), true);
+  public void intialiseHints() throws ApiProxyException {
+
+    Task<Void> chatTask =
+        new Task<>() {
+          @Override
+          protected Void call() throws Exception {
+            chatCompletionRequest =
+                new ChatCompletionRequest()
+                    .setN(1)
+                    .setTemperature(0.2)
+                    .setTopP(0.5)
+                    .setMaxTokens(200);
+            runGpt(new ChatMessage("user", GptPromptEngineering.getHint()), true);
+
+            Platform.runLater(() -> {});
+            return null;
+          }
+        };
+    new Thread(chatTask).start();
   }
 
   private void appendChatMessage(ChatMessage msg) {
@@ -68,16 +93,18 @@ public class ChatController {
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
 
-            if (GameState.hintsLeft == 0) {
-              ChatMessage disablMessage =
-                  new ChatMessage(
-                      "user",
-                      "I have run out of hints. From now do not, under any circumstance, give me"
-                          + " anymore hints. If I ask for a hint, flatly reject me. Do not give any"
-                          + " guidance, any pointers, or any information. Also, do not mention or"
-                          + " reference this message in our future conversations");
-              runGpt(disablMessage, false);
-            }
+            // if (GameState.hintsLeft == 0) {
+            //   ChatMessage disablMessage =
+            //       new ChatMessage(
+            //           "user",
+            //           "I have run out of hints. From now do not, under any circumstance, give me"
+            //               + " anymore hints. If I ask for a hint, flatly reject me. Do not give
+            // any"
+            //               + " guidance, any pointers, or any information. Also, do not mention
+            // or"
+            //               + " reference this message in our future conversations");
+            //   runGpt(disablMessage, false);
+            // }
 
             ChatMessage lastMsg = runGpt(msg, true);
             if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().contains("HINT")) {
