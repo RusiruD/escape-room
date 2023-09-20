@@ -56,6 +56,7 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
+    GameState.currentRoom = GameState.ROOM.CHEST;
   }
 
   public void updateInventory() {
@@ -65,5 +66,10 @@ public class PuzzleRoomController implements Controller {
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
   }
 }

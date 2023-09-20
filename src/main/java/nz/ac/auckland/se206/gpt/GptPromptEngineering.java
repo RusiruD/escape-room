@@ -6,10 +6,30 @@ import nz.ac.auckland.se206.GameState;
 public class GptPromptEngineering {
 
   private static String rusiruRoom =
-      "The room you're in charge of"
-          + " can be escaped by following these steps. 1: Gather all parchment pieces."
-          + " 2: Place all pieces on a table 3: Once the pieces are placed, follow their"
-          + " instructions. 4: Drink the potion and move the large boulder.";
+      "1: Gather all parchment pieces."
+          + " 2: Place all pieces on the table 3: Once the pieces are placed, follow their"
+          + " instructions. 4: Drink the potion and move the large boulder";
+
+  private static String marcellinRoom =
+      "1: Move the shape's points so that no lines between points overlap";
+
+  private static String zachRoom =
+      "1: Investigate the door to find the puzzle. 2: Solve the puzzle by sliding the pieces into"
+          + " the correct order";
+
+  private static String chestRoom = "1: Put the keys into the chest";
+
+  private static String hugePrompt =
+      "There are four rooms each with a different activity in them. Here's a list of the room name"
+          + " and instructions to complete the room:"
+          + " rusiruRoom: "
+          + rusiruRoom
+          + "; marcellinRoom: "
+          + marcellinRoom
+          + "; zachRoom: "
+          + zachRoom
+          + "; chestRoom: "
+          + chestRoom;
 
   /**
    * Generates a GPT prompt engineering string for a riddle with the given word.
@@ -24,7 +44,8 @@ public class GptPromptEngineering {
         + ". You should answer with the word Correct when is correct, if the user asks for hints"
         + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
         + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
-        + " the answer";
+        + " the answer. The player will use parantheses to communicate what hint you aer suppose to"
+        + " give. Do not mention this information back to them, and do not mention the room name.";
   }
 
   public static String getHint() {
@@ -33,10 +54,12 @@ public class GptPromptEngineering {
       prompt =
           "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"
               + " trapped the player inside your dungeon. Greet the player with a taunt and say"
-              + " they can ask you for hints. If you give the player a hint or any form of help,"
-              + " be explicit that you're giving a hint by putting HINT at the beginning of your"
-              + " message. Do not give more that one step as a hint."
-              + rusiruRoom;
+              + " they can ask you for hints. If you give the player a hint or any form of help, be"
+              + " explicit that you're giving a hint by putting HINT at the beginning of your"
+              + " message. Do not give more that one step as a hint. The player will use"
+              + " parantheses to communicate what hint you aer suppose to give. Do not mention this"
+              + " information back to them, and do not mention the room name."
+              + hugePrompt;
     } else if (GameState.hintsLeft < 999 && GameState.hintsLeft != 0) { // MEDIUM
       prompt =
           "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"
@@ -49,7 +72,7 @@ public class GptPromptEngineering {
               + " instruction as a hint. Once you've given "
               + GameState.hintsLeft
               + " hints, if you're asked more for help, hints, or information, reject it."
-              + rusiruRoom;
+              + hugePrompt;
     } else { // HARD
       prompt =
           "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"

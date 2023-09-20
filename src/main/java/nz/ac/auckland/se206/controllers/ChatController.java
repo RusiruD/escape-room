@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import nz.ac.auckland.se206.GameState.ROOM;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -48,8 +48,8 @@ public class ChatController {
                     .setN(1)
                     .setTemperature(0.2)
                     .setTopP(0.5)
-                    .setMaxTokens(200);
-            runGpt(new ChatMessage("user", GptPromptEngineering.getHint()), true);
+                    .setMaxTokens(500);
+            runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
 
             Platform.runLater(() -> {});
             return null;
@@ -62,15 +62,15 @@ public class ChatController {
     chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
   }
 
-  private ChatMessage runGpt(ChatMessage msg, boolean shouldAppend) throws ApiProxyException {
+  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
-      if (shouldAppend) {
-        appendChatMessage(result.getChatMessage());
-      }
+
+      appendChatMessage(result.getChatMessage());
+
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       e.printStackTrace();
@@ -86,31 +86,25 @@ public class ChatController {
           @Override
           protected Void call() throws Exception {
             String message = inputText.getText();
+            String extra = "";
+            if (GameState.currentRoom == ROOM.CHEST) {
+              extra = " (I am in chestRoom)";
+            } else if (GameState.currentRoom == ROOM.ZACH) {
+              extra = " (I am in zachRoom)";
+            } else if (GameState.currentRoom == ROOM.RUSIRU) {
+              extra = " (I am in rusiruRoom)";
+            } else {
+              extra = " (I am in marcellinRoom)";
+            }
+            message = message.concat(extra);
             if (message.trim().isEmpty()) {
               return null;
             }
             inputText.clear();
-            ChatMessage msg = new ChatMessage("user", message);
-            appendChatMessage(msg);
-
-            // if (GameState.hintsLeft == 0) {
-            //   ChatMessage disablMessage =
-            //       new ChatMessage(
-            //           "user",
-            //           "I have run out of hints. From now do not, under any circumstance, give me"
-            //               + " anymore hints. If I ask for a hint, flatly reject me. Do not give
-            // any"
-            //               + " guidance, any pointers, or any information. Also, do not mention
-            // or"
-            //               + " reference this message in our future conversations");
-            //   runGpt(disablMessage, false);
-            // }
-
-            ChatMessage lastMsg = runGpt(msg, true);
-            if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().contains("HINT")) {
-              GameState.hintsLeft++;
-              System.out.println(GameState.hintsLeft++);
-            }
+            ChatMessage actualMessage = new ChatMessage("user", message);
+            ChatMessage fakeMessage = new ChatMessage("user", message.replace(extra, ""));
+            appendChatMessage(fakeMessage);
+            ChatMessage lastMsg = runGpt(actualMessage);
             Platform.runLater(() -> {});
             return null;
           }
@@ -120,7 +114,6 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot(AppUi.CORRIDOR);
-    App.focus();
+    App.returnToCorridor();
   }
 }

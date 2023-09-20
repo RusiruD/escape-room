@@ -200,6 +200,7 @@ public class CorridorController implements Controller {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.PUZZLEROOM);
+        GameState.currentRoom = GameState.ROOM.ZACH;
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -210,6 +211,7 @@ public class CorridorController implements Controller {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+        GameState.currentRoom = GameState.ROOM.RUSIRU;
       } catch (IOException e) {
         e.printStackTrace();
       }
@@ -220,6 +222,7 @@ public class CorridorController implements Controller {
       try {
         stopMovement();
         App.setRoot(SceneManager.AppUi.UNTANGLE);
+        GameState.currentRoom = GameState.ROOM.MARCELLIN;
       } catch (IOException e) {
         e.printStackTrace();
       }

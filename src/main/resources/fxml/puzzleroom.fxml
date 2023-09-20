@@ -29,5 +29,6 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
+      <Button layoutX="49.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
    </children>
 </Pane>

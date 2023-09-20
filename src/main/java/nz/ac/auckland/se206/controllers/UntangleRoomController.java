@@ -1,5 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.DoubleProperty;
@@ -28,6 +29,7 @@ import javafx.scene.shape.StrokeType;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
 // see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
@@ -289,6 +291,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
+    GameState.currentRoom = GameState.ROOM.CHEST;
   }
 
   public void updateInventory() {
@@ -298,5 +301,10 @@ public class UntangleRoomController implements Controller {
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
   }
 }

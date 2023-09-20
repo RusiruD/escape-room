@@ -141,4 +141,9 @@ public class PuzzleController implements Controller {
   }
 
   public void updateInventory() {}
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
+  }
 }
