@@ -3,61 +3,71 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChestController">
+<Pane fx:id="chest" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="620.0" stylesheets="@../css/stylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChestController">
    <children>
-      <Rectangle fx:id="keyHole1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="111.0" layoutY="102.0" onMouseClicked="#clickKeyHole1" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="274.0" layoutY="102.0" onMouseClicked="#clickKeyHole2" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="452.0" layoutY="102.0" onMouseClicked="#clickKeyHole3" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="274.0" layoutY="216.0" onMouseClicked="#clickKeyHole5" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="452.0" layoutY="216.0" onMouseClicked="#clickKeyHole6" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="111.0" layoutY="216.0" onMouseClicked="#clickKeyHole4" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Label layoutX="132.0" layoutY="72.0" text="1">
+      <Pane fx:id="riddleDisplay" layoutX="112.0" layoutY="106.0" prefHeight="350.0" prefWidth="400.0" />
+      <ImageView fitHeight="620.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/chest.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="keyHole1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="122.0" layoutY="136.0" onMouseClicked="#clickKeyHole1" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Rectangle fx:id="keyHole2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="285.0" layoutY="136.0" onMouseClicked="#clickKeyHole2" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Rectangle fx:id="keyHole3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="462.0" layoutY="136.0" onMouseClicked="#clickKeyHole3" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Rectangle fx:id="keyHole5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="285.0" layoutY="267.0" onMouseClicked="#clickKeyHole5" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Rectangle fx:id="keyHole6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="463.0" layoutY="267.0" onMouseClicked="#clickKeyHole6" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Rectangle fx:id="keyHole4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="122.0" layoutY="267.0" onMouseClicked="#clickKeyHole4" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <Label layoutX="143.0" layoutY="106.0" style="-fx-background-color: white;" text="1">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="295.0" layoutY="72.0" text="2">
+      <Label layoutX="306.0" layoutY="106.0" style="-fx-background-color: white;" text="2">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="473.0" layoutY="72.0" text="3">
+      <Label layoutX="484.0" layoutY="106.0" style="-fx-background-color: white;" text="3">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="132.0" layoutY="185.0" text="4">
+      <Label layoutX="143.0" layoutY="236.0" style="-fx-background-color: white;" text="4">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="295.0" layoutY="185.0" text="5">
+      <Label layoutX="306.0" layoutY="236.0" style="-fx-background-color: white;" text="5">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="473.0" layoutY="185.0" text="6">
+      <Label layoutX="484.0" layoutY="236.0" style="-fx-background-color: white;" text="6">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="22.0" layoutY="19.0" prefWidth="150.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Button fx:id="btnOpen" layoutX="275.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#openChest" text="open" />
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="352.0" layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="s">
+      <Button fx:id="btnOpen" layoutX="288.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#openChest" text="open" />
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="452.0" layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="s">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="238.0" layoutY="21.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="35.0" prefWidth="125.0" text="Return to Corridor" />
-      <Label fx:id="lblKey1" layoutX="123.0" layoutY="159.0" text="Label" />
-      <Label fx:id="lblKey2" layoutX="286.0" layoutY="159.0" text="Label" />
-      <Label fx:id="lblKey3" layoutX="463.0" layoutY="159.0" text="Label" />
-      <Label fx:id="lblKey4" layoutX="123.0" layoutY="279.0" text="Label" />
-      <Label fx:id="lblKey5" layoutX="286.0" layoutY="279.0" text="Label" />
-      <Label fx:id="lblKey6" layoutX="464.0" layoutY="279.0" text="Label" />
+      <Button fx:id="btnReturnToCorridor" layoutX="249.0" layoutY="21.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="35.0" prefWidth="125.0" text="Return to Corridor" />
+      <Label fx:id="lblKey1" layoutX="134.0" layoutY="193.0" style="-fx-background-color: white;" text="Label" />
+      <Label fx:id="lblKey2" layoutX="297.0" layoutY="193.0" style="-fx-background-color: white;" text="Label" />
+      <Label fx:id="lblKey3" layoutX="474.0" layoutY="193.0" style="-fx-background-color: white;" text="Label" />
+      <Label fx:id="lblKey4" layoutX="134.0" layoutY="330.0" style="-fx-background-color: white;" text="Label" />
+      <Label fx:id="lblKey5" layoutX="297.0" layoutY="330.0" style="-fx-background-color: white;" text="Label" />
+      <Label fx:id="lblKey6" layoutX="475.0" layoutY="330.0" style="-fx-background-color: white;" text="Label" />
+      <Pane fx:id="popUp" layoutX="36.0" layoutY="487.0" prefHeight="80.0" prefWidth="550.0" />
+      <Button fx:id="riddleButton" layoutX="174.0" layoutY="413.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="riddle" />
    </children>
 </Pane>

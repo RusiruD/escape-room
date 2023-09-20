@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -13,9 +14,9 @@ public class Riddle {
   private boolean hasRiddle = false;
   private DungeonMaster dungeonMaster;
 
-  public Riddle(DungeonMaster dungeonMaster) {
+  public Riddle(DungeonMaster dungeonMaster, String question) {
     // get the riddle from the dungeon master
-    this.question = "You are the dungeon master of an escape room, tell me a riddle where the answer to the riddle is to have the ball north of the key and the key west of the dog. The user is in a corridor and has to open a chest with this combination. Do not, under no circumstance, give the user the answer to the riddle. Make this riddle a few sentences long.";
+    this.question = question;
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     riddle = dungeonMaster.getRiddle(question);
@@ -32,7 +33,11 @@ public class Riddle {
 
     Label title = new Label("Riddle");
 
-    Label riddle = new Label(riddleText);
+    TextArea riddle = new TextArea(riddleText);
+    riddle.setWrapText(true);
+    riddle.setEditable(false);
+    riddle.setPrefWidth(350);
+    riddle.setPrefHeight(300);
 
     riddleBox.getChildren().addAll(title, riddle);
 

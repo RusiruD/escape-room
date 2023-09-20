@@ -11,7 +11,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="679.0" prefWidth="648.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <ImageView fitHeight="679.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
@@ -31,8 +30,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-
-      <Button fx:id="riddleButton" layoutX="530.0" layoutY="71.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
       <Pane fx:id="popUp" layoutX="25.0" layoutY="366.0" prefHeight="80.0" prefWidth="550.0" />
 
       <Group layoutX="401.0" layoutY="529.0">
