@@ -5,9 +5,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.util.TypeKey;
-
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,44 +38,27 @@ public class ChestController implements Controller {
 
   private int correctKeys = 0;
 
-  @FXML
-  private ComboBox<String> inventoryChoiceBox;
+  @FXML private ComboBox<String> inventoryChoiceBox;
 
-  @FXML
-  private Label lblTime;
+  @FXML private Label lblTime;
 
-  @FXML
-  private Rectangle keyHole1;
-  @FXML
-  private Rectangle keyHole2;
-  @FXML
-  private Rectangle keyHole3;
-  @FXML
-  private Rectangle keyHole4;
-  @FXML
-  private Rectangle keyHole5;
-  @FXML
-  private Rectangle keyHole6;
+  @FXML private Rectangle keyHole1;
+  @FXML private Rectangle keyHole2;
+  @FXML private Rectangle keyHole3;
+  @FXML private Rectangle keyHole4;
+  @FXML private Rectangle keyHole5;
+  @FXML private Rectangle keyHole6;
 
-  @FXML
-  private Label lblKey1;
-  @FXML
-  private Label lblKey2;
-  @FXML
-  private Label lblKey3;
-  @FXML
-  private Label lblKey4;
-  @FXML
-  private Label lblKey5;
-  @FXML
-  private Label lblKey6;
+  @FXML private Label lblKey1;
+  @FXML private Label lblKey2;
+  @FXML private Label lblKey3;
+  @FXML private Label lblKey4;
+  @FXML private Label lblKey5;
+  @FXML private Label lblKey6;
 
-  @FXML
-  private Pane chest;
-  @FXML
-  private Pane popUp;
-  @FXML
-  private Pane riddleDisplay;
+  @FXML private Pane chest;
+  @FXML private Pane popUp;
+  @FXML private Pane riddleDisplay;
 
   private final String DEFAULT_COLOUR = "#1e90ff";
   private final String CORRECT_COLOUR = "#a8e6cf";
@@ -118,25 +98,36 @@ public class ChestController implements Controller {
       correctKeyMap.put("hole" + (i + 1), "empty");
     }
 
-    String question = "You are the dungeon master of an escape room. Tell me a riddle where the first solution is "
-        + solutions[0] + ", the second solution is " + solutions[1] + ", and the third solution is " + solutions[2]
-        + ". Hide the answers within the riddle but do not use the numbers within the riddle instead use synonyms. Do not, under no circumstance, give the user the answer to the riddles. After every sentence do a line break. Make the riddle a few sentences long. Do not go over 150 words.";
+    String question =
+        "You are the dungeon master of an escape room. Tell me a riddle where the first solution is"
+            + " "
+            + solutions[0]
+            + ", the second solution is "
+            + solutions[1]
+            + ", and the third solution is "
+            + solutions[2]
+            + ". Hide the answers within the riddle but do not use the numbers within the riddle"
+            + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
+            + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
+            + " long. Do not go over 150 words.";
     System.out.println(question);
 
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task = new Task<Void>() {
-      @Override
-      public Void call() throws Exception {
-        riddle = new Riddle(dungeonMaster, question);
-        return null;
-      }
-    };
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          public Void call() throws Exception {
+            riddle = new Riddle(dungeonMaster, question);
+            return null;
+          }
+        };
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
-    task.setOnSucceeded(event -> {
-      GameState.riddle = riddle;
-    });
+    task.setOnSucceeded(
+        event -> {
+          GameState.riddle = riddle;
+        });
   }
 
   public void openChest(MouseEvent event) {
@@ -299,25 +290,31 @@ public class ChestController implements Controller {
       popUp.getChildren().add(dialogue);
       dialogue.getStyleClass().add("popUp");
       // buttons in the dialogue
-      Rectangle exitButton = (Rectangle) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(2);
-      Text dialogueText = (Text) ((VBox) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(0)).getChildren().get(1);
-      ImageView nextButton = (ImageView) ((StackPane) dialogue.getChildren()
-          .get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(event1 -> {
-        popUp.visibleProperty().set(false);
-      });
-      dialogueText.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
-      nextButton.setOnMouseClicked(event1 -> {
-        if (!dungeonMaster.isSpeaking()) {
-          dungeonMaster.update();
-        }
-      });
+      Rectangle exitButton =
+          (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+      Text dialogueText =
+          (Text)
+              ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+                  .getChildren()
+                  .get(1);
+      ImageView nextButton =
+          (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+      exitButton.setOnMouseClicked(
+          event1 -> {
+            popUp.visibleProperty().set(false);
+          });
+      dialogueText.setOnMouseClicked(
+          event1 -> {
+            if (!dungeonMaster.isSpeaking()) {
+              dungeonMaster.update();
+            }
+          });
+      nextButton.setOnMouseClicked(
+          event1 -> {
+            if (!dungeonMaster.isSpeaking()) {
+              dungeonMaster.update();
+            }
+          });
       riddleCalled = true;
     }
   }

@@ -33,9 +33,8 @@ public class DungeonMaster {
   private String[] messages;
   private int messageIndex = 0;
 
-  private ChatCompletionRequest chatCompletionRequest = new ChatCompletionRequest()
-      .setN(1).setTemperature(0.2)
-      .setTopP(0.5).setMaxTokens(150);
+  private ChatCompletionRequest chatCompletionRequest =
+      new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(150);
 
   public Pane getPopUp() {
     popUp = new HBox();
@@ -80,9 +79,10 @@ public class DungeonMaster {
     quitButton.setWidth(20);
     quitButton.setHeight(20);
     quitButton.setStyle("-fx-fill: #f38ba8");
-    quitButton.setOnMouseClicked(e -> {
-      popUp.visibleProperty().set(false);
-    });
+    quitButton.setOnMouseClicked(
+        e -> {
+          popUp.visibleProperty().set(false);
+        });
 
     StackPane dialogueContainer = new StackPane();
     dialogueContainer.getChildren().addAll(dialogueBox, nextButton, quitButton);
@@ -98,21 +98,23 @@ public class DungeonMaster {
     // speak first message
     isSpeaking = true;
     TextToSpeech tts = new TextToSpeech();
-    Task<Void> speakTask = new Task<Void>() {
-      @Override
-      protected Void call() {
-        tts.speak(messages[0]);
-        return null;
-      }
-    };
+    Task<Void> speakTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() {
+            tts.speak(messages[0]);
+            return null;
+          }
+        };
 
-    speakTask.setOnSucceeded(e -> {
-      System.out.println("speak task succeeded");
-      isSpeaking = false;
-      if (messages.length > 1) {
-        nextButton.visibleProperty().set(true);
-      }
-    });
+    speakTask.setOnSucceeded(
+        e -> {
+          System.out.println("speak task succeeded");
+          isSpeaking = false;
+          if (messages.length > 1) {
+            nextButton.visibleProperty().set(true);
+          }
+        });
 
     Thread thread = new Thread(speakTask);
     thread.setDaemon(true);
@@ -121,38 +123,46 @@ public class DungeonMaster {
     return popUp;
   }
 
+  // returns a pane with the text
   public Pane getText(String role, String message) {
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;
+    // create a chat message
     ChatMessage chatMessage = new ChatMessage(role, message);
     chatCompletionRequest.addMessage(chatMessage);
-    Task<Void> gptTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        try {
-          ChatCompletionResult chatCompetionResult = chatCompletionRequest.execute();
-          Choice result = chatCompetionResult.getChoices().iterator().next();
-          chatCompletionRequest.addMessage(result.getChatMessage());
-          appendChatMessage(result.getChatMessage());
-          return null;
-        } catch (ApiProxyException e) {
-          e.printStackTrace();
-          return null;
-        }
-      }
-    };
+    // create a task to get the response
+    Task<Void> gptTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            try {
+              // get the response
+              ChatCompletionResult chatCompetionResult = chatCompletionRequest.execute();
+              Choice result = chatCompetionResult.getChoices().iterator().next();
+              chatCompletionRequest.addMessage(result.getChatMessage());
+              appendChatMessage(result.getChatMessage());
+              return null;
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+              return null;
+            }
+          }
+        };
 
-    gptTask.setOnSucceeded(e -> {
-      System.out.println("gpt task succeeded");
-      taskDone = true;
-    });
-    gptTask.setOnFailed(e -> {
-      System.out.println("gpt task failed");
-    });
-    gptTask.setOnCancelled(e -> {
-      System.out.println("gpt task cancelled");
-    });
+    gptTask.setOnSucceeded(
+        e -> {
+          System.out.println("gpt task succeeded");
+          taskDone = true;
+        });
+    gptTask.setOnFailed(
+        e -> {
+          System.out.println("gpt task failed");
+        });
+    gptTask.setOnCancelled(
+        e -> {
+          System.out.println("gpt task cancelled");
+        });
 
     System.out.print(messages);
     Thread thread = new Thread(gptTask);
@@ -163,17 +173,18 @@ public class DungeonMaster {
     ExecutorService executor = Executors.newSingleThreadExecutor();
     CountDownLatch latch = new CountDownLatch(1);
     // create executor service to wait until task is done
-    executor.submit(() -> {
-      try {
-        while (!taskDone) {
-          System.out.println("waiting");
-          Thread.sleep(100);
-        }
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      latch.countDown();
-    });
+    executor.submit(
+        () -> {
+          try {
+            while (!taskDone) {
+              System.out.println("waiting");
+              Thread.sleep(100);
+            }
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          latch.countDown();
+        });
 
     try {
       latch.await();
@@ -185,40 +196,51 @@ public class DungeonMaster {
     return getPopUp();
   }
 
+  // returns a pane with the text
   public String getRiddle(String message) {
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;
+    // create a chat message
     ChatMessage chatMessage = new ChatMessage("user", message);
     chatCompletionRequest.addMessage(chatMessage);
-    Task<Void> gptTask = new Task<Void>() {
-      @Override
-      protected Void call() throws Exception {
-        try {
-          ChatCompletionResult chatCompetionResult = chatCompletionRequest.execute();
-          Choice result = chatCompetionResult.getChoices().iterator().next();
-          chatCompletionRequest.addMessage(result.getChatMessage());
-          appendChatMessage(result.getChatMessage());
-          return null;
-        } catch (ApiProxyException e) {
-          e.printStackTrace();
-          return null;
-        }
-      }
-    };
+    // create a task to get the response
+    Task<Void> gptTask =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            // get the response
+            try {
+              // get the response
+              ChatCompletionResult chatCompetionResult = chatCompletionRequest.execute();
+              Choice result = chatCompetionResult.getChoices().iterator().next();
+              // if the response is not a riddle, get another response
+              chatCompletionRequest.addMessage(result.getChatMessage());
+              // if the response is not a riddle, get another response
+              appendChatMessage(result.getChatMessage());
+              return null;
+            } catch (ApiProxyException e) {
+              e.printStackTrace();
+              return null;
+            }
+          }
+        };
 
-    gptTask.setOnSucceeded(e -> {
-      System.out.println("gpt task succeeded");
-      System.out.println(messages);
-      taskDone = true;
-      riddleDone = true;
-    });
-    gptTask.setOnFailed(e -> {
-      System.out.println("gpt task failed");
-    });
-    gptTask.setOnCancelled(e -> {
-      System.out.println("gpt task cancelled");
-    });
+    gptTask.setOnSucceeded(
+        e -> {
+          System.out.println("gpt task succeeded");
+          System.out.println(messages);
+          taskDone = true;
+          riddleDone = true;
+        });
+    gptTask.setOnFailed(
+        e -> {
+          System.out.println("gpt task failed");
+        });
+    gptTask.setOnCancelled(
+        e -> {
+          System.out.println("gpt task cancelled");
+        });
 
     System.out.print(messages);
     Thread thread = new Thread(gptTask);
@@ -229,17 +251,18 @@ public class DungeonMaster {
     ExecutorService executor = Executors.newSingleThreadExecutor();
     CountDownLatch latch = new CountDownLatch(1);
     // create executor service to wait until task is done
-    executor.submit(() -> {
-      try {
-        while (!taskDone) {
-          System.out.println("waiting");
-          Thread.sleep(100);
-        }
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-      latch.countDown();
-    });
+    executor.submit(
+        () -> {
+          try {
+            while (!taskDone) {
+              System.out.println("waiting");
+              Thread.sleep(100);
+            }
+          } catch (InterruptedException e) {
+            e.printStackTrace();
+          }
+          latch.countDown();
+        });
 
     try {
       latch.await();
@@ -264,10 +287,13 @@ public class DungeonMaster {
 
   public void nextMessage() {
     // popup -> dialog container -> dialog box -> text
-    Text dialogue = (Text) ((VBox) ((StackPane) popUp.getChildren().get(1))
-        .getChildren().get(0)).getChildren().get(1);
-    ImageView nextButton = (ImageView) ((StackPane) popUp.getChildren().get(1))
-        .getChildren().get(1);
+    Text dialogue =
+        (Text)
+            ((VBox) ((StackPane) popUp.getChildren().get(1)).getChildren().get(0))
+                .getChildren()
+                .get(1);
+    ImageView nextButton =
+        (ImageView) ((StackPane) popUp.getChildren().get(1)).getChildren().get(1);
     TextToSpeech tts = new TextToSpeech();
     System.out.println("mss " + messages.length + " " + messageIndex);
     messageIndex++;
@@ -276,20 +302,22 @@ public class DungeonMaster {
       System.out.println("next message: " + messages[messageIndex]);
       nextButton.visibleProperty().set(false);
       dialogue.setText(messages[messageIndex]);
-      Task<Void> speakTask = new Task<Void>() {
-        @Override
-        protected Void call() {
-          tts.speak(messages[messageIndex]);
-          return null;
-        }
-      };
+      Task<Void> speakTask =
+          new Task<Void>() {
+            @Override
+            protected Void call() {
+              tts.speak(messages[messageIndex]);
+              return null;
+            }
+          };
 
-      speakTask.setOnSucceeded(e -> {
-        System.out.println("speak task succeeded");
-        taskDone = true;
-        isSpeaking = false;
-        nextButton.visibleProperty().set(true);
-      });
+      speakTask.setOnSucceeded(
+          e -> {
+            System.out.println("speak task succeeded");
+            taskDone = true;
+            isSpeaking = false;
+            nextButton.visibleProperty().set(true);
+          });
 
       Thread thread = new Thread(speakTask);
       thread.setDaemon(true);
@@ -299,17 +327,18 @@ public class DungeonMaster {
       ExecutorService executor = Executors.newSingleThreadExecutor();
       CountDownLatch latch = new CountDownLatch(1);
       // create executor service to wait until task is done
-      executor.submit(() -> {
-        try {
-          while (!taskDone) {
-            System.out.println("waiting");
-            Thread.sleep(250);
-          }
-        } catch (InterruptedException e) {
-          e.printStackTrace();
-        }
-        latch.countDown();
-      });
+      executor.submit(
+          () -> {
+            try {
+              while (!taskDone) {
+                System.out.println("waiting");
+                Thread.sleep(250);
+              }
+            } catch (InterruptedException e) {
+              e.printStackTrace();
+            }
+            latch.countDown();
+          });
 
       try {
         latch.await();
@@ -318,9 +347,10 @@ public class DungeonMaster {
       }
       executor.shutdown();
     } else {
-      popUp.setOnMouseClicked(e -> {
-        popUp.visibleProperty().set(false);
-      });
+      popUp.setOnMouseClicked(
+          e -> {
+            popUp.visibleProperty().set(false);
+          });
     }
   }
 

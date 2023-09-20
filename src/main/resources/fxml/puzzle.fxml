@@ -7,54 +7,54 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="620.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleController">
    <children>
       <ImageView fitHeight="620.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/out-0.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="one" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="49.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="one" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="52.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="two" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="50.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="two" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="54.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="50.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="53.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="four" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="165.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="four" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="175.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="five" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="165.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="five" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="174.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="six" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="165.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="six" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="172.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N6.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="zero" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="281.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="zero" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="293.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N0.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="eight" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="281.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="eight" fitHeight="106.0" fitWidth="121.0" layoutX="250.0" layoutY="295.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N8.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="nine" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="281.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="nine" fitHeight="106.0" fitWidth="121.0" layoutX="381.0" layoutY="299.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N9.png" />
          </image>
@@ -64,10 +64,11 @@
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="461.0" layoutY="14.0" prefHeight="25.0" prefWidth="125.0" text="s">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="248.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="24.0" />
+            <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
+      <Button layoutX="27.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
    </children>
 </Pane>

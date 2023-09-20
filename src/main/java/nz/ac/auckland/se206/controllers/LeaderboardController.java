@@ -20,63 +20,29 @@ import nz.ac.auckland.se206.ScoreEntry;
 
 public class LeaderboardController {
 
-  @FXML
-  private StackPane graph;
-  @FXML
-  private ScrollPane scrollPane;
-  @FXML
-  private Label curretProfile;
-  @FXML
-  private Label label1;
-  @FXML
-  private Label label2;
-  @FXML
-  private Label label3;
-  @FXML
-  private VBox leaderboard;
-  @FXML
-  private VBox leaderboardContainer;
+  @FXML private StackPane graph;
+  @FXML private ScrollPane scrollPane;
+  @FXML private Label curretProfile;
+  @FXML private Label label1;
+  @FXML private Label label2;
+  @FXML private Label label3;
+  @FXML private VBox leaderboard;
+  @FXML private VBox leaderboardContainer;
 
   private ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 
   private int scaleFactor = 200;
 
+  // add a new score to the leaderboard
   public void initialize() {
-    scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] { 0, 0, 0, 0, 0, 0 }));
-    scores.add(new ScoreEntry("John Doe2", 0, 10, new double[] { 0, 0, 0, 0, 0, 0 }));
-    scores.add(new ScoreEntry("John Doe3", 0, 20, new double[] { 0, 0, 0, 0, 0, 0 }));
-    scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] { 0, 0, 0, 0, 0, 0 }));
-    scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] { 0, 0, 0, 0, 0, 0 }));
-    scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] { 0, 0, 0, 0, 0, 0 }));
-    // scores.add(new ScoreEntry("John Doe7", 0, 60, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe8", 0, 70, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4,
-    // 0.2, 0.4, 0.3}));
-
-    // scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe2", 0, 10, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe3", 0, 20, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe7", 0, 60, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe8", 0, 70, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe9", 0, 80, new double[] {0, 0, 0, 0, 0,
-    // 0}));
-    // scores.add(new ScoreEntry("John Doe10", 0, 90, new double[] {0.6, 0.5, 0.4,
-    // 0.2, 0.4, 0.3}));
+    // add some scores to the leaderboard
+    scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe2", 0, 10, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe3", 0, 20, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe4", 0, 30, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe5", 0, 40, new double[] {0, 0, 0, 0, 0, 0}));
+    scores.add(new ScoreEntry("John Doe6", 0, 50, new double[] {0, 0, 0, 0, 0, 0}));
+    // sort the scores
     sortScores();
   }
 
@@ -96,7 +62,8 @@ public class LeaderboardController {
 
     entry.setStyle("-fx-background-color: " + hexcode + "; -fx-padding: 15;");
     if (isFinal) {
-      entry.setStyle("-fx-background-color: linear-gradient(to top, #3a404d, #181c26); -fx-padding: 15;");
+      entry.setStyle(
+          "-fx-background-color: linear-gradient(to top, #3a404d, #181c26); -fx-padding: 15;");
     }
     entry.setAlignment(Pos.CENTER);
 
@@ -173,11 +140,11 @@ public class LeaderboardController {
   }
 
   private void createGraph(ScoreEntry scoreEntry) {
-    double[] max = { 1, 1, 1, 1, 1, 1 };
-    double[] point8 = { 0.8, 0.8, 0.8, 0.8, 0.8, 0.8 };
-    double[] point6 = { 0.6, 0.6, 0.6, 0.6, 0.6, 0.6 };
-    double[] point4 = { 0.4, 0.4, 0.4, 0.4, 0.4, 0.4 };
-    double[] point2 = { 0.2, 0.2, 0.2, 0.2, 0.2, 0.2 };
+    double[] max = {1, 1, 1, 1, 1, 1};
+    double[] point8 = {0.8, 0.8, 0.8, 0.8, 0.8, 0.8};
+    double[] point6 = {0.6, 0.6, 0.6, 0.6, 0.6, 0.6};
+    double[] point4 = {0.4, 0.4, 0.4, 0.4, 0.4, 0.4};
+    double[] point2 = {0.2, 0.2, 0.2, 0.2, 0.2, 0.2};
     Polygon graphMax = createGraphHelper(max);
     graphMax.setFill(Color.BEIGE.deriveColor(0, 1.2, 1, 0.6));
 
@@ -200,8 +167,9 @@ public class LeaderboardController {
     }
 
     // to change - get array of string of labels then append to group
-    String[] statStrings = { "lorem ipsum", "lorem ipsum", "lorem ipsum",
-        "lorem ipsum", "lorem ipsum", "lorem ipsum" };
+    String[] statStrings = {
+      "lorem ipsum", "lorem ipsum", "lorem ipsum", "lorem ipsum", "lorem ipsum", "lorem ipsum"
+    };
     Group labels = new Group();
     for (int i = 0; i < max.length; i++) {
       double angle = 2 * Math.PI * i / max.length;
@@ -222,28 +190,41 @@ public class LeaderboardController {
     setGraph(scoreEntry);
   }
 
+  // create a graph from an array of doubles
   private Polygon createGraphHelper(double[] data) {
+    // create a polygon
     Polygon polygon = new Polygon();
+    // add points to the polygon
     for (int i = 0; i < data.length; i++) {
+      // calculate the angle and radius of the point
       double angle = 2 * Math.PI * i / data.length;
+      // scale the radius
       double radius = data[i] * scaleFactor;
+      // calculate the point
       Point2D point = new Point2D(Math.cos(angle) * radius, Math.sin(angle) * radius);
+      // add the point to the polygon
       polygon.getPoints().addAll(point.getX(), point.getY());
+      // set the style of the polygon
       polygon.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 0.6));
+      // set the fill of the polygon
       polygon.setFill(Color.TRANSPARENT);
     }
     return polygon;
   }
 
+  // set the graph to the most recent score
   private void setGraph(ScoreEntry scoreEntry) {
+    // remove the old graph
     if (graph.getChildren().size() > 7) {
       System.out.println("Removed: " + graph.getChildren().get(7));
       graph.getChildren().remove(7);
     }
+    // add the new graph
     double[] data = scoreEntry.getStatPoints();
     Polygon graphData = createGraphHelper(data);
     graphData.setFill(Color.CORNSILK.deriveColor(0, 1.2, 1, 0.8));
     graphData.setStroke(Color.BLACK.deriveColor(0, 1.2, 1, 1));
+    // add the new graph to the graph
     graph.getChildren().add(graphData);
   }
 
@@ -264,29 +245,50 @@ public class LeaderboardController {
   // }
   // }
 
+  // depending on integer input, return a colour for the leaderboard
   private String getColour(int i) {
     switch (i % 10) {
       case 0:
+        // red
         return "#fa6855";
+
       case 1:
+        // orange
         return "#ed5f52";
+
       case 2:
+        // yellow
         return "#e0574f";
+
       case 3:
+        // green
         return "#db544e";
       case 4:
+        // blue
         return "#d7514d";
+
       case 5:
+        // purple
         return "#d24e4c";
+
       case 6:
+        // pink
         return "#cd4b4b";
+
       case 7:
+        // brown
         return "#c74749";
+
       case 8:
+        // grey
         return "#c24448";
+
       case 9:
+        // black
         return "#b53f43";
+
       default:
+        // white
         return "#ffffff";
     }
   }

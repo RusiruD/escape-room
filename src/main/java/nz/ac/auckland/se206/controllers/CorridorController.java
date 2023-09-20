@@ -14,14 +14,14 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
-
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
-import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.CustomNotifications;
+import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
 
@@ -38,115 +38,111 @@ public class CorridorController implements Controller {
   private BooleanProperty rightPressed = new SimpleBooleanProperty();
 
   // A binding to check if any movement key is pressed
-  private BooleanBinding keyPressed = forwardPressed.or(leftPressed)
-      .or(backwardPressed).or(rightPressed);
+  private BooleanBinding keyPressed =
+      forwardPressed.or(leftPressed).or(backwardPressed).or(rightPressed);
 
   private int movementSpeed = 2;
 
   // JavaFX UI elements
 
-  @FXML
-  private Polygon polygon;
-  @FXML
-  private Group group;
-  @FXML
-  private Rectangle player;
-  @FXML
-  private Rectangle treasureChest;
-  @FXML
-  private Rectangle door1;
-  @FXML
-  private Rectangle door2;
-  @FXML
-  private Rectangle border1;
-  @FXML
+  @FXML private ImageView backgroundImage;
+  @FXML private Polygon polygon;
+  @FXML private Group group;
+  @FXML private Rectangle player;
+  @FXML private Rectangle treasureChest;
+  @FXML private Rectangle door1;
+  @FXML private Rectangle door2;
+  @FXML private Rectangle border1;
+  @FXML private Rectangle door3;
+  @FXML private ImageView swordandshield;
 
-  private Rectangle door3;
-  @FXML
-  private ImageView swordandshield;
-
-  @FXML
-  private Pane room;
-
-  @FXML
-  private Label lblTime;
-  @FXML
-  private ComboBox<String> inventoryChoiceBox;
+  @FXML private Pane room;
+  @FXML private Pane popUp;
+  @FXML private Pane riddleDisplay;
+  @FXML private Label lblTime;
+  @FXML private ComboBox<String> inventoryChoiceBox;
 
   // Animation timer for player movement
 
-  private AnimationTimer playerTimer = new AnimationTimer() {
-    @Override
-    public void handle(long timestamp) {
-      // Handle player movement
-      if (forwardPressed.get()) {
-        player.rotateProperty().set(0);
-        if (playerStaysInRoom(polygon, player, "W")) {
-          player.setY(player.getY() - movementSpeed);
+  private AnimationTimer playerTimer =
+      new AnimationTimer() {
+        @Override
+        public void handle(long timestamp) {
+          // Handle player movement
+          if (forwardPressed.get()) {
+            player.rotateProperty().set(0);
+            if (playerStaysInRoom(polygon, player, "W")) {
+              player.setY(player.getY() - movementSpeed);
+            }
+          }
+          // Handle left movement
+          if (leftPressed.get()) {
+            player.rotateProperty().set(-90);
+            if (playerStaysInRoom(polygon, player, "A")) {
+              player.setX(player.getX() - movementSpeed);
+            }
+          }
+          // Handle backward movement
+          if (backwardPressed.get()) {
+            player.rotateProperty().set(180);
+            if (playerStaysInRoom(polygon, player, "S")) {
+              player.setY(player.getY() + movementSpeed);
+            }
+          }
+          // Handle right movement
+          if (rightPressed.get()) {
+            player.rotateProperty().set(90);
+            if (playerStaysInRoom(polygon, player, "D")) {
+              player.setX(player.getX() + movementSpeed);
+            }
+          }
         }
-      }
-      // Handle left movement
-      if (leftPressed.get()) {
-        player.rotateProperty().set(-90);
-        if (playerStaysInRoom(polygon, player, "A")) {
-          player.setX(player.getX() - movementSpeed);
-        }
-      }
-      // Handle backward movement
-      if (backwardPressed.get()) {
-        player.rotateProperty().set(180);
-        if (playerStaysInRoom(polygon, player, "S")) {
-          player.setY(player.getY() + movementSpeed);
-        }
-      }
-      // Handle right movement
-      if (rightPressed.get()) {
-        player.rotateProperty().set(90);
-        if (playerStaysInRoom(polygon, player, "D")) {
-          player.setX(player.getX() + movementSpeed);
-        }
-      }
-    }
-  };
+      };
 
   // Animation timer for collision detection
-  private AnimationTimer collisionTimer = new AnimationTimer() {
-    @Override
-    public void handle(long timestamp) {
-      // Check for collisions with doors and handle navigation
-      checkCollision();
-    }
-  };
+  private AnimationTimer collisionTimer =
+      new AnimationTimer() {
+        @Override
+        public void handle(long timestamp) {
+          // Check for collisions with doors and handle navigation
+          checkCollision();
+        }
+      };
 
   @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
+    CustomNotifications.generateNotification(
+        "You've become stronger!", "Now you can fight the dungeon master!");
     Inventory.addToInventory("sword/shield");
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
 
     // Then, set the ImageView as the fill for your shape:
-    Image image2 = new Image("/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
+    Image image2 =
+        new Image(
+            "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
-
   }
 
   public void initialize() {
+
     instance = this;
     Image image = new Image("/images/character.png");
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
-    keyPressed.addListener((observable, boolValue, randomVar) -> {
-      if (!boolValue) {
-        // Start the player movement and collision detection timers
-        playerTimer.start();
-        collisionTimer.start();
-      } else {
-        // Stop the timers when no movement keys are pressed
-        playerTimer.stop();
-        collisionTimer.stop();
-      }
-    });
+    keyPressed.addListener(
+        (observable, boolValue, randomVar) -> {
+          if (!boolValue) {
+            // Start the player movement and collision detection timers
+            playerTimer.start();
+            collisionTimer.start();
+          } else {
+            // Stop the timers when no movement keys are pressed
+            playerTimer.stop();
+            collisionTimer.stop();
+          }
+        });
   }
 
   // Method to check if the player stays in the room while moving
@@ -176,32 +172,24 @@ public class CorridorController implements Controller {
   private void checkCollision() {
     // Check collision with door1 and navigate to a new room if needed
     if (player.intersects(door1.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.PUZZLEROOM);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+
+      stopMovement();
+      App.goToDoor1();
+      GameState.currentRoom = GameState.ROOM_STATE.RUSIRU;
     }
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      stopMovement();
+      App.goToDoor2();
+      GameState.currentRoom = GameState.ROOM_STATE.MARCELLIN;
     }
 
     // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.UNTANGLE);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      stopMovement();
+      GameState.currentRoom = GameState.ROOM_STATE.ZACH;
+      App.goToDoor3();
     }
   }
 
@@ -261,28 +249,35 @@ public class CorridorController implements Controller {
     System.out.println("clicked");
     App.setRoot(SceneManager.AppUi.CHEST);
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-    if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
+
+    if (GameState.isLock2Unlocked == true
+        && GameState.isLock1Unlocked == true
+        && GameState.isLock3Unlocked == true
+        && swordandshield.visibleProperty().get() == false
+        && !Inventory.contains("sword/shield")) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
 
     } else {
       if (selectedItem != null) {
+        // Check if the player has the key
         if (selectedItem.equals("key1")) {
           GameState.isLock1Unlocked = true;
           Inventory.removeFromInventory("key1");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
+        // Check if the player has the key
         if (selectedItem.equals("key2")) {
           GameState.isLock2Unlocked = true;
           Inventory.removeFromInventory("key2");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
+        // Check if the player has the key
         if (selectedItem.equals("key3")) {
           GameState.isLock3Unlocked = true;
           Inventory.removeFromInventory("key3");
           inventoryChoiceBox.getSelectionModel().clearSelection();
         }
-
       }
     }
   }
@@ -302,5 +297,22 @@ public class CorridorController implements Controller {
   public void updateTimerLabel(String time) {
     // Update the timer label in the UI
     lblTime.setText(time);
+  }
+
+  @FXML
+  public double getCorridorWidth() {
+
+    return room.getPrefWidth();
+  }
+
+  @FXML
+  public double getCorridorHeight() {
+
+    return room.getPrefHeight();
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
   }
 }
