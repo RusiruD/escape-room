@@ -105,6 +105,7 @@ private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
   }
 }
 
+
 /**
 * Handle the action of sending a message in the chat interface.
 * This method processes user input, appends it to the chat, and sends it to GPT-3.
@@ -125,13 +126,13 @@ private void onSendMessage(ActionEvent event) throws ApiProxyException, IOExcept
 
           // Add context information based on the current room
           if (GameState.currentRoom == ROOMSTATE.CHEST) {
-              extra = " (I am in chestRoom)";
+              extra = " (chestRoom)";
           } else if (GameState.currentRoom == ROOMSTATE.ZACH) {
-              extra = " (I am in zachRoom)";
+              extra = " (zachRoom)";
           } else if (GameState.currentRoom == ROOMSTATE.RUSIRU) {
-              extra = " (I am in rusiruRoom)";
+              extra = " (rusiruRoom)";
           } else {
-              extra = " (I am in marcellinRoom)";
+              extra = " (marcellinRoom)";
           }
 
           // Modify the message to include the context
