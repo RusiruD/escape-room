@@ -42,7 +42,7 @@ public class GptPromptEngineering {
   }
 
   public static String getHint() {
-    String prompt = "";
+    String prompt ;
     if (GameState.hintsLeft == 999) { // EASY
       prompt =
           "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"

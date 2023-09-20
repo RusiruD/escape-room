@@ -175,20 +175,20 @@ public class CorridorController implements Controller {
 
       stopMovement();
       App.goToDoor1();
-      GameState.currentRoom = GameState.ROOM_STATE.RUSIRU;
+      GameState.currentRoom = GameState.ROOMSTATE.RUSIRU;
     }
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
       stopMovement();
       App.goToDoor2();
-      GameState.currentRoom = GameState.ROOM_STATE.MARCELLIN;
+      GameState.currentRoom = GameState.ROOMSTATE.MARCELLIN;
     }
 
     // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
       stopMovement();
-      GameState.currentRoom = GameState.ROOM_STATE.ZACH;
+      GameState.currentRoom = GameState.ROOMSTATE.ZACH;
       App.goToDoor3();
     }
   }

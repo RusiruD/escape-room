@@ -75,34 +75,7 @@ public class RoomController implements Controller {
 
   @FXML private Button btnHideNote;
 
-  public static Color convertStringToColor(String colorName) {
-    switch (colorName) {
-      case "Red Potion":
-        return Color.RED;
-      case "Green Potion":
-        return Color.GREEN;
-
-      case "Blue Potion":
-        return Color.BLUE;
-      case "Purple Potion":
-        return Color.PURPLE;
-      case "Yellow Potion":
-        return Color.YELLOW;
-
-        // Add more color mappings as needed
-      default:
-        return Color.BLACK;
-    } // Default to black if the color name is not recognized
-  }
-
-  public static Color calculateAverageColor(Color color1, Color color2) {
-    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
-    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
-    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
-
-    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
-  }
-
+  
   @FXML
   private void enlarge(ImageView image) {
     image.setScaleX(1.5);
@@ -219,7 +192,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void closeNote(ActionEvent event) {
+  private void closeNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -291,22 +264,38 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOM_STATE.CHEST;
+    GameState.currentRoom = GameState.ROOMSTATE.CHEST;
+  }
+   private void tintScene(Pane potionsRoomPane) {
+    Color colour1 = convertStringToColor(GameState.firstPotion);
+    Color colour2 = convertStringToColor(GameState.secondPotion);
+    Color colour3 = calculateAverageColor(colour1, colour2);
+    // Create a colored rectangle to overlay the scene
+
+    Rectangle tintRectangle =
+        new Rectangle(potionsRoomPane.getWidth(), potionsRoomPane.getHeight(), colour3);
+    tintRectangle.setOpacity(0); // Initially, make it fully transparent
+
+    // Add the rectangle to the root layout
+    potionsRoomPane.getChildren().add(tintRectangle);
+
+    // Create a timeline animation to control the tint effect
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
+            new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.60)),
+            new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
+    timeline.setOnFinished(
+        event -> {
+          potionsRoomPane
+              .getChildren()
+              .remove(tintRectangle); // Remove the tint rectangle from the root
+        });
+    // Play the animation
+    timeline.play();
   }
 
-  @FXML
-  public double getRoomWidth() {
-
-    return potionsRoomPane.getPrefWidth();
-  }
-
-  @FXML
-  public double getRoomHeight() {
-
-    return potionsRoomPane.getPrefHeight();
-  }
-
-  @FXML
+   @FXML
   private void onTableClicked(MouseEvent event) {
 
     // Check if a note is selected in the combo box
@@ -372,6 +361,47 @@ public class RoomController implements Controller {
     }
   }
 
+public static Color convertStringToColor(String colorName) {
+    switch (colorName) {
+      case "Red Potion":
+        return Color.RED;
+      case "Green Potion":
+        return Color.GREEN;
+
+      case "Blue Potion":
+        return Color.BLUE;
+      case "Purple Potion":
+        return Color.PURPLE;
+      case "Yellow Potion":
+        return Color.YELLOW;
+
+        // Add more color mappings as needed
+      default:
+        return Color.BLACK;
+    } // Default to black if the color name is not recognized
+  }
+
+  public static Color calculateAverageColor(Color color1, Color color2) {
+    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
+    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
+    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
+
+    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
+  }
+
+  @FXML
+  public double getRoomWidth() {
+
+    return potionsRoomPane.getPrefWidth();
+  }
+
+  @FXML
+  public double getRoomHeight() {
+
+    return potionsRoomPane.getPrefHeight();
+  }
+
+ 
   @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
@@ -433,35 +463,7 @@ public class RoomController implements Controller {
     thread.start();
   }
 
-  private void tintScene(Pane potionsRoomPane) {
-    Color colour1 = convertStringToColor(GameState.firstPotion);
-    Color colour2 = convertStringToColor(GameState.secondPotion);
-    Color colour3 = calculateAverageColor(colour1, colour2);
-    // Create a colored rectangle to overlay the scene
-
-    Rectangle tintRectangle =
-        new Rectangle(potionsRoomPane.getWidth(), potionsRoomPane.getHeight(), colour3);
-    tintRectangle.setOpacity(0); // Initially, make it fully transparent
-
-    // Add the rectangle to the root layout
-    potionsRoomPane.getChildren().add(tintRectangle);
-
-    // Create a timeline animation to control the tint effect
-    Timeline timeline =
-        new Timeline(
-            new KeyFrame(Duration.seconds(0), new KeyValue(tintRectangle.opacityProperty(), 0.0)),
-            new KeyFrame(Duration.seconds(1), new KeyValue(tintRectangle.opacityProperty(), 0.60)),
-            new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
-    timeline.setOnFinished(
-        event -> {
-          potionsRoomPane
-              .getChildren()
-              .remove(tintRectangle); // Remove the tint rectangle from the root
-        });
-    // Play the animation
-    timeline.play();
-  }
-
+ 
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);

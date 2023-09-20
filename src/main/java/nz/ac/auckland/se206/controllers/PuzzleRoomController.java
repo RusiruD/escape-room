@@ -58,7 +58,7 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOM_STATE.CHEST;
+    GameState.currentRoom = GameState.ROOMSTATE.CHEST;
   }
 
   public void updateInventory() {
