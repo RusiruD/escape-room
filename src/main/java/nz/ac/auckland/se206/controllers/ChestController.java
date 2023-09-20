@@ -61,9 +61,9 @@ public class ChestController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
 
-  private final String DEFAULTCOLOUR = "#1e90ff";
-  private final String CORRECTCOLOUR = "#a8e6cf";
-  private final String INCORRECTCOLOUR = "#f38ba8";
+  private static final String DEFAULT_COLOUR = "#1e90ff";
+  private static final String CORRECT_COLOUR = "#a8e6cf";
+  private static final String INCORRECT_COLOUR = "#f38ba8";
 
   private Riddle riddle;
   private Boolean riddleCalled = false;
@@ -155,27 +155,27 @@ public class ChestController implements Controller {
         // get key hole
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole1.mouseTransparentProperty().set(true);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole2.mouseTransparentProperty().set(true);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole3.mouseTransparentProperty().set(true);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole4.mouseTransparentProperty().set(true);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole5.mouseTransparentProperty().set(true);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + CORRECTCOLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole6.mouseTransparentProperty().set(true);
             break;
         }
@@ -184,44 +184,44 @@ public class ChestController implements Controller {
         System.out.println("hole " + (i + 1) + " is incorrect");
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + INCORRECTCOLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
             break;
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
         // set back to default
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + DEFAULTCOLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
             break;
         }
       }
@@ -382,51 +382,62 @@ public class ChestController implements Controller {
     }
   }
 
-  private void setLabelKeyHole(int num, String key) {
-    
-    System.out.println("set label key hole " + num + " to " + key);
-    if (key != "") {
+  /**
+ * Sets the label for a keyhole to display the inserted key's status.
+ *
+ * @param num The number of the keyhole.
+ * @param key The key inserted into the keyhole.
+ */
+private void setLabelKeyHole(int num, String key) {
+  // Print a debug message indicating which keyhole is being set
+  System.out.println("set label key hole " + num + " to " + key);
+  
+  // Check if a key is inserted
+  if (!key.isEmpty()) {
+      // Depending on the keyhole number, set the corresponding label to display the key inserted
       switch (num) {
-        case 1:
-          lblKey1.setText(key + " inserted");
-          break;
-        case 2:
-          lblKey2.setText(key + " inserted");
-          break;
-        case 3:
-          lblKey3.setText(key + " inserted");
-          break;
-        case 4:
-          lblKey4.setText(key + " inserted");
-          break;
-        case 5:
-          lblKey5.setText(key + " inserted");
-          break;
-        case 6:
-          lblKey6.setText(key + " inserted");
-          break;
+          case 1:
+              lblKey1.setText(key + " inserted");
+              break;
+          case 2:
+              lblKey2.setText(key + " inserted");
+              break;
+          case 3:
+              lblKey3.setText(key + " inserted");
+              break;
+          case 4:
+              lblKey4.setText(key + " inserted");
+              break;
+          case 5:
+              lblKey5.setText(key + " inserted");
+              break;
+          case 6:
+              lblKey6.setText(key + " inserted");
+              break;
       }
-    } else {
+  } else {
+      // If no key is inserted, clear the label for the corresponding keyhole
       switch (num) {
-        case 1:
-          lblKey1.setText("");
-          break;
-        case 2:
-          lblKey2.setText("");
-          break;
-        case 3:
-          lblKey3.setText("");
-          break;
-        case 4:
-          lblKey4.setText("");
-          break;
-        case 5:
-          lblKey5.setText("");
-          break;
-        case 6:
-          lblKey6.setText("");
-          break;
+          case 1:
+              lblKey1.setText("");
+              break;
+          case 2:
+              lblKey2.setText("");
+              break;
+          case 3:
+              lblKey3.setText("");
+              break;
+          case 4:
+              lblKey4.setText("");
+              break;
+          case 5:
+              lblKey5.setText("");
+              break;
+          case 6:
+              lblKey6.setText("");
+              break;
       }
-    }
   }
+}
+
 }
