@@ -133,6 +133,7 @@ public class UntangleRoomController implements Controller {
   public static UntangleRoomController getInstance() {
     return instance;
   }
+
   @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
   @FXML private ImageView key3;
@@ -247,18 +248,17 @@ public class UntangleRoomController implements Controller {
     key3.setVisible(true);
     key3.mouseTransparentProperty().set(false);
   }
-  @FXML
-  public double getUntangleRoomWidth(){
-   
-    
-   
-    return  untangleRoomAnchorPane.getPrefWidth();
-  }
-  @FXML
-  public double getUntangleRoomHeight(){
-    
-    return untangleRoomAnchorPane.getPrefHeight();
 
+  @FXML
+  public double getUntangleRoomWidth() {
+
+    return untangleRoomAnchorPane.getPrefWidth();
+  }
+
+  @FXML
+  public double getUntangleRoomHeight() {
+
+    return untangleRoomAnchorPane.getPrefHeight();
   }
 
   // creates a draggable anchor displayed around a point.
@@ -305,7 +305,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOM.CHEST;
+    GameState.currentRoom = GameState.ROOM_STATE.CHEST;
   }
 
   public void updateInventory() {

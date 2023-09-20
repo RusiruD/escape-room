@@ -11,21 +11,29 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="728.0" prefWidth="696.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" minHeight="-Infinity"
+   minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased"
+   prefHeight="728.0" prefWidth="696.0" stylesheets="@../css/roomStylesheet.css"
+   xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
+   fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CorridorBackground.png" />
          </image>
       </ImageView>
-      <Button layoutX="562.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel">
+      <Button layoutX="562.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#clickExit"
+         prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel">
 
          <font>
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="21.0" prefHeight="38.0" prefWidth="166.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="278.0" layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="21.0" prefHeight="38.0"
+         prefWidth="166.0" promptText="Inventory" styleClass="combo-box"
+         stylesheets="@../css/roomStylesheet.css" />
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="278.0"
+         layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
@@ -34,41 +42,58 @@
 
       <Group layoutX="401.0" layoutY="529.0">
          <children>
-            <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0" points="279.5390625, -154.0, 28.5390625, -355.0, -24.4609375, -311.0, -68.4609375, -424.0, -110.4609375, -389.0, -78.4609375, -271.0, -110.4609375, -242.0, -154.91656494140625, -378.0, -209.15386962890625, -336.0, -148.4609375, -218.0, -169.4609375, -188.0, -188.640625, -166.74444580078125, -209.15386962890625, -182.0, -198.15386962890625, -166.74444580078125, -216.4609375, -143.0, -302.15386962890625, -271.0, -357.010498046875, -224.0, -267.24444580078125, -106.0, -372.9854736328125, -36.0, -188.640625, 196.0, 84.0, 190.0, 213.0, 50.0, 279.5390625, -36.0" stroke="BLACK" strokeType="INSIDE" />
-            <Label alignment="CENTER" blendMode="HARD_LIGHT" layoutX="-269.0" layoutY="-129.0" prefHeight="41.0" prefWidth="70.0" rotate="-45.0" text="1" textFill="#830000">
+            <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0"
+               points="279.5390625, -154.0, 28.5390625, -355.0, -24.4609375, -311.0, -68.4609375, -424.0, -110.4609375, -389.0, -78.4609375, -271.0, -110.4609375, -242.0, -154.91656494140625, -378.0, -209.15386962890625, -336.0, -148.4609375, -218.0, -169.4609375, -188.0, -188.640625, -166.74444580078125, -209.15386962890625, -182.0, -198.15386962890625, -166.74444580078125, -216.4609375, -143.0, -302.15386962890625, -271.0, -357.010498046875, -224.0, -267.24444580078125, -106.0, -372.9854736328125, -36.0, -188.640625, 196.0, 84.0, 190.0, 213.0, 50.0, 279.5390625, -36.0"
+               stroke="BLACK" strokeType="INSIDE" />
+            <Label alignment="CENTER" blendMode="HARD_LIGHT" layoutX="-269.0" layoutY="-129.0"
+               prefHeight="41.0" prefWidth="70.0" rotate="-45.0" text="1" textFill="#830000">
                <font>
                   <Font name="Old English Text MT" size="35.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" blendMode="DARKEN" layoutX="-148.0" layoutY="-233.0" prefHeight="41.0" prefWidth="70.0" rotate="-45.9" text="2" textFill="#830000">
+            <Label alignment="CENTER" blendMode="DARKEN" layoutX="-148.0" layoutY="-233.0"
+               prefHeight="41.0" prefWidth="70.0" rotate="-45.9" text="2" textFill="#830000">
                <font>
                   <Font name="Old English Text MT" size="35.0" />
                </font>
             </Label>
-            <Label alignment="CENTER" blendMode="DARKEN" layoutX="-82.0" layoutY="-309.0" prefHeight="41.0" prefWidth="95.0" rotate="-45.0" text="3" textFill="#830000">
+            <Label alignment="CENTER" blendMode="DARKEN" layoutX="-82.0" layoutY="-309.0"
+               prefHeight="41.0" prefWidth="95.0" rotate="-45.0" text="3" textFill="#830000">
                <font>
                   <Font name="Old English Text MT" size="35.0" />
                </font>
             </Label>
-            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="-199.0" layoutY="-366.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
-            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0" layoutX="-107.0" layoutY="-406.0" opacity="0.0" rotate="-35.5" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="58.0" layoutX="-332.0" layoutY="-263.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-            <ImageView fx:id="treasurechest" fitHeight="77.0" fitWidth="133.0" layoutX="-80.0" layoutY="-176.0" onMouseClicked="#onTreasureChestClicked" pickOnBounds="true" preserveRatio="true">
+            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0"
+               layoutX="-199.0" layoutY="-366.0" opacity="0.0" rotate="-37.9" stroke="BLACK"
+               strokeType="INSIDE" width="54.0" />
+            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0"
+               layoutX="-107.0" layoutY="-406.0" opacity="0.0" rotate="-35.5" stroke="BLACK"
+               strokeType="INSIDE" width="52.0" />
+            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="58.0"
+               layoutX="-332.0" layoutY="-263.0" opacity="0.0" rotate="54.5" stroke="BLACK"
+               strokeType="INSIDE" width="23.0" />
+            <ImageView fx:id="treasurechest" fitHeight="77.0" fitWidth="133.0" layoutX="-80.0"
+               layoutY="-176.0" onMouseClicked="#onTreasureChestClicked" pickOnBounds="true"
+               preserveRatio="true">
                <image>
                   <Image url="@../images/TreasureChest.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="swordandshield" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="-43.0" layoutY="-170.0" onMouseClicked="#onSwordAndShieldClicked" pickOnBounds="true" preserveRatio="true" visible="false">
+            <ImageView fx:id="swordandshield" disable="true" fitHeight="92.0" fitWidth="71.0"
+               layoutX="-43.0" layoutY="-170.0" onMouseClicked="#onSwordAndShieldClicked"
+               pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/swordandshield.png" />
                </image>
             </ImageView>
-            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" focusTraversable="true" height="50.0" stroke="#f00000" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
-      
-            <Button fx:id="riddleButton" layoutX="210.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
+            <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536"
+               focusTraversable="true" height="50.0" stroke="#f00000" strokeType="INSIDE"
+               strokeWidth="0.0" width="50.0" />
+
          </children>
       </Group>
-      <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
+      <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onMouseClicked="#getHint"
+         text="Hint" />
 
    </children>
 </Pane>

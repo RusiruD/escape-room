@@ -34,7 +34,7 @@ public class DungeonMaster {
   private int messageIndex = 0;
 
   private ChatCompletionRequest chatCompletionRequest =
-      new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(200);
+      new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(150);
 
   public Pane getPopUp() {
     popUp = new HBox();
@@ -229,6 +229,7 @@ public class DungeonMaster {
     gptTask.setOnSucceeded(
         e -> {
           System.out.println("gpt task succeeded");
+          System.out.println(messages);
           taskDone = true;
           riddleDone = true;
         });

@@ -10,7 +10,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GameState.ROOM;
+import nz.ac.auckland.se206.GameState.ROOM_STATE;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -87,11 +87,11 @@ public class ChatController {
           protected Void call() throws Exception {
             String message = inputText.getText();
             String extra = "";
-            if (GameState.currentRoom == ROOM.CHEST) {
+            if (GameState.currentRoom == ROOM_STATE.CHEST) {
               extra = " (I am in chestRoom)";
-            } else if (GameState.currentRoom == ROOM.ZACH) {
+            } else if (GameState.currentRoom == ROOM_STATE.ZACH) {
               extra = " (I am in zachRoom)";
-            } else if (GameState.currentRoom == ROOM.RUSIRU) {
+            } else if (GameState.currentRoom == ROOM_STATE.RUSIRU) {
               extra = " (I am in rusiruRoom)";
             } else {
               extra = " (I am in marcellinRoom)";

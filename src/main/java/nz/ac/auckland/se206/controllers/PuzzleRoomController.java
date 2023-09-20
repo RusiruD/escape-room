@@ -21,6 +21,7 @@ public class PuzzleRoomController implements Controller {
   public static PuzzleRoomController getInstance() {
     return instance;
   }
+
   @FXML private Pane puzzleRoomPane;
   @FXML private Label lblTime;
   @FXML private ImageView key2;
@@ -57,24 +58,23 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOM.CHEST;
+    GameState.currentRoom = GameState.ROOM_STATE.CHEST;
   }
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
   }
-  @FXML
-  public double getPuzzleRoomWidth(){
-   
-    
-   
-    return  puzzleRoomPane.getPrefWidth();
-  }
-  @FXML
-  public double getPuzzleRoomHeight(){
-   
-    return puzzleRoomPane.getPrefHeight();
 
+  @FXML
+  public double getPuzzleRoomWidth() {
+
+    return puzzleRoomPane.getPrefWidth();
+  }
+
+  @FXML
+  public double getPuzzleRoomHeight() {
+
+    return puzzleRoomPane.getPrefHeight();
   }
 
   @FXML

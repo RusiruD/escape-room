@@ -8,9 +8,9 @@ public class CustomNotifications {
   public static void generateNotification(String title, String text) {
     // generate a notification
     Notifications.create()
-        .title(title) // set the title
-        .position(Pos.BOTTOM_RIGHT) // set the position
-        .owner(null) // set the owner
+        .title(title)
+        .position(Pos.BOTTOM_RIGHT)
+        .owner(null)
         .text(text) // set the text
         .threshold(1, Notifications.create().title("Collapsed Notification")) // set the threshold
         .showWarning(); // show the notification

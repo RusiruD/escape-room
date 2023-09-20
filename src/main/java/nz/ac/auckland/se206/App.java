@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.CorridorController;
 import nz.ac.auckland.se206.controllers.PuzzleController;
 import nz.ac.auckland.se206.controllers.PuzzleRoomController;
@@ -37,11 +38,9 @@ public class App extends Application {
     newScene = appUi;
 
     scene.setRoot(SceneManager.getUiRoot(appUi));
- 
+
     root.requestFocus();
   }
-
-  
 
   /**
    * Returns the node associated to the input file. The method expects that the file is located in
@@ -70,6 +69,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.START, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
     SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
+    SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     SceneManager.addController(PuzzleRoomController.getInstance());
@@ -77,6 +77,7 @@ public class App extends Application {
     SceneManager.addController(CorridorController.getInstance());
     SceneManager.addController(PuzzleController.getInstance());
     SceneManager.addController(UntangleRoomController.getInstance());
+    SceneManager.addController(ChestController.getInstance());
 
     root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 780.0, 780.0);
@@ -90,82 +91,70 @@ public class App extends Application {
   }
 
   public static void returnToCorridor() {
-    
+
     try {
 
-
-     
-         
-
-      
       App.setRoot(AppUi.CORRIDOR);
-       
+
       CorridorController corridorController = CorridorController.getInstance();
       double corridorWidth = corridorController.getCorridorWidth();
-      
+
       double corridorHeight = corridorController.getCorridorHeight();
-      
+
       Stage primaryStage = (Stage) scene.getWindow();
-     
-      
-     
-      primaryStage.setWidth(corridorWidth+15);
-      primaryStage.setHeight(corridorHeight+38);
-      
-      
-     
-      
+
+      primaryStage.setWidth(corridorWidth + 15);
+      primaryStage.setHeight(corridorHeight + 38);
 
     } catch (IOException e) {
-  
+
       e.printStackTrace();
     }
     focus();
-   
   }
+
   public static void goToDoor1() {
     try {
       App.setRoot(AppUi.FIRST_ROOM);
-      
+
       RoomController roomController = RoomController.getInstance();
       double roomWidth = roomController.getRoomWidth();
       double roomHeight = roomController.getRoomHeight();
       Stage primaryStage = (Stage) scene.getWindow();
-        primaryStage.setWidth(roomWidth+15);
-        primaryStage.setHeight(roomHeight+38);
-      
+      primaryStage.setWidth(roomWidth + 15);
+      primaryStage.setHeight(roomHeight + 38);
 
     } catch (IOException e) {
       e.printStackTrace();
     }
     focus();
   }
-  public static void goToDoor2(){
+
+  public static void goToDoor2() {
     try {
       App.setRoot(AppUi.UNTANGLE);
       UntangleRoomController untangleroomController = UntangleRoomController.getInstance();
       double untangleroomWidth = untangleroomController.getUntangleRoomWidth();
       double untangleroomHeight = untangleroomController.getUntangleRoomHeight();
       Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(untangleroomWidth+15);
-      primaryStage.setHeight(untangleroomHeight+38);
-       
+      primaryStage.setWidth(untangleroomWidth + 15);
+      primaryStage.setHeight(untangleroomHeight + 38);
 
     } catch (IOException e) {
       e.printStackTrace();
     }
     focus();
   }
-  public static void goToDoor3(){
+
+  public static void goToDoor3() {
     try {
       App.setRoot(AppUi.PUZZLEROOM);
       PuzzleRoomController puzzleroomController = PuzzleRoomController.getInstance();
       double puzzleroomWidth = puzzleroomController.getPuzzleRoomWidth();
       double puzzleroomHeight = puzzleroomController.getPuzzleRoomHeight();
       Stage primaryStage = (Stage) scene.getWindow();
-        primaryStage.setWidth(puzzleroomWidth+15);
-        primaryStage.setHeight(puzzleroomHeight+38);
-       
+      primaryStage.setWidth(puzzleroomWidth + 15);
+      primaryStage.setHeight(puzzleroomHeight + 38);
 
     } catch (IOException e) {
       e.printStackTrace();

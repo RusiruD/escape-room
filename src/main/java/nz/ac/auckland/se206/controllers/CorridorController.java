@@ -5,7 +5,6 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.ComboBox;
@@ -15,18 +14,13 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
-import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
@@ -65,12 +59,8 @@ public class CorridorController implements Controller {
   @FXML private Pane room;
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
-
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
-
-  private Riddle riddle;
-  private Boolean riddleCalled = false;
 
   // Animation timer for player movement
 
@@ -153,23 +143,6 @@ public class CorridorController implements Controller {
             collisionTimer.stop();
           }
         });
-
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          public Void call() throws Exception {
-            riddle = new Riddle(dungeonMaster);
-            return null;
-          }
-        };
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-    task.setOnSucceeded(
-        event -> {
-          GameState.riddle = riddle;
-        });
   }
 
   // Method to check if the player stays in the room while moving
@@ -202,20 +175,20 @@ public class CorridorController implements Controller {
 
       stopMovement();
       App.goToDoor1();
-      GameState.currentRoom = GameState.ROOM.RUSIRU;
+      GameState.currentRoom = GameState.ROOM_STATE.RUSIRU;
     }
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
       stopMovement();
       App.goToDoor2();
-      GameState.currentRoom = GameState.ROOM.MARCELLIN;
+      GameState.currentRoom = GameState.ROOM_STATE.MARCELLIN;
     }
 
     // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
       stopMovement();
-      GameState.currentRoom = GameState.ROOM.ZACH;
+      GameState.currentRoom = GameState.ROOM_STATE.ZACH;
       App.goToDoor3();
     }
   }
@@ -271,10 +244,10 @@ public class CorridorController implements Controller {
   }
 
   @FXML
-  public void onTreasureChestClicked(MouseEvent event) {
+  public void onTreasureChestClicked(MouseEvent event) throws IOException {
     // Handle click on treasure chest
     System.out.println("clicked");
-    // Check if the player has the sword and shield
+    App.setRoot(SceneManager.AppUi.CHEST);
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
     if (GameState.isLock2Unlocked == true
@@ -336,67 +309,6 @@ public class CorridorController implements Controller {
   public double getCorridorHeight() {
 
     return room.getPrefHeight();
-  }
-
-  @FXML
-  public void getRiddle() {
-    DungeonMaster dungeonMaster = riddle.getDungeonMaster();
-    if (!dungeonMaster.isRiddleDone()) {
-      return;
-    }
-
-    if (riddleCalled) {
-      // gets the riddle pane if already asked dungeon master for riddle
-      String riddleText = riddle.getRiddle();
-      Pane riddlePane = riddle.riddlePane(riddleText);
-      riddleDisplay.getChildren().add(riddlePane);
-      riddlePane.getStyleClass().add("riddle");
-      riddleDisplay.toFront();
-      riddleDisplay.visibleProperty().set(true);
-      riddleDisplay.mouseTransparentProperty().set(false);
-      Pane parent = (Pane) riddleDisplay.getParent();
-
-      // change width of parent
-      parent.setPrefSize(200, 200);
-
-      riddleDisplay.translateXProperty().set(parent.getWidth() / 2 - riddleDisplay.getWidth() / 2);
-      riddleDisplay
-          .translateYProperty()
-          .set(parent.getHeight() / 2 - riddleDisplay.getHeight() / 2);
-
-    } else {
-      // gets the dungeon master to speak the riddle dialogue
-      Pane dialogue = dungeonMaster.getPopUp();
-      popUp.getChildren().add(dialogue);
-      dialogue.getStyleClass().add("popUp");
-      // buttons in the dialogue
-      Rectangle exitButton =
-          (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-      Text dialogueText =
-          (Text)
-              ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                  .getChildren()
-                  .get(1);
-      ImageView nextButton =
-          (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(
-          event1 -> {
-            popUp.visibleProperty().set(false);
-          });
-      dialogueText.setOnMouseClicked(
-          event1 -> {
-            if (!dungeonMaster.isSpeaking()) {
-              dungeonMaster.update();
-            }
-          });
-      nextButton.setOnMouseClicked(
-          event1 -> {
-            if (!dungeonMaster.isSpeaking()) {
-              dungeonMaster.update();
-            }
-          });
-      riddleCalled = true;
-    }
   }
 
   @FXML
