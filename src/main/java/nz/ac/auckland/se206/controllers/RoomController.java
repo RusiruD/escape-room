@@ -18,11 +18,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
@@ -429,33 +426,11 @@ public class RoomController implements Controller {
         e -> {
           System.out.println("home task succeeded");
           Pane dialogue = task.getValue();
-          popUp.getChildren().add(dialogue);
+          Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+          popUp.getChildren().add(dialogueFormat);
+
           dialogue.getStyleClass().add("popUp");
-          Rectangle exitButton =
-              (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-          Text dialogueText =
-              (Text)
-                  ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                      .getChildren()
-                      .get(1);
-          ImageView nextButton =
-              (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-          exitButton.setOnMouseClicked(
-              event1 -> {
-                popUp.visibleProperty().set(false);
-              });
-          dialogueText.setOnMouseClicked(
-              event1 -> {
-                if (!dungeonMaster.isSpeaking()) {
-                  dungeonMaster.update();
-                }
-              });
-          nextButton.setOnMouseClicked(
-              event1 -> {
-                if (!dungeonMaster.isSpeaking()) {
-                  dungeonMaster.update();
-                }
-              });
+          
         });
     Thread thread = new Thread(task);
     thread.setDaemon(true);

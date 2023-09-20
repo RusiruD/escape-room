@@ -354,6 +354,35 @@ public class DungeonMaster {
     }
   }
 
+  public Pane paneFormat(Pane dialogue, DungeonMaster dungeonMaster) {
+    Rectangle exitButton =
+        (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+    Text dialogueText =
+        (Text)
+            ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+                .getChildren()
+                .get(1);
+    ImageView nextButton =
+        (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+    exitButton.setOnMouseClicked(
+        event1 -> {
+          popUp.visibleProperty().set(false);
+        });
+    dialogueText.setOnMouseClicked(
+        event1 -> {
+          if (!dungeonMaster.isSpeaking()) {
+            dungeonMaster.update();
+          }
+        });
+    nextButton.setOnMouseClicked(
+        event1 -> {
+          if (!dungeonMaster.isSpeaking()) {
+            dungeonMaster.update();
+          }
+        });
+    return dialogue;
+  }
+
   public boolean isSpeaking() {
     return isSpeaking;
   }

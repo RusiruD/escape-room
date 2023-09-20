@@ -317,34 +317,10 @@ public class ChestController implements Controller {
     } else {
       // gets the dungeon master to speak the riddle dialogue
       Pane dialogue = dungeonMaster.getPopUp();
-      popUp.getChildren().add(dialogue);
+      Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+      popUp.getChildren().add(dialogueFormat);
+
       dialogue.getStyleClass().add("popUp");
-      // buttons in the dialogue
-      Rectangle exitButton =
-          (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-      Text dialogueText =
-          (Text)
-              ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                  .getChildren()
-                  .get(1);
-      ImageView nextButton =
-          (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-      exitButton.setOnMouseClicked(
-          event1 -> {
-            popUp.visibleProperty().set(false);
-          });
-      dialogueText.setOnMouseClicked(
-          event1 -> {
-            if (!dungeonMaster.isSpeaking()) {
-              dungeonMaster.update();
-            }
-          });
-      nextButton.setOnMouseClicked(
-          event1 -> {
-            if (!dungeonMaster.isSpeaking()) {
-              dungeonMaster.update();
-            }
-          });
       riddleCalled = true;
     }
   }
