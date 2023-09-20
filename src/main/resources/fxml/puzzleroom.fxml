@@ -24,7 +24,7 @@
             <Font name="Old English Text MT" size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="key2" fitHeight="35.0" fitWidth="60.0" layoutX="471.0" layoutY="520.0" onMouseClicked="#onKey2Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="key2" fitHeight="102.0" fitWidth="134.0" layoutX="471.0" layoutY="453.0" onMouseClicked="#onKey2Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/key.png" />
          </image>
