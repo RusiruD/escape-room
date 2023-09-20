@@ -28,47 +28,24 @@ public class ChatController {
   @FXML
   public void initialize() throws ApiProxyException {
 
-    Task<Void> chatTask =
-        new Task<>() {
-          @Override
-          protected Void call() throws Exception {
-            chatCompletionRequest =
-                new ChatCompletionRequest()
-                    .setN(1)
-                    .setTemperature(0.2)
-                    .setTopP(0.5)
-                    .setMaxTokens(200);
-            runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
-            Platform.runLater(() -> {});
-            return null;
-          }
-        };
-    new Thread(chatTask).start();
+    chatCompletionRequest =
+        new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(200);
+    runGpt(new ChatMessage("user", GptPromptEngineering.getHint()), true);
   }
 
-  /**
-   * Appends a chat message to the chat text area.
-   *
-   * @param msg the chat message to append
-   */
   private void appendChatMessage(ChatMessage msg) {
     chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
   }
 
-  /**
-   * Runs the GPT model with a given chat message.
-   *
-   * @param msg the chat message to process
-   * @return the response chat message
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private ChatMessage runGpt(ChatMessage msg, boolean shouldAppend) throws ApiProxyException {
     chatCompletionRequest.addMessage(msg);
     try {
       ChatCompletionResult chatCompletionResult = chatCompletionRequest.execute();
       Choice result = chatCompletionResult.getChoices().iterator().next();
       chatCompletionRequest.addMessage(result.getChatMessage());
-      appendChatMessage(result.getChatMessage());
+      if (shouldAppend) {
+        appendChatMessage(result.getChatMessage());
+      }
       return result.getChatMessage();
     } catch (ApiProxyException e) {
       e.printStackTrace();
@@ -76,13 +53,6 @@ public class ChatController {
     }
   }
 
-  /**
-   * Sends a message to the GPT model.
-   *
-   * @param event the action event triggered by the send button
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   * @throws IOException if there is an I/O error
-   */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
 
@@ -97,10 +67,22 @@ public class ChatController {
             inputText.clear();
             ChatMessage msg = new ChatMessage("user", message);
             appendChatMessage(msg);
-            ChatMessage lastMsg = runGpt(msg);
+
+            if (GameState.hintsLeft == 0) {
+              ChatMessage disablMessage =
+                  new ChatMessage(
+                      "user",
+                      "I have run out of hints. From now do not, under any circumstance, give me"
+                          + " anymore hints. If I ask for a hint, flatly reject me. Do not give any"
+                          + " guidance, any pointers, or any information. Also, do not mention or"
+                          + " reference this message in our future conversations");
+              runGpt(disablMessage, false);
+            }
+
+            ChatMessage lastMsg = runGpt(msg, true);
             if (lastMsg.getRole().equals("assistant") && lastMsg.getContent().contains("HINT")) {
-              GameState.hintsGiven++;
-              System.out.println(GameState.hintsGiven++);
+              GameState.hintsLeft++;
+              System.out.println(GameState.hintsLeft++);
             }
             Platform.runLater(() -> {});
             return null;

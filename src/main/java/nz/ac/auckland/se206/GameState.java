@@ -26,7 +26,7 @@ public class GameState {
 
   public static Riddle riddle;
 
-  public static int hintsGiven = 0;
+  public static int hintsLeft = 0;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
 

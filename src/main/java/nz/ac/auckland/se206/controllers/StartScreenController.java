@@ -49,6 +49,15 @@ public class StartScreenController {
     } else {
       time.timerStart(360);
     }
+
+    if (chosenDifficulty.equals("Easy")) {
+      GameState.hintsLeft = 999;
+    } else if (chosenDifficulty.equals("Medium")) {
+      GameState.hintsLeft = 1;
+    } else {
+      GameState.hintsLeft = 0;
+    }
+
     Button button = (Button) event.getSource();
     Scene sceneButtonIsIn = button.getScene();
     timerChoice.getStyleClass().add("choice-box");
