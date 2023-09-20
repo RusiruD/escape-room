@@ -197,7 +197,7 @@ public class UntangleRoomController implements Controller {
       double y1 = polygon.getPoints().get(i + 1);
       double x2 = polygon.getPoints().get(i + 2);
       double y2 = polygon.getPoints().get(i + 3);
-      // Line line = shortenLine(x1, y1, x2, y2);
+      
 
       Line line = new Line(x1, y1, x2, y2);
       line.setScaleX(0.9);

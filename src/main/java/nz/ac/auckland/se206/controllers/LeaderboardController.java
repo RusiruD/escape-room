@@ -108,10 +108,7 @@ public class LeaderboardController {
     for (int i = 0; i < scores.size(); i++) {
       if (i < scores.size()) {
         int score = scores.get(i).getTime();
-        // int posDiff = 0;
-        // if (scores.get(i).getLeaderboardPos() == -1) {
-        // posDiff = calcPosChange(i);
-        // }
+        
         scores.get(i).setLeaderboardPos(i);
         String name = scores.get(i).getName();
         addTime(name, score, i, false);
@@ -214,22 +211,8 @@ public class LeaderboardController {
     graph.getChildren().add(graphData);
   }
 
-  // private int calcPosChange(int pos) {
-  // int oldPos = scores.get(pos).getLeaderboardPos();
-  // if (oldPos == pos) {
-  // scores.get(pos).setMovement(ScoreEntry.Movement.NONE);
-  // return 0;
-  // } else {
-  // int posDiff = oldPos - pos;
-  // if (posDiff < 0) {
-  // posDiff = posDiff * -1;
-  // scores.get(pos).setMovement(ScoreEntry.Movement.UP);
-  // } else {
-  // scores.get(pos).setMovement(ScoreEntry.Movement.DOWN);
-  // }
-  // return posDiff;
-  // }
-  // }
+ 
+ 
 
   // depending on integer input, return a colour for the leaderboard
   private String getColour(int i) {
