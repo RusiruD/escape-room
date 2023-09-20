@@ -25,6 +25,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -80,12 +81,11 @@ public class RoomController implements Controller {
   @FXML private Label lblTime;
   @FXML private ImageView parchment3;
   @FXML private ImageView key1;
- 
+
   @FXML private ImageView boulder;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
   @FXML private ImageView note;
- 
 
   private int parchmentPieces = 0;
   @FXML private ImageView yellowPotion;
@@ -103,7 +103,6 @@ public class RoomController implements Controller {
 
   private ChatCompletionRequest chatCompletionRequest;
   @FXML private ImageView parchment4duplicate;
-  
 
   @FXML private Button btnHideNote;
 
@@ -204,6 +203,10 @@ public class RoomController implements Controller {
     if (potionsincauldron.contains(GameState.firstPotion)
         && potionsincauldron.contains(GameState.secondPotion)) {
       tintScene(root);
+      CustomNotifications.generateNotification(
+          "Something Happens!",
+          "You feel far stronger... like energy's coursing through you and you could move"
+              + " anything...");
       allowImageToBeDragged(boulder);
     }
   }
