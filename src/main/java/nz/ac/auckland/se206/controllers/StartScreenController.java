@@ -1,7 +1,5 @@
 package nz.ac.auckland.se206.controllers;
 
-import java.io.IOException;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -10,7 +8,7 @@ import javafx.scene.control.ChoiceBox;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartScreenController {
 
@@ -34,7 +32,7 @@ public class StartScreenController {
   }
 
   @FXML
-  private void onStartGame(ActionEvent event) {
+  private void onStartGame(ActionEvent event) throws ApiProxyException {
 
     // Get the chosen values from the choice box
     String chosenTimeLimit = timerChoice.getValue();
@@ -52,10 +50,22 @@ public class StartScreenController {
     } else {
       time.timerStart(360);
     }
-    
+
+    if (chosenDifficulty.equals("Easy")) {
+      GameState.hintsLeft = 999;
+    } else if (chosenDifficulty.equals("Medium")) {
+      GameState.hintsLeft = 3;
+    } else {
+      GameState.hintsLeft = 0;
+    }
+
+    ChatController.getInstance().intialiseHints();
+
+    Button button = (Button) event.getSource();
+    Scene sceneButtonIsIn = button.getScene();
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");
-   
-   App.returnToCorridor();
+
+    App.returnToCorridor();
   }
 }

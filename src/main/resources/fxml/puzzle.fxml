@@ -69,5 +69,6 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
+      <Button layoutX="27.0" layoutY="38.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
    </children>
 </Pane>

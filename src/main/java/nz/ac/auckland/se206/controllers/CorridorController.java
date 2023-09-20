@@ -27,6 +27,7 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Riddle;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
 
@@ -49,7 +50,7 @@ public class CorridorController implements Controller {
   private int movementSpeed = 2;
 
   // JavaFX UI elements
-  
+
   @FXML private ImageView backgroundImage;
   @FXML private Polygon polygon;
   @FXML private Group group;
@@ -134,7 +135,7 @@ public class CorridorController implements Controller {
   }
 
   public void initialize() {
-   
+
     instance = this;
     Image image = new Image("/images/character.png");
 
@@ -199,24 +200,22 @@ public class CorridorController implements Controller {
     // Check collision with door1 and navigate to a new room if needed
     if (player.intersects(door1.getBoundsInParent())) {
 
-        stopMovement();
-        App.goToDoor1();
-       
+      stopMovement();
+      App.goToDoor1();
+      GameState.currentRoom = GameState.ROOM.RUSIRU;
     }
-      
-     
-  
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
       stopMovement();
-     App.goToDoor2();
+      App.goToDoor2();
+      GameState.currentRoom = GameState.ROOM.MARCELLIN;
     }
 
     // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
       stopMovement();
-     
+      GameState.currentRoom = GameState.ROOM.ZACH;
       App.goToDoor3();
     }
   }
@@ -326,17 +325,17 @@ public class CorridorController implements Controller {
     // Update the timer label in the UI
     lblTime.setText(time);
   }
-  @FXML
-  public double getCorridorWidth(){
-   
-   
-    return  room.getPrefWidth();
-  }
-  @FXML
-  public double getCorridorHeight(){
-   
-    return room.getPrefHeight();
 
+  @FXML
+  public double getCorridorWidth() {
+
+    return room.getPrefWidth();
+  }
+
+  @FXML
+  public double getCorridorHeight() {
+
+    return room.getPrefHeight();
   }
 
   @FXML
@@ -398,5 +397,10 @@ public class CorridorController implements Controller {
           });
       riddleCalled = true;
     }
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
   }
 }

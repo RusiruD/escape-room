@@ -120,6 +120,7 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
+      <Button layoutX="285.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
       <Button layoutX="974.0" layoutY="23.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="84.0" text="Cogwheel" />
    </children>
 </Pane>

@@ -33,6 +33,7 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
+      <Button layoutX="62.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
       <Button layoutX="1111.0" layoutY="31.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
    </children>
 </AnchorPane>

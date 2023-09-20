@@ -68,6 +68,7 @@
             <Button fx:id="riddleButton" layoutX="210.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
          </children>
       </Group>
+      <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
 
    </children>
 </Pane>
