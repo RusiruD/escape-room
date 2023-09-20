@@ -11,7 +11,7 @@ public class CustomNotifications {
         .title(title)
         .position(Pos.BOTTOM_RIGHT)
         .owner(null)
-        .text(text) // set the text
+        .text(text) 
         .threshold(1, Notifications.create().title("Collapsed Notification")) // set the threshold
         .showWarning(); // show the notification
   }

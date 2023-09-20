@@ -61,8 +61,6 @@ public class StartScreenController {
 
     ChatController.getInstance().intialiseHints();
 
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");
 
