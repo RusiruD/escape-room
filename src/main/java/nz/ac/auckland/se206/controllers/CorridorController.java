@@ -27,6 +27,7 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Riddle;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
 
@@ -390,5 +391,10 @@ public class CorridorController implements Controller {
           });
       riddleCalled = true;
     }
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
   }
 }

@@ -11,8 +11,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="679.0" prefWidth="648.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="679.0" prefWidth="648.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <ImageView fitHeight="679.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -54,6 +53,7 @@
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" focusTraversable="true" height="50.0" stroke="#f00000" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
          </children>
       </Group>
+      <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
 
    </children>
 </Pane>
