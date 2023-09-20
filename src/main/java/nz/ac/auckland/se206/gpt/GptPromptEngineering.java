@@ -17,7 +17,10 @@ public class GptPromptEngineering {
       "1: Investigate the door to find the puzzle. 2: Solve the puzzle by sliding the pieces into"
           + " the correct order";
 
-  private static String chestRoom = "1: Put the keys into the chest";
+  private static String chestRoom =
+      "1: There's a chest in the room. 2: Upon investigating the chest, there will be a three verse"
+          + " poem. The first verse subtly tells you where to put the first key, second verse"
+          + " second key, and so on.";
 
   private static String hugePrompt =
       "There are four rooms each with a different activity in them. Here's a list of the room name"
@@ -30,6 +33,16 @@ public class GptPromptEngineering {
           + zachRoom
           + "; chestRoom: "
           + chestRoom;
+
+  private static String initial =
+      "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"
+          + " trapped the player inside your dungeon with four rooms named rusiruRoom,"
+          + " marcellinRoom, zachRoom, and chestRoom. Never mention any of the room names under any"
+          + " circumstances. ";
+
+  private static String end =
+      " To give you context, the player will include information in parenthesis. Since this is"
+          + " role-play, do not mention that contextual information";
 
   /**
    * Generates a GPT prompt engineering string for a riddle with the given word.
@@ -45,29 +58,24 @@ public class GptPromptEngineering {
     String prompt = "";
     if (GameState.hintsLeft == 999) { // EASY
       prompt =
-          "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"
-              + " trapped the player inside your dungeon. Greet the player with a taunt and say"
-              + " they can ask you for hints. If you give the player a hint or any form of help, be"
-              + " explicit that you're giving a hint by putting HINT at the beginning of your"
-              + " message. Do not give more that one step as a hint. The player will use"
-              + " parentheses to communicate what hint you are suppose to give. Do not mention this"
-              + " information back to them, and do not mention the room name."
+          initial
+              + "Greet the player with a taunt and say they can ask you for hints. Do not give more"
+              + " than one step or instruction as a hint."
+              + end
               + hugePrompt;
     } else if (GameState.hintsLeft < 999 && GameState.hintsLeft != 0) { // MEDIUM
       prompt =
-          "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"
-              + " trapped the player inside your dungeon. Greet the player with a taunt and say"
+          initial
+              + "Greet the player with a taunt and say"
               + " they can ask you for "
               + GameState.hintsLeft
-              + " hints. You cannot give hints or information without asking. If you give the"
-              + " player a hint or any form of help, be explicit that you're giving a hint by"
-              + " putting HINT at the beginning of your message. Do not give more that one step or"
-              + " instruction as a hint. It is extremelty important that pnce you've given "
+              + " hints. You cannot give hints or information without asking. Do not give more than"
+              + " one step or instruction as a hint. It is extremely important that once you've"
+              + " given "
               + GameState.hintsLeft
               + " hints that you don't given any more, and if you're asked more for help, hints, or"
-              + " information, reject it. The player will use parentheses to communicate what hint"
-              + " you are suppose to give. Do not mention this information back to them, and do not"
-              + " mention the room name."
+              + " information, reject it."
+              + end
               + hugePrompt;
     } else { // HARD
       prompt =

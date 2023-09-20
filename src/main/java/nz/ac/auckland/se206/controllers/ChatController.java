@@ -88,13 +88,13 @@ public class ChatController {
             String message = inputText.getText();
             String extra = "";
             if (GameState.currentRoom == ROOM_STATE.CHEST) {
-              extra = " (I am in chestRoom)";
+              extra = " (chestRoom)";
             } else if (GameState.currentRoom == ROOM_STATE.ZACH) {
-              extra = " (I am in zachRoom)";
+              extra = " (zachRoom)";
             } else if (GameState.currentRoom == ROOM_STATE.RUSIRU) {
-              extra = " (I am in rusiruRoom)";
+              extra = " (rusiruRoom)";
             } else {
-              extra = " (I am in marcellinRoom)";
+              extra = " (marcellinRoom)";
             }
             message = message.concat(extra);
             if (message.trim().isEmpty()) {
