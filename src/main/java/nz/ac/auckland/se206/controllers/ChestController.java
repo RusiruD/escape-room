@@ -25,6 +25,7 @@ public class ChestController implements Controller {
 
   private HashMap<String, String> keyHoleMap = new HashMap<String, String>();
   private HashMap<String, String> correctKeyMap = new HashMap<String, String>();
+  private HashMap<String, String> keyMap = new HashMap<String, String>();
   private List<String> keys = Arrays.asList("key1", "key2", "key3");
 
   private int correctKeys = 0;
@@ -102,16 +103,22 @@ public class ChestController implements Controller {
         switch (i) {
           case 0:
             keyHole1.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole1.mouseTransparentProperty().set(true);
           case 1:
             keyHole2.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole2.mouseTransparentProperty().set(true);
           case 2:
             keyHole3.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole3.mouseTransparentProperty().set(true);
           case 3:
             keyHole4.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole4.mouseTransparentProperty().set(true);
           case 4:
             keyHole5.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole5.mouseTransparentProperty().set(true);
           case 5:
             keyHole6.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole6.mouseTransparentProperty().set(true);
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "false") {
         // set to red for incorrect and let them try again
@@ -119,22 +126,16 @@ public class ChestController implements Controller {
         switch (i) {
           case 0:
             keyHole1.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
-            keyHole1.mouseTransparentProperty().set(false);
           case 1:
             keyHole2.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
-            keyHole2.mouseTransparentProperty().set(false);
           case 2:
             keyHole3.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
-            keyHole3.mouseTransparentProperty().set(false);
           case 3:
             keyHole4.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
-            keyHole4.mouseTransparentProperty().set(false);
           case 4:
             keyHole5.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
-            keyHole5.mouseTransparentProperty().set(false);
           case 5:
             keyHole6.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
-            keyHole6.mouseTransparentProperty().set(false);
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
         // set back to default
@@ -213,14 +214,18 @@ public class ChestController implements Controller {
     // check if correct key
     // if the key is already correct then do nothing
     // check if inserting a key
-    if (!keys.contains(inventoryChoiceBox.getValue())) {
-      return;
-    }
-    System.out.println("is key correct?");
+    System.out.println("click key hole " + num);
     if (correctKeyMap.get("hole" + num) == "empty") {
       // in the case that the key hole is empty when clicked
-      keyHole.styleProperty().set("-fx-fill: #fab387");
+      if (!keys.contains(inventoryChoiceBox.getValue())) {
+        return;
+      }
 
+      // set to orange for inserting and add to key map
+      keyHole.styleProperty().set("-fx-fill: #fab387");
+      keyMap.put("hole" + num, inventoryChoiceBox.getValue());
+
+      // check if correct key
       if (keyHoleMap.get("hole" + num) == inventoryChoiceBox.getValue()) {
         System.out.println("correct key");
         correctKeys++;
@@ -233,15 +238,13 @@ public class ChestController implements Controller {
       }
       inventoryChoiceBox.getItems().remove(inventoryChoiceBox.getValue());
       // sets to yellow for filled
-      keyHole.mouseTransparentProperty().set(true);
-    } else if (correctKeyMap.get("hole" + num) == "false") {
-      // if its false then set back to default (get back key) on click
+    } else {
+      // if its filled then set back to default (get back key) on click
       keyHole.styleProperty().set("-fx-fill: #1e90ff");
-      keyHole.mouseTransparentProperty().set(true);
-
       // puts key states back to normal
       correctKeyMap.put("hole" + num, "empty");
-      inventoryChoiceBox.getItems().add(keyHoleMap.get("hole" + num));
+      System.out.println("got back key " + keyHoleMap.get("hole" + num));
+      inventoryChoiceBox.getItems().add(keyMap.get("hole" + num));
     }
   }
 }
