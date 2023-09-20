@@ -69,7 +69,6 @@ public class ChestController implements Controller {
 
   public void initialize() {
     instance = this;
-    keyHoleMap = new HashMap<String, String>();
     // get random keys for key holes
 
     lblKey1.setText("");
@@ -83,6 +82,7 @@ public class ChestController implements Controller {
     ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
     for (int i = 1; i <= 6; i++) {
       randomNumbers.add(i);
+      keyHoleMap.put("hole" + i, "empty");
     }
 
     int[] solutions = new int[3];
@@ -133,12 +133,10 @@ public class ChestController implements Controller {
   public void openChest(MouseEvent event) {
     System.out.println("open chest");
     // check if correct combination
+    updateKeys();
     if (correctKeys == 3) {
       // open chest
       System.out.println("chest opened");
-    } else {
-      // change inserted keys red or green depending if they are correct
-      updateKeys();
     }
   }
 
@@ -154,21 +152,27 @@ public class ChestController implements Controller {
           case 0:
             keyHole1.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole1.mouseTransparentProperty().set(true);
+            break;
           case 1:
             keyHole2.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole2.mouseTransparentProperty().set(true);
+            break;
           case 2:
             keyHole3.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole3.mouseTransparentProperty().set(true);
+            break;
           case 3:
             keyHole4.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole4.mouseTransparentProperty().set(true);
+            break;
           case 4:
             keyHole5.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole5.mouseTransparentProperty().set(true);
+            break;
           case 5:
             keyHole6.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
             keyHole6.mouseTransparentProperty().set(true);
+            break;
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "false") {
         // set to red for incorrect and let them try again
@@ -176,32 +180,44 @@ public class ChestController implements Controller {
         switch (i) {
           case 0:
             keyHole1.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            break;
           case 1:
             keyHole2.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            break;
           case 2:
             keyHole3.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            break;
           case 3:
             keyHole4.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            break;
           case 4:
             keyHole5.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            break;
           case 5:
             keyHole6.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            break;
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
         // set back to default
         switch (i) {
           case 0:
             keyHole1.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            break;
           case 1:
             keyHole2.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            break;
           case 2:
             keyHole3.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            break;
           case 3:
             keyHole4.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            break;
           case 4:
             keyHole5.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            break;
           case 5:
             keyHole6.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            break;
         }
       }
     }
@@ -336,7 +352,7 @@ public class ChestController implements Controller {
       setLabelKeyHole(num, inventoryChoiceBox.getValue());
 
       // check if correct key
-      if (keyHoleMap.get("hole" + num) == inventoryChoiceBox.getValue()) {
+      if (keyHoleMap.get("hole" + num).equals(inventoryChoiceBox.getValue())) {
         System.out.println("correct key");
         correctKeys++;
         correctKeyMap.put("hole" + num, "true");
