@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="679.0" prefWidth="648.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="728.0" prefWidth="696.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
-      <ImageView fitHeight="679.0" fitWidth="660.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CorridorBackground.png" />
          </image>
@@ -34,7 +34,7 @@
 
       <Group layoutX="401.0" layoutY="529.0">
          <children>
-            <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0" points="248.15386962890625, -182.0, -7.15386962890625, -372.0, -48.15386962890625, -336.0, -71.15399169921875, -434.0, -129.78741455078125, -394.0, -106.640625, -299.0, -125.15386962890625, -271.0, -154.91656494140625, -378.0, -209.15386962890625, -336.0, -170.640625, -232.0, -188.640625, -212.0, -198.15386962890625, -195.0, -209.15386962890625, -182.0, -209.15386962890625, -182.0, -224.59857177734375, -166.0, -302.15386962890625, -271.0, -357.010498046875, -224.0, -272.989501953125, -124.0, -366.15386962890625, -50.03997802734375, -198.15386962890625, 144.0, 47.84613037109375, 150.0, 186.84613037109375, -2.2099609375, 236.84613037109375, -71.2099609375" stroke="BLACK" strokeType="INSIDE" />
+            <Polygon fx:id="polygon" fill="DODGERBLUE" opacity="0.0" points="279.5390625, -154.0, 28.5390625, -355.0, -24.4609375, -311.0, -71.15399169921875, -434.0, -110.4609375, -389.0, -78.4609375, -271.0, -110.4609375, -242.0, -154.91656494140625, -378.0, -209.15386962890625, -336.0, -148.4609375, -218.0, -169.4609375, -188.0, -188.640625, -166.74444580078125, -209.15386962890625, -182.0, -198.15386962890625, -166.74444580078125, -216.4609375, -143.0, -302.15386962890625, -271.0, -357.010498046875, -224.0, -267.24444580078125, -106.0, -372.9854736328125, -36.0, -188.640625, 196.0, 84.0, 190.0, 213.0, 50.0, 279.5390625, -36.0" stroke="BLACK" strokeType="INSIDE" />
             <Label layoutX="-263.0" layoutY="-148.0" prefHeight="41.0" prefWidth="70.0" rotate="-45.0" text="One" textFill="#830000">
                <font>
                   <Font name="Old English Text MT" size="35.0" />
@@ -50,9 +50,9 @@
                   <Font name="Old English Text MT" size="35.0" />
                </font>
             </Label>
-            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="-218.0" layoutY="-362.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
-            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0" layoutX="-367.0" layoutY="-279.0" opacity="0.0" rotate="-40.6" stroke="BLACK" strokeType="INSIDE" width="58.0" />
-            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="58.0" layoutX="-111.0" layoutY="-423.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="23.0" />
+            <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="-198.0" layoutY="-355.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
+            <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0" layoutX="-366.0" layoutY="-266.0" opacity="0.0" rotate="-40.6" stroke="BLACK" strokeType="INSIDE" width="58.0" />
+            <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="58.0" layoutX="-98.0" layoutY="-423.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="23.0" />
             <ImageView fx:id="treasurechest" fitHeight="77.0" fitWidth="133.0" layoutX="-80.0" layoutY="-176.0" onMouseClicked="#onTreasureChestClicked" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/TreasureChest.png" />
@@ -65,7 +65,7 @@
             </ImageView>
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" focusTraversable="true" height="50.0" stroke="#f00000" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
       
-            <Button fx:id="riddleButton" layoutX="159.0" layoutY="98.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
+            <Button fx:id="riddleButton" layoutX="210.0" layoutY="158.0" mnemonicParsing="false" onMouseClicked="#getRiddle" text="Button" />
          </children>
       </Group>
 

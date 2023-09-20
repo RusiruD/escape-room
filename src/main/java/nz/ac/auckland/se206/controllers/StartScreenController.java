@@ -1,10 +1,13 @@
 package nz.ac.auckland.se206.controllers;
 
+import java.io.IOException;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -49,11 +52,15 @@ public class StartScreenController {
     } else {
       time.timerStart(360);
     }
-    Button button = (Button) event.getSource();
-    Scene sceneButtonIsIn = button.getScene();
+    
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");
-    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
-    SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
+   
+    try {
+      App.setRoot(AppUi.CORRIDOR);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }  
   }
 }

@@ -31,7 +31,7 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class RoomController implements Controller {
   private static RoomController instance;
- @FXML private Pane root;
+ @FXML private Pane potionsRoomPane;
   @FXML private Pane popUp;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
@@ -158,7 +158,7 @@ public class RoomController implements Controller {
     }
     if (potionsincauldron.contains(GameState.firstPotion)
         && potionsincauldron.contains(GameState.secondPotion)) {
-      tintScene(root);
+      tintScene(potionsRoomPane);
       allowImageToBeDragged(boulder);
     }
   }
@@ -287,6 +287,19 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
+  }
+  @FXML
+  public double getRoomWidth(){
+   
+   
+   
+    return  potionsRoomPane.getPrefWidth();
+  }
+  @FXML
+  public double getRoomHeight(){
+   
+    return potionsRoomPane.getPrefHeight();
+
   }
 
   @FXML
@@ -418,17 +431,17 @@ public class RoomController implements Controller {
 
   }
 
-  private void tintScene(Pane root) {
+  private void tintScene(Pane potionsRoomPane) {
     Color colour1 = convertStringToColor(GameState.firstPotion);
     Color colour2 = convertStringToColor(GameState.secondPotion);
     Color colour3 = calculateAverageColor(colour1, colour2);
     // Create a colored rectangle to overlay the scene
 
-    Rectangle tintRectangle = new Rectangle(root.getWidth(), root.getHeight(), colour3);
+    Rectangle tintRectangle = new Rectangle(potionsRoomPane.getWidth(), potionsRoomPane.getHeight(), colour3);
     tintRectangle.setOpacity(0); // Initially, make it fully transparent
 
     // Add the rectangle to the root layout
-    root.getChildren().add(tintRectangle);
+    potionsRoomPane.getChildren().add(tintRectangle);
 
     // Create a timeline animation to control the tint effect
     Timeline timeline =
@@ -438,7 +451,7 @@ public class RoomController implements Controller {
             new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
     timeline.setOnFinished(
         event -> {
-          root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
+         potionsRoomPane.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
         });
     // Play the animation
     timeline.play();

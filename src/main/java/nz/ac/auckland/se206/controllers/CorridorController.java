@@ -48,7 +48,8 @@ public class CorridorController implements Controller {
   private int movementSpeed = 2;
 
   // JavaFX UI elements
-
+  
+  @FXML private ImageView backgroundImage;
   @FXML private Polygon polygon;
   @FXML private Group group;
   @FXML private Rectangle player;
@@ -130,6 +131,7 @@ public class CorridorController implements Controller {
   }
 
   public void initialize() {
+   
     instance = this;
     Image image = new Image("/images/character.png");
 
@@ -193,32 +195,31 @@ public class CorridorController implements Controller {
   private void checkCollision() {
     // Check collision with door1 and navigate to a new room if needed
     if (player.intersects(door1.getBoundsInParent())) {
-      try {
+
         stopMovement();
-        App.setRoot(SceneManager.AppUi.PUZZLEROOM);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+        App.goToDoor1();
+        /*try {
+          App.setRoot(SceneManager.AppUi.FIRST_ROOM);
+        } catch (IOException e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }*/
     }
+      
+     
+  
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.FIRST_ROOM);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      stopMovement();
+     App.goToDoor2();
     }
 
     // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
-      try {
-        stopMovement();
-        App.setRoot(SceneManager.AppUi.UNTANGLE);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
+      stopMovement();
+     
+      App.goToDoor3();
     }
   }
 
@@ -326,6 +327,18 @@ public class CorridorController implements Controller {
   public void updateTimerLabel(String time) {
     // Update the timer label in the UI
     lblTime.setText(time);
+  }
+  @FXML
+  public double getCorridorWidth(){
+   
+   
+    return  room.getPrefWidth();
+  }
+  @FXML
+  public double getCorridorHeight(){
+   
+    return room.getPrefHeight();
+
   }
 
   @FXML
