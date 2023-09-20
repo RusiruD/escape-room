@@ -17,7 +17,7 @@
          </image>
       </ImageView>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="22.0" prefHeight="38.0" prefWidth="160.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <ImageView fx:id="imgTable" fitHeight="170.0" fitWidth="324.0" layoutX="85.0" layoutY="458.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgTable" fitHeight="170.0" fitWidth="324.0" layoutX="114.0" layoutY="407.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />
          </image>
@@ -63,12 +63,12 @@
             <Image url="@../images/boulder.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="942.0" layoutY="27.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="513.0" layoutY="27.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="490.0" layoutY="22.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="39.0" prefWidth="200.0" text="Return to Corridor" />
+      <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="574.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
       <Pane fx:id="popUp" layoutX="315.0" layoutY="513.0" maxHeight="80.0" maxWidth="550.0" prefHeight="80.0" prefWidth="550.0" style="-fx-background-color: null;" />
       <ImageView fx:id="cauldron" fitHeight="99.0" fitWidth="125.0" layoutX="912.0" layoutY="483.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -120,5 +120,6 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
+      <Button layoutX="974.0" layoutY="23.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="84.0" text="Cogwheel" />
    </children>
 </Pane>

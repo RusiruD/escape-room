@@ -17,9 +17,9 @@
          </image>
       </ImageView>
       <Rectangle fx:id="puzzleButton" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="269.0" layoutY="267.0" onMouseClicked="#clickPuzzle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
-      <Button fx:id="btnReturnToCorridor" layoutX="216.0" layoutY="15.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="38.0" prefWidth="208.0" stylesheets="@../css/roomStylesheet.css" text="Return to Corridor" />
+      <Button fx:id="btnReturnToCorridor" layoutX="14.0" layoutY="561.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="38.0" prefWidth="87.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="15.0" prefHeight="38.0" prefWidth="166.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="461.0" layoutY="14.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="248.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" text="s">
          <font>
             <Font name="Old English Text MT" size="24.0" />
          </font>
@@ -29,5 +29,6 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
+      <Button layoutX="509.0" layoutY="20.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
    </children>
 </Pane>

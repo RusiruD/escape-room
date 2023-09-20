@@ -18,14 +18,14 @@
             <Image url="@../images/CorridorBackground.png" />
          </image>
       </ImageView>
-      <Button layoutX="562.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#clickExit" stylesheets="@../css/roomStylesheet.css" text="Exit">
+      <Button layoutX="562.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel">
 
          <font>
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="21.0" prefHeight="38.0" prefWidth="166.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="341.0" layoutY="26.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="278.0" layoutY="26.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="24.0" />
          </font>
