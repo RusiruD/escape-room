@@ -17,6 +17,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -130,7 +131,7 @@ public class UntangleRoomController implements Controller {
   public static UntangleRoomController getInstance() {
     return instance;
   }
-
+  @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
   @FXML private ImageView key3;
   @FXML private Label lblTime;
@@ -243,6 +244,19 @@ public class UntangleRoomController implements Controller {
     System.out.println("Puzzle solved");
     key3.setVisible(true);
     key3.mouseTransparentProperty().set(false);
+  }
+  @FXML
+  public double getUntangleRoomWidth(){
+   
+    
+   
+    return  untangleRoomAnchorPane.getPrefWidth();
+  }
+  @FXML
+  public double getUntangleRoomHeight(){
+    
+    return untangleRoomAnchorPane.getPrefHeight();
+
   }
 
   // creates a draggable anchor displayed around a point.

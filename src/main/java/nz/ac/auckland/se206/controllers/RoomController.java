@@ -37,38 +37,7 @@ public class RoomController implements Controller {
     return instance;
   }
 
-  public static Color convertStringToColor(String colorName) {
-    switch (colorName) {
-      case "Red Potion":
-        return Color.RED;
-      case "Green Potion":
-        System.out.println("s");
-        return Color.GREEN;
-
-      case "Blue Potion":
-        System.out.println("sd");
-        return Color.BLUE;
-      case "Purple Potion":
-        return Color.PURPLE;
-      case "Yellow Potion":
-        System.out.println("sd");
-        return Color.YELLOW;
-
-        // Add more color mappings as needed
-      default:
-        return Color.BLACK;
-    } // Default to black if the color name is not recognized
-  }
-
-  public static Color calculateAverageColor(Color color1, Color color2) {
-    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
-    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
-    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
-
-    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
-  }
-
-  @FXML private Pane root;
+  @FXML private Pane potionsRoomPane;
   @FXML private Pane popUp;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
@@ -96,60 +65,40 @@ public class RoomController implements Controller {
   @FXML private ImageView parchment1duplicate;
   @FXML private ImageView cauldron;
   @FXML private ImageView parchment2duplicate;
-
+  private List<String> potionsincauldron = new ArrayList<>();
   @FXML private ImageView parchment3duplicate;
   @FXML private TextArea chatTextArea;
 
   @FXML private ImageView parchment4duplicate;
-  private List<String> potionsincauldron = new ArrayList<>();
 
   @FXML private Button btnHideNote;
 
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() throws ApiProxyException {
-    instance = this;
-    chatTextArea
-        .getStylesheets()
-        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
-    chatTextArea.getStyleClass().add("text-area .content");
-    btnHideNote.getStyleClass().add("custom-button");
-    String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
+  public static Color convertStringToColor(String colorName) {
+    switch (colorName) {
+      case "Red Potion":
+        return Color.RED;
+      case "Green Potion":
+        return Color.GREEN;
 
-    Random random = new Random();
+      case "Blue Potion":
+        return Color.BLUE;
+      case "Purple Potion":
+        return Color.PURPLE;
+      case "Yellow Potion":
+        return Color.YELLOW;
 
-    int firstIndex = random.nextInt(colors.length);
-    String firstPotion = colors[firstIndex];
-    GameState.firstPotion = "" + firstPotion + " Potion";
-    int secondIndex;
-    do {
-      secondIndex = random.nextInt(colors.length);
-    } while (secondIndex == firstIndex); // Ensure the second color is different from the first
+        // Add more color mappings as needed
+      default:
+        return Color.BLACK;
+    } // Default to black if the color name is not recognized
+  }
 
-    String secondPotion = colors[secondIndex];
-    GameState.secondPotion = secondPotion + " Potion";
+  public static Color calculateAverageColor(Color color1, Color color2) {
+    double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
+    double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
+    double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
 
-    chatTextArea.appendText(
-        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
-            + firstPotion
-            + " and "
-            + secondPotion
-            + " in the cauldron for super strength. \n"
-            + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
-    // Bind the rotation of the image to the slider value
-    /*
-     * imgArt
-     * .rotateProperty()
-     * .bind(
-     * Bindings.createDoubleBinding(
-     * () -> 360 * (slider.getValue() / 100.0), slider.valueProperty()));
-     */
-    setRandomPosition(parchment1);
-    setRandomPosition(parchment2);
-    setRandomPosition(parchment3);
-    setRandomPosition(parchment4);
-
-    // Allow the boulder to be dragged and dropped
-
+    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
   }
 
   @FXML
@@ -207,7 +156,7 @@ public class RoomController implements Controller {
     // if the two correct potions are in the cauldron, the boulder is made draggable
     if (potionsincauldron.contains(GameState.firstPotion)
         && potionsincauldron.contains(GameState.secondPotion)) {
-      tintScene(root);
+      tintScene(potionsRoomPane);
       CustomNotifications.generateNotification(
           "Something Happens!",
           "You feel far stronger... like energy's coursing through you and you could move"
@@ -226,7 +175,7 @@ public class RoomController implements Controller {
   private void addToInventory(ImageView image) {
     image.setVisible(false);
     image.setDisable(true);
-    // inventoryChoiceBox.getItems().add(image.getId());
+
     Inventory.addToInventory(image.getId());
     updateInventory();
   }
@@ -236,7 +185,7 @@ public class RoomController implements Controller {
     ImageView image = (ImageView) event.getSource();
     image.setVisible(false);
     image.setDisable(true);
-    // inventoryChoiceBox.getItems().add(image.getId());
+
     Inventory.addToInventory(image.getId());
     updateInventory();
   }
@@ -268,7 +217,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void closeNote() {
+  private void closeNote(ActionEvent event) {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -340,6 +289,18 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
+  }
+
+  @FXML
+  public double getRoomWidth() {
+
+    return potionsRoomPane.getPrefWidth();
+  }
+
+  @FXML
+  public double getRoomHeight() {
+
+    return potionsRoomPane.getPrefHeight();
   }
 
   @FXML
@@ -467,22 +428,20 @@ public class RoomController implements Controller {
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
-    // dialog.getStyleClass().add("popUp");
-    // popUp.getChildren().add(dialog);
-
   }
 
-  private void tintScene(Pane root) {
+  private void tintScene(Pane potionsRoomPane) {
     Color colour1 = convertStringToColor(GameState.firstPotion);
     Color colour2 = convertStringToColor(GameState.secondPotion);
     Color colour3 = calculateAverageColor(colour1, colour2);
     // Create a colored rectangle to overlay the scene
 
-    Rectangle tintRectangle = new Rectangle(root.getWidth(), root.getHeight(), colour3);
+    Rectangle tintRectangle =
+        new Rectangle(potionsRoomPane.getWidth(), potionsRoomPane.getHeight(), colour3);
     tintRectangle.setOpacity(0); // Initially, make it fully transparent
 
     // Add the rectangle to the root layout
-    root.getChildren().add(tintRectangle);
+    potionsRoomPane.getChildren().add(tintRectangle);
 
     // Create a timeline animation to control the tint effect
     Timeline timeline =
@@ -492,9 +451,51 @@ public class RoomController implements Controller {
             new KeyFrame(Duration.seconds(2), new KeyValue(tintRectangle.opacityProperty(), 0.0)));
     timeline.setOnFinished(
         event -> {
-          root.getChildren().remove(tintRectangle); // Remove the tint rectangle from the root
+          potionsRoomPane
+              .getChildren()
+              .remove(tintRectangle); // Remove the tint rectangle from the root
         });
     // Play the animation
     timeline.play();
+  }
+
+  /** Initializes the room view, it is called when the room loads. */
+  public void initialize() throws ApiProxyException {
+    instance = this;
+    chatTextArea
+        .getStylesheets()
+        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
+    chatTextArea.getStyleClass().add("text-area .content");
+    btnHideNote.getStyleClass().add("custom-button");
+    String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
+
+    Random random = new Random();
+
+    int firstIndex = random.nextInt(colors.length);
+    String firstPotion = colors[firstIndex];
+    GameState.firstPotion = "" + firstPotion + " Potion";
+    int secondIndex;
+    do {
+      secondIndex = random.nextInt(colors.length);
+    } while (secondIndex == firstIndex); // Ensure the second color is different from the first
+
+    String secondPotion = colors[secondIndex];
+    GameState.secondPotion = secondPotion + " Potion";
+
+    chatTextArea.appendText(
+        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
+            + firstPotion
+            + " and "
+            + secondPotion
+            + " in the cauldron for super strength. \n"
+            + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
+
+    setRandomPosition(parchment1);
+    setRandomPosition(parchment2);
+    setRandomPosition(parchment3);
+    setRandomPosition(parchment4);
+
+    // Allow the boulder to be dragged and dropped
+
   }
 }

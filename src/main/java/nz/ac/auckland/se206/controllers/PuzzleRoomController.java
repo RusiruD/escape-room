@@ -8,6 +8,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
@@ -20,7 +21,7 @@ public class PuzzleRoomController implements Controller {
   public static PuzzleRoomController getInstance() {
     return instance;
   }
-
+  @FXML private Pane puzzleRoomPane;
   @FXML private Label lblTime;
   @FXML private ImageView key2;
 
@@ -60,6 +61,19 @@ public class PuzzleRoomController implements Controller {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
+  }
+  @FXML
+  public double getPuzzleRoomWidth(){
+   
+    
+   
+    return  puzzleRoomPane.getPrefWidth();
+  }
+  @FXML
+  public double getPuzzleRoomHeight(){
+   
+    return puzzleRoomPane.getPrefHeight();
+
   }
 
   @FXML
