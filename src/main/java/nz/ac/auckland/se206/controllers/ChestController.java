@@ -8,11 +8,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.databind.util.TypeKey;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 
 public class ChestController implements Controller {
@@ -38,21 +40,29 @@ public class ChestController implements Controller {
 
   @FXML
   private Rectangle keyHole1;
-
   @FXML
   private Rectangle keyHole2;
-
   @FXML
   private Rectangle keyHole3;
-
   @FXML
   private Rectangle keyHole4;
-
   @FXML
   private Rectangle keyHole5;
-
   @FXML
   private Rectangle keyHole6;
+
+  @FXML
+  private Label lblKey1;
+  @FXML
+  private Label lblKey2;
+  @FXML
+  private Label lblKey3;
+  @FXML
+  private Label lblKey4;
+  @FXML
+  private Label lblKey5;
+  @FXML
+  private Label lblKey6;
 
   private final String DEFAULT_COLOUR = "#1e90ff";
   private final String CORRECT_COLOUR = "#a8e6cf";
@@ -62,6 +72,13 @@ public class ChestController implements Controller {
     instance = this;
     keyHoleMap = new HashMap<String, String>();
     // get random keys for key holes
+
+    lblKey1.setText("");
+    lblKey2.setText("");
+    lblKey3.setText("");
+    lblKey4.setText("");
+    lblKey5.setText("");
+    lblKey6.setText("");
 
     // shuffle keys
     ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
@@ -210,6 +227,11 @@ public class ChestController implements Controller {
     clickKeyHoleHelper(6, keyHole);
   }
 
+  @FXML
+  private void onReturnToCorridorClicked(ActionEvent event) {
+    App.returnToCorridor();
+  }
+
   private void clickKeyHoleHelper(int num, Rectangle keyHole) {
     // check if correct key
     // if the key is already correct then do nothing
@@ -224,6 +246,7 @@ public class ChestController implements Controller {
       // set to orange for inserting and add to key map
       keyHole.styleProperty().set("-fx-fill: #fab387");
       keyMap.put("hole" + num, inventoryChoiceBox.getValue());
+      setLabelKeyHole(num, inventoryChoiceBox.getValue());
 
       // check if correct key
       if (keyHoleMap.get("hole" + num) == inventoryChoiceBox.getValue()) {
@@ -243,8 +266,56 @@ public class ChestController implements Controller {
       keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // puts key states back to normal
       correctKeyMap.put("hole" + num, "empty");
+      setLabelKeyHole(num, "");
       System.out.println("got back key " + keyHoleMap.get("hole" + num));
       inventoryChoiceBox.getItems().add(keyMap.get("hole" + num));
+    }
+  }
+
+  private void setLabelKeyHole(int num, String key) {
+    System.out.println("set label key hole " + num + " to " + key);
+    if (key != "") {
+      switch (num) {
+        case 1:
+          lblKey1.setText(key + " inserted");
+          break;
+        case 2:
+          lblKey2.setText(key + " inserted");
+          break;
+        case 3:
+          lblKey3.setText(key + " inserted");
+          break;
+        case 4:
+          lblKey4.setText(key + " inserted");
+          break;
+        case 5:
+          lblKey5.setText(key + " inserted");
+          break;
+        case 6:
+          lblKey6.setText(key + " inserted");
+          break;
+      }
+    } else {
+      switch (num) {
+        case 1:
+          lblKey1.setText("");
+          break;
+        case 2:
+          lblKey2.setText("");
+          break;
+        case 3:
+          lblKey3.setText("");
+          break;
+        case 4:
+          lblKey4.setText("");
+          break;
+        case 5:
+          lblKey5.setText("");
+          break;
+        case 6:
+          lblKey6.setText("");
+          break;
+      }
     }
   }
 }
