@@ -5,9 +5,9 @@ import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartScreenController {
@@ -65,7 +65,7 @@ public class StartScreenController {
     Scene sceneButtonIsIn = button.getScene();
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");
-    sceneButtonIsIn.setRoot(SceneManager.getUiRoot(AppUi.CORRIDOR));
-    SceneManager.getUiRoot(AppUi.CORRIDOR).requestFocus();
+
+    App.returnToCorridor();
   }
 }
