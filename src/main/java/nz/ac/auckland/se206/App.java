@@ -20,6 +20,9 @@ import nz.ac.auckland.se206.controllers.UntangleRoomController;
  */
 public class App extends Application {
 
+  public static SceneManager.AppUi oldScene = null;
+  public static SceneManager.AppUi newScene = AppUi.CORRIDOR;
+
   private static Scene scene;
 
   private static Parent root;
@@ -29,6 +32,10 @@ public class App extends Application {
   }
 
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
+
+    oldScene = newScene;
+    newScene = appUi;
+
     scene.setRoot(SceneManager.getUiRoot(appUi));
     root.requestFocus();
   }

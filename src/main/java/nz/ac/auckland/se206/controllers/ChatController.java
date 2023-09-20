@@ -104,7 +104,7 @@ public class ChatController {
             ChatMessage actualMessage = new ChatMessage("user", message);
             ChatMessage fakeMessage = new ChatMessage("user", message.replace(extra, ""));
             appendChatMessage(fakeMessage);
-            ChatMessage lastMsg = runGpt(actualMessage);
+            runGpt(actualMessage);
             Platform.runLater(() -> {});
             return null;
           }
@@ -114,6 +114,6 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.returnToCorridor();
+    App.setRoot(App.oldScene);
   }
 }

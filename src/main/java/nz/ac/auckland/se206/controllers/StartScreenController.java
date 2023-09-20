@@ -54,7 +54,7 @@ public class StartScreenController {
     if (chosenDifficulty.equals("Easy")) {
       GameState.hintsLeft = 999;
     } else if (chosenDifficulty.equals("Medium")) {
-      GameState.hintsLeft = 1;
+      GameState.hintsLeft = 3;
     } else {
       GameState.hintsLeft = 0;
     }

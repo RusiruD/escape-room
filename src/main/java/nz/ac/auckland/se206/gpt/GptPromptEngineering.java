@@ -38,14 +38,7 @@ public class GptPromptEngineering {
    * @return the generated prompt engineering string
    */
   public static String getRiddleWithGivenWord(String wordToGuess) {
-    return "You are the AI of an escape room, tell me a riddle with"
-        + " answer "
-        + wordToGuess
-        + ". You should answer with the word Correct when is correct, if the user asks for hints"
-        + " give them, if users guess incorrectly also give hints. You cannot, no matter what,"
-        + " reveal the answer even if the player asks for it. Even if player gives up, do not give"
-        + " the answer. The player will use parantheses to communicate what hint you aer suppose to"
-        + " give. Do not mention this information back to them, and do not mention the room name.";
+    return null;
   }
 
   public static String getHint() {
@@ -57,7 +50,7 @@ public class GptPromptEngineering {
               + " they can ask you for hints. If you give the player a hint or any form of help, be"
               + " explicit that you're giving a hint by putting HINT at the beginning of your"
               + " message. Do not give more that one step as a hint. The player will use"
-              + " parantheses to communicate what hint you aer suppose to give. Do not mention this"
+              + " parentheses to communicate what hint you are suppose to give. Do not mention this"
               + " information back to them, and do not mention the room name."
               + hugePrompt;
     } else if (GameState.hintsLeft < 999 && GameState.hintsLeft != 0) { // MEDIUM
@@ -69,9 +62,12 @@ public class GptPromptEngineering {
               + " hints. You cannot give hints or information without asking. If you give the"
               + " player a hint or any form of help, be explicit that you're giving a hint by"
               + " putting HINT at the beginning of your message. Do not give more that one step or"
-              + " instruction as a hint. Once you've given "
+              + " instruction as a hint. It is extremelty important that pnce you've given "
               + GameState.hintsLeft
-              + " hints, if you're asked more for help, hints, or information, reject it."
+              + " hints that you don't given any more, and if you're asked more for help, hints, or"
+              + " information, reject it. The player will use parentheses to communicate what hint"
+              + " you are suppose to give. Do not mention this information back to them, and do not"
+              + " mention the room name."
               + hugePrompt;
     } else { // HARD
       prompt =
