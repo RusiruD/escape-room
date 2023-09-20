@@ -29,7 +29,6 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
-import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 
 public class RoomController implements Controller {
   private static RoomController instance;
@@ -101,8 +100,8 @@ public class RoomController implements Controller {
   @FXML private ImageView parchment3duplicate;
   @FXML private TextArea chatTextArea;
 
-  private ChatCompletionRequest chatCompletionRequest;
   @FXML private ImageView parchment4duplicate;
+  private List<String> potionsincauldron = new ArrayList<>();
 
   @FXML private Button btnHideNote;
 
@@ -159,19 +158,23 @@ public class RoomController implements Controller {
     image.setScaleY(1.5);
   }
 
-  List<String> potionsincauldron = new ArrayList<>();
-
+  // When the cauldron is clicked, the potion is added to the cauldron
   @FXML
   private void onCauldronClicked(MouseEvent event) {
 
+    // Check if a potion is selected in the combo box
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
 
+    // if a potion is selected it is made visible in the scene
     if (selectedItem != null && selectedItem.contains("redPotion")) {
+      // if the potion is already in the cauldron, it is not added again
       potionsincauldron.add("Red Potion");
+      // the potion is removed from the combo box
       Inventory.removeFromInventory(selectedItem);
-
+      // the inventory is updated
       updateInventory();
 
+      // repeat for the other potions
     } else if (selectedItem != null && selectedItem.contains("bluePotion")) {
       potionsincauldron.add("Blue Potion");
 
@@ -179,20 +182,21 @@ public class RoomController implements Controller {
 
       updateInventory();
 
+      // repeat for the other potions
     } else if (selectedItem != null && selectedItem.contains("greenPotion")) {
       potionsincauldron.add("Green Potion");
 
       Inventory.removeFromInventory(selectedItem);
 
       updateInventory();
-
+      // repeat for the other potions
     } else if (selectedItem != null && selectedItem.contains("yellowPotion")) {
       potionsincauldron.add("Yellow Potion");
 
       Inventory.removeFromInventory(selectedItem);
 
       updateInventory();
-
+      // repeat for the other potions
     } else if (selectedItem != null && selectedItem.contains("purplePotion")) {
       potionsincauldron.add("Purple Potion");
 
@@ -200,6 +204,7 @@ public class RoomController implements Controller {
 
       updateInventory();
     }
+    // if the two correct potions are in the cauldron, the boulder is made draggable
     if (potionsincauldron.contains(GameState.firstPotion)
         && potionsincauldron.contains(GameState.secondPotion)) {
       tintScene(root);
