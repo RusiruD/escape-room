@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
@@ -128,6 +129,8 @@ public class PuzzleController implements Controller {
     }
     // if all the tiles are in the correct position, the puzzle is solved
     if (counter == 9) {
+      CustomNotifications.generateNotification(
+          "Something Happens!", "You hear something fall to the ground...");
       GameState.setPuzzleRoomSolved(true);
     }
   }
