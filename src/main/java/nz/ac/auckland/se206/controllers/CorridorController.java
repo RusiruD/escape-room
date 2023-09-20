@@ -285,9 +285,10 @@ public class CorridorController implements Controller {
   }
 
   @FXML
-  public void onTreasureChestClicked(MouseEvent event) {
+  public void onTreasureChestClicked(MouseEvent event) throws IOException {
     // Handle click on treasure chest
     System.out.println("clicked");
+    App.setRoot(SceneManager.AppUi.CHEST);
     String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
     if (GameState.isLock2Unlocked == true && GameState.isLock1Unlocked == true && GameState.isLock3Unlocked == true) {
       swordandshield.setVisible(true);

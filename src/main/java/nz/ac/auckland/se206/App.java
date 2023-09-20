@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.CorridorController;
 import nz.ac.auckland.se206.controllers.PuzzleController;
 import nz.ac.auckland.se206.controllers.PuzzleRoomController;
@@ -63,12 +64,14 @@ public class App extends Application {
     SceneManager.addUi(AppUi.START, loadFxml("startScreen"));
     SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
     SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
+    SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
 
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(RoomController.getInstance());
     SceneManager.addController(CorridorController.getInstance());
     SceneManager.addController(PuzzleController.getInstance());
     SceneManager.addController(UntangleRoomController.getInstance());
+    SceneManager.addController(ChestController.getInstance());
 
     root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 1100.0, 620.0);
