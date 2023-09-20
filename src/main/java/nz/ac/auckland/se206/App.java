@@ -72,7 +72,7 @@ public class App extends Application {
     SceneManager.addController(UntangleRoomController.getInstance());
 
     root = SceneManager.getUiRoot(AppUi.START);
-    scene = new Scene(root, 1100.0, 620.0);
+    scene = new Scene(root, 780.0, 780.0);
     stage.setScene(scene);
     stage.show();
     focus();
@@ -110,7 +110,7 @@ public class App extends Application {
       
 
     } catch (IOException e) {
-      System.out.println("dd");
+  
       e.printStackTrace();
     }
     focus();

@@ -56,11 +56,6 @@ public class StartScreenController {
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");
    
-    try {
-      App.setRoot(AppUi.CORRIDOR);
-    } catch (IOException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }  
+   App.returnToCorridor();
   }
 }

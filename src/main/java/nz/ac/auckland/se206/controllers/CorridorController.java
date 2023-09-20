@@ -198,12 +198,7 @@ public class CorridorController implements Controller {
 
         stopMovement();
         App.goToDoor1();
-        /*try {
-          App.setRoot(SceneManager.AppUi.FIRST_ROOM);
-        } catch (IOException e) {
-          // TODO Auto-generated catch block
-          e.printStackTrace();
-        }*/
+       
     }
       
      

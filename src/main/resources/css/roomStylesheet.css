@@ -87,7 +87,7 @@
 
 .text-area .content {
     -fx-background-image: url("/images/parchmentbg1.jpg");
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: rgba(0, 0, 0, 0.1);
     /* Set the background color */
     -fx-font-family: "Papyrus";
     /* Use the Papyrus font */
@@ -100,10 +100,6 @@
 }
 
 /* Define a custom style class */
-.custom-button {
-    -fx-background-color: #3498db;
-    -fx-text-fill: #ffffff;
-}
 
 /* Apply the custom style class to a button */
 .button.custom-button {

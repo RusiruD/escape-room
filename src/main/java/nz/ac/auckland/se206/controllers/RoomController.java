@@ -79,16 +79,16 @@ public class RoomController implements Controller {
       case "Red Potion":
         return Color.RED;
       case "Green Potion":
-        System.out.println("s");
+       
         return Color.GREEN;
 
       case "Blue Potion":
-        System.out.println("sd");
+      
         return Color.BLUE;
       case "Purple Potion":
         return Color.PURPLE;
       case "Yellow Potion":
-        System.out.println("sd");
+      
         return Color.YELLOW;
 
         // Add more color mappings as needed
