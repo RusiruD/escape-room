@@ -10,15 +10,15 @@ import javafx.scene.layout.VBox;
 
 public class Riddle {
   private String riddle;
-  private boolean hasRiddle = false;
+
   private DungeonMaster dungeonMaster;
 
   public Riddle(DungeonMaster dungeonMaster, String question) {
     // get the riddle from the dungeon master
+
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     riddle = dungeonMaster.getRiddle(question);
-    this.hasRiddle = true;
   }
 
   public Pane riddlePane(String riddleText) {
@@ -65,10 +65,6 @@ public class Riddle {
 
   public DungeonMaster getDungeonMaster() {
     return dungeonMaster;
-  }
-
-  public boolean hasRiddle() {
-    return hasRiddle;
   }
 
   public String getRiddle() {

@@ -23,6 +23,7 @@ public class ChatController {
   private static ChatController instance;
 
   public static ChatController getInstance() {
+
     return instance;
   }
 
@@ -34,6 +35,7 @@ public class ChatController {
 
   @FXML
   public void initialize() throws ApiProxyException {
+
     instance = this;
   }
 
@@ -168,6 +170,7 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+
     App.setRoot(App.oldScene);
   }
 }

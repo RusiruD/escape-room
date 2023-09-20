@@ -46,13 +46,20 @@ public class LeaderboardController {
     sortScores();
   }
 
-  // add a new score to the leaderboard
+  /**
+   * Adds a time entry to the leaderboard with the specified name, time, position, and final status.
+   *
+   * @param name The name of the player.
+   * @param time The time achieved by the player.
+   * @param position The position of the player in the leaderboard.
+   * @param isFinal Indicates whether the entry is for the final leaderboard.
+   */
   public void addTime(String name, int time, int position, boolean isFinal) {
-    // create a new entry
+    // Create a horizontal box to represent the leaderboard entry
     HBox entry = new HBox();
     entry.setPrefHeight(60);
 
-    // hbox for the first half of the entry
+    // Create two horizontal boxes to divide the entry into two halves
     HBox firstHalf = new HBox();
     firstHalf.setPrefWidth(250);
     firstHalf.setAlignment(Pos.CENTER_LEFT);
@@ -61,45 +68,55 @@ public class LeaderboardController {
     secondHalf.setPrefWidth(250);
     secondHalf.setAlignment(Pos.CENTER_RIGHT);
 
+    // Determine the background color based on the position
     String hexcode = getColour(position);
-    // set the style of the entry
+
+    // Set the style for the entry, including background color and padding
     entry.setStyle("-fx-background-color: " + hexcode + "; -fx-padding: 15;");
     if (isFinal) {
       entry.setStyle(
           "-fx-background-color: linear-gradient(to top, #3a404d, #181c26); -fx-padding: 15;");
     }
     entry.setAlignment(Pos.CENTER);
-    // create a stackpane for the position
+
+    // Create a stack pane to display the position number as a circle with a label
     StackPane pos = new StackPane();
     Circle circle = new Circle(15);
     circle.setFill(Color.WHITE);
     Label posLabel = new Label(Integer.toString(position + 1));
     posLabel.setStyle("-fx-text-fill: " + hexcode + "; -fx-font-size: 20; -fx-font-weight: bold;");
-    // add the position to the stackpane
+
     pos.getChildren().addAll(circle, posLabel);
     pos.setPadding(new Insets(0, 20, 0, 0));
 
+    // Add the position display to the first half
     firstHalf.getChildren().add(pos);
-    // if there is no name, add a label saying no name
+
+    // Check if the time is -1 (indicating no time set)
     if (time == -1) {
       firstHalf.getChildren().add(new Label("No time set"));
       leaderboard.getChildren().add(entry);
       return;
     }
-    // add the name and time to the entry
+
+    // Create labels for the player's name and time
     Label nameLabel = new Label(name);
     nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
     firstHalf.getChildren().add(nameLabel);
+
     Label timeLabel = new Label("Time: " + time);
     timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 15 0 10;");
     secondHalf.getChildren().add(timeLabel);
-    // add the entry to the leaderboard
+
+    // Add the two halves to the entry
     entry.getChildren().addAll(firstHalf, secondHalf);
+
+    // Depending on whether it's a final entry, add to the appropriate container
     if (isFinal) {
       leaderboardContainer.getChildren().add(entry);
-      return;
+    } else {
+      leaderboard.getChildren().add(entry);
     }
-    leaderboard.getChildren().add(entry);
   }
 
   private void sortScores() {
@@ -108,10 +125,7 @@ public class LeaderboardController {
     for (int i = 0; i < scores.size(); i++) {
       if (i < scores.size()) {
         int score = scores.get(i).getTime();
-        // int posDiff = 0;
-        // if (scores.get(i).getLeaderboardPos() == -1) {
-        // posDiff = calcPosChange(i);
-        // }
+
         scores.get(i).setLeaderboardPos(i);
         String name = scores.get(i).getName();
         addTime(name, score, i, false);

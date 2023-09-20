@@ -67,6 +67,44 @@ public class RoomController implements Controller {
     return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
   }
 
+  @FXML private Pane potionsRoomPane;
+  @FXML private Pane popUp;
+
+  @FXML private ComboBox<String> inventoryChoiceBox;
+  @FXML private Button btnReturnToCorridor;
+  @FXML private ImageView parchment1;
+  @FXML private ImageView imgArt;
+  @FXML private Slider slider;
+  @FXML private ImageView parchment2;
+  @FXML private Label lblTime;
+  @FXML private ImageView parchment3;
+  @FXML private ImageView key1;
+
+  @FXML private ImageView boulder;
+
+  @FXML private ImageView note;
+
+  @FXML private ImageView yellowPotion;
+  @FXML private ImageView redPotion;
+  @FXML private ImageView bluePotion;
+  @FXML private ImageView greenPotion;
+  @FXML private ImageView purplePotion;
+  @FXML private ImageView parchment4;
+  @FXML private ImageView parchment1duplicate;
+  @FXML private ImageView cauldron;
+  @FXML private ImageView parchment2duplicate;
+
+  @FXML private ImageView parchment3duplicate;
+  @FXML private TextArea chatTextArea;
+
+  @FXML private ImageView parchment4duplicate;
+
+  @FXML private Button btnHideNote;
+  private double horizontalOffset = 0;
+  private double verticalOffset = 0;
+  private List<String> potionsincauldron = new ArrayList<>();
+  private int parchmentPieces = 0;
+
   @FXML
   public double getRoomWidth() {
 
@@ -84,41 +122,100 @@ public class RoomController implements Controller {
     lblTime.setText(time);
   }
 
-  @FXML private Pane potionsRoomPane;
-  @FXML private Pane popUp;
+  @FXML
+  public void clickWindow(MouseEvent event) {
+    System.out.println("window clicked");
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    Task<Pane> task =
+        new Task<Pane>() {
+          @Override
+          protected Pane call() throws Exception {
+            return dungeonMaster.getText(
+                "user",
+                "I took damage from the window! Tell me"
+                    + " a few short sentences about it with no commas.");
+          }
+        };
+    task.setOnSucceeded(
+        e -> {
+          System.out.println("home task succeeded");
+          Pane dialogue = task.getValue();
+          popUp.getChildren().add(dialogue);
+          dialogue.getStyleClass().add("popUp");
+          Rectangle exitButton =
+              (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+          Text dialogueText =
+              (Text)
+                  ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+                      .getChildren()
+                      .get(1);
+          ImageView nextButton =
+              (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+          exitButton.setOnMouseClicked(
+              event1 -> {
+                popUp.visibleProperty().set(false);
+              });
+          dialogueText.setOnMouseClicked(
+              event1 -> {
+                if (!dungeonMaster.isSpeaking()) {
+                  dungeonMaster.update();
+                }
+              });
+          nextButton.setOnMouseClicked(
+              event1 -> {
+                if (!dungeonMaster.isSpeaking()) {
+                  dungeonMaster.update();
+                }
+              });
+        });
+    Thread thread = new Thread(task);
+    thread.setDaemon(true);
+    thread.start();
+  }
 
-  @FXML private ComboBox<String> inventoryChoiceBox;
-  @FXML private Button btnReturnToCorridor;
-  @FXML private ImageView parchment1;
-  @FXML private ImageView imgArt;
-  @FXML private Slider slider;
-  @FXML private ImageView parchment2;
-  @FXML private Label lblTime;
-  @FXML private ImageView parchment3;
-  @FXML private ImageView key1;
+  public void initialize() throws ApiProxyException {
+    instance = this;
+    chatTextArea
+        .getStylesheets()
+        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
+    chatTextArea.getStyleClass().add("text-area .content");
+    btnHideNote.getStyleClass().add("custom-button");
+    String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
 
-  @FXML private ImageView boulder;
-  private double horizontalOffset = 0;
-  private double verticalOffset = 0;
-  @FXML private ImageView note;
+    Random random = new Random();
 
-  private int parchmentPieces = 0;
-  @FXML private ImageView yellowPotion;
-  @FXML private ImageView redPotion;
-  @FXML private ImageView bluePotion;
-  @FXML private ImageView greenPotion;
-  @FXML private ImageView purplePotion;
-  @FXML private ImageView parchment4;
-  @FXML private ImageView parchment1duplicate;
-  @FXML private ImageView cauldron;
-  @FXML private ImageView parchment2duplicate;
-  private List<String> potionsincauldron = new ArrayList<>();
-  @FXML private ImageView parchment3duplicate;
-  @FXML private TextArea chatTextArea;
+    int firstIndex = random.nextInt(colors.length);
+    String firstPotion = colors[firstIndex];
+    GameState.firstPotion = "" + firstPotion + " Potion";
+    int secondIndex;
+    do {
+      secondIndex = random.nextInt(colors.length);
+    } while (secondIndex == firstIndex); // Ensure the second color is different from the first
 
-  @FXML private ImageView parchment4duplicate;
+    String secondPotion = colors[secondIndex];
+    GameState.secondPotion = secondPotion + " Potion";
 
-  @FXML private Button btnHideNote;
+    chatTextArea.appendText(
+        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
+            + firstPotion
+            + " and "
+            + secondPotion
+            + " in the cauldron for super strength. \n"
+            + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
+
+    setRandomPosition(parchment1);
+    setRandomPosition(parchment2);
+    setRandomPosition(parchment3);
+    setRandomPosition(parchment4);
+
+    // Allow the boulder to be dragged and dropped
+
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    App.setRoot(AppUi.CHAT);
+  }
 
   @FXML
   private void enlarge(ImageView image) {
@@ -236,7 +333,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void closeNote() {
+  private void hideNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -404,106 +501,5 @@ public class RoomController implements Controller {
     } else {
 
     }
-  }
-
-  /**
-   * Initializes the chat view, loading the note.
-   *
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   */
-  @FXML
-  public void clickWindow(MouseEvent event) {
-    System.out.println("window clicked");
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Pane> task =
-        new Task<Pane>() {
-          @Override
-          protected Pane call() throws Exception {
-            return dungeonMaster.getText(
-                "user",
-                "I took damage from the window! Tell me"
-                    + " a few short sentences about it with no commas.");
-          }
-        };
-    task.setOnSucceeded(
-        e -> {
-          System.out.println("home task succeeded");
-          Pane dialogue = task.getValue();
-          popUp.getChildren().add(dialogue);
-          dialogue.getStyleClass().add("popUp");
-          Rectangle exitButton =
-              (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-          Text dialogueText =
-              (Text)
-                  ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                      .getChildren()
-                      .get(1);
-          ImageView nextButton =
-              (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-          exitButton.setOnMouseClicked(
-              event1 -> {
-                popUp.visibleProperty().set(false);
-              });
-          dialogueText.setOnMouseClicked(
-              event1 -> {
-                if (!dungeonMaster.isSpeaking()) {
-                  dungeonMaster.update();
-                }
-              });
-          nextButton.setOnMouseClicked(
-              event1 -> {
-                if (!dungeonMaster.isSpeaking()) {
-                  dungeonMaster.update();
-                }
-              });
-        });
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-  }
-
-  @FXML
-  public void getHint() throws IOException {
-    App.setRoot(AppUi.CHAT);
-  }
-
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() throws ApiProxyException {
-    instance = this;
-    chatTextArea
-        .getStylesheets()
-        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
-    chatTextArea.getStyleClass().add("text-area .content");
-    btnHideNote.getStyleClass().add("custom-button");
-    String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
-
-    Random random = new Random();
-
-    int firstIndex = random.nextInt(colors.length);
-    String firstPotion = colors[firstIndex];
-    GameState.firstPotion = "" + firstPotion + " Potion";
-    int secondIndex;
-    do {
-      secondIndex = random.nextInt(colors.length);
-    } while (secondIndex == firstIndex); // Ensure the second color is different from the first
-
-    String secondPotion = colors[secondIndex];
-    GameState.secondPotion = secondPotion + " Potion";
-
-    chatTextArea.appendText(
-        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
-            + firstPotion
-            + " and "
-            + secondPotion
-            + " in the cauldron for super strength. \n"
-            + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
-
-    setRandomPosition(parchment1);
-    setRandomPosition(parchment2);
-    setRandomPosition(parchment3);
-    setRandomPosition(parchment4);
-
-    // Allow the boulder to be dragged and dropped
-
   }
 }

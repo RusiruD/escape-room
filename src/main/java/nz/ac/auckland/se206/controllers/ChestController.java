@@ -30,6 +30,7 @@ public class ChestController implements Controller {
   private static ChestController instance;
 
   public static ChestController getInstance() {
+
     return instance;
   }
 
@@ -70,6 +71,7 @@ public class ChestController implements Controller {
   private Boolean riddleCalled = false;
 
   public void initialize() {
+
     // Initialize the instance field with the current instance of the class
     instance = this;
 
@@ -239,6 +241,7 @@ public class ChestController implements Controller {
 
   // Method to update inventory in the UI
   public void updateInventory() {
+
     inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 
@@ -292,6 +295,7 @@ public class ChestController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+
     App.returnToCorridor();
   }
 
@@ -389,12 +393,19 @@ public class ChestController implements Controller {
     }
   }
 
-  // sets the label for the key hole
+  /**
+   * Sets the label for a keyhole to display the inserted key's status.
+   *
+   * @param num The number of the keyhole.
+   * @param key The key inserted into the keyhole.
+   */
   private void setLabelKeyHole(int num, String key) {
-    // set the label for the key hole
+    // Print a debug message indicating which keyhole is being set
     System.out.println("set label key hole " + num + " to " + key);
-    if (key != "") {
-      // set label to key
+
+    // Check if a key is inserted
+    if (!key.isEmpty()) {
+      // Depending on the keyhole number, set the corresponding label to display the key inserted
       switch (num) {
         case 1:
           lblKey1.setText(key + " inserted");
@@ -403,7 +414,6 @@ public class ChestController implements Controller {
           lblKey2.setText(key + " inserted");
           break;
         case 3:
-          // set label to key
           lblKey3.setText(key + " inserted");
           break;
         case 4:
@@ -417,7 +427,7 @@ public class ChestController implements Controller {
           break;
       }
     } else {
-      // set label to empty
+      // If no key is inserted, clear the label for the corresponding keyhole
       switch (num) {
         case 1:
           lblKey1.setText("");
@@ -426,13 +436,11 @@ public class ChestController implements Controller {
           lblKey2.setText("");
           break;
         case 3:
-          // set label to empty
           lblKey3.setText("");
           break;
         case 4:
           lblKey4.setText("");
           break;
-          // set label to empty
         case 5:
           lblKey5.setText("");
           break;
