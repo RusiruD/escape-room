@@ -92,126 +92,117 @@ public class App extends Application {
     root.requestFocus();
   }
 
- 
-/**
- * Return to the corridor and navigate to the corridor view.
- * Adjust the stage size to fit the corridor dimensions.
- */
-public static void returnToCorridor() {
-
-  try {
+  /**
+   * Return to the corridor and navigate to the corridor view. Adjust the stage size to fit the
+   * corridor dimensions.
+   */
+  public static void returnToCorridor() {
+    try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
-      
+
       // Get the corridor controller instance
       CorridorController corridorController = CorridorController.getInstance();
-      
+
       // Get the dimensions of the corridor
       double corridorWidth = corridorController.getCorridorWidth();
       double corridorHeight = corridorController.getCorridorHeight();
-      
+
       // Get the primary stage and adjust its size to fit the corridor
       Stage primaryStage = (Stage) scene.getWindow();
       primaryStage.setWidth(corridorWidth + 15);
       primaryStage.setHeight(corridorHeight + 38);
 
-  } catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
+    }
   }
-  
-  // Focus on the corridor
-  focus();
-}
 
-/**
-* Navigate to Door 1 and enter the first room.
-* Adjust the stage size to fit the first room dimensions.
-*/
-public static void goToDoor1() {
+  /**
+   * Navigate to Door 1 and enter the first room. Adjust the stage size to fit the first room
+   * dimensions.
+   */
+  public static void goToDoor1() {
 
-  try {
+    try {
       // Set the root view to the first room
       App.setRoot(AppUi.FIRST_ROOM);
-      
+
       // Get the first room controller instance
       RoomController roomController = RoomController.getInstance();
-      
+
       // Get the dimensions of the first room
       double roomWidth = roomController.getRoomWidth();
       double roomHeight = roomController.getRoomHeight();
-      
+
       // Get the primary stage and adjust its size to fit the first room
       Stage primaryStage = (Stage) scene.getWindow();
       primaryStage.setWidth(roomWidth + 15);
       primaryStage.setHeight(roomHeight + 38);
 
-  } catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
+    }
+
+    // Focus on the first room
+    focus();
   }
-  
-  // Focus on the first room
-  focus();
-}
 
   /**
- * Navigate to Door 2 and enter the Untangle room.
- * Adjust the stage size to fit the Untangle room dimensions.
- */
-public static void goToDoor2() {
+   * Navigate to Door 2 and enter the Untangle room. Adjust the stage size to fit the Untangle room
+   * dimensions.
+   */
+  public static void goToDoor2() {
 
-  try {
+    try {
       // Set the root view to the Untangle room
       App.setRoot(AppUi.UNTANGLE);
-      
+
       // Get the Untangle room controller instance
       UntangleRoomController untangleroomController = UntangleRoomController.getInstance();
-      
+
       // Get the dimensions of the Untangle room
       double untangleroomWidth = untangleroomController.getUntangleRoomWidth();
       double untangleroomHeight = untangleroomController.getUntangleRoomHeight();
-      
+
       // Get the primary stage and adjust its size to fit the Untangle room
       Stage primaryStage = (Stage) scene.getWindow();
       primaryStage.setWidth(untangleroomWidth + 15);
       primaryStage.setHeight(untangleroomHeight + 38);
 
-  } catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
+    }
   }
-  
-  // Focus on the new room
-  focus();
-}
 
-/**
-* Navigate to Door 3 and enter the Puzzle room.
-* Adjust the stage size to fit the Puzzle room dimensions.
-*/
-public static void goToDoor3() {
+  /**
+   * Navigate to Door 3 and enter the Puzzle room. Adjust the stage size to fit the Puzzle room
+   * dimensions.
+   */
+  public static void goToDoor3() {
 
-  try {
+    try {
       // Set the root view to the Puzzle room
       App.setRoot(AppUi.PUZZLEROOM);
-      
+
       // Get the Puzzle room controller instance
       PuzzleRoomController puzzleroomController = PuzzleRoomController.getInstance();
-      
+
       // Get the dimensions of the Puzzle room
       double puzzleroomWidth = puzzleroomController.getPuzzleRoomWidth();
       double puzzleroomHeight = puzzleroomController.getPuzzleRoomHeight();
-      
+
       // Get the primary stage and adjust its size to fit the Puzzle room
       Stage primaryStage = (Stage) scene.getWindow();
       primaryStage.setWidth(puzzleroomWidth + 15);
       primaryStage.setHeight(puzzleroomHeight + 38);
 
-  } catch (IOException e) {
-    
-      e.printStackTrace();
-  }
-  
-  // Focus on the new room
-  focus();
-}
+    } catch (IOException e) {
 
+      e.printStackTrace();
+    }
+
+    // Focus on the new room
+    focus();
+  }
 }

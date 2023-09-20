@@ -9,18 +9,16 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 public class Riddle {
-
   private String riddle;
- 
+
   private DungeonMaster dungeonMaster;
 
   public Riddle(DungeonMaster dungeonMaster, String question) {
     // get the riddle from the dungeon master
-   
+
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     riddle = dungeonMaster.getRiddle(question);
-   
   }
 
   public Pane riddlePane(String riddleText) {
@@ -68,8 +66,6 @@ public class Riddle {
   public DungeonMaster getDungeonMaster() {
     return dungeonMaster;
   }
-
- 
 
   public String getRiddle() {
     return riddle;

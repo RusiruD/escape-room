@@ -39,46 +39,6 @@ public class RoomController implements Controller {
     return instance;
   }
 
-  @FXML private Pane potionsRoomPane;
-  @FXML private Pane popUp;
-
-  @FXML private ComboBox<String> inventoryChoiceBox;
-  @FXML private Button btnReturnToCorridor;
-  @FXML private ImageView parchment1;
-  @FXML private ImageView imgArt;
-  @FXML private Slider slider;
-  @FXML private ImageView parchment2;
-  @FXML private Label lblTime;
-  @FXML private ImageView parchment3;
-  @FXML private ImageView key1;
-
-  @FXML private ImageView boulder;
-
-  @FXML private ImageView note;
-
-
-  @FXML private ImageView yellowPotion;
-  @FXML private ImageView redPotion;
-  @FXML private ImageView bluePotion;
-  @FXML private ImageView greenPotion;
-  @FXML private ImageView purplePotion;
-  @FXML private ImageView parchment4;
-  @FXML private ImageView parchment1duplicate;
-  @FXML private ImageView cauldron;
-  @FXML private ImageView parchment2duplicate;
- 
-  @FXML private ImageView parchment3duplicate;
-  @FXML private TextArea chatTextArea;
-
-  @FXML private ImageView parchment4duplicate;
-
-  @FXML private Button btnHideNote;
-  private double horizontalOffset = 0;
-  private double verticalOffset = 0;
-  private List<String> potionsincauldron = new ArrayList<>();
-  private int parchmentPieces = 0;
-
-
   public static Color convertStringToColor(String colorName) {
     switch (colorName) {
       case "Red Potion":
@@ -106,6 +66,45 @@ public class RoomController implements Controller {
 
     return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
   }
+
+  @FXML private Pane potionsRoomPane;
+  @FXML private Pane popUp;
+
+  @FXML private ComboBox<String> inventoryChoiceBox;
+  @FXML private Button btnReturnToCorridor;
+  @FXML private ImageView parchment1;
+  @FXML private ImageView imgArt;
+  @FXML private Slider slider;
+  @FXML private ImageView parchment2;
+  @FXML private Label lblTime;
+  @FXML private ImageView parchment3;
+  @FXML private ImageView key1;
+
+  @FXML private ImageView boulder;
+
+  @FXML private ImageView note;
+
+  @FXML private ImageView yellowPotion;
+  @FXML private ImageView redPotion;
+  @FXML private ImageView bluePotion;
+  @FXML private ImageView greenPotion;
+  @FXML private ImageView purplePotion;
+  @FXML private ImageView parchment4;
+  @FXML private ImageView parchment1duplicate;
+  @FXML private ImageView cauldron;
+  @FXML private ImageView parchment2duplicate;
+
+  @FXML private ImageView parchment3duplicate;
+  @FXML private TextArea chatTextArea;
+
+  @FXML private ImageView parchment4duplicate;
+
+  @FXML private Button btnHideNote;
+  private double horizontalOffset = 0;
+  private double verticalOffset = 0;
+  private List<String> potionsincauldron = new ArrayList<>();
+  private int parchmentPieces = 0;
+
   @FXML
   public double getRoomWidth() {
 
@@ -118,11 +117,10 @@ public class RoomController implements Controller {
     return potionsRoomPane.getPrefHeight();
   }
 
-   @FXML
+  @FXML
   public void updateTimerLabel(String time) {
     lblTime.setText(time);
   }
-
 
   @FXML
   public void clickWindow(MouseEvent event) {
@@ -213,6 +211,7 @@ public class RoomController implements Controller {
     // Allow the boulder to be dragged and dropped
 
   }
+
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);
@@ -406,9 +405,10 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOMSTATE.CHEST;
+    GameState.currentRoom = GameState.roomState.CHEST;
   }
-   private void tintScene(Pane potionsRoomPane) {
+
+  private void tintScene(Pane potionsRoomPane) {
     Color colour1 = convertStringToColor(GameState.firstPotion);
     Color colour2 = convertStringToColor(GameState.secondPotion);
     Color colour3 = calculateAverageColor(colour1, colour2);
@@ -437,7 +437,7 @@ public class RoomController implements Controller {
     timeline.play();
   }
 
-   @FXML
+  @FXML
   private void onTableClicked(MouseEvent event) {
 
     // Check if a note is selected in the combo box
@@ -502,21 +502,4 @@ public class RoomController implements Controller {
 
     }
   }
-
-
-
-  
-
- 
- 
-  /**
-   * Initializes the chat view, loading the note.
-   *
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   */
-  
-
- 
-  /** Initializes the room view, it is called when the room loads. */
-  
 }

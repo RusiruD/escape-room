@@ -197,7 +197,6 @@ public class UntangleRoomController implements Controller {
       double y1 = polygon.getPoints().get(i + 1);
       double x2 = polygon.getPoints().get(i + 2);
       double y2 = polygon.getPoints().get(i + 3);
-      
 
       Line line = new Line(x1, y1, x2, y2);
       line.setScaleX(0.9);
@@ -231,12 +230,11 @@ public class UntangleRoomController implements Controller {
       }
     }
 
-
     System.out.println(polygon);
     puzzleSolved();
   }
 
- 	private void puzzleSolved() {
+  private void puzzleSolved() {
     if (isSolved) {
       return;
     }
@@ -302,7 +300,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.ROOMSTATE.CHEST;
+    GameState.currentRoom = GameState.roomState.CHEST;
   }
 
   public void updateInventory() {

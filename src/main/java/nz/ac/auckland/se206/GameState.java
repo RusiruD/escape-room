@@ -6,14 +6,14 @@ import javafx.beans.value.ObservableBooleanValue;
 /** Represents the state of the game. */
 public class GameState {
 
-  public enum ROOMSTATE {
+  public enum roomState {
     MARCELLIN,
     RUSIRU,
     ZACH,
     CHEST
   }
 
-  public static ROOMSTATE currentRoom = ROOMSTATE.CHEST;
+  public static roomState currentRoom = roomState.CHEST;
 
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;

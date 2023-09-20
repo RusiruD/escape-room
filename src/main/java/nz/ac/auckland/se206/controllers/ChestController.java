@@ -63,9 +63,9 @@ public class ChestController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
 
-  private static final String DEFAULT_COLOUR = "#1e90ff";
-  private static final String CORRECT_COLOUR = "#a8e6cf";
-  private static final String INCORRECT_COLOUR = "#f38ba8";
+  private final String defaultColour = "#1e90ff";
+  private final String correctColour = "#a8e6cf";
+  private final String incorrectColour = "#f38ba8";
 
   private Riddle riddle;
   private Boolean riddleCalled = false;
@@ -87,8 +87,8 @@ public class ChestController implements Controller {
     // Initialize the key hole map with empty slots
     ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
     for (int i = 1; i <= 6; i++) {
-        randomNumbers.add(i);
-        keyHoleMap.put("hole" + i, "empty");
+      randomNumbers.add(i);
+      keyHoleMap.put("hole" + i, "empty");
     }
 
     // Create an array to store solutions and shuffle the random numbers
@@ -97,34 +97,42 @@ public class ChestController implements Controller {
 
     // Assign keys to shuffled key holes and print the assignments
     for (int i = 0; i < 3; i++) {
-        keyHoleMap.put("hole" + randomNumbers.get(i), keys.get(i));
-        System.out.println("hole" + randomNumbers.get(i) + " " + keys.get(i));
-        solutions[i] = randomNumbers.get(i);
+      keyHoleMap.put("hole" + randomNumbers.get(i), keys.get(i));
+      System.out.println("hole" + randomNumbers.get(i) + " " + keys.get(i));
+      solutions[i] = randomNumbers.get(i);
     }
 
     // Initialize the correct key map with empty slots
     for (int i = 0; i < 6; i++) {
-        correctKeyMap.put("hole" + (i + 1), "empty");
+      correctKeyMap.put("hole" + (i + 1), "empty");
     }
 
     // Create a riddle question
-    String question = "You are the dungeon master of an escape room. Tell me a riddle where the first solution is "
-            + solutions[0] + ", the second solution is " + solutions[1] + ", and the third solution is " + solutions[2]
-            + ". Hide the answers within the riddle but do not use the numbers within the riddle instead use synonyms."
-            + " Do not, under no circumstance, give the user the answer to the riddles. After every sentence do a line break."
-            + " Make the riddle a few sentences long. Do not go over 150 words.";
+    String question =
+        "You are the dungeon master of an escape room. Tell me a riddle where the first solution is"
+            + " "
+            + solutions[0]
+            + ", the second solution is "
+            + solutions[1]
+            + ", and the third solution is "
+            + solutions[2]
+            + ". Hide the answers within the riddle but do not use the numbers within the riddle"
+            + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
+            + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
+            + " long. Do not go over 150 words.";
     System.out.println(question);
 
     // Create a DungeonMaster and initiate a task to generate a riddle
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task = new Task<Void>() {
-        @Override
-        public Void call() throws Exception {
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          public Void call() throws Exception {
             // Create a new Riddle object with the provided question
             riddle = new Riddle(dungeonMaster, question);
             return null;
-        }
-    };
+          }
+        };
 
     // Start a new thread for the task
     Thread thread = new Thread(task);
@@ -132,10 +140,11 @@ public class ChestController implements Controller {
     thread.start();
 
     // Set an event handler for when the task is completed, and assign the riddle to the GameState
-    task.setOnSucceeded(event -> {
-        GameState.riddle = riddle;
-    });
-}
+    task.setOnSucceeded(
+        event -> {
+          GameState.riddle = riddle;
+        });
+  }
 
   public void openChest(MouseEvent event) {
     System.out.println("open chest");
@@ -157,27 +166,27 @@ public class ChestController implements Controller {
         // get key hole
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + correctColour);
             keyHole1.mouseTransparentProperty().set(true);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + correctColour);
             keyHole2.mouseTransparentProperty().set(true);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + correctColour);
             keyHole3.mouseTransparentProperty().set(true);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + correctColour);
             keyHole4.mouseTransparentProperty().set(true);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + correctColour);
             keyHole5.mouseTransparentProperty().set(true);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + CORRECT_COLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + correctColour);
             keyHole6.mouseTransparentProperty().set(true);
             break;
         }
@@ -186,44 +195,44 @@ public class ChestController implements Controller {
         System.out.println("hole " + (i + 1) + " is incorrect");
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + incorrectColour);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + incorrectColour);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + incorrectColour);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + incorrectColour);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + incorrectColour);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + INCORRECT_COLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + incorrectColour);
             break;
         }
       } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
         // set back to default
         switch (i) {
           case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole1.styleProperty().set("-fx-fill: " + defaultColour);
             break;
           case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole2.styleProperty().set("-fx-fill: " + defaultColour);
             break;
           case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole3.styleProperty().set("-fx-fill: " + defaultColour);
             break;
           case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole4.styleProperty().set("-fx-fill: " + defaultColour);
             break;
           case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole5.styleProperty().set("-fx-fill: " + defaultColour);
             break;
           case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + DEFAULT_COLOUR);
+            keyHole6.styleProperty().set("-fx-fill: " + defaultColour);
             break;
         }
       }
@@ -385,66 +394,65 @@ public class ChestController implements Controller {
   }
 
   /**
- * Sets the label for a keyhole to display the inserted key's status.
- *
- * @param num The number of the keyhole.
- * @param key The key inserted into the keyhole.
- */
-private void setLabelKeyHole(int num, String key) {
-  // Print a debug message indicating which keyhole is being set
-  System.out.println("set label key hole " + num + " to " + key);
-  
-  // Check if a key is inserted
-  if (!key.isEmpty()) {
+   * Sets the label for a keyhole to display the inserted key's status.
+   *
+   * @param num The number of the keyhole.
+   * @param key The key inserted into the keyhole.
+   */
+  private void setLabelKeyHole(int num, String key) {
+    // Print a debug message indicating which keyhole is being set
+    System.out.println("set label key hole " + num + " to " + key);
+
+    // Check if a key is inserted
+    if (!key.isEmpty()) {
       // Depending on the keyhole number, set the corresponding label to display the key inserted
       switch (num) {
-          case 1:
-              lblKey1.setText(key + " inserted");
-              break;
-          case 2:
-              lblKey2.setText(key + " inserted");
-              break;
-          case 3:
-              lblKey3.setText(key + " inserted");
-              break;
-          case 4:
-              lblKey4.setText(key + " inserted");
-              break;
-          case 5:
-              lblKey5.setText(key + " inserted");
-              break;
-          case 6:
-              lblKey6.setText(key + " inserted");
-              break;
+        case 1:
+          lblKey1.setText(key + " inserted");
+          break;
+        case 2:
+          lblKey2.setText(key + " inserted");
+          break;
+        case 3:
+          lblKey3.setText(key + " inserted");
+          break;
+        case 4:
+          lblKey4.setText(key + " inserted");
+          break;
+        case 5:
+          lblKey5.setText(key + " inserted");
+          break;
+        case 6:
+          lblKey6.setText(key + " inserted");
+          break;
       }
-  } else {
+    } else {
       // If no key is inserted, clear the label for the corresponding keyhole
       switch (num) {
-          case 1:
-              lblKey1.setText("");
-              break;
-          case 2:
-              lblKey2.setText("");
-              break;
-          case 3:
-              lblKey3.setText("");
-              break;
-          case 4:
-              lblKey4.setText("");
-              break;
-          case 5:
-              lblKey5.setText("");
-              break;
-          case 6:
-              lblKey6.setText("");
-              break;
+        case 1:
+          lblKey1.setText("");
+          break;
+        case 2:
+          lblKey2.setText("");
+          break;
+        case 3:
+          lblKey3.setText("");
+          break;
+        case 4:
+          lblKey4.setText("");
+          break;
+        case 5:
+          lblKey5.setText("");
+          break;
+        case 6:
+          lblKey6.setText("");
+          break;
       }
+    }
   }
 
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);
   }
-}
-
 }
