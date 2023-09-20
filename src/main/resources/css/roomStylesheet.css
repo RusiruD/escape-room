@@ -10,7 +10,7 @@
     -fx-text-fill: rgb(0, 0, 0);
     /* Set text color to black */
 
-    -fx-background-color: rgba(255, 255, 255, 0.1);
+    -fx-background-color: rgba(0, 0, 0, 0.1);
     /* Set the background color */
 }
 
@@ -19,14 +19,14 @@
     /*-fx-background-color: #774c1c;
     -fx-border-color: #d4af37;*/
 
-    -fx-font-family: 'MedievalFont', sans-serif;
+    -fx-font-family: 'Old English Text MT', sans-serif;
     -fx-text-fill: black;
     /* Set text color to black */
     -fx-font-weight: bolder;
     /* Make text bold */
     -fx-font-size: 18px;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
-    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-image: url('/images/parchmentbg1.jpg');
     -fx-background-size: cover;
 }
 
@@ -34,7 +34,7 @@
 
 
 .choice-box .context-menu {
-    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-image: url('/images/parchmentbg1.jpg');
 }
 
 /* Style the text inside the ChoiceBox dropdown */
@@ -42,21 +42,21 @@
     -fx-text-fill: black;
     /* Set the text color */
     -fx-font-weight: bolder;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
 }
 
 .combo-box {
     /*-fx-background-color: #774c1c;
     -fx-border-color: #d4af37;*/
 
-    -fx-font-family: 'MedievalFont', sans-serif;
+    -fx-font-family: 'Old English Text MT', sans-serif;
     -fx-text-fill: black;
     /* Set text color to black */
     -fx-font-weight: bolder;
     /* Make text bold */
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
-    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-image: url('/images/parchmentbg1.jpg');
     -fx-background-size: cover;
 }
 
@@ -64,15 +64,16 @@
 .button {
     -fx-text-fill: black;
     /* Set text color to black */
-    -fx-font-weight: bolder;
+    -fx-font-weight: bold;
     /* Make text bold */
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
+    -fx-font-family: 'Old English Text MT', sans-serif;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
-    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-image: url('/images/parchmentbg1.jpg');
 }
 
 .combo-box .list-cell {
-    -fx-background-image: url('/images/parchmentbg.jpg');
+    -fx-background-image: url('/images/parchmentbg1.jpg');
 }
 
 /* Style the text inside the ChoiceBox dropdown */
@@ -80,12 +81,12 @@
     -fx-text-fill: black;
     /* Set the text color */
     -fx-font-weight: bolder;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
 }
 
 
 .text-area .content {
-    -fx-background-image: url("/images/parchmentbg.jpg");
+    -fx-background-image: url("/images/parchmentbg1.jpg");
     -fx-background-color: rgba(255, 255, 255, 0.1);
     /* Set the background color */
     -fx-font-family: "Papyrus";
