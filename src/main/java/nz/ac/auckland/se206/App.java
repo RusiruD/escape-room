@@ -51,6 +51,7 @@ public class App extends Application {
    * @throws IOException If the file is not found.
    */
   private static Parent loadFxml(final String fxml) throws IOException {
+
     return new FXMLLoader(App.class.getResource("/fxml/" + fxml + ".fxml")).load();
   }
 
@@ -62,6 +63,7 @@ public class App extends Application {
    */
   @Override
   public void start(final Stage stage) throws IOException {
+
     SceneManager.addUi(AppUi.UNTANGLE, loadFxml("untangleRoom"));
     SceneManager.addUi(AppUi.LEADERBOARD, loadFxml("leaderboard"));
     SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
@@ -96,6 +98,7 @@ public class App extends Application {
  * Adjust the stage size to fit the corridor dimensions.
  */
 public static void returnToCorridor() {
+
   try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
@@ -125,6 +128,7 @@ public static void returnToCorridor() {
 * Adjust the stage size to fit the first room dimensions.
 */
 public static void goToDoor1() {
+
   try {
       // Set the root view to the first room
       App.setRoot(AppUi.FIRST_ROOM);
@@ -154,6 +158,7 @@ public static void goToDoor1() {
  * Adjust the stage size to fit the Untangle room dimensions.
  */
 public static void goToDoor2() {
+
   try {
       // Set the root view to the Untangle room
       App.setRoot(AppUi.UNTANGLE);
@@ -183,6 +188,7 @@ public static void goToDoor2() {
 * Adjust the stage size to fit the Puzzle room dimensions.
 */
 public static void goToDoor3() {
+
   try {
       // Set the root view to the Puzzle room
       App.setRoot(AppUi.PUZZLEROOM);
@@ -200,6 +206,7 @@ public static void goToDoor3() {
       primaryStage.setHeight(puzzleroomHeight + 38);
 
   } catch (IOException e) {
+    
       e.printStackTrace();
   }
   

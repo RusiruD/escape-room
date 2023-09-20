@@ -334,7 +334,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void closeNote() {
+  private void hideNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);

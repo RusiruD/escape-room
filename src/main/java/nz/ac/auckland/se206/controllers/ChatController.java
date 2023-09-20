@@ -23,6 +23,7 @@ public class ChatController {
   private static ChatController instance;
 
   public static ChatController getInstance() {
+
     return instance;
   }
 
@@ -34,6 +35,7 @@ public class ChatController {
 
   @FXML
   public void initialize() throws ApiProxyException {
+
     instance = this;
   }
 
@@ -77,6 +79,7 @@ public void intialiseHints() throws ApiProxyException {
 * @param msg The chat message to append
 */
 private void appendChatMessage(ChatMessage msg) {
+  
   chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
 }
 
@@ -88,6 +91,7 @@ private void appendChatMessage(ChatMessage msg) {
 * @throws ApiProxyException if there is an error communicating with the API proxy
 */
 private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+
   chatCompletionRequest.addMessage(msg);
   try {
       // Execute the chat completion request with GPT-3
@@ -116,6 +120,7 @@ private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
 */
 @FXML
 private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+
   // Create a background task for sending and processing chat messages
   Task<Void> chatTask = new Task<>() {
       @Override
@@ -167,6 +172,7 @@ private void onSendMessage(ActionEvent event) throws ApiProxyException, IOExcept
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
+    
     App.setRoot(App.oldScene);
   }
 }

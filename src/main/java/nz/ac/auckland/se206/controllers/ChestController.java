@@ -28,6 +28,7 @@ public class ChestController implements Controller {
   private static ChestController instance;
 
   public static ChestController getInstance() {
+
     return instance;
   }
 
@@ -68,6 +69,7 @@ public class ChestController implements Controller {
   private Boolean riddleCalled = false;
 
   public void initialize() {
+
     // Initialize the instance field with the current instance of the class
     instance = this;
 
@@ -228,6 +230,7 @@ public class ChestController implements Controller {
 
   // Method to update inventory in the UI
   public void updateInventory() {
+
     inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 
@@ -281,6 +284,7 @@ public class ChestController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+
     App.returnToCorridor();
   }
 
@@ -379,6 +383,7 @@ public class ChestController implements Controller {
   }
 
   private void setLabelKeyHole(int num, String key) {
+    
     System.out.println("set label key hole " + num + " to " + key);
     if (key != "") {
       switch (num) {

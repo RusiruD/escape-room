@@ -2,7 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import nz.ac.auckland.se206.App;
@@ -14,6 +14,7 @@ public class StartScreenController {
 
   @FXML private ChoiceBox<String> timerChoice;
   @FXML private ChoiceBox<String> difficultyChoice;
+  @FXML private Button btnStart;
 
   @FXML
   private void initialize() {

@@ -230,16 +230,13 @@ public class UntangleRoomController implements Controller {
         }
       }
     }
-    // for debug
-    // Group liness = new Group();
-    // liness.getChildren().addAll(lines);
-    // pane.getChildren().add(liness);
+
 
     System.out.println(polygon);
     puzzleSolved();
   }
 
-  private void puzzleSolved() {
+ 	private void puzzleSolved() {
     if (isSolved) {
       return;
     }
