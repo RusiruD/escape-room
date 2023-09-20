@@ -68,9 +68,10 @@ public class ChestController implements Controller {
   private Boolean riddleCalled = false;
 
   public void initialize() {
+    // Initialize the instance field with the current instance of the class
     instance = this;
-    // get random keys for key holes
 
+    // Set text for key labels
     lblKey1.setText("");
     lblKey2.setText("");
     lblKey3.setText("");
@@ -78,57 +79,59 @@ public class ChestController implements Controller {
     lblKey5.setText("");
     lblKey6.setText("");
 
-    // shuffle keys
+    // Create an ArrayList to store random numbers and a map to represent key holes
+    // Initialize the key hole map with empty slots
     ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
     for (int i = 1; i <= 6; i++) {
-      randomNumbers.add(i);
-      keyHoleMap.put("hole" + i, "empty");
+        randomNumbers.add(i);
+        keyHoleMap.put("hole" + i, "empty");
     }
 
+    // Create an array to store solutions and shuffle the random numbers
     int[] solutions = new int[3];
-
     Collections.shuffle(randomNumbers);
+
+    // Assign keys to shuffled key holes and print the assignments
     for (int i = 0; i < 3; i++) {
-      keyHoleMap.put("hole" + randomNumbers.get(i), keys.get(i));
-      System.out.println("hole" + randomNumbers.get(i) + " " + keys.get(i));
-      solutions[i] = randomNumbers.get(i);
+        keyHoleMap.put("hole" + randomNumbers.get(i), keys.get(i));
+        System.out.println("hole" + randomNumbers.get(i) + " " + keys.get(i));
+        solutions[i] = randomNumbers.get(i);
     }
 
+    // Initialize the correct key map with empty slots
     for (int i = 0; i < 6; i++) {
-      correctKeyMap.put("hole" + (i + 1), "empty");
+        correctKeyMap.put("hole" + (i + 1), "empty");
     }
 
-    String question =
-        "You are the dungeon master of an escape room. Tell me a riddle where the first solution is"
-            + " "
-            + solutions[0]
-            + ", the second solution is "
-            + solutions[1]
-            + ", and the third solution is "
-            + solutions[2]
-            + ". Hide the answers within the riddle but do not use the numbers within the riddle"
-            + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
-            + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
-            + " long. Do not go over 150 words.";
+    // Create a riddle question
+    String question = "You are the dungeon master of an escape room. Tell me a riddle where the first solution is "
+            + solutions[0] + ", the second solution is " + solutions[1] + ", and the third solution is " + solutions[2]
+            + ". Hide the answers within the riddle but do not use the numbers within the riddle instead use synonyms."
+            + " Do not, under no circumstance, give the user the answer to the riddles. After every sentence do a line break."
+            + " Make the riddle a few sentences long. Do not go over 150 words.";
     System.out.println(question);
 
+    // Create a DungeonMaster and initiate a task to generate a riddle
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          public Void call() throws Exception {
+    Task<Void> task = new Task<Void>() {
+        @Override
+        public Void call() throws Exception {
+            // Create a new Riddle object with the provided question
             riddle = new Riddle(dungeonMaster, question);
             return null;
-          }
-        };
+        }
+    };
+
+    // Start a new thread for the task
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
-    task.setOnSucceeded(
-        event -> {
-          GameState.riddle = riddle;
-        });
-  }
+
+    // Set an event handler for when the task is completed, and assign the riddle to the GameState
+    task.setOnSucceeded(event -> {
+        GameState.riddle = riddle;
+    });
+}
 
   public void openChest(MouseEvent event) {
     System.out.println("open chest");
