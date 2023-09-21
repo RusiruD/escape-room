@@ -22,7 +22,6 @@ public class WinLossController implements Controller {
   @FXML private Button exitGame;
   @FXML private Button replayGame;
   @FXML private Button newGame;
-  @FXML private Label lblTime;
 
   public void initialize() {
     instance = this;
@@ -61,9 +60,7 @@ public class WinLossController implements Controller {
   }
 
   @Override
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
+  public void updateTimerLabel(String time) {}
 
   @Override
   public void updateInventory() {}

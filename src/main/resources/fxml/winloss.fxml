@@ -10,10 +10,9 @@
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
       <Button fx:id="exitGame" layoutX="83.0" layoutY="237.0" mnemonicParsing="false" onAction="#onExitGameClicked" text="Exit" />
-      <Button fx:id="replayGame" layoutX="253.0" layoutY="237.0" mnemonicParsing="false" onAction="#onReplayGameClicked" text="Replay Game" />
+      <Button fx:id="replayGame" layoutX="232.0" layoutY="237.0" mnemonicParsing="false" onAction="#onReplayGameClicked" text="Replay Game" />
       <Button fx:id="newGame" layoutX="433.0" layoutY="237.0" mnemonicParsing="false" onAction="#onNewGameClicked" text="New Game" />
       <Label fx:id="gameOutcome" layoutX="272.0" layoutY="67.0" stylesheets="@../css/roomStylesheet.css" text="You Won" />
       <Label fx:id="gameOutcomeDescription" layoutX="231.0" layoutY="133.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon" />
-      <Label fx:id="lblTime" layoutX="493.0" layoutY="27.0" prefHeight="17.0" prefWidth="86.0" stylesheets="@../css/roomStylesheet.css" text="Label" />
    </children>
 </Pane>
