@@ -9,10 +9,10 @@
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.WinLossController">
    <children>
       <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
-      <Button layoutX="83.0" layoutY="237.0" mnemonicParsing="false" text="Exit" />
-      <Button layoutX="253.0" layoutY="237.0" mnemonicParsing="false" text="Replay Game" />
-      <Button layoutX="433.0" layoutY="237.0" mnemonicParsing="false" text="New Game" />
-      <Label layoutX="272.0" layoutY="67.0" text="You Won" />
-      <Label layoutX="231.0" layoutY="133.0" text="You escaped the dungeon" />
+      <Button fx:id="exitGame" layoutX="83.0" layoutY="237.0" mnemonicParsing="false" text="Exit" />
+      <Button fx:id="replayGame" layoutX="253.0" layoutY="237.0" mnemonicParsing="false" text="Replay Game" />
+      <Button fx:id="newGame" layoutX="433.0" layoutY="237.0" mnemonicParsing="false" text="New Game" />
+      <Label fx:id="gameOutcome" layoutX="272.0" layoutY="67.0" text="You Won" />
+      <Label fx:id="gameOutcomeDescription" layoutX="231.0" layoutY="133.0" text="You escaped the dungeon" />
    </children>
 </Pane>
