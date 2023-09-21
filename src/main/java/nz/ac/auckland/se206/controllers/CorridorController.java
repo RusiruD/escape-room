@@ -258,38 +258,17 @@ public class CorridorController implements Controller {
     // Handle click on treasure chest
     System.out.println("clicked");
     App.setRoot(SceneManager.AppUi.CHEST);
-    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
+   
 
-    if (GameState.isLock2Unlocked == true
-        && GameState.isLock1Unlocked == true
-        && GameState.isLock3Unlocked == true
+    if (GameState.isChestOpened==true
         && swordandshield.visibleProperty().get() == false
         && !Inventory.contains("sword/shield")) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
 
-    } else {
-      if (selectedItem != null) {
-        // Check if the player has the key
-        if (selectedItem.equals("key1")) {
-          GameState.isLock1Unlocked = true;
-          Inventory.removeFromInventory("key1");
-          inventoryChoiceBox.getSelectionModel().clearSelection();
-        }
-        // Check if the player has the key
-        if (selectedItem.equals("key2")) {
-          GameState.isLock2Unlocked = true;
-          Inventory.removeFromInventory("key2");
-          inventoryChoiceBox.getSelectionModel().clearSelection();
-        }
-        // Check if the player has the key
-        if (selectedItem.equals("key3")) {
-          GameState.isLock3Unlocked = true;
-          Inventory.removeFromInventory("key3");
-          inventoryChoiceBox.getSelectionModel().clearSelection();
-        }
-      }
-    }
+    } 
+     
+      
   }
 
   @FXML
