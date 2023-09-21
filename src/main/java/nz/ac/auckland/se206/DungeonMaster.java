@@ -27,6 +27,7 @@ public class DungeonMaster {
 
   private boolean taskDone = false;
   private boolean isSpeaking = false;
+  private boolean messageFinished = false;
 
   private String message;
   private String[] messages;
@@ -259,6 +260,7 @@ public class DungeonMaster {
       popUp.setOnMouseClicked(
           e -> {
             popUp.visibleProperty().set(false);
+            messageFinished = true;
           });
     }
     messageIndex++;
@@ -287,6 +289,7 @@ public class DungeonMaster {
     exitButton.setOnMouseClicked(
         event1 -> {
           popUp.visibleProperty().set(false);
+          messageFinished = true;
         });
     
     // Attach an event handler to the dialogue text to allow advancing the dialogue
@@ -320,5 +323,9 @@ public class DungeonMaster {
   public Pane getPopUp() {
     update();
     return popUp;
+  }
+
+  public boolean isMessageFinished() {
+    return messageFinished;
   }
 }

@@ -109,6 +109,8 @@ public class RoomController implements Controller {
   private List<String> potionsincauldron = new ArrayList<>();
   private int parchmentPieces = 0;
 
+  private boolean hasTaunted = false;
+
   @FXML
   public double getRoomWidth() {
 
@@ -133,7 +135,8 @@ public class RoomController implements Controller {
     Riddle call = new Riddle(dungeonMaster, message);
     Button master = (Button) event.getSource();
     master.setOnMouseClicked(e -> {
-      callAi(call);
+      if (!dungeonMaster.isMessageFinished()) callAi(call);
+      else { master.visibleProperty().set(false); }
     });
   }
 

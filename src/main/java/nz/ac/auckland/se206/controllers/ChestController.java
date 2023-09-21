@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
@@ -285,9 +286,10 @@ public class ChestController implements Controller {
     DungeonMaster dungeonMaster = new DungeonMaster();
     String message = "print a lines of text";
     Riddle call = new Riddle(dungeonMaster, message);
-    Pane master = (Pane) event.getSource();
+    Button master = (Button) event.getSource();
     master.setOnMouseClicked(e -> {
-      callAi(call);
+      if (!dungeonMaster.isMessageFinished()) callAi(call);
+      else { master.visibleProperty().set(false); }
     });
   }
 
