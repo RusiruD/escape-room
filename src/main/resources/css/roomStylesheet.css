@@ -169,7 +169,8 @@
 }
 
 .popUp VBox Text {
-    -fx-font-size: 10px;
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 15px;
 }
 
 .popUp StackPane ImageView:hover {

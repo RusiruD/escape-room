@@ -89,7 +89,15 @@ public class ChestController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
 
-    String instructionsString = "INSTRUCTIONS GO HERE";
+    String instructionsString = "THE CHEST IS LOCKED!. \n \n"
+        + "You need to find the correct keys to unlock the chest. \n \n"
+        + "The keys are hidden in the dungeon. \n \n"
+        + "You need to find the keys and insert them into the correct key holes. \n \n"
+        + "The correct keys will turn green. \n \n"
+        + "The incorrect keys will turn red. \n \n"
+        + "The empty key holes will are blue. \n \n"
+        + "Once you have inserted the correct keys, the chest will open. \n \n"
+        + "Good luck!";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
@@ -139,7 +147,7 @@ public class ChestController implements Controller {
             + ". Hide the answers within the riddle but do not use the numbers within the riddle"
             + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
             + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
-            + " long. Do not go over 150 words.";
+            + " long. Do not go over 100 words.";
     System.out.println(question);
 
     // Create a DungeonMaster and initiate a task to generate a riddle
