@@ -2,6 +2,7 @@ package nz.ac.auckland.se206;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -15,34 +16,36 @@ public class Instructions {
   public Instructions(String instructions) {
     Pane instructionsPane = new Pane();
 
-    HBox instructionsBox = new HBox();
-    VBox instructionsVerticalBox = new VBox();
+    StackPane stackPane = new StackPane();
+
+    VBox instructionsBox = new VBox();
 
     Label title = new Label("Instructions");
-    Label instructionsLabel = new Label(instructions);
 
-    instructionsVerticalBox.getChildren().addAll(title, instructionsLabel);
+    TextArea instructionsText = new TextArea(instructions);
+    instructionsText.setWrapText(true);
+    instructionsText.setEditable(false);
+    instructionsText.setPrefWidth(350);
+    instructionsText.setPrefHeight(300);
 
-    StackPane stackPane = new StackPane();
+    instructionsBox.getChildren().addAll(title, instructionsText);
+
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
     closeButton.setOnMouseClicked(
-        e -> {
-          instructionsPane.setVisible(false);
+        event -> {
+          instructionsPane.getParent().visibleProperty().set(false);
+          instructionsPane.getParent().mouseTransparentProperty().set(true);
+          instructionsPane.getParent().toBack();
         });
 
-    ImageView hintButton = new ImageView("images/question.png");
-    hintButton.setFitHeight(20);
-    hintButton.setFitWidth(20);
-
-    stackPane.getChildren().addAll(closeButton, hintButton);
+    stackPane.getChildren().addAll(instructionsBox, closeButton);
     StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
-    StackPane.setAlignment(hintButton, Pos.BOTTOM_RIGHT);
 
-    instructionsBox.getChildren().addAll(instructionsVerticalBox, stackPane);
+    instructionsPane.getChildren().add(stackPane);
 
-    instructionsPane.getChildren().addAll(instructionsBox);
+    this.instructionsPane = instructionsPane;
   }
 
   public void setInstructions(String instructions) {

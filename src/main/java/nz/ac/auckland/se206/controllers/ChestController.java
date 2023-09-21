@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
@@ -64,6 +65,8 @@ public class ChestController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
 
+  @FXML private Pane instructionsDisplay;
+
   private final String defaultColour = "#1e90ff";
   private final String correctColour = "#a8e6cf";
   private final String incorrectColour = "#f38ba8";
@@ -75,6 +78,12 @@ public class ChestController implements Controller {
 
     // Initialize the instance field with the current instance of the class
     instance = this;
+
+    String instructionsString = "INSTRUCTIONS GO HERE";
+    Instructions instructions = new Instructions(instructionsString);
+    Pane instructionsPane = instructions.getInstructionsPane();
+    instructionsDisplay.getChildren().add(instructionsPane);
+    instructionsPane.getStyleClass().add("riddle");
 
     // Set text for key labels
     lblKey1.setText("");
@@ -231,6 +240,14 @@ public class ChestController implements Controller {
   public void updateTimerLabel(String time) {
     // Update the timer label in the UI
     lblTime.setText(time);
+  }
+
+  @FXML
+  public void getInstructions(MouseEvent event) {
+    // Set the instructions pane to be visible and not mouse transparent
+    instructionsDisplay.visibleProperty().set(true);
+    instructionsDisplay.mouseTransparentProperty().set(false);
+    instructionsDisplay.toFront();
   }
 
   @FXML

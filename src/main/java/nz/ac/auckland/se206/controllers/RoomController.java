@@ -32,6 +32,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -73,6 +74,7 @@ public class RoomController implements Controller {
 
   @FXML private Pane potionsRoomPane;
   @FXML private Pane popUp;
+  @FXML private Pane instructionsDisplay;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Button btnReturnToCorridor;
@@ -129,6 +131,14 @@ public class RoomController implements Controller {
   }
 
   @FXML
+  public void getInstructions(MouseEvent event) {
+    // Set the instructions pane to be visible and not mouse transparent
+    instructionsDisplay.visibleProperty().set(true);
+    instructionsDisplay.mouseTransparentProperty().set(false);
+    instructionsDisplay.toFront();
+  }
+
+  @FXML
   public void clickWindow(MouseEvent event) {
     DungeonMaster dungeonMaster = new DungeonMaster();
     String message = "print a lines of text";
@@ -151,6 +161,13 @@ public class RoomController implements Controller {
 
   public void initialize() throws ApiProxyException {
     instance = this;
+
+    String instructionsString = "INSTRUCTIONS GO HERE";
+    Instructions instructions = new Instructions(instructionsString);
+    Pane instructionsPane = instructions.getInstructionsPane();
+    instructionsDisplay.getChildren().add(instructionsPane);
+    instructionsPane.getStyleClass().add("riddle");
+
     chatTextArea
         .getStylesheets()
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
