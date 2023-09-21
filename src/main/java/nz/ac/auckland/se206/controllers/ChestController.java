@@ -301,7 +301,7 @@ public class ChestController implements Controller {
       Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
       popUp.getChildren().add(dialogueFormat);
 
-      dialogue.getStyleClass().add("popUp");
+      dialogueFormat.getStyleClass().add("popUp");
       riddleCalled = true;
     }
   }
