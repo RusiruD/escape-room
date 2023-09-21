@@ -154,7 +154,7 @@ public class UntangleRoomController implements Controller {
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
-    
+
     // set the inventory choice box
     Polygon polygon = createStartingTriangle();
 
@@ -236,7 +236,6 @@ public class UntangleRoomController implements Controller {
       }
     }
 
-   
     puzzleSolved();
   }
 
@@ -247,7 +246,6 @@ public class UntangleRoomController implements Controller {
     isSolved = true;
     key2.setVisible(true);
     key2.setDisable(false);
-    
   }
 
   @FXML

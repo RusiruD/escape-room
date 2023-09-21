@@ -35,8 +35,6 @@ public class PuzzleRoomController implements Controller {
     instance = this;
   }
 
-  
-
   @FXML
   private void clickPuzzle(MouseEvent event) throws IOException {
     App.setRoot(AppUi.PUZZLE);

@@ -153,7 +153,6 @@ public class CorridorController implements Controller {
             collisionTimer.stop();
           }
         });
-      
   }
 
   // Method to check if the player stays in the room while moving
@@ -193,12 +192,12 @@ public class CorridorController implements Controller {
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
-    
+
       player.setY(0);
       player.setX(0);
-      
+
       stopMovement();
-      
+
       App.goToDoor2();
       GameState.currentRoom = GameState.roomState.MARCELLIN;
     }
@@ -268,22 +267,16 @@ public class CorridorController implements Controller {
     // Handle click on treasure chest
     System.out.println("clicked");
     App.setRoot(SceneManager.AppUi.CHEST);
-   
-
-    
-     
-      
   }
+
   @FXML
-  public void onTreasureChestUnlocked(){
-    if (GameState.isChestOpened==true
+  public void onTreasureChestUnlocked() {
+    if (GameState.isChestOpened == true
         && swordandshield.visibleProperty().get() == false
         && !Inventory.contains("sword/shield")) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
-
-    } 
-
+    }
   }
 
   @FXML

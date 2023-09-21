@@ -4,13 +4,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
-
 import javafx.animation.KeyFrame;
-
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -21,11 +17,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
@@ -144,10 +137,13 @@ public class RoomController implements Controller {
     String message = "print a lines of text";
     Riddle call = new Riddle(dungeonMaster, message);
     Button master = (Button) event.getSource();
-    master.setOnMouseClicked(e -> {
-      if (!dungeonMaster.isMessageFinished()) callAi(call);
-      else { master.visibleProperty().set(false); }
-    });
+    master.setOnMouseClicked(
+        e -> {
+          if (!dungeonMaster.isMessageFinished()) callAi(call);
+          else {
+            master.visibleProperty().set(false);
+          }
+        });
   }
 
   private void callAi(Riddle call) {
@@ -495,11 +491,4 @@ public class RoomController implements Controller {
 
     }
   }
-
-
- 
-
- 
- 
-
 }

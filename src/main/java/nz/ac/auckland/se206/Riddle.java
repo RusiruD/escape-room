@@ -34,8 +34,6 @@ public class Riddle {
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
-
-
   }
 
   public Pane riddlePane(String riddleText) {
