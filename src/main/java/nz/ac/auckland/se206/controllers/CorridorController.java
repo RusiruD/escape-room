@@ -274,6 +274,11 @@ public class CorridorController implements Controller {
   public void onTreasureChestClicked(MouseEvent event) throws IOException {
     // Handle click on treasure chest
     System.out.println("clicked");
+    if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
+      CustomNotifications.generateNotification(
+          "No Keys!", "The chest is locked, maybe you should come back after finding some...");
+      return;
+    }
     App.setRoot(SceneManager.AppUi.CHEST);
   }
 
