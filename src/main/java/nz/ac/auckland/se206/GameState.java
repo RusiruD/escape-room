@@ -9,14 +9,22 @@ import javafx.util.Duration;
 /** Represents the state of the game. */
 public class GameState {
 
-  public enum roomState {
+  public enum STATE {
     MARCELLIN,
     RUSIRU,
     ZACH,
     CHEST
   }
 
-  public static roomState currentRoom = roomState.CHEST;
+  public enum DIFFICULTY {
+    EASY,
+    MEDIUM,
+    HARD,
+  }
+
+  public static DIFFICULTY currentDifficulty = DIFFICULTY.EASY;
+
+  public static STATE currentRoom = STATE.CHEST;
 
   public static boolean aiCalled;
 
@@ -38,7 +46,11 @@ public class GameState {
 
   public static Riddle riddle;
 
-  public static int hintsLeft = 0;
+  public static int hintsGiven = 0;
+
+  public static boolean noPapers = true;
+  public static boolean noCombination = true;
+  public static boolean noPotionBoulder = true;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
 

@@ -48,7 +48,6 @@ public class TimerCounter {
   }
 
   private void updateTimers(String string) {
-
     for (Controller controller : SceneManager.getControllers()) {
       if (controller.equals(WinLossController.getInstance())) {
         continue;

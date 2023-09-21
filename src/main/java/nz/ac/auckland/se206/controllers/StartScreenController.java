@@ -7,6 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.GameState.DIFFICULTY;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -69,12 +70,13 @@ public class StartScreenController {
     } else {
       timer.timerStart(360);
     }
-    if (difficulty.equals("Easy")) {
-      GameState.hintsLeft = 999;
-    } else if (difficulty.equals("Medium")) {
-      GameState.hintsLeft = 5;
+
+    if (chosenDifficulty.equals("Easy")) {
+      GameState.currentDifficulty = DIFFICULTY.EASY;
+    } else if (chosenDifficulty.equals("Medium")) {
+      GameState.currentDifficulty = DIFFICULTY.MEDIUM;
     } else {
-      GameState.hintsLeft = 0;
+      GameState.currentDifficulty = DIFFICULTY.HARD;
     }
   }
 

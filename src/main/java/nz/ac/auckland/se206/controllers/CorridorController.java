@@ -195,7 +195,7 @@ public class CorridorController implements Controller {
 
       stopMovement();
       App.goToDoor1();
-      GameState.currentRoom = GameState.roomState.RUSIRU;
+      GameState.currentRoom = GameState.STATE.RUSIRU;
     }
 
     // Check collision with door2 and navigate to a new room if needed
@@ -207,7 +207,7 @@ public class CorridorController implements Controller {
       stopMovement();
 
       App.goToDoor2();
-      GameState.currentRoom = GameState.roomState.MARCELLIN;
+      GameState.currentRoom = GameState.STATE.MARCELLIN;
     }
 
     // Check collision with door3 and navigate to a new room if needed
@@ -215,7 +215,7 @@ public class CorridorController implements Controller {
       player.setY(0);
       player.setX(0);
       stopMovement();
-      GameState.currentRoom = GameState.roomState.ZACH;
+      GameState.currentRoom = GameState.STATE.ZACH;
       App.goToDoor3();
     }
   }
