@@ -59,6 +59,7 @@ public class WinLossController implements Controller {
     App.returnToCorridor();
     Inventory.clearInventory();
     App.resetPlayerImage();
+    App.resetToDefault();
   }
 
   @FXML
