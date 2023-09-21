@@ -153,7 +153,6 @@ public class DungeonMaster {
         () -> {
           try {
             while (!taskDone) {
-              System.out.println("waiting");
               Thread.sleep(100);
             }
           } catch (InterruptedException e) {
@@ -259,7 +258,8 @@ public class DungeonMaster {
     } else {
       popUp.setOnMouseClicked(
           e -> {
-            popUp.visibleProperty().set(false);
+            popUp.getParent().visibleProperty().set(false);
+            popUp.getParent().mouseTransparentProperty().set(true);
             messageFinished = true;
           });
     }
@@ -267,12 +267,12 @@ public class DungeonMaster {
   }
 
   /**
- * Formats the dialogue pane and attaches event handlers to its elements.
- *
- * @param dialogue The dialogue pane to be formatted.
- * @param dungeonMaster The DungeonMaster responsible for managing the dialogue.
- * @return The formatted dialogue pane.
- */
+   * Formats the dialogue pane and attaches event handlers to its elements.
+   *
+   * @param dialogue The dialogue pane to be formatted.
+   * @param dungeonMaster The DungeonMaster responsible for managing the dialogue.
+   * @return The formatted dialogue pane.
+   */
   public Pane paneFormat(Pane dialogue, DungeonMaster dungeonMaster) {
     // Retrieve and configure UI elements within the dialogue pane
     Rectangle exitButton =
@@ -284,14 +284,15 @@ public class DungeonMaster {
                 .get(1);
     ImageView nextButton =
         (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-    
+
     // Attach an event handler to the exit button to close the dialogue
     exitButton.setOnMouseClicked(
         event1 -> {
-          popUp.visibleProperty().set(false);
+          popUp.getParent().visibleProperty().set(false);
+          popUp.getParent().mouseTransparentProperty().set(true);
           messageFinished = true;
         });
-    
+
     // Attach an event handler to the dialogue text to allow advancing the dialogue
     dialogueText.setOnMouseClicked(
         event1 -> {
@@ -299,7 +300,7 @@ public class DungeonMaster {
             dungeonMaster.update();
           }
         });
-    
+
     // Attach an event handler to the next button to allow advancing the dialogue
     nextButton.setOnMouseClicked(
         event1 -> {
@@ -307,7 +308,7 @@ public class DungeonMaster {
             dungeonMaster.update();
           }
         });
-    
+
     // Return the formatted dialogue pane
     return dialogue;
   }
