@@ -30,6 +30,7 @@ import javafx.scene.shape.StrokeType;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
@@ -136,6 +137,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
+  @FXML private Pane instructionsDisplay;
   @FXML private ImageView key2;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
@@ -147,7 +149,11 @@ public class UntangleRoomController implements Controller {
     // set the instance
     instance = this;
     // set the key2's visibility and disable it
-    
+    String instructionsString = "INSTRUCTIONS GO HERE";
+    Instructions instructions = new Instructions(instructionsString);
+    Pane instructionsPane = instructions.getInstructionsPane();
+    instructionsDisplay.getChildren().add(instructionsPane);
+    instructionsPane.getStyleClass().add("riddle");
     
     // set the inventory choice box
     Polygon polygon = createStartingTriangle();
@@ -315,5 +321,13 @@ public class UntangleRoomController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);
+  }
+
+  @FXML
+  public void getInstructions(MouseEvent event) {
+    // Set the instructions pane to be visible and not mouse transparent
+    instructionsDisplay.visibleProperty().set(true);
+    instructionsDisplay.mouseTransparentProperty().set(false);
+    instructionsDisplay.toFront();
   }
 }

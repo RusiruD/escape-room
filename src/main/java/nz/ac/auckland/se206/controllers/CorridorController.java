@@ -21,6 +21,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
@@ -61,6 +62,8 @@ public class CorridorController implements Controller {
   @FXML private Pane riddleDisplay;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
+
+  @FXML private Pane instructionsDisplay;
 
   // Animation timer for player movement
 
@@ -128,6 +131,13 @@ public class CorridorController implements Controller {
 
     instance = this;
     Image image = new Image("/images/character.png");
+
+    String instructionsString = "INSTRUCTIONS GO HERE";
+    Instructions instructions = new Instructions(instructionsString);
+    Pane instructionsPane = instructions.getInstructionsPane();
+    instructionsDisplay.getChildren().add(instructionsPane);
+    instructionsPane.getStyleClass().add("riddle");
+    instructionsDisplay.toFront();
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
@@ -275,6 +285,14 @@ public class CorridorController implements Controller {
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     System.exit(0);
+  }
+
+  @FXML
+  public void getInstructions(MouseEvent event) {
+    // Set the instructions pane to be visible and not mouse transparent
+    instructionsDisplay.visibleProperty().set(true);
+    instructionsDisplay.mouseTransparentProperty().set(false);
+    instructionsDisplay.toFront();
   }
 
   // Method to update inventory in the UI

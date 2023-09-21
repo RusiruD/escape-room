@@ -33,7 +33,11 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <Button layoutX="62.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
-      <Button layoutX="1045.0" layoutY="23.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
+
+      <Button layoutX="279.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
+      <Button layoutX="1043.0" layoutY="30.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
+      <Pane fx:id="instructionsDisplay" layoutX="440.0" layoutY="175.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
+      <Button layoutX="190.0" layoutY="748.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
+
    </children>
 </AnchorPane>

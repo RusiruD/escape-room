@@ -145,8 +145,7 @@
     -fx-shape: " ";
 }
 
-.popUp,
-.instructions {
+.popUp {
     -fx-alignment: center-left;
     -fx-padding: 10px;
     -fx-background-color: #45475a;
@@ -175,18 +174,6 @@
 
 .popUp StackPane ImageView:hover {
     -fx-cursor: hand;
-}
-
-
-.instructions .label {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 15px;
-    -fx-font-weight: bold;
-}
-
-.instructions HBox VBox Text {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 10px;
 }
 
 .riddle {
