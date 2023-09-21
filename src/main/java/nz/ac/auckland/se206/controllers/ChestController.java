@@ -6,22 +6,21 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-import javafx.concurrent.Task;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+
 import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Text;
+
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
-import nz.ac.auckland.se206.GameState;
+
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 

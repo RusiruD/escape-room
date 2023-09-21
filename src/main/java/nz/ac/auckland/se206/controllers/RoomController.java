@@ -4,11 +4,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+
 
 import javafx.animation.KeyFrame;
+
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.concurrent.Task;
@@ -204,7 +203,7 @@ public class RoomController implements Controller {
             + firstPotion
             + " and "
             + secondPotion
-            + " in the cauldron for super strength. \n"
+            + " in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
 
     setRandomPosition(parchment1);
@@ -337,7 +336,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void hideNote() {
+  private void onHideNote() {
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);

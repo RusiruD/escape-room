@@ -10,16 +10,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="untangleRoomAnchorPane" maxHeight="800.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" style="-fx-background-image: url('..\images\background.png');" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.UntangleRoomController">
+<AnchorPane fx:id="untangleRoomAnchorPane" maxHeight="800.0" maxWidth="1280.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-image: url('..\images\background.png');" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.UntangleRoomController">
    <children>
-      <ImageView fitHeight="800.0" fitWidth="1280.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <ImageView fitHeight="800.0" fitWidth="1263.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="17.0" AnchorPane.topAnchor="0.0">
          <image>
-            <Image url="@../images/background.png" />
+            <Image url="@../images/UnentangleRoomBackground.jpeg" />
          </image>
       </ImageView>
       <Pane fx:id="pane" layoutX="203.0" layoutY="126.0" prefHeight="500.0" prefWidth="900.0" style="-fx-background-color: rgb(92, 95, 119, 0.4);" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="190.0" AnchorPane.rightAnchor="190.0" AnchorPane.topAnchor="100.0" />
       <Button fx:id="btnReturnToCorridor" layoutX="29.0" layoutY="748.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="50.0" layoutY="34.0" prefHeight="38.0" prefWidth="169.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="43.0" layoutY="30.0" prefHeight="38.0" prefWidth="169.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="547.0" layoutY="30.0" prefHeight="44.0" prefWidth="186.0" text="s" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
@@ -28,12 +28,12 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ImageView fx:id="key3" fitHeight="110.0" fitWidth="150.0" layoutX="565.0" layoutY="625.0" onMouseClicked="#onKey3Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="key2" disable="true" fitHeight="110.0" fitWidth="150.0" layoutX="565.0" layoutY="625.0" onMouseClicked="#onKey2Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <Button layoutX="62.0" layoutY="100.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
-      <Button layoutX="1111.0" layoutY="31.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
+      <Button layoutX="279.0" layoutY="30.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
+      <Button layoutX="1043.0" layoutY="30.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
    </children>
 </AnchorPane>
