@@ -35,10 +35,12 @@ public class WinLossController implements Controller {
     }
   }
 
+  @FXML
   private void onExitGameClicked(ActionEvent event) {
     System.exit(0);
   }
 
+  @FXML
   private void onReplayGameClicked(ActionEvent event) {
 
     StartScreenController.getInstance()
@@ -46,6 +48,7 @@ public class WinLossController implements Controller {
     App.returnToCorridor();
   }
 
+  @FXML
   private void onNewGameClicked(ActionEvent event) {
     try {
       App.setRoot(AppUi.START);
