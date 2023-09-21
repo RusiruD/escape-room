@@ -214,4 +214,20 @@ public class App extends Application {
     // Focus on the new room
     focus();
   }
+
+  public static void goToWinLoss() {
+    try {
+      App.setRoot(AppUi.WINLOSS);
+      WinLossController winLossController = WinLossController.getInstance();
+      double winlossWidth = winLossController.getWinLossWidth();
+      double winlossHeight = winLossController.getWinLossHeight();
+      Stage primaryStage = (Stage) scene.getWindow();
+      primaryStage.setWidth(winlossWidth + 15);
+      primaryStage.setHeight(winlossHeight + 38);
+
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
 }

@@ -5,6 +5,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
@@ -17,6 +18,7 @@ public class WinLossController implements Controller {
     return instance;
   }
 
+  @FXML private Pane winlossPane;
   @FXML private Label gameOutcome;
   @FXML private Label gameOutcomeDescription;
   @FXML private Button exitGame;
@@ -57,6 +59,16 @@ public class WinLossController implements Controller {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+
+  @FXML
+  private double getWinLossHeight() {
+    return winlossPane.getHeight();
+  }
+
+  @FXML
+  private double getWinLossWidth() {
+    return winlossPane.getWidth();
   }
 
   @Override
