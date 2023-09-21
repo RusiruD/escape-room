@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.effect.BlendMode;
@@ -10,8 +11,10 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
+import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class PuzzleController implements Controller {
@@ -34,17 +37,31 @@ public class PuzzleController implements Controller {
   @FXML private ImageView eight;
   @FXML private ImageView nine;
 
+  @FXML private ImageView exclamationMark;
+
   private boolean hasSelection = false;
   private ImageView firstSelection;
   private ImageView secondSelection;
 
+  private Riddle call;
+
   @FXML private Label lblTime;
 
   @FXML private Pane instructionsDisplay;
+  @FXML private Pane popUp;
+  @FXML private Pane visualDungeonMaster;
 
   public void initialize() {
     // set the instance
     instance = this;
+
+    popUp.toBack();
+
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
+
+    TranslateTransition translateTransition = GameState.translate(exclamationMark);
+    translateTransition.play();
 
     String instructionsString = "INSTRUCTIONS GO HERE";
     Instructions instructions = new Instructions(instructionsString);
@@ -60,6 +77,12 @@ public class PuzzleController implements Controller {
         new String[][] {
           {"one", "two", "zero"}, {"four", "six", "three"}, {"eight", "five", "nine"}
         };
+
+    String question =
+        "Congratulate the user on rearranging the tiles correctly and solving the puzzle.";
+
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    call = new Riddle(dungeonMaster, question);
   }
 
   @FXML
@@ -142,6 +165,9 @@ public class PuzzleController implements Controller {
       CustomNotifications.generateNotification(
           "Something Happens!", "You hear something fall to the ground...");
       GameState.setPuzzleRoomSolved(true);
+
+      visualDungeonMaster.visibleProperty().set(true);
+      visualDungeonMaster.mouseTransparentProperty().set(false);
     }
   }
 
@@ -158,10 +184,28 @@ public class PuzzleController implements Controller {
   }
 
   @FXML
+  public void getAi(MouseEvent event) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    if (!dungeonMaster.isMessageFinished()) callAi(call);
+  }
+
+  @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
+  }
+
+  private void callAi(Riddle call) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    Pane dialogue = dungeonMaster.getPopUp();
+    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.toFront();
+    popUp.getChildren().add(dialogueFormat);
+
+    dialogueFormat.getStyleClass().add("popUp");
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 }
