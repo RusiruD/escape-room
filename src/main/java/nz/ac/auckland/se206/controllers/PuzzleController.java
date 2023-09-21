@@ -6,10 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class PuzzleController implements Controller {
@@ -38,9 +40,17 @@ public class PuzzleController implements Controller {
 
   @FXML private Label lblTime;
 
+  @FXML private Pane instructionsDisplay;
+
   public void initialize() {
     // set the instance
     instance = this;
+
+    String instructionsString = "INSTRUCTIONS GO HERE";
+    Instructions instructions = new Instructions(instructionsString);
+    Pane instructionsPane = instructions.getInstructionsPane();
+    instructionsDisplay.getChildren().add(instructionsPane);
+    instructionsPane.getStyleClass().add("riddle");
     // set the tiles and solution
     tiles =
         new String[][] {
@@ -145,5 +155,13 @@ public class PuzzleController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);
+  }
+
+  @FXML
+  public void getInstructions(MouseEvent event) {
+    // Set the instructions pane to be visible and not mouse transparent
+    instructionsDisplay.visibleProperty().set(true);
+    instructionsDisplay.mouseTransparentProperty().set(false);
+    instructionsDisplay.toFront();
   }
 }
