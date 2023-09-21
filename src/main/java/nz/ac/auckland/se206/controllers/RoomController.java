@@ -126,54 +126,36 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  public void clickWindow(MouseEvent event) {
+  public void clickWindow() {
+    String message = "write a sentence about anything";
+    if (!GameState.aiCalled) {
+      callAi(message);
+    } else {
+      System.out.println("ai already called");
+    }
+  }
+
+  public void callAi(String message) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Pane> task =
-        new Task<Pane>() {
+    Task<Void> task =
+        new Task<Void>() {
           @Override
-          protected Pane call() throws Exception {
-            return dungeonMaster.getText(
-                "user",
-                "I took damage from the window! Tell me"
-                    + " a few short sentences about it with no commas.");
-          }
-        };
-    task.setOnSucceeded(
-        e -> {
-          System.out.println("home task succeeded");
-          Pane dialogue = task.getValue();
-          popUp.getChildren().add(dialogue);
-          dialogue.getStyleClass().add("popUp");
-          Rectangle exitButton =
-              (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-          Text dialogueText =
-              (Text)
-                  ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                      .getChildren()
-                      .get(1);
-          ImageView nextButton =
-              (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-          exitButton.setOnMouseClicked(
-              event1 -> {
-                popUp.visibleProperty().set(false);
-              });
-          dialogueText.setOnMouseClicked(
-              event1 -> {
-                if (!dungeonMaster.isSpeaking()) {
-                  dungeonMaster.update();
-                }
-              });
-          nextButton.setOnMouseClicked(
-              event1 -> {
-                if (!dungeonMaster.isSpeaking()) {
-                  dungeonMaster.update();
-                }
-              });
-        });
+          protected Void call() throws Exception {
+            dungeonMaster.getText("user", message);
+            return null;
+          }  
+      };
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
+    task.setOnSucceeded(
+        e -> {
+          Pane dialogue = dungeonMaster.paneFormat(dungeonMaster.getPopUp(), dungeonMaster);
+          popUp.getChildren().add(dialogue);
+
+          dialogue.getStyleClass().add("popUp");    
+        });
   }
 
   public void initialize() throws ApiProxyException {
