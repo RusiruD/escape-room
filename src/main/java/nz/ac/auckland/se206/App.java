@@ -132,6 +132,11 @@ public class App extends Application {
    * Navigate to Door 1 and enter the first room. Adjust the stage size to fit the first room
    * dimensions.
    */
+  public static void resetPlayerImage() {
+    CorridorController corridorController = CorridorController.getInstance();
+    corridorController.resetPlayerImage();
+  }
+
   public static void goToDoor1() {
 
     try {

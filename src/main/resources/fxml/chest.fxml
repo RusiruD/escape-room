@@ -60,7 +60,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="249.0" layoutY="21.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="35.0" prefWidth="125.0" stylesheets="@../css/roomStylesheet.css" text="Return to Corridor" />
+      <Button fx:id="btnReturnToCorridor" layoutX="249.0" layoutY="21.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="38.0" prefWidth="184.0" stylesheets="@../css/roomStylesheet.css" text="Return to Corridor" />
       <Label fx:id="lblKey1" layoutX="134.0" layoutY="193.0" style="-fx-background-color: white;" text="Label" />
       <Label fx:id="lblKey2" layoutX="297.0" layoutY="193.0" style="-fx-background-color: white;" text="Label" />
       <Label fx:id="lblKey3" layoutX="474.0" layoutY="193.0" style="-fx-background-color: white;" text="Label" />

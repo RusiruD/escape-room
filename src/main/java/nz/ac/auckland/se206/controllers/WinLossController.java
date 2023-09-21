@@ -27,16 +27,21 @@ public class WinLossController implements Controller {
   // Initialization method
   public void initialize() {
     instance = this;
+  }
+
+  public void checkGameStatus() {
     if (GameState.isGameWon) {
+
       // Set text for a win
       gameOutcome.setText("You Win!");
       gameOutcomeDescription.setText(
-          "You have successfully escaped the dungeon and slayed the dungeon master");
+          "You have successfully escaped the dungeon \n and slayed the dungeon master");
     } else {
+      System.out.println(GameState.isGameWon);
       // Set text for a loss
       gameOutcome.setText("You Lose!");
       gameOutcomeDescription.setText(
-          "You have failed to escape the dungeon and have succumbed to the dungeon master");
+          "You have failed to escape the dungeon \n and have succumbed to the dungeon master");
     }
   }
 
@@ -52,6 +57,8 @@ public class WinLossController implements Controller {
     StartScreenController.getInstance()
         .checkDifficultyAndTimeLimit(GameState.gameTime, GameState.difficultyLevel);
     App.returnToCorridor();
+    Inventory.clearInventory();
+    App.resetPlayerImage();
   }
 
   @FXML

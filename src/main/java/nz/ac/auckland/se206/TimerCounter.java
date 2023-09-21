@@ -44,6 +44,7 @@ public class TimerCounter {
 
   private void gameOver() {
     App.goToWinLoss();
+    WinLossController.getInstance().checkGameStatus();
   }
 
   private void updateTimers(String string) {
