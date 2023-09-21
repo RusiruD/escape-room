@@ -119,6 +119,7 @@ public class CorridorController implements Controller {
     Inventory.addToInventory("sword/shield");
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
+    GameState.isGameWon = true;
 
     // Then, set the ImageView as the fill for your shape:
     Image image2 =

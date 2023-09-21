@@ -6,10 +6,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
-public class WinLossController {
+public class WinLossController implements Controller {
   private static WinLossController instance;
 
   public static WinLossController getInstance() {
@@ -52,5 +53,17 @@ public class WinLossController {
       // TODO Auto-generated catch block
       e.printStackTrace();
     }
+  }
+
+  @Override
+  public void updateTimerLabel(String time) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateTimerLabel'");
+  }
+
+  @Override
+  public void updateInventory() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateInventory'");
   }
 }

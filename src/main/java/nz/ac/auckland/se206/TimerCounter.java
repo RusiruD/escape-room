@@ -1,9 +1,11 @@
 package nz.ac.auckland.se206;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import nz.ac.auckland.se206.controllers.SceneManager;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class TimerCounter {
 
@@ -42,7 +44,12 @@ public class TimerCounter {
   }
 
   private void gameOver() {
-    System.exit(0);
+    try {
+      App.setRoot(AppUi.WINLOSS);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
   }
 
   private void updateTimers(String string) {
