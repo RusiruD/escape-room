@@ -22,6 +22,7 @@ public class WinLossController implements Controller {
   @FXML private Button exitGame;
   @FXML private Button replayGame;
   @FXML private Button newGame;
+  @FXML private Label lblTime;
 
   public void initialize() {
     if (GameState.isGameWon) {
@@ -60,13 +61,9 @@ public class WinLossController implements Controller {
 
   @Override
   public void updateTimerLabel(String time) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateTimerLabel'");
+    lblTime.setText(time);
   }
 
   @Override
-  public void updateInventory() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'updateInventory'");
-  }
+  public void updateInventory() {}
 }
