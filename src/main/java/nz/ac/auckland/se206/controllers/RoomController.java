@@ -22,8 +22,11 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
@@ -505,89 +508,9 @@ public class RoomController implements Controller {
   }
 
 
-  /**
-   * Initializes the chat view, loading the note.
-   *
-   * @throws ApiProxyException if there is an error communicating with the API proxy
-   */
-  @FXML
-  public void clickWindow(MouseEvent event) {
-    System.out.println("window clicked");
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            dungeonMaster.getText(
-                "user",
-                "I took damage from the window! Tell me"
-                    + " a few short sentences about it with no commas.");
-            while (!dungeonMaster.isTaskDone()) {
-              System.out.println("waiting for task to finish");
-            }
-            return null;
-          }
-        };
-    task.setOnSucceeded(
-        e -> {
-          System.out.println("home task succeeded");
-          System.out.println(dungeonMaster.getRiddle());
-          Pane dialogue = dungeonMaster.getPopUp();
-          Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-          popUp.getChildren().add(dialogueFormat);
+ 
 
-          dialogue.getStyleClass().add("popUp");
-        });
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-    // waits until task is done
-    
-  }
-
-  @FXML
-  public void getHint() throws IOException {
-    App.setRoot(AppUi.CHAT);
-  }
-
-  /** Initializes the room view, it is called when the room loads. */
-  public void initialize() throws ApiProxyException {
-    instance = this;
-    chatTextArea
-        .getStylesheets()
-        .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
-    chatTextArea.getStyleClass().add("text-area .content");
-    btnHideNote.getStyleClass().add("custom-button");
-    String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
-
-    Random random = new Random();
-
-    int firstIndex = random.nextInt(colors.length);
-    String firstPotion = colors[firstIndex];
-    GameState.firstPotion = "" + firstPotion + " Potion";
-    int secondIndex;
-    do {
-      secondIndex = random.nextInt(colors.length);
-    } while (secondIndex == firstIndex); // Ensure the second color is different from the first
-
-    String secondPotion = colors[secondIndex];
-    GameState.secondPotion = secondPotion + " Potion";
-
-    chatTextArea.appendText(
-        "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
-            + firstPotion
-            + " and "
-            + secondPotion
-            + " in the cauldron for super strength. \n"
-            + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
-
-    setRandomPosition(parchment1);
-    setRandomPosition(parchment2);
-    setRandomPosition(parchment3);
-    setRandomPosition(parchment4);
-
-    // Allow the boulder to be dragged and dropped
-
-  }
+ 
+ 
 
 }
