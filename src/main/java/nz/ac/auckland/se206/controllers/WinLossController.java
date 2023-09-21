@@ -62,13 +62,13 @@ public class WinLossController implements Controller {
   }
 
   @FXML
-  private double getWinLossHeight() {
-    return winlossPane.getHeight();
+  public double getWinLossHeight() {
+    return winlossPane.getPrefHeight();
   }
 
   @FXML
-  private double getWinLossWidth() {
-    return winlossPane.getWidth();
+  public double getWinLossWidth() {
+    return winlossPane.getPrefWidth();
   }
 
   @Override
