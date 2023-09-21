@@ -282,7 +282,9 @@ public class ChestController implements Controller {
   @FXML
   public void getAi(MouseEvent event) {
     DungeonMaster dungeonMaster = call.getDungeonMaster();
-    if (!dungeonMaster.isMessageFinished()) callAi(call);
+    if (!dungeonMaster.isMessageFinished()) {
+      callAi(call);
+    }
   }
 
   @FXML
@@ -463,12 +465,15 @@ public class ChestController implements Controller {
     App.setRoot(AppUi.CHAT);
   }
 
+  // Call the AI to give a hint
   private void callAi(Riddle call) {
+    // Get the dungeon master and the pop up pane
     DungeonMaster dungeonMaster = call.getDungeonMaster();
     Pane dialogue = dungeonMaster.getPopUp();
     Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.toFront();
     popUp.getChildren().add(dialogueFormat);
-
+    // Set the dialogue to be visible and not mouse transparent
     dialogueFormat.getStyleClass().add("popUp");
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);

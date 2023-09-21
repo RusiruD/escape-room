@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.GameState.STATE;
+import nz.ac.auckland.se206.GameState.State;
 import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.CorridorController;
 import nz.ac.auckland.se206.controllers.PuzzleController;
@@ -98,18 +98,19 @@ public class App extends Application {
   }
 
   public static void resetToDefault() {
+    // Reset the game state
     GameState.isGameWon = false;
     GameState.isKey1Collected = false;
     GameState.isKey2Collected = false;
     GameState.isKey3Collected = false;
     GameState.isChestOpened = false;
     GameState.isRiddleResolved = false;
-
+    // Reset the puzzle room state
     GameState.puzzleRoomSolved.set(false);
     GameState.firstPotion = "";
     GameState.secondPotion = "";
     GameState.riddle = null;
-    GameState.currentRoom = STATE.CHEST;
+    GameState.currentRoom = State.CHEST;
   }
 
   /**

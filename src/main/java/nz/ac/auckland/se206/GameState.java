@@ -9,22 +9,22 @@ import javafx.util.Duration;
 /** Represents the state of the game. */
 public class GameState {
 
-  public enum STATE {
+  public enum State {
     MARCELLIN,
     RUSIRU,
     ZACH,
     CHEST
   }
 
-  public enum DIFFICULTY {
+  public enum Difficulty {
     EASY,
     MEDIUM,
     HARD,
   }
 
-  public static DIFFICULTY currentDifficulty = DIFFICULTY.EASY;
+  public static Difficulty currentDifficulty = Difficulty.EASY;
 
-  public static STATE currentRoom = STATE.CHEST;
+  public static State currentRoom = State.CHEST;
 
   public static boolean aiCalled;
 

@@ -133,13 +133,13 @@ public class ChatController {
             // Clear the input field and create actual and fake chat messages
             inputText.clear();
             String hint = "";
-            if (GameState.currentRoom == GameState.STATE.CHEST) {
+            if (GameState.currentRoom == GameState.State.CHEST) {
               hint = "\"The riddle as well as the keys unlock the chest.\"";
-            } else if (GameState.currentRoom == GameState.STATE.MARCELLIN) {
+            } else if (GameState.currentRoom == GameState.State.MARCELLIN) {
               hint = "\"Move the points of the shape such that no lines between points overlap.\"";
-            } else if (GameState.currentRoom == GameState.STATE.ZACH) {
+            } else if (GameState.currentRoom == GameState.State.ZACH) {
               hint = "\"Investigate the door to find a sliding puzzle\"";
-            } else if (GameState.currentRoom == GameState.STATE.RUSIRU) {
+            } else if (GameState.currentRoom == GameState.State.RUSIRU) {
               if (GameState.noPapers == true) {
                 hint = "\"Pick up all the papers.\"";
               } else if (GameState.noCombination == true && GameState.noPapers == false) {
@@ -149,10 +149,9 @@ public class ChatController {
               }
             }
 
-            
-            String contextMsg = "";
+            String contextMsg = null;
             if (GameState.hintsGiven < 1
-                || GameState.currentDifficulty == GameState.DIFFICULTY.EASY) {
+                || GameState.currentDifficulty == GameState.Difficulty.EASY) {
               contextMsg = GptPromptEngineering.hintPrompt(message, hint);
             } else { // No more hints left
               contextMsg = GptPromptEngineering.noHintPrompt(message);

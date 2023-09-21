@@ -7,7 +7,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GameState.DIFFICULTY;
+import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -62,7 +62,11 @@ public class StartScreenController {
 
   @FXML
   public void checkDifficultyAndTimeLimit(String time, String difficulty) {
+
+    // Create a new timer object
     TimerCounter timer = new TimerCounter();
+
+    // Start the timer based on the chosen time limit
     if (time.equals("2 Minutes")) {
       timer.timerStart(120);
     } else if (time.equals("4 Minutes")) {
@@ -71,12 +75,13 @@ public class StartScreenController {
       timer.timerStart(360);
     }
 
+    // Set the difficulty based on the chosen difficulty
     if (difficulty.equals("Easy")) {
-      GameState.currentDifficulty = DIFFICULTY.EASY;
+      GameState.currentDifficulty = Difficulty.EASY;
     } else if (difficulty.equals("Medium")) {
-      GameState.currentDifficulty = DIFFICULTY.MEDIUM;
+      GameState.currentDifficulty = Difficulty.MEDIUM;
     } else {
-      GameState.currentDifficulty = DIFFICULTY.HARD;
+      GameState.currentDifficulty = Difficulty.HARD;
     }
   }
 

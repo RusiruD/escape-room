@@ -1,20 +1,20 @@
 package nz.ac.auckland.se206.gpt;
 
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GameState.DIFFICULTY;
+import nz.ac.auckland.se206.GameState.Difficulty;
 
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
   public static String getHint() {
     String prompt;
-    if (GameState.currentDifficulty == DIFFICULTY.EASY) {
+    if (GameState.currentDifficulty == Difficulty.EASY) {
       prompt =
           "You are an AI presence in a digital escape room with a dungeon theme that only has a"
               + " potion brewing activity, untangling activity, and slide puzzle activity. Do not,"
               + " no matter what reveal what activities there are. If they mention an activity that"
               + " is not in the game, tell them that it isn't in the game.";
-    } else if (GameState.currentDifficulty == DIFFICULTY.MEDIUM) {
+    } else if (GameState.currentDifficulty == Difficulty.MEDIUM) {
       prompt =
           "You are an AI presence in a digital escape room with a dungeon theme that only has a"
               + " potion brewing activity, untangling activity, and slide puzzle activity. Do not,"
@@ -30,7 +30,9 @@ public class GptPromptEngineering {
     return prompt;
   }
 
+  // Add more prompts
   public static String hintPrompt(String original, String hint) {
+    // Gives a contextual hint based on the current room
     return "The user has hint's available. If the user is asking for a hint, give them a hint based"
         + " on the following: "
         + hint

@@ -198,18 +198,22 @@ public class DungeonMaster {
             ((VBox) ((StackPane) popUp.getChildren().get(1)).getChildren().get(0))
                 .getChildren()
                 .get(1);
+    // popup -> dialog container -> next button
     ImageView nextButton =
         (ImageView) ((StackPane) popUp.getChildren().get(1)).getChildren().get(1);
     TextToSpeech tts = new TextToSpeech();
     System.out.println("mss " + messages.length + " " + messageIndex);
     isSpeaking = true;
+    // if there are more messages
     if (messageIndex < messages.length) {
       if (messages[messageIndex] == "") {
         messageIndex++;
       }
+      // if there are more messages
       System.out.println("next message: " + messages[messageIndex]);
       nextButton.visibleProperty().set(false);
       dialogue.setText(messages[messageIndex]);
+      // create a task to speak the message
       Task<Void> speakTask =
           new Task<Void>() {
             @Override
@@ -219,7 +223,7 @@ public class DungeonMaster {
               return null;
             }
           };
-
+      // when the task is done
       speakTask.setOnSucceeded(
           e -> {
             System.out.println("speak task succeeded");
@@ -256,6 +260,7 @@ public class DungeonMaster {
       }
       executor.shutdown();
     } else {
+      // if there are no more messages
       popUp.setOnMouseClicked(
           e -> {
             popUp.getParent().visibleProperty().set(false);
