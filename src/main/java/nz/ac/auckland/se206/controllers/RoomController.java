@@ -32,6 +32,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -108,6 +109,8 @@ public class RoomController implements Controller {
   private List<String> potionsincauldron = new ArrayList<>();
   private int parchmentPieces = 0;
 
+  private boolean hasTaunted = false;
+
   @FXML
   public double getRoomWidth() {
 
@@ -126,36 +129,24 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  public void clickWindow() {
-    String message = "write a sentence about anything";
-    if (!GameState.aiCalled) {
-      callAi(message);
-    } else {
-      System.out.println("ai already called");
-    }
+  public void clickWindow(MouseEvent event) {
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    String message = "print a lines of text";
+    Riddle call = new Riddle(dungeonMaster, message);
+    Button master = (Button) event.getSource();
+    master.setOnMouseClicked(e -> {
+      if (!dungeonMaster.isMessageFinished()) callAi(call);
+      else { master.visibleProperty().set(false); }
+    });
   }
 
-  public void callAi(String message) {
-    System.out.println("window clicked");
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            dungeonMaster.getText("user", message);
-            return null;
-          }  
-      };
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-    task.setOnSucceeded(
-        e -> {
-          Pane dialogue = dungeonMaster.paneFormat(dungeonMaster.getPopUp(), dungeonMaster);
-          popUp.getChildren().add(dialogue);
+  private void callAi(Riddle call) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    Pane dialogue = dungeonMaster.getPopUp();
+    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.getChildren().add(dialogueFormat);
 
-          dialogue.getStyleClass().add("popUp");    
-        });
+    dialogueFormat.getStyleClass().add("popUp");
   }
 
   public void initialize() throws ApiProxyException {
