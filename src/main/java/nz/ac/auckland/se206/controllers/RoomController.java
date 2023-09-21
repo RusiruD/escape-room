@@ -137,10 +137,7 @@ public class RoomController implements Controller {
 
   @FXML
   public void getAi(MouseEvent event) {
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    if (!dungeonMaster.isMessageFinished()) {
-      callAi(call);
-    }
+    callAi(call);
   }
 
   // Call the AI to give a hint
