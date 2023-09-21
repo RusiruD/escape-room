@@ -143,6 +143,7 @@ public class CorridorController implements Controller {
             collisionTimer.stop();
           }
         });
+      
   }
 
   // Method to check if the player stays in the room while moving
@@ -172,6 +173,8 @@ public class CorridorController implements Controller {
   private void checkCollision() {
     // Check collision with door1 and navigate to a new room if needed
     if (player.intersects(door1.getBoundsInParent())) {
+      player.setY(0);
+      player.setX(0);
 
       stopMovement();
       App.goToDoor1();
@@ -180,13 +183,20 @@ public class CorridorController implements Controller {
 
     // Check collision with door2 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door2.getBoundsInParent())) {
+    
+      player.setY(0);
+      player.setX(0);
+      
       stopMovement();
+      
       App.goToDoor2();
       GameState.currentRoom = GameState.roomState.MARCELLIN;
     }
 
     // Check collision with door3 and navigate to a new room if needed
     if (player.getBoundsInParent().intersects(door3.getBoundsInParent())) {
+      player.setY(0);
+      player.setX(0);
       stopMovement();
       GameState.currentRoom = GameState.roomState.ZACH;
       App.goToDoor3();

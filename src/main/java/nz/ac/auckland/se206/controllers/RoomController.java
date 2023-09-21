@@ -203,7 +203,7 @@ public class RoomController implements Controller {
             + firstPotion
             + " and "
             + secondPotion
-            + " in the cauldron for super strength. \n"
+            + " in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
 
     setRandomPosition(parchment1);
