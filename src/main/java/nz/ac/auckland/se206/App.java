@@ -117,7 +117,11 @@ public class App extends Application {
       e.printStackTrace();
     }
   }
+public static void makeSwordAndShieldAppear(){
+  CorridorController corridorController = CorridorController.getInstance();
+  corridorController.onTreasureChestUnlocked();
 
+}
   /**
    * Navigate to Door 1 and enter the first room. Adjust the stage size to fit the first room
    * dimensions.
