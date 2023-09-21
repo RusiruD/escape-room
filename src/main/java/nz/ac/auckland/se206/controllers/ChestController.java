@@ -281,31 +281,14 @@ public class ChestController implements Controller {
   }
 
   @FXML
-  public void clickButton() {
-    callAi("write a line of dialogue");
-  }
-
-  public void callAi(String message) {
-    System.out.println("window clicked");
+  public void clickButton(MouseEvent event) {
     DungeonMaster dungeonMaster = new DungeonMaster();
-    Task<Void> task =
-        new Task<Void>() {
-          @Override
-          protected Void call() throws Exception {
-            dungeonMaster.getText("user", message);
-            return null;
-          }  
-      };
-    Thread thread = new Thread(task);
-    thread.setDaemon(true);
-    thread.start();
-    task.setOnSucceeded(
-        e -> {
-          Pane dialogue = dungeonMaster.paneFormat(dungeonMaster.getPopUp(), dungeonMaster);
-          popUp.getChildren().add(dialogue);
-
-          dialogue.getStyleClass().add("popUp");    
-        });
+    String message = "print a lines of text";
+    Riddle call = new Riddle(dungeonMaster, message);
+    Pane master = (Pane) event.getSource();
+    master.setOnMouseClicked(e -> {
+      callAi(call);
+    });
   }
 
   @FXML
@@ -436,5 +419,14 @@ public class ChestController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);
+  }
+
+  private void callAi(Riddle call) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    Pane dialogue = dungeonMaster.getPopUp();
+    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.getChildren().add(dialogueFormat);
+
+    dialogueFormat.getStyleClass().add("popUp");
   }
 }
