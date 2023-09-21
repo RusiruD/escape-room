@@ -113,12 +113,20 @@ public class CorridorController implements Controller {
       };
 
   @FXML
+  public void resetPlayerImage() {
+    Image image = new Image("/images/character.png");
+    player.setFill(new ImagePattern(image));
+  }
+
+  @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
     CustomNotifications.generateNotification(
         "You've become stronger!", "Now you can fight the dungeon master!");
     Inventory.addToInventory("sword/shield");
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
+    GameState.isGameWon = true;
+    System.out.println(GameState.isGameWon);
 
     // Then, set the ImageView as the fill for your shape:
     Image image2 =

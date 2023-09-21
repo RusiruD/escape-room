@@ -13,7 +13,9 @@ import nz.ac.auckland.se206.controllers.PuzzleRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SceneManager;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import nz.ac.auckland.se206.controllers.StartScreenController;
 import nz.ac.auckland.se206.controllers.UntangleRoomController;
+import nz.ac.auckland.se206.controllers.WinLossController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -65,6 +67,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
 
     SceneManager.addUi(AppUi.UNTANGLE, loadFxml("untangleRoom"));
+    SceneManager.addUi(AppUi.WINLOSS, loadFxml("winloss"));
     SceneManager.addUi(AppUi.LEADERBOARD, loadFxml("leaderboard"));
     SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
     SceneManager.addUi(AppUi.CORRIDOR, loadFxml("corridor"));
@@ -75,11 +78,13 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     SceneManager.addController(PuzzleRoomController.getInstance());
+    SceneManager.addController(WinLossController.getInstance());
     SceneManager.addController(RoomController.getInstance());
     SceneManager.addController(CorridorController.getInstance());
     SceneManager.addController(PuzzleController.getInstance());
     SceneManager.addController(UntangleRoomController.getInstance());
     SceneManager.addController(ChestController.getInstance());
+    System.out.println(SceneManager.getControllers());
 
     root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 780.0, 780.0);
@@ -127,6 +132,11 @@ public class App extends Application {
    * Navigate to Door 1 and enter the first room. Adjust the stage size to fit the first room
    * dimensions.
    */
+  public static void resetPlayerImage() {
+    CorridorController corridorController = CorridorController.getInstance();
+    corridorController.resetPlayerImage();
+  }
+
   public static void goToDoor1() {
 
     try {
@@ -208,6 +218,66 @@ public class App extends Application {
     }
 
     // Focus on the new room
+    focus();
+  }
+
+  /**
+   * Switches the application UI to the Win/Loss screen. Adjusts the primary stage size to fit the
+   * Win/Loss screen content.
+   */
+  public static void goToWinLoss() {
+    try {
+      // Set the root of the application to the Win/Loss screen.
+      App.setRoot(AppUi.WINLOSS);
+
+      // Get the instance of the WinLossController.
+      WinLossController winLossController = WinLossController.getInstance();
+
+      // Get the dimensions of the Win/Loss screen content.
+      double winlossWidth = winLossController.getWinLossWidth();
+      double winlossHeight = winLossController.getWinLossHeight();
+
+      // Adjust the primary stage size to fit the Win/Loss screen content.
+      Stage primaryStage = (Stage) scene.getWindow();
+      primaryStage.setWidth(winlossWidth + 15);
+      primaryStage.setHeight(winlossHeight + 38);
+
+    } catch (IOException e) {
+      // Handle any IOException that might occur during the switch.
+      e.printStackTrace();
+    }
+
+    // Set the focus to an unspecified method.
+    focus();
+  }
+
+  /**
+   * Switches the application UI to the Start Screen. Adjusts the primary stage size to fit the
+   * Start Screen content.
+   */
+  public static void goToStartScreen() {
+    try {
+      // Set the root of the application to the Start Screen.
+      App.setRoot(AppUi.START);
+
+      // Get the instance of the StartScreenController.
+      StartScreenController startScreenController = StartScreenController.getInstance();
+
+      // Get the dimensions of the Start Screen content.
+      double startScreenWidth = startScreenController.getStartScreenWidth();
+      double startScreenHeight = startScreenController.getStartScreenHeight();
+
+      // Adjust the primary stage size to fit the Start Screen content.
+      Stage primaryStage = (Stage) scene.getWindow();
+      primaryStage.setWidth(startScreenWidth + 15);
+      primaryStage.setHeight(startScreenHeight + 38);
+
+    } catch (IOException e) {
+      // Handle any IOException that might occur during the switch.
+      e.printStackTrace();
+    }
+
+    // Set the focus to an unspecified method.
     focus();
   }
 }

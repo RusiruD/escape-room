@@ -165,6 +165,7 @@ public class ChestController implements Controller {
     updateKeys();
     if (correctKeys == 3) {
       GameState.isChestOpened = true;
+
       App.makeSwordAndShieldAppear();
       // open chest
       System.out.println("chest opened");
