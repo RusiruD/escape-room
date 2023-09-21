@@ -204,6 +204,9 @@ public class DungeonMaster {
     System.out.println("mss " + messages.length + " " + messageIndex);
     isSpeaking = true;
     if (messageIndex < messages.length) {
+      if (messages[messageIndex] == "") {
+        messageIndex++;
+      }
       System.out.println("next message: " + messages[messageIndex]);
       nextButton.visibleProperty().set(false);
       dialogue.setText(messages[messageIndex]);
