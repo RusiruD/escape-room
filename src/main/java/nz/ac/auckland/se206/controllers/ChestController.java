@@ -6,19 +6,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
-
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-
 import javafx.scene.shape.Rectangle;
-
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
@@ -306,10 +301,13 @@ public class ChestController implements Controller {
     String message = "print a lines of text";
     Riddle call = new Riddle(dungeonMaster, message);
     Button master = (Button) event.getSource();
-    master.setOnMouseClicked(e -> {
-      if (!dungeonMaster.isMessageFinished()) callAi(call);
-      else { master.visibleProperty().set(false); }
-    });
+    master.setOnMouseClicked(
+        e -> {
+          if (!dungeonMaster.isMessageFinished()) callAi(call);
+          else {
+            master.visibleProperty().set(false);
+          }
+        });
   }
 
   @FXML

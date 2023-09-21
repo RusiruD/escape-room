@@ -119,45 +119,43 @@ public class LeaderboardController {
     }
   }
 
-  /**
- * Sorts the scores list by time and updates the leaderboard UI.
- */
-private void sortScores() {
-  // Store the last (highest) score entry temporarily
-  ScoreEntry temp = scores.get(scores.size() - 1);
-  
-  // Sort the scores list based on time using a comparator
-  scores.sort(Comparator.comparing(ScoreEntry::getTime));
-  
-  // Iterate through the sorted scores list and update leaderboard positions
-  for (int i = 0; i < scores.size(); i++) {
-    if (i < scores.size()) {
-      int score = scores.get(i).getTime();
+  /** Sorts the scores list by time and updates the leaderboard UI. */
+  private void sortScores() {
+    // Store the last (highest) score entry temporarily
+    ScoreEntry temp = scores.get(scores.size() - 1);
 
-      // Set the leaderboard position for each score entry
-      scores.get(i).setLeaderboardPos(i);
-      
-      // Retrieve the name of the player
-      String name = scores.get(i).getName();
-      
-      // Update the leaderboard UI with the player's name, score, and position
-      addTime(name, score, i, false);
-    } else {
-      // Add a placeholder entry if there are no more scores
-      addTime(null, -1, i, false);
+    // Sort the scores list based on time using a comparator
+    scores.sort(Comparator.comparing(ScoreEntry::getTime));
+
+    // Iterate through the sorted scores list and update leaderboard positions
+    for (int i = 0; i < scores.size(); i++) {
+      if (i < scores.size()) {
+        int score = scores.get(i).getTime();
+
+        // Set the leaderboard position for each score entry
+        scores.get(i).setLeaderboardPos(i);
+
+        // Retrieve the name of the player
+        String name = scores.get(i).getName();
+
+        // Update the leaderboard UI with the player's name, score, and position
+        addTime(name, score, i, false);
+      } else {
+        // Add a placeholder entry if there are no more scores
+        addTime(null, -1, i, false);
+      }
     }
+
+    // Retrieve the time and name of the highest score entry
+    int time = temp.getTime();
+    String name = temp.getName();
+
+    // Update the leaderboard UI with the highest score as the final entry
+    addTime(name, time, scores.indexOf(temp), true);
+
+    // Create a graph to visualize the highest score
+    createGraph(temp);
   }
-  
-  // Retrieve the time and name of the highest score entry
-  int time = temp.getTime();
-  String name = temp.getName();
-  
-  // Update the leaderboard UI with the highest score as the final entry
-  addTime(name, time, scores.indexOf(temp), true);
-  
-  // Create a graph to visualize the highest score
-  createGraph(temp);
-}
 
   private void createGraph(ScoreEntry scoreEntry) {
     double[] max = {1, 1, 1, 1, 1, 1};
@@ -206,7 +204,7 @@ private void sortScores() {
     graph.getChildren().add(labels);
     // 5 -> 7 children total (0-6) datat would be 8th (7) child
     graph.getChildren().addAll(graphMax, graphPoint8, graphPoint6, graphPoint4, graphPoint2);
-    
+
     setGraph(scoreEntry);
   }
 
@@ -236,7 +234,7 @@ private void sortScores() {
   private void setGraph(ScoreEntry scoreEntry) {
     // remove the old graph
     if (graph.getChildren().size() > 7) {
-      
+
       graph.getChildren().remove(7);
     }
     // add the new graph
