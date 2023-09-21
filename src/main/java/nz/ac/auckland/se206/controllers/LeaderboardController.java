@@ -206,7 +206,7 @@ private void sortScores() {
     graph.getChildren().add(labels);
     // 5 -> 7 children total (0-6) datat would be 8th (7) child
     graph.getChildren().addAll(graphMax, graphPoint8, graphPoint6, graphPoint4, graphPoint2);
-    System.out.println(graph.getChildren().size());
+    
     setGraph(scoreEntry);
   }
 
@@ -236,7 +236,7 @@ private void sortScores() {
   private void setGraph(ScoreEntry scoreEntry) {
     // remove the old graph
     if (graph.getChildren().size() > 7) {
-      System.out.println("Removed: " + graph.getChildren().get(7));
+      
       graph.getChildren().remove(7);
     }
     // add the new graph
