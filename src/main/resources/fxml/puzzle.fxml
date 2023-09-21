@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="620.0" fitWidth="640.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/out-0.png" />
+            <Image url="@../images/PuzzleBackground.png" />
          </image>
       </ImageView>
       <ImageView fx:id="one" fitHeight="106.0" fitWidth="121.0" layoutX="119.0" layoutY="52.0" onMouseClicked="#clickedTile" pickOnBounds="true">

@@ -236,7 +236,7 @@ public class UntangleRoomController implements Controller {
       }
     }
 
-    System.out.println(polygon);
+   
     puzzleSolved();
   }
 
@@ -245,7 +245,6 @@ public class UntangleRoomController implements Controller {
       return;
     }
     isSolved = true;
-    System.out.println("Puzzle solved");
     key2.setVisible(true);
     key2.setDisable(false);
     

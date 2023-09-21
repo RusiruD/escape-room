@@ -142,6 +142,7 @@ public class ChestController implements Controller {
     // check if correct combination
     updateKeys();
     if (correctKeys == 3) {
+      GameState.isChestOpened = true;
       // open chest
       System.out.println("chest opened");
     }

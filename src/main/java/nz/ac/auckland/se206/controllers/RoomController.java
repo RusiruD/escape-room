@@ -191,9 +191,9 @@ public class RoomController implements Controller {
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
             + firstPotion
-            + " and "
+            + " potion and "
             + secondPotion
-            + " in the cauldron the fumes should give you incredible Power. \n"
+            + " potion in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
 
     setRandomPosition(parchment1);

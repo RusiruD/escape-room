@@ -25,9 +25,7 @@ public class GameState {
 
   public static boolean isKey2Collected = false;
   public static boolean isKey3Collected = false;
-  public static boolean isLock1Unlocked = false;
-  public static boolean isLock2Unlocked = false;
-  public static boolean isLock3Unlocked = false;
+  public static boolean isChestOpened=false;
 
   public static String difficultyLevel = "";
   public static String gameTime = "";
