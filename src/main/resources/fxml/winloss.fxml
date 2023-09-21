@@ -12,7 +12,7 @@
    <children>
       <ImageView fitHeight="406.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../../../../Downloads/da09ccb630024772bd23dbdeadefac9b.jpeg" />
+            <Image url="@../images/WinLossBackground.jpeg" />
          </image>
       </ImageView>
       <Button fx:id="exitGame" layoutX="121.0" layoutY="237.0" mnemonicParsing="false" onAction="#onExitGameClicked" text="Exit" />
@@ -23,7 +23,7 @@
             <Font name="Old English Text MT" size="50.0" />
          </font>
       </Label>
-      <Label fx:id="gameOutcomeDescription" alignment="CENTER" layoutX="133.0" layoutY="133.0" prefHeight="49.0" prefWidth="363.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon" textFill="#c60000">
+      <Label fx:id="gameOutcomeDescription" alignment="CENTER" layoutY="135.0" prefHeight="49.0" prefWidth="600.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon" textFill="#c60000">
          <font>
             <Font name="Old English Text MT" size="32.0" />
          </font>

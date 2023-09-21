@@ -22,7 +22,7 @@ public class StartScreenController {
 
   @FXML
   private void initialize() {
-
+    instance = this;
     // Add items to the choice box
     timerChoice.getItems().add("2 Minutes");
     timerChoice.getItems().add("4 Minutes");
