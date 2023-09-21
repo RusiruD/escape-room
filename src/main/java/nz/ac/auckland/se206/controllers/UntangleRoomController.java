@@ -261,14 +261,16 @@ public class UntangleRoomController implements Controller {
     puzzleSolved();
   }
 
+  // check if the puzzle is solved
   private void puzzleSolved() {
     if (isSolved) {
       return;
     }
     isSolved = true;
+    // If it's solved, then the player can go back to the corridor
     key2.setVisible(true);
     key2.setDisable(false);
-
+    // update the game state
     visualDungeonMaster.visibleProperty().set(true);
     visualDungeonMaster.mouseTransparentProperty().set(false);
   }
@@ -329,7 +331,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.STATE.CHEST;
+    GameState.currentRoom = GameState.State.CHEST;
   }
 
   public void updateInventory() {
@@ -337,19 +339,11 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
-
-  @FXML
-  public void getHint() throws IOException {
-    App.setRoot(AppUi.CHAT);
-  }
-
-  @FXML
   public void getAi(MouseEvent event) {
     DungeonMaster dungeonMaster = call.getDungeonMaster();
-    if (!dungeonMaster.isMessageFinished()) callAi(call);
+    if (!dungeonMaster.isMessageFinished()) {
+      callAi(call);
+    }
   }
 
   @FXML
@@ -360,13 +354,28 @@ public class UntangleRoomController implements Controller {
     instructionsDisplay.toFront();
   }
 
+  @FXML
+  public void updateTimerLabel(String time) {
+    // Set the label to the time
+    lblTime.setText(time);
+  }
+
+  @FXML
+  public void getHint() throws IOException {
+    // Go to the chat screen
+    App.setRoot(AppUi.CHAT);
+  }
+
+  // Call the AI to give a hint
   private void callAi(Riddle call) {
+    // Get the dungeon master and the pop up pane
     DungeonMaster dungeonMaster = call.getDungeonMaster();
     Pane dialogue = dungeonMaster.getPopUp();
+    // Format the dialogue
     Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
     popUp.toFront();
     popUp.getChildren().add(dialogueFormat);
-
+    // Set the dialogue to be visible and not mouse transparent
     dialogueFormat.getStyleClass().add("popUp");
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);

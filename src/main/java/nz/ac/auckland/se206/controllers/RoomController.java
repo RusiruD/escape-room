@@ -138,36 +138,41 @@ public class RoomController implements Controller {
   @FXML
   public void getAi(MouseEvent event) {
     DungeonMaster dungeonMaster = call.getDungeonMaster();
-    if (!dungeonMaster.isMessageFinished()) callAi(call);
+    if (!dungeonMaster.isMessageFinished()) {
+      callAi(call);
+    }
   }
 
+  // Call the AI to give a hint
   private void callAi(Riddle call) {
+    // Get the dungeon master and the pop up pane
     DungeonMaster dungeonMaster = call.getDungeonMaster();
     Pane dialogue = dungeonMaster.getPopUp();
     Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
     popUp.toFront();
     popUp.getChildren().add(dialogueFormat);
-
+    // Set the dialogue to be visible and not mouse transparent
     dialogueFormat.getStyleClass().add("popUp");
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   public void initialize() throws ApiProxyException {
+    // Set the instance variable to this object
     instance = this;
     popUp.toBack();
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
-
+    // Set the dungeon master to be invisible and mouse transparent
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
-
+    // Set the dungeon master to be invisible and mouse transparent
     String instructionsString = "INSTRUCTIONS GO HERE";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
-
+    // Set style sheets
     chatTextArea
         .getStylesheets()
         .add(getClass().getResource("/css/roomStylesheet.css").toExternalForm());
@@ -176,7 +181,7 @@ public class RoomController implements Controller {
     String[] colors = {"Blue", "Yellow", "Purple", "Red", "Green"};
 
     Random random = new Random();
-
+    // Randomly select two colors from the array
     int firstIndex = random.nextInt(colors.length);
     String firstPotion = colors[firstIndex];
     GameState.firstPotion = "" + firstPotion + " Potion";
@@ -184,10 +189,10 @@ public class RoomController implements Controller {
     do {
       secondIndex = random.nextInt(colors.length);
     } while (secondIndex == firstIndex); // Ensure the second color is different from the first
-
+    // Randomly select two colors from the array
     String secondPotion = colors[secondIndex];
     GameState.secondPotion = secondPotion + " Potion";
-
+    // Create a new dungeon master
     DungeonMaster dungeonMaster = new DungeonMaster();
     String message =
         "Congratulate a player for moving the boulder to get the key commenting on them mixing the "
@@ -196,7 +201,7 @@ public class RoomController implements Controller {
             + secondPotion
             + " to increase their strength. Keep this short";
     call = new Riddle(dungeonMaster, message);
-
+    // Set the tiles and solution
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
             + firstPotion
@@ -204,7 +209,7 @@ public class RoomController implements Controller {
             + secondPotion
             + " potion in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
-
+    // Set the tiles and solution
     setRandomPosition(parchment1);
     setRandomPosition(parchment2);
     setRandomPosition(parchment3);
@@ -392,9 +397,11 @@ public class RoomController implements Controller {
 
   @FXML
   private void onNoteClicked(MouseEvent event) {
+    // Check if a note is selected in the combo box
     GameState.noCombination = false;
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
+    // if a note is selected it is made visible in the scene
     addToInventory(note);
     btnHideNote.setDisable(false);
     btnHideNote.setVisible(true);
@@ -412,7 +419,7 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.STATE.CHEST;
+    GameState.currentRoom = GameState.State.CHEST;
   }
 
   private void tintScene(Pane potionsRoomPane) {
