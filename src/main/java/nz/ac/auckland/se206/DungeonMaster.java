@@ -259,16 +259,18 @@ public class DungeonMaster {
         e1.printStackTrace();
       }
       executor.shutdown();
-    } else {
-      // if there are no more messages
+    }
+    messageIndex++;
+    if (messageIndex >= messages.length) {
+      // when no more messages turn off next indicator and close popup
       popUp.setOnMouseClicked(
           e -> {
             popUp.getParent().visibleProperty().set(false);
             popUp.getParent().mouseTransparentProperty().set(true);
             messageFinished = true;
           });
+      nextButton.visibleProperty().set(false);
     }
-    messageIndex++;
   }
 
   /**

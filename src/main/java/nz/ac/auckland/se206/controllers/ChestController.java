@@ -9,6 +9,7 @@ import java.util.List;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
@@ -39,6 +40,8 @@ public class ChestController implements Controller {
   private List<String> keys = Arrays.asList("key1", "key2", "key3");
 
   private int correctKeys = 0;
+
+  @FXML private Button riddleButton;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
 
@@ -86,7 +89,15 @@ public class ChestController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
 
-    String instructionsString = "INSTRUCTIONS GO HERE";
+    String instructionsString = "THE CHEST IS LOCKED!. \n \n"
+        + "You need to find the correct keys to unlock the chest. \n \n"
+        + "The keys are hidden in the dungeon. \n \n"
+        + "You need to find the keys and insert them into the correct key holes. \n \n"
+        + "The correct keys will turn green. \n \n"
+        + "The incorrect keys will turn red. \n \n"
+        + "The empty key holes will are blue. \n \n"
+        + "Once you have inserted the correct keys, the chest will open. \n \n"
+        + "Good luck!";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
@@ -136,7 +147,7 @@ public class ChestController implements Controller {
             + ". Hide the answers within the riddle but do not use the numbers within the riddle"
             + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
             + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
-            + " long. Do not go over 150 words.";
+            + " long. Do not go over 100 words.";
     System.out.println(question);
 
     // Create a DungeonMaster and initiate a task to generate a riddle
@@ -165,7 +176,9 @@ public class ChestController implements Controller {
     updateKeys();
     if (correctKeys == 3) {
       GameState.isChestOpened = true;
-
+      //disable riddle button when finished
+      riddleButton.visibleProperty().set(false);
+      riddleButton.mouseTransparentProperty().set(true);
       App.makeSwordAndShieldAppear();
       // open chest
       System.out.println("chest opened");
@@ -281,10 +294,7 @@ public class ChestController implements Controller {
 
   @FXML
   public void getAi(MouseEvent event) {
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    if (!dungeonMaster.isMessageFinished()) {
-      callAi(call);
-    }
+    callAi(call);
   }
 
   @FXML
@@ -472,6 +482,9 @@ public class ChestController implements Controller {
     Pane dialogue = dungeonMaster.getPopUp();
     Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
     popUp.toFront();
+    if (popUp.getChildren() != null) {
+      popUp.getChildren().clear();
+    }
     popUp.getChildren().add(dialogueFormat);
     // Set the dialogue to be visible and not mouse transparent
     dialogueFormat.getStyleClass().add("popUp");
