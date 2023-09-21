@@ -46,7 +46,6 @@ public class TimerCounter {
   }
 
   private void updateTimers(String string) {
-
     for (Controller controller : SceneManager.getControllers()) {
       controller.updateTimerLabel(string);
     }

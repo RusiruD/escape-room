@@ -10,7 +10,6 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GameState.roomState;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -58,7 +57,7 @@ public class ChatController {
                     .setN(1)
                     .setTemperature(0.2)
                     .setTopP(0.5)
-                    .setMaxTokens(500);
+                    .setMaxTokens(100);
 
             // Run GPT-3 with an initial hint request
             runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
@@ -125,21 +124,6 @@ public class ChatController {
           @Override
           protected Void call() throws Exception {
             String message = inputText.getText();
-            String extra;
-
-            // Add context information based on the current room
-            if (GameState.currentRoom == roomState.CHEST) {
-              extra = " (chestRoom)";
-            } else if (GameState.currentRoom == roomState.ZACH) {
-              extra = " (zachRoom)";
-            } else if (GameState.currentRoom == roomState.RUSIRU) {
-              extra = " (rusiruRoom)";
-            } else {
-              extra = " (marcellinRoom)";
-            }
-
-            // Modify the message to include the context
-            message = message.concat(extra);
 
             // If the message is empty, return early
             if (message.trim().isEmpty()) {
@@ -148,14 +132,44 @@ public class ChatController {
 
             // Clear the input field and create actual and fake chat messages
             inputText.clear();
-            ChatMessage actualMessage = new ChatMessage("user", message);
-            ChatMessage fakeMessage = new ChatMessage("user", message.replace(extra, ""));
+            String hint = "";
+            if (GameState.currentRoom == GameState.STATE.CHEST) {
+              hint = "\"The riddle as well as the keys unlock the chest.\"";
+            } else if (GameState.currentRoom == GameState.STATE.MARCELLIN) {
+              hint = "\"Move the points of the shape such that no lines between points overlap.\"";
+            } else if (GameState.currentRoom == GameState.STATE.ZACH) {
+              hint = "\"Investigate the door to find a sliding puzzle\"";
+            } else if (GameState.currentRoom == GameState.STATE.RUSIRU) {
+              if (GameState.noPapers == true) {
+                hint = "\"Pick up all the papers.\"";
+              } else if (GameState.noCombination == true && GameState.noPapers == false) {
+                hint = "\"Put all the papers on the table and read it.\"";
+              } else if (GameState.noPotionBoulder == true && GameState.noCombination == false) {
+                hint = "\"Brew a potion of strength to move the big rock.\"";
+              }
+            }
+
+            
+            String contextMsg = "";
+            if (GameState.hintsGiven < 1
+                || GameState.currentDifficulty == GameState.DIFFICULTY.EASY) {
+              contextMsg = GptPromptEngineering.hintPrompt(message, hint);
+            } else { // No more hints left
+              contextMsg = GptPromptEngineering.noHintPrompt(message);
+            }
+
+            ChatMessage actualMessage = new ChatMessage("user", contextMsg);
 
             // Append the fake message to the chat interface
-            appendChatMessage(fakeMessage);
+            appendChatMessage(new ChatMessage("user", message));
 
             // Run GPT-3 with the actual message
-            runGpt(actualMessage);
+            ChatMessage last = runGpt(actualMessage);
+
+            if (last.getContent().toLowerCase().contains("hint")) {
+              GameState.hintsGiven++;
+              System.out.println("HINT DETECTED!");
+            }
 
             // Ensure that the UI updates on the JavaFX application thread
             Platform.runLater(() -> {});
@@ -170,7 +184,6 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-
     App.setRoot(App.oldScene);
   }
 }

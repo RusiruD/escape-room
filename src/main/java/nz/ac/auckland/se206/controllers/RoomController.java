@@ -126,6 +126,7 @@ public class RoomController implements Controller {
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
+    GameState.noCombination = false;
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
@@ -266,6 +267,7 @@ public class RoomController implements Controller {
           "Something Happens!",
           "You feel far stronger... like energy's coursing through you and you could move"
               + " anything...");
+      GameState.noPotionBoulder = false;
       allowImageToBeDragged(boulder);
     }
   }
@@ -278,6 +280,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void addToInventory(ImageView image) {
+    GameState.noPapers = false;
     image.setVisible(false);
     image.setDisable(true);
 
@@ -377,7 +380,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onNoteClicked(MouseEvent event) {
-
+    GameState.noCombination = false;
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
     addToInventory(note);
@@ -394,7 +397,7 @@ public class RoomController implements Controller {
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
     App.returnToCorridor();
-    GameState.currentRoom = GameState.roomState.CHEST;
+    GameState.currentRoom = GameState.STATE.CHEST;
   }
 
   private void tintScene(Pane potionsRoomPane) {
