@@ -125,33 +125,37 @@ public class RoomController implements Controller {
     lblTime.setText(time);
   }
 
-  public void clickWindow(MouseEvent event) {
+  @FXML
+  public void clickWindow() {
+    String message = "write a sentence about anything";
+    if (!GameState.aiCalled) {
+      callAi(message);
+    } else {
+      System.out.println("ai already called");
+    }
+  }
+
+  public void callAi(String message) {
     System.out.println("window clicked");
     DungeonMaster dungeonMaster = new DungeonMaster();
     Task<Void> task =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            dungeonMaster.getText("user", "write a few lines about anything");
-            while (!dungeonMaster.isTaskDone()) {
-              System.out.println("waiting");
-            }
+            dungeonMaster.getText("user", message);
             return null;
-          }
-        };
-    task.setOnSucceeded(
-        e -> {
-          System.out.println("home task succeeded");
-          Pane dialogue = dungeonMaster.getPopUp();
-          Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-          popUp.getChildren().add(dialogueFormat);
-
-          dialogueFormat.getStyleClass().add("popUp");
-          
-        });
+          }  
+      };
     Thread thread = new Thread(task);
     thread.setDaemon(true);
     thread.start();
+    task.setOnSucceeded(
+        e -> {
+          Pane dialogue = dungeonMaster.paneFormat(dungeonMaster.getPopUp(), dungeonMaster);
+          popUp.getChildren().add(dialogue);
+
+          dialogue.getStyleClass().add("popUp");    
+        });
   }
 
   public void initialize() throws ApiProxyException {

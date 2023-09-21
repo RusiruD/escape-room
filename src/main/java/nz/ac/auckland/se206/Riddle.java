@@ -14,14 +14,11 @@ public class Riddle {
 
   private DungeonMaster dungeonMaster;
 
-  private boolean hasRiddle;
-
   public Riddle(DungeonMaster dungeonMaster, String question) {
     // get the riddle from the dungeon master
 
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
-    this.hasRiddle = false;
     Task<Void> task =
         new Task<Void>() {
           @Override
@@ -33,7 +30,6 @@ public class Riddle {
     task.setOnSucceeded(
         e -> {
           this.riddle = dungeonMaster.getRiddle();
-          this.hasRiddle = true;
         });
     Thread thread = new Thread(task);
     thread.setDaemon(true);

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
@@ -20,7 +21,7 @@ import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
-
+import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
@@ -277,6 +278,34 @@ public class ChestController implements Controller {
   private void onReturnToCorridorClicked(ActionEvent event) {
 
     App.returnToCorridor();
+  }
+
+  @FXML
+  public void clickButton() {
+    callAi("write a line of dialogue");
+  }
+
+  public void callAi(String message) {
+    System.out.println("window clicked");
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    Task<Void> task =
+        new Task<Void>() {
+          @Override
+          protected Void call() throws Exception {
+            dungeonMaster.getText("user", message);
+            return null;
+          }  
+      };
+    Thread thread = new Thread(task);
+    thread.setDaemon(true);
+    thread.start();
+    task.setOnSucceeded(
+        e -> {
+          Pane dialogue = dungeonMaster.paneFormat(dungeonMaster.getPopUp(), dungeonMaster);
+          popUp.getChildren().add(dialogue);
+
+          dialogue.getStyleClass().add("popUp");    
+        });
   }
 
   @FXML

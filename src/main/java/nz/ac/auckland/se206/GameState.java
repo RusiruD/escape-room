@@ -15,6 +15,8 @@ public class GameState {
 
   public static roomState currentRoom = roomState.CHEST;
 
+  public static boolean aiCalled;
+
   /** Indicates whether the riddle has been resolved. */
   public static boolean isRiddleResolved = false;
 
