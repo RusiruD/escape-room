@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import nz.ac.auckland.se206.GameState.roomState;
+import nz.ac.auckland.se206.GameState.STATE;
 import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.CorridorController;
 import nz.ac.auckland.se206.controllers.PuzzleController;
@@ -85,7 +85,6 @@ public class App extends Application {
     SceneManager.addController(PuzzleController.getInstance());
     SceneManager.addController(UntangleRoomController.getInstance());
     SceneManager.addController(ChestController.getInstance());
-    System.out.println(SceneManager.getControllers());
 
     root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 780.0, 780.0);
@@ -105,12 +104,12 @@ public class App extends Application {
     GameState.isKey3Collected = false;
     GameState.isChestOpened = false;
     GameState.isRiddleResolved = false;
-    GameState.hintsLeft = 0;
+
     GameState.puzzleRoomSolved.set(false);
     GameState.firstPotion = "";
     GameState.secondPotion = "";
     GameState.riddle = null;
-    GameState.currentRoom = roomState.CHEST;
+    GameState.currentRoom = STATE.CHEST;
   }
 
   /**

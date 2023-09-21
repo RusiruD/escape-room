@@ -71,9 +71,9 @@ public class StartScreenController {
       timer.timerStart(360);
     }
 
-    if (chosenDifficulty.equals("Easy")) {
+    if (difficulty.equals("Easy")) {
       GameState.currentDifficulty = DIFFICULTY.EASY;
-    } else if (chosenDifficulty.equals("Medium")) {
+    } else if (difficulty.equals("Medium")) {
       GameState.currentDifficulty = DIFFICULTY.MEDIUM;
     } else {
       GameState.currentDifficulty = DIFFICULTY.HARD;
