@@ -25,6 +25,7 @@ public class WinLossController implements Controller {
   @FXML private Label lblTime;
 
   public void initialize() {
+    instance = this;
     if (GameState.isGameWon) {
       gameOutcome.setText("You Win!");
       gameOutcomeDescription.setText(

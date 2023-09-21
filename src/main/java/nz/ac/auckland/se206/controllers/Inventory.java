@@ -34,6 +34,9 @@ public class Inventory {
   private static void update() {
 
     for (Controller controller : SceneManager.getControllers()) {
+      if (controller.equals(WinLossController.getInstance())) {
+        continue;
+      }
       controller.updateInventory();
     }
   }

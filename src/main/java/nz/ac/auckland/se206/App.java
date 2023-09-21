@@ -66,6 +66,7 @@ public class App extends Application {
   public void start(final Stage stage) throws IOException {
 
     SceneManager.addUi(AppUi.UNTANGLE, loadFxml("untangleRoom"));
+    SceneManager.addUi(AppUi.WINLOSS, loadFxml("winloss"));
     SceneManager.addUi(AppUi.LEADERBOARD, loadFxml("leaderboard"));
     SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
     SceneManager.addUi(AppUi.CORRIDOR, loadFxml("corridor"));
@@ -74,7 +75,6 @@ public class App extends Application {
     SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
     SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
-    SceneManager.addUi(AppUi.WINLOSS, loadFxml("winloss"));
 
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(WinLossController.getInstance());
@@ -83,6 +83,7 @@ public class App extends Application {
     SceneManager.addController(PuzzleController.getInstance());
     SceneManager.addController(UntangleRoomController.getInstance());
     SceneManager.addController(ChestController.getInstance());
+    System.out.println(SceneManager.getControllers());
 
     root = SceneManager.getUiRoot(AppUi.START);
     scene = new Scene(root, 780.0, 780.0);
