@@ -10,6 +10,12 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class WinLossController {
+  private static WinLossController instance;
+
+  public static WinLossController getInstance() {
+    return instance;
+  }
+
   @FXML private Label gameOutcome;
   @FXML private Label gameOutcomeDescription;
   @FXML private Button exitGame;

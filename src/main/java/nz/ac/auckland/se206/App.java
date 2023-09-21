@@ -14,6 +14,7 @@ import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SceneManager;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.controllers.UntangleRoomController;
+import nz.ac.auckland.se206.controllers.WinLossController;
 
 /**
  * This is the entry point of the JavaFX application, while you can change this class, it should
@@ -73,8 +74,10 @@ public class App extends Application {
     SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
     SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
+    SceneManager.addUi(AppUi.WINLOSS, loadFxml("winloss"));
 
     SceneManager.addController(PuzzleRoomController.getInstance());
+    SceneManager.addController(WinLossController.getInstance());
     SceneManager.addController(RoomController.getInstance());
     SceneManager.addController(CorridorController.getInstance());
     SceneManager.addController(PuzzleController.getInstance());
