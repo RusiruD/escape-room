@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.TimerCounter;
@@ -16,6 +17,7 @@ public class StartScreenController {
     return instance;
   }
 
+  @FXML private Pane startScreenPane;
   @FXML private ChoiceBox<String> timerChoice;
   @FXML private ChoiceBox<String> difficultyChoice;
   @FXML private Button btnStart;
@@ -74,5 +76,15 @@ public class StartScreenController {
     } else {
       GameState.hintsLeft = 0;
     }
+  }
+
+  @FXML
+  public double getStartScreenHeight() {
+    return startScreenPane.getPrefHeight();
+  }
+
+  @FXML
+  public double getStartScreenWidth() {
+    return startScreenPane.getPrefWidth();
   }
 }

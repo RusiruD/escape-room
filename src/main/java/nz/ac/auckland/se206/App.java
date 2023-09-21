@@ -13,6 +13,7 @@ import nz.ac.auckland.se206.controllers.PuzzleRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SceneManager;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import nz.ac.auckland.se206.controllers.StartScreenController;
 import nz.ac.auckland.se206.controllers.UntangleRoomController;
 import nz.ac.auckland.se206.controllers.WinLossController;
 
@@ -215,19 +216,63 @@ public class App extends Application {
     focus();
   }
 
+  /**
+   * Switches the application UI to the Win/Loss screen. Adjusts the primary stage size to fit the
+   * Win/Loss screen content.
+   */
   public static void goToWinLoss() {
     try {
+      // Set the root of the application to the Win/Loss screen.
       App.setRoot(AppUi.WINLOSS);
+
+      // Get the instance of the WinLossController.
       WinLossController winLossController = WinLossController.getInstance();
+
+      // Get the dimensions of the Win/Loss screen content.
       double winlossWidth = winLossController.getWinLossWidth();
       double winlossHeight = winLossController.getWinLossHeight();
+
+      // Adjust the primary stage size to fit the Win/Loss screen content.
       Stage primaryStage = (Stage) scene.getWindow();
       primaryStage.setWidth(winlossWidth + 15);
       primaryStage.setHeight(winlossHeight + 38);
 
     } catch (IOException e) {
-      // TODO Auto-generated catch block
+      // Handle any IOException that might occur during the switch.
       e.printStackTrace();
     }
+
+    // Set the focus to an unspecified method.
+    focus();
+  }
+
+  /**
+   * Switches the application UI to the Start Screen. Adjusts the primary stage size to fit the
+   * Start Screen content.
+   */
+  public static void goToStartScreen() {
+    try {
+      // Set the root of the application to the Start Screen.
+      App.setRoot(AppUi.START);
+
+      // Get the instance of the StartScreenController.
+      StartScreenController startScreenController = StartScreenController.getInstance();
+
+      // Get the dimensions of the Start Screen content.
+      double startScreenWidth = startScreenController.getStartScreenWidth();
+      double startScreenHeight = startScreenController.getStartScreenHeight();
+
+      // Adjust the primary stage size to fit the Start Screen content.
+      Stage primaryStage = (Stage) scene.getWindow();
+      primaryStage.setWidth(startScreenWidth + 15);
+      primaryStage.setHeight(startScreenHeight + 38);
+
+    } catch (IOException e) {
+      // Handle any IOException that might occur during the switch.
+      e.printStackTrace();
+    }
+
+    // Set the focus to an unspecified method.
+    focus();
   }
 }
