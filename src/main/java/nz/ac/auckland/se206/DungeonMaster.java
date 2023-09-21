@@ -97,7 +97,7 @@ public class DungeonMaster {
   }
 
   // returns a pane with the text
-  public void getText(String role, String message) {
+  public Pane getText(String role, String message) {
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;
@@ -172,6 +172,7 @@ public class DungeonMaster {
       System.out.println(txt);
     }
     popUp = createPopUp();
+    return popUp;
   }
 
   // returns a pane with the text
