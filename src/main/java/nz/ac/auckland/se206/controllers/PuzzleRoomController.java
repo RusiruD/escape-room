@@ -24,19 +24,18 @@ public class PuzzleRoomController implements Controller {
 
   @FXML private Pane puzzleRoomPane;
   @FXML private Label lblTime;
-  @FXML private ImageView key2;
+  @FXML private ImageView key3;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   public void initialize() {
-    key2.visibleProperty().bind(GameState.puzzleRoomSolved);
-    key2.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
+    key3.visibleProperty().bind(GameState.puzzleRoomSolved);
+    key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
 
     instance = this;
   }
 
-  @FXML
-  public void key2Visible() {}
+  
 
   @FXML
   private void clickPuzzle(MouseEvent event) throws IOException {
@@ -44,15 +43,15 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void onKey2Clicked(MouseEvent event) {
-    // change the key2's visibility and disable it
-    key2.visibleProperty().unbind();
-    key2.disableProperty().unbind();
-    Inventory.addToInventory("key2");
-    key2.setVisible(false);
-    key2.setDisable(true);
+  private void onKey3Clicked(MouseEvent event) {
+    // change the key3's visibility and disable it
+    key3.visibleProperty().unbind();
+    key3.disableProperty().unbind();
+    Inventory.addToInventory("key3");
+    key3.setVisible(false);
+    key3.setDisable(true);
     // update the game state
-    GameState.isKey2Collected = true;
+    GameState.isKey3Collected = true;
   }
 
   @FXML

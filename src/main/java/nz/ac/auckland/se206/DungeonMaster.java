@@ -261,34 +261,50 @@ public class DungeonMaster {
     messageIndex++;
   }
 
-  public Pane paneFormat(Pane dialogue, DungeonMaster dungeonMaster) {
-    Rectangle exitButton =
-        (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
-    Text dialogueText =
-        (Text)
-            ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
-                .getChildren()
-                .get(1);
-    ImageView nextButton =
-        (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
-    exitButton.setOnMouseClicked(
-        event1 -> {
-          popUp.visibleProperty().set(false);
-        });
-    dialogueText.setOnMouseClicked(
-        event1 -> {
-          if (!dungeonMaster.isSpeaking()) {
-            dungeonMaster.update();
-          }
-        });
-    nextButton.setOnMouseClicked(
-        event1 -> {
-          if (!dungeonMaster.isSpeaking()) {
-            dungeonMaster.update();
-          }
-        });
-    return dialogue;
-  }
+  /**
+ * Formats the dialogue pane and attaches event handlers to its elements.
+ *
+ * @param dialogue The dialogue pane to be formatted.
+ * @param dungeonMaster The DungeonMaster responsible for managing the dialogue.
+ * @return The formatted dialogue pane.
+ */
+public Pane paneFormat(Pane dialogue, DungeonMaster dungeonMaster) {
+  // Retrieve and configure UI elements within the dialogue pane
+  Rectangle exitButton =
+      (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+  Text dialogueText =
+      (Text)
+          ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+              .getChildren()
+              .get(1);
+  ImageView nextButton =
+      (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+  
+  // Attach an event handler to the exit button to close the dialogue
+  exitButton.setOnMouseClicked(
+      event1 -> {
+        popUp.visibleProperty().set(false);
+      });
+  
+  // Attach an event handler to the dialogue text to allow advancing the dialogue
+  dialogueText.setOnMouseClicked(
+      event1 -> {
+        if (!dungeonMaster.isSpeaking()) {
+          dungeonMaster.update();
+        }
+      });
+  
+  // Attach an event handler to the next button to allow advancing the dialogue
+  nextButton.setOnMouseClicked(
+      event1 -> {
+        if (!dungeonMaster.isSpeaking()) {
+          dungeonMaster.update();
+        }
+      });
+  
+  // Return the formatted dialogue pane
+  return dialogue;
+}
 
   public boolean isSpeaking() {
     return isSpeaking;

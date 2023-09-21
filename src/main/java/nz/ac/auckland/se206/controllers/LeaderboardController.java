@@ -119,25 +119,45 @@ public class LeaderboardController {
     }
   }
 
-  private void sortScores() {
-    ScoreEntry temp = scores.get(scores.size() - 1);
-    scores.sort(Comparator.comparing(ScoreEntry::getTime));
-    for (int i = 0; i < scores.size(); i++) {
-      if (i < scores.size()) {
-        int score = scores.get(i).getTime();
+  /**
+ * Sorts the scores list by time and updates the leaderboard UI.
+ */
+private void sortScores() {
+  // Store the last (highest) score entry temporarily
+  ScoreEntry temp = scores.get(scores.size() - 1);
+  
+  // Sort the scores list based on time using a comparator
+  scores.sort(Comparator.comparing(ScoreEntry::getTime));
+  
+  // Iterate through the sorted scores list and update leaderboard positions
+  for (int i = 0; i < scores.size(); i++) {
+    if (i < scores.size()) {
+      int score = scores.get(i).getTime();
 
-        scores.get(i).setLeaderboardPos(i);
-        String name = scores.get(i).getName();
-        addTime(name, score, i, false);
-      } else {
-        addTime(null, -1, i, false);
-      }
+      // Set the leaderboard position for each score entry
+      scores.get(i).setLeaderboardPos(i);
+      
+      // Retrieve the name of the player
+      String name = scores.get(i).getName();
+      
+      // Update the leaderboard UI with the player's name, score, and position
+      addTime(name, score, i, false);
+    } else {
+      // Add a placeholder entry if there are no more scores
+      addTime(null, -1, i, false);
     }
-    int time = temp.getTime();
-    String name = temp.getName();
-    addTime(name, time, scores.indexOf(temp), true);
-    createGraph(temp);
   }
+  
+  // Retrieve the time and name of the highest score entry
+  int time = temp.getTime();
+  String name = temp.getName();
+  
+  // Update the leaderboard UI with the highest score as the final entry
+  addTime(name, time, scores.indexOf(temp), true);
+  
+  // Create a graph to visualize the highest score
+  createGraph(temp);
+}
 
   private void createGraph(ScoreEntry scoreEntry) {
     double[] max = {1, 1, 1, 1, 1, 1};

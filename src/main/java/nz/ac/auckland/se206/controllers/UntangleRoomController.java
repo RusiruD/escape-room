@@ -136,7 +136,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
-  @FXML private ImageView key3;
+  @FXML private ImageView key2;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
 
@@ -146,9 +146,9 @@ public class UntangleRoomController implements Controller {
   public void initialize() {
     // set the instance
     instance = this;
-    // set the key3's visibility and disable it
-    key3.setVisible(false);
-    key3.mouseTransparentProperty().set(true);
+    // set the key2's visibility and disable it
+    
+    
     // set the inventory choice box
     Polygon polygon = createStartingTriangle();
 
@@ -240,8 +240,9 @@ public class UntangleRoomController implements Controller {
     }
     isSolved = true;
     System.out.println("Puzzle solved");
-    key3.setVisible(true);
-    key3.mouseTransparentProperty().set(false);
+    key2.setVisible(true);
+    key2.setDisable(false);
+    
   }
 
   @FXML
@@ -290,11 +291,11 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
-  private void onKey3Clicked(MouseEvent event) {
-    Inventory.addToInventory("key3");
-    key3.setVisible(false);
-    key3.setDisable(true);
-    GameState.isKey3Collected = true;
+  private void onKey2Clicked(MouseEvent event) {
+    Inventory.addToInventory("key2");
+    key2.setVisible(false);
+    key2.setDisable(true);
+    GameState.isKey2Collected = true;
   }
 
   @FXML
