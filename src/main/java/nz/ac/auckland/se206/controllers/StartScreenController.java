@@ -10,6 +10,11 @@ import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartScreenController {
+  private static StartScreenController instance;
+
+  public static StartScreenController getInstance() {
+    return instance;
+  }
 
   @FXML private ChoiceBox<String> timerChoice;
   @FXML private ChoiceBox<String> difficultyChoice;
@@ -41,23 +46,8 @@ public class StartScreenController {
     GameState.difficultyLevel = chosenDifficulty;
 
     // Create a new timer object
-    TimerCounter time = new TimerCounter();
 
-    if (chosenTimeLimit.equals("2 Minutes")) {
-      time.timerStart(120);
-    } else if (chosenTimeLimit.equals("4 Minutes")) {
-      time.timerStart(240);
-    } else {
-      time.timerStart(360);
-    }
-
-    if (chosenDifficulty.equals("Easy")) {
-      GameState.hintsLeft = 999;
-    } else if (chosenDifficulty.equals("Medium")) {
-      GameState.hintsLeft = 5;
-    } else {
-      GameState.hintsLeft = 0;
-    }
+    checkDifficultyAndTimeLimit(chosenTimeLimit, chosenDifficulty);
 
     ChatController.getInstance().intialiseHints();
 
@@ -65,5 +55,24 @@ public class StartScreenController {
     difficultyChoice.getStyleClass().add("choice-box");
 
     App.returnToCorridor();
+  }
+
+  @FXML
+  public void checkDifficultyAndTimeLimit(String time, String difficulty) {
+    TimerCounter timer = new TimerCounter();
+    if (time.equals("2 Minutes")) {
+      timer.timerStart(120);
+    } else if (time.equals("4 Minutes")) {
+      timer.timerStart(240);
+    } else {
+      timer.timerStart(360);
+    }
+    if (difficulty.equals("Easy")) {
+      GameState.hintsLeft = 999;
+    } else if (difficulty.equals("Medium")) {
+      GameState.hintsLeft = 5;
+    } else {
+      GameState.hintsLeft = 0;
+    }
   }
 }
