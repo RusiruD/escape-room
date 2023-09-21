@@ -1,7 +1,10 @@
 package nz.ac.auckland.se206;
 
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -34,7 +37,7 @@ public class GameState {
   public static boolean isKey2Collected = false;
   public static boolean isKey3Collected = false;
   public static boolean isChestOpened = false;
-
+  public static boolean isGameWon = false;
   public static String difficultyLevel = "";
   public static String gameTime = "";
 
@@ -61,5 +64,18 @@ public class GameState {
 
   public static boolean isPuzzleRoomSolved() {
     return puzzleRoomSolved.get();
+  }
+
+  public static TranslateTransition translate(ImageView image) {
+    // default transition for boucning
+    TranslateTransition transition = new TranslateTransition();
+    transition.setDuration(Duration.seconds(1));
+    transition.setNode(image);
+    transition.setFromY(0);
+    transition.setToY(10);
+    transition.setCycleCount(TranslateTransition.INDEFINITE);
+    transition.setAutoReverse(true);
+
+    return transition;
   }
 }

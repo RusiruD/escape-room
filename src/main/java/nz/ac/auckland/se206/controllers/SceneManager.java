@@ -16,7 +16,8 @@ public class SceneManager {
     CHAT,
     UNTANGLE,
     LEADERBOARD,
-    CHEST
+    CHEST,
+    WINLOSS
   }
 
   private static HashMap<AppUi, Parent> sceneMap = new HashMap<AppUi, Parent>();

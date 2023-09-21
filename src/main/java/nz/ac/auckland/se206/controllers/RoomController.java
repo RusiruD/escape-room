@@ -7,6 +7,7 @@ import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -68,6 +69,7 @@ public class RoomController implements Controller {
   @FXML private Pane potionsRoomPane;
   @FXML private Pane popUp;
   @FXML private Pane instructionsDisplay;
+  @FXML private Pane visualDungeonMaster;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Button btnReturnToCorridor;
@@ -94,6 +96,7 @@ public class RoomController implements Controller {
   @FXML private ImageView parchment2duplicate;
 
   @FXML private ImageView parchment3duplicate;
+  @FXML private ImageView exclamationMark;
   @FXML private TextArea chatTextArea;
 
   @FXML private ImageView parchment4duplicate;
@@ -104,7 +107,7 @@ public class RoomController implements Controller {
   private List<String> potionsincauldron = new ArrayList<>();
   private int parchmentPieces = 0;
 
-  private boolean hasTaunted = false;
+  private Riddle call;
 
   @FXML
   public double getRoomWidth() {
@@ -133,31 +136,31 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  public void clickWindow(MouseEvent event) {
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    String message = "print a lines of text";
-    Riddle call = new Riddle(dungeonMaster, message);
-    Button master = (Button) event.getSource();
-    master.setOnMouseClicked(
-        e -> {
-          if (!dungeonMaster.isMessageFinished()) callAi(call);
-          else {
-            master.visibleProperty().set(false);
-          }
-        });
+  public void getAi(MouseEvent event) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    if (!dungeonMaster.isMessageFinished()) callAi(call);
   }
 
   private void callAi(Riddle call) {
     DungeonMaster dungeonMaster = call.getDungeonMaster();
     Pane dialogue = dungeonMaster.getPopUp();
     Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.toFront();
     popUp.getChildren().add(dialogueFormat);
 
     dialogueFormat.getStyleClass().add("popUp");
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   public void initialize() throws ApiProxyException {
     instance = this;
+    popUp.toBack();
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
+
+    TranslateTransition translateTransition = GameState.translate(exclamationMark);
+    translateTransition.play();
 
     String instructionsString = "INSTRUCTIONS GO HERE";
     Instructions instructions = new Instructions(instructionsString);
@@ -184,6 +187,15 @@ public class RoomController implements Controller {
 
     String secondPotion = colors[secondIndex];
     GameState.secondPotion = secondPotion + " Potion";
+
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    String message =
+        "Congratulate a player for moving the boulder to get the key commenting on them mixing the "
+            + firstPotion
+            + " and the "
+            + secondPotion
+            + " to increase their strength. Keep this short";
+    call = new Riddle(dungeonMaster, message);
 
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
@@ -392,6 +404,9 @@ public class RoomController implements Controller {
   private void onKey1Clicked(MouseEvent event) {
     addToInventory(key1);
     GameState.isKey1Collected = true;
+
+    visualDungeonMaster.visibleProperty().set(true);
+    visualDungeonMaster.mouseTransparentProperty().set(false);
   }
 
   @FXML

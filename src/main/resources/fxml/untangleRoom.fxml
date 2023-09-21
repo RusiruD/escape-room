@@ -38,6 +38,21 @@
       <Button layoutX="1043.0" layoutY="30.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
       <Pane fx:id="instructionsDisplay" layoutX="440.0" layoutY="175.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
       <Button layoutX="190.0" layoutY="748.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
+      <Pane fx:id="visualDungeonMaster" layoutX="39.0" layoutY="285.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
+         <children>
+            <ImageView fitHeight="88.0" fitWidth="71.0" layoutX="14.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/armouredCharacter.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="exclamationMark" fitHeight="64.0" fitWidth="64.0" layoutX="63.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/exclamation.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Pane fx:id="popUp" layoutX="325.0" layoutY="490.0" prefHeight="110.0" prefWidth="550.0" />
 
    </children>
 </AnchorPane>

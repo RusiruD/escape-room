@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.DIFFICULTY;
@@ -11,14 +12,20 @@ import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class StartScreenController {
+  private static StartScreenController instance;
 
+  public static StartScreenController getInstance() {
+    return instance;
+  }
+
+  @FXML private Pane startScreenPane;
   @FXML private ChoiceBox<String> timerChoice;
   @FXML private ChoiceBox<String> difficultyChoice;
   @FXML private Button btnStart;
 
   @FXML
   private void initialize() {
-
+    instance = this;
     // Add items to the choice box
     timerChoice.getItems().add("2 Minutes");
     timerChoice.getItems().add("4 Minutes");
@@ -42,14 +49,26 @@ public class StartScreenController {
     GameState.difficultyLevel = chosenDifficulty;
 
     // Create a new timer object
-    TimerCounter time = new TimerCounter();
 
-    if (chosenTimeLimit.equals("2 Minutes")) {
-      time.timerStart(120);
-    } else if (chosenTimeLimit.equals("4 Minutes")) {
-      time.timerStart(240);
+    checkDifficultyAndTimeLimit(chosenTimeLimit, chosenDifficulty);
+
+    ChatController.getInstance().intialiseHints();
+
+    timerChoice.getStyleClass().add("choice-box");
+    difficultyChoice.getStyleClass().add("choice-box");
+
+    App.returnToCorridor();
+  }
+
+  @FXML
+  public void checkDifficultyAndTimeLimit(String time, String difficulty) {
+    TimerCounter timer = new TimerCounter();
+    if (time.equals("2 Minutes")) {
+      timer.timerStart(120);
+    } else if (time.equals("4 Minutes")) {
+      timer.timerStart(240);
     } else {
-      time.timerStart(360);
+      timer.timerStart(360);
     }
 
     if (chosenDifficulty.equals("Easy")) {
@@ -59,12 +78,15 @@ public class StartScreenController {
     } else {
       GameState.currentDifficulty = DIFFICULTY.HARD;
     }
+  }
 
-    ChatController.getInstance().intialiseHints();
+  @FXML
+  public double getStartScreenHeight() {
+    return startScreenPane.getPrefHeight();
+  }
 
-    timerChoice.getStyleClass().add("choice-box");
-    difficultyChoice.getStyleClass().add("choice-box");
-
-    App.returnToCorridor();
+  @FXML
+  public double getStartScreenWidth() {
+    return startScreenPane.getPrefWidth();
   }
 }

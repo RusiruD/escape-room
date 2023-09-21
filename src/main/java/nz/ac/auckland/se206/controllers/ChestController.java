@@ -6,16 +6,18 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
@@ -56,9 +58,12 @@ public class ChestController implements Controller {
   @FXML private Label lblKey5;
   @FXML private Label lblKey6;
 
+  @FXML private ImageView exclamationMark;
+
   @FXML private Pane chest;
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
+  @FXML private Pane visualDungeonMaster;
 
   @FXML private Pane instructionsDisplay;
 
@@ -67,12 +72,19 @@ public class ChestController implements Controller {
   private final String incorrectColour = "#f38ba8";
 
   private Riddle riddle;
+  private Riddle call;
   private Boolean riddleCalled = false;
 
   public void initialize() {
 
     // Initialize the instance field with the current instance of the class
     instance = this;
+
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
+
+    TranslateTransition translateTransition = GameState.translate(exclamationMark);
+    translateTransition.play();
 
     String instructionsString = "INSTRUCTIONS GO HERE";
     Instructions instructions = new Instructions(instructionsString);
@@ -130,6 +142,21 @@ public class ChestController implements Controller {
     // Create a DungeonMaster and initiate a task to generate a riddle
     DungeonMaster dungeonMaster = new DungeonMaster();
     riddle = new Riddle(dungeonMaster, question);
+
+    String callQuestion =
+        "Congratulate the player on solving the riddle and unlocking the chest with the solution"
+            + " that key1 goest into keyhole "
+            + solutions[0]
+            + ", key2 goes into keyhole "
+            + solutions[1]
+            + ", and key3 goes into keyhole "
+            + solutions[2]
+            + " Tell the player that the sword and shield have fallen out to the corridor. Tell the"
+            + " player that they can now return to the corridor and fight you. Be antagonistic and"
+            + " confident that you will win. Keep this message short";
+
+    DungeonMaster dungeonMasterCall = new DungeonMaster();
+    call = new Riddle(dungeonMasterCall, callQuestion);
   }
 
   public void openChest(MouseEvent event) {
@@ -138,9 +165,14 @@ public class ChestController implements Controller {
     updateKeys();
     if (correctKeys == 3) {
       GameState.isChestOpened = true;
+
       App.makeSwordAndShieldAppear();
       // open chest
       System.out.println("chest opened");
+      visualDungeonMaster.visibleProperty().set(true);
+      visualDungeonMaster.mouseTransparentProperty().set(false);
+      CustomNotifications.generateNotification(
+          "Chest Opened!", "You hear the clanging of metal on the floor of the corridor...");
     }
   }
 
@@ -248,6 +280,12 @@ public class ChestController implements Controller {
   }
 
   @FXML
+  public void getAi(MouseEvent event) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    if (!dungeonMaster.isMessageFinished()) callAi(call);
+  }
+
+  @FXML
   public void clickKeyHole1(MouseEvent event) {
     // check if correct key
     Rectangle keyHole = (Rectangle) event.getSource();
@@ -293,21 +331,6 @@ public class ChestController implements Controller {
   private void onReturnToCorridorClicked(ActionEvent event) {
 
     App.returnToCorridor();
-  }
-
-  @FXML
-  public void clickButton(MouseEvent event) {
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    String message = "print a lines of text";
-    Riddle call = new Riddle(dungeonMaster, message);
-    Button master = (Button) event.getSource();
-    master.setOnMouseClicked(
-        e -> {
-          if (!dungeonMaster.isMessageFinished()) callAi(call);
-          else {
-            master.visibleProperty().set(false);
-          }
-        });
   }
 
   @FXML
@@ -447,5 +470,7 @@ public class ChestController implements Controller {
     popUp.getChildren().add(dialogueFormat);
 
     dialogueFormat.getStyleClass().add("popUp");
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 }

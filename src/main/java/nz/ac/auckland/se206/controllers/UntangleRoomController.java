@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -29,8 +30,10 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeType;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
+import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
@@ -138,16 +141,30 @@ public class UntangleRoomController implements Controller {
   @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
   @FXML private Pane instructionsDisplay;
+  @FXML private Pane popUp;
+  @FXML private Pane visualDungeonMaster;
+  @FXML private ImageView exclamationMark;
   @FXML private ImageView key2;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   private boolean isSolved = false;
 
+  private Riddle call;
+
   // add a new score to the leaderboard
   public void initialize() {
     // set the instance
     instance = this;
+
+    popUp.toBack();
+
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
+
+    TranslateTransition translateTransition = GameState.translate(exclamationMark);
+    translateTransition.play();
+
     // set the key2's visibility and disable it
     String instructionsString = "INSTRUCTIONS GO HERE";
     Instructions instructions = new Instructions(instructionsString);
@@ -163,6 +180,11 @@ public class UntangleRoomController implements Controller {
     root.getChildren().add(polygon);
     root.getChildren().addAll(createControlAnchorsFor(polygon.getPoints()));
     pane.getChildren().add(root);
+
+    String question =
+        "Congratulate the player on correctly untangling the lines and solving the puzzle";
+    DungeonMaster dungeonMaster = new DungeonMaster();
+    call = new Riddle(dungeonMaster, question);
   }
 
   // creates a triangle.
@@ -246,6 +268,9 @@ public class UntangleRoomController implements Controller {
     isSolved = true;
     key2.setVisible(true);
     key2.setDisable(false);
+
+    visualDungeonMaster.visibleProperty().set(true);
+    visualDungeonMaster.mouseTransparentProperty().set(false);
   }
 
   @FXML
@@ -322,10 +347,28 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
+  public void getAi(MouseEvent event) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    if (!dungeonMaster.isMessageFinished()) callAi(call);
+  }
+
+  @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
+  }
+
+  private void callAi(Riddle call) {
+    DungeonMaster dungeonMaster = call.getDungeonMaster();
+    Pane dialogue = dungeonMaster.getPopUp();
+    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.toFront();
+    popUp.getChildren().add(dialogueFormat);
+
+    dialogueFormat.getStyleClass().add("popUp");
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 }
