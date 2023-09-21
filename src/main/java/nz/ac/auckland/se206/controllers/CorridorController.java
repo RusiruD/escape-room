@@ -260,6 +260,12 @@ public class CorridorController implements Controller {
     App.setRoot(SceneManager.AppUi.CHEST);
    
 
+    
+     
+      
+  }
+  @FXML
+  public void onTreasureChestUnlocked(){
     if (GameState.isChestOpened==true
         && swordandshield.visibleProperty().get() == false
         && !Inventory.contains("sword/shield")) {
@@ -267,8 +273,7 @@ public class CorridorController implements Controller {
       swordandshield.setDisable(false);
 
     } 
-     
-      
+
   }
 
   @FXML
