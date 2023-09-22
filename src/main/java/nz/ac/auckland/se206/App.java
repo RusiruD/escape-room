@@ -124,48 +124,45 @@ public class App extends Application {
     primaryStage.setHeight(height + 38);
   }
 
-  
-  public static void goToChest(){
-    try{
+  public static void goToChest() {
+    try {
       App.setRoot(AppUi.CHEST);
       ChestController chestController = ChestController.getInstance();
-      
-      setStageToSize(chestController.getChestWidth(), chestController.getChestHeight());}
-      catch (IOException e) {
-        e.printStackTrace();
-      }
-    
-    }
-    public static void goToPuzzle(){
-      try{
-        App.setRoot(AppUi.PUZZLE);
-        PuzzleController puzzleController = PuzzleController.getInstance();
-        
-       setStageToSize(puzzleController.getPuzzleWidth(),puzzleController.getPuzzleHeight());}
-        catch (IOException e) {
-          e.printStackTrace();
-      }
-    }
-    
 
-    
-  
-  public static void goToChat(){
-    try{
-      App.setRoot(AppUi.CHAT);
-     ChatController chatController = ChatController.getInstance();
-    setStageToSize(chatController.getChatWidth(), chatController.getChatHeight());}
-      catch (IOException e) {
-        e.printStackTrace();
-      }
+      setStageToSize(chestController.getChestWidth(), chestController.getChestHeight());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
+
+  public static void goToPuzzle() {
+    try {
+      App.setRoot(AppUi.PUZZLE);
+      PuzzleController puzzleController = PuzzleController.getInstance();
+
+      setStageToSize(puzzleController.getPuzzleWidth(), puzzleController.getPuzzleHeight());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
+  public static void goToChat() {
+    try {
+      App.setRoot(AppUi.CHAT);
+      ChatController chatController = ChatController.getInstance();
+      setStageToSize(chatController.getChatWidth(), chatController.getChatHeight());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void returnToCorridor() {
     try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
-CorridorController corridorController = CorridorController.getInstance();
+      CorridorController corridorController = CorridorController.getInstance();
       // Get the corridor controller instance
-   setStageToSize(corridorController.getCorridorWidth(), corridorController.getCorridorHeight());
+      setStageToSize(corridorController.getCorridorWidth(), corridorController.getCorridorHeight());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -196,7 +193,7 @@ CorridorController corridorController = CorridorController.getInstance();
       RoomController roomController = RoomController.getInstance();
 
       // Get the dimensions of the first room
-     setStageToSize(roomController.getRoomWidth(), roomController.getRoomHeight());
+      setStageToSize(roomController.getRoomWidth(), roomController.getRoomHeight());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -220,7 +217,9 @@ CorridorController corridorController = CorridorController.getInstance();
       UntangleRoomController untangleroomController = UntangleRoomController.getInstance();
 
       // Get the dimensions of the Untangle room
-     setStageToSize(untangleroomController.getUntangleRoomWidth(), untangleroomController.getUntangleRoomHeight());
+      setStageToSize(
+          untangleroomController.getUntangleRoomWidth(),
+          untangleroomController.getUntangleRoomHeight());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -241,7 +240,8 @@ CorridorController corridorController = CorridorController.getInstance();
       PuzzleRoomController puzzleroomController = PuzzleRoomController.getInstance();
 
       // Get the dimensions of the Puzzle room
-      setStageToSize(puzzleroomController.getPuzzleRoomWidth(), puzzleroomController.getPuzzleRoomHeight());
+      setStageToSize(
+          puzzleroomController.getPuzzleRoomWidth(), puzzleroomController.getPuzzleRoomHeight());
 
     } catch (IOException e) {
 
@@ -265,7 +265,7 @@ CorridorController corridorController = CorridorController.getInstance();
       WinLossController winLossController = WinLossController.getInstance();
 
       // Get the dimensions of the Win/Loss screen content.
-     setStageToSize(winLossController.getWinLossWidth(), winLossController.getWinLossHeight());
+      setStageToSize(winLossController.getWinLossWidth(), winLossController.getWinLossHeight());
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
@@ -289,7 +289,9 @@ CorridorController corridorController = CorridorController.getInstance();
       StartScreenController startScreenController = StartScreenController.getInstance();
 
       // Get the dimensions of the Start Screen content.
-      setStageToSize(startScreenController.getStartScreenWidth(), startScreenController.getStartScreenHeight());
+      setStageToSize(
+          startScreenController.getStartScreenWidth(),
+          startScreenController.getStartScreenHeight());
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.

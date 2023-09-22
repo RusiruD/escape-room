@@ -35,7 +35,6 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.Utililty;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
 // see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
@@ -167,7 +166,10 @@ public class UntangleRoomController implements Controller {
     translateTransition.play();
 
     // set the key2's visibility and disable it
-    String instructionsString = "The lines are tangled. \n\nDrag the points to move the lines. \n\nuntangle them to solve the puzzle";
+    String instructionsString =
+        "The lines are tangled. \n\n"
+            + "Drag the points to move the lines. \n\n"
+            + "untangle them to solve the puzzle";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);

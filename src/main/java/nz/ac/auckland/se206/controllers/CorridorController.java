@@ -23,7 +23,6 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
 
@@ -142,9 +141,10 @@ public class CorridorController implements Controller {
     instance = this;
     Image image = new Image("/images/character.png");
 
-    String instructionsString = "Use WASD to move around the room. \n\n"
-        + "The treasure chest needs keys to open it. \n\n"
-        + "Move into the rooms and solve their puzzles to get keys. \n\n";
+    String instructionsString =
+        "Use WASD to move around the room. \n\n"
+            + "The treasure chest needs keys to open it. \n\n"
+            + "Move into the rooms and solve their puzzles to get keys. \n\n";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
@@ -303,7 +303,8 @@ public class CorridorController implements Controller {
   public void clickDungeonMaster() {
     if (!GameState.isChestOpened) {
       CustomNotifications.generateNotification(
-          "Silence", "The dungeon master's stare is cold and unyielding. You should leave him alone.");
+          "Silence",
+          "The dungeon master's stare is cold and unyielding. You should leave him alone.");
     } else if (hasSword) {
       // win game
       GameState.isGameWon = true;
@@ -311,7 +312,9 @@ public class CorridorController implements Controller {
       WinLossController.getInstance().checkGameStatus();
     } else {
       CustomNotifications.generateNotification(
-          "Anticipation", "The dungeon master stands ready to fight if you choose to pick up the sword and shield.");
+          "Anticipation",
+          "The dungeon master stands ready to fight if you choose to pick up the sword and"
+              + " shield.");
     }
   }
 
@@ -355,6 +358,5 @@ public class CorridorController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.goToChat();
-    
   }
 }

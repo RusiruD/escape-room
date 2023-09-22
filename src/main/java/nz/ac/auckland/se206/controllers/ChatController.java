@@ -40,18 +40,16 @@ public class ChatController {
 
     instance = this;
   }
+
   @FXML
   public double getChatWidth() {
     return chatPane.getPrefWidth();
-   
   }
-
 
   @FXML
   public double getChatHeight() {
     return chatPane.getPrefHeight();
   }
-
 
   /**
    * Initialize hints for the chat interface. This method sets up the initial chat request and
@@ -208,28 +206,20 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    if(App.oldScene.equals(AppUi.CORRIDOR)){
+    if (App.oldScene.equals(AppUi.CORRIDOR)) {
       App.returnToCorridor();
 
-      
-    }
-    else if(App.oldScene.equals(AppUi.FIRST_ROOM)){
+    } else if (App.oldScene.equals(AppUi.FIRST_ROOM)) {
       App.goToDoor1();
-    }
-    else if(App.oldScene.equals(AppUi.PUZZLEROOM)){
+    } else if (App.oldScene.equals(AppUi.PUZZLEROOM)) {
       App.goToDoor3();
-    }
-    else if (App.oldScene.equals(AppUi.UNTANGLE)){
+    } else if (App.oldScene.equals(AppUi.UNTANGLE)) {
       App.goToDoor2();
-    }
-    else if (App.oldScene.equals(AppUi.CHEST)){
+    } else if (App.oldScene.equals(AppUi.CHEST)) {
       App.goToChest();
-    }
-    else if (App.oldScene.equals(AppUi.PUZZLE)){
+    } else if (App.oldScene.equals(AppUi.PUZZLE)) {
       App.goToPuzzle();
+    } else {
     }
-    else{}
-
-  
   }
 }
