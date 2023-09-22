@@ -35,13 +35,13 @@ public class WinLossController implements Controller {
       // Set text for a win
       gameOutcome.setText("You Win!");
       gameOutcomeDescription.setText(
-          "You have successfully escaped the dungeon \n and slayed the dungeon master");
+          "You escaped the dungeon!");
     } else {
       System.out.println(GameState.isGameWon);
       // Set text for a loss
       gameOutcome.setText("You Lose!");
       gameOutcomeDescription.setText(
-          "You have failed to escape the dungeon \n and have succumbed to the dungeon master");
+          "You've failed to escape");
     }
   }
 
