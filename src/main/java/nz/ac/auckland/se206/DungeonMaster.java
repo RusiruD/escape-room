@@ -170,9 +170,6 @@ public class DungeonMaster {
     }
     System.out.println("done");
     executor.shutdown();
-    for (String txt : messages) {
-      System.out.println(txt);
-    }
     popUp = createPopUp();
     return popUp;
   }
@@ -246,7 +243,6 @@ public class DungeonMaster {
           () -> {
             try {
               while (!taskDone) {
-                System.out.println("waiting");
                 Thread.sleep(250);
               }
             } catch (InterruptedException e) {

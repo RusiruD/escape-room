@@ -98,20 +98,29 @@ public class App extends Application {
     root.requestFocus();
   }
 
-  public static void resetToDefault() {
+  public static void resetToDefault() throws IOException {
     // Reset the game state
-    GameState.isGameWon = false;
-    GameState.isKey1Collected = false;
-    GameState.isKey2Collected = false;
-    GameState.isKey3Collected = false;
-    GameState.isChestOpened = false;
-    GameState.isRiddleResolved = false;
-    // Reset the puzzle room state
-    GameState.puzzleRoomSolved.set(false);
-    GameState.firstPotion = "";
-    GameState.secondPotion = "";
-    GameState.riddle = null;
+    GameState.reset();
     GameState.currentRoom = State.CHEST;
+
+    SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
+    SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
+    SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
+    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
+    SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
+    SceneManager.addUi(AppUi.CORRIDOR, loadFxml("corridor"));
+    SceneManager.addUi(AppUi.UNTANGLE, loadFxml("untangleRoom"));
+    SceneManager.addUi(AppUi.WINLOSS, loadFxml("winloss"));
+
+    SceneManager.clearControllers();
+
+    SceneManager.addController(PuzzleRoomController.getInstance());
+    SceneManager.addController(WinLossController.getInstance());
+    SceneManager.addController(RoomController.getInstance());
+    SceneManager.addController(CorridorController.getInstance());
+    SceneManager.addController(PuzzleController.getInstance());
+    SceneManager.addController(UntangleRoomController.getInstance());
+    SceneManager.addController(ChestController.getInstance());
   }
 
   /**
