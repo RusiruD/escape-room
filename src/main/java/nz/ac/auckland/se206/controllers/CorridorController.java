@@ -141,12 +141,17 @@ public class CorridorController implements Controller {
     instance = this;
     Image image = new Image("/images/character.png");
 
-    String instructionsString = "INSTRUCTIONS GO HERE";
+    String instructionsString = "Use WASD to move around the room. \n\n"
+        + "The treasure chest needs keys to open it. \n\n"
+        + "Move into the rooms and solve their puzzles to get keys. \n\n";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
     instructionsDisplay.toFront();
+
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses

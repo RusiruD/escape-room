@@ -165,11 +165,15 @@ public class RoomController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
     // Set the dungeon master to be invisible and mouse transparent
-    String instructionsString = "INSTRUCTIONS GO HERE";
+    String instructionsString = "Pieces of parchment are all over the room and you see a key gleaming behind the boulder. \n"
+        + "Combine the parchments on the table to see what they have to say. \n";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
+
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
     // Set style sheets
     chatTextArea
         .getStylesheets()

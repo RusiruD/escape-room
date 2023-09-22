@@ -103,6 +103,9 @@ public class ChestController implements Controller {
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
 
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
+
     // Set text for key labels
     lblKey1.setText("");
     lblKey2.setText("");
