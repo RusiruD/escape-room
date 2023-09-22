@@ -63,7 +63,7 @@ public class ChestController implements Controller {
 
   @FXML private ImageView exclamationMark;
 
-  @FXML private Pane chest;
+  @FXML private Pane chestPane;
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
   @FXML private Pane visualDungeonMaster;
@@ -188,7 +188,12 @@ public class ChestController implements Controller {
           "Chest Opened!", "You hear the clanging of metal on the floor of the corridor...");
     }
   }
-
+  public double getChestHeight() {
+    return chestPane.getPrefHeight();
+  }
+  public double getChestWidth() {
+   return chestPane.getPrefWidth();
+  }
   private void updateKeys() {
     // check if correct key
 

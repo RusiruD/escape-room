@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -197,6 +198,28 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    App.setRoot(App.oldScene);
+    if(App.oldScene.equals(AppUi.CORRIDOR)){
+      App.returnToCorridor();
+
+      
+    }
+    else if(App.oldScene.equals(AppUi.FIRST_ROOM)){
+      App.goToDoor1();
+    }
+    else if(App.oldScene.equals(AppUi.PUZZLEROOM)){
+      App.goToDoor3();
+    }
+    else if (App.oldScene.equals(AppUi.UNTANGLE)){
+      App.goToDoor2();
+    }
+    else if (App.oldScene.equals(AppUi.CHEST)){
+      App.goToChest();
+    }
+    else if (App.oldScene.equals(AppUi.PUZZLE)){
+      App.goToPuzzle();
+    }
+    else{}
+
+  
   }
 }
