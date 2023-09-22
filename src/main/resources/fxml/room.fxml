@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="potionsRoomPane" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="potionsRoomPane" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fx:id="imgBackground" fitHeight="620.0" fitWidth="1100.0" pickOnBounds="true">
          <image>
             <Image url="@../images/RoomBackground.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="22.0" prefHeight="38.0" prefWidth="160.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="11.0" layoutY="14.0" prefHeight="38.0" prefWidth="160.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <ImageView fx:id="imgTable" fitHeight="170.0" fitWidth="324.0" layoutX="114.0" layoutY="407.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />
@@ -68,7 +68,7 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="574.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
+      <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="571.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
       <Pane fx:id="popUp" layoutX="315.0" layoutY="513.0" maxHeight="80.0" maxWidth="550.0" prefHeight="80.0" prefWidth="550.0" style="-fx-background-color: null;" />
       <ImageView fx:id="cauldron" fitHeight="99.0" fitWidth="125.0" layoutX="912.0" layoutY="483.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -120,10 +120,9 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <Button layoutX="285.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
-      <Button layoutX="974.0" layoutY="23.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="84.0" text="Cogwheel" />
+      <Button layoutX="11.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
       <Pane fx:id="instructionsDisplay" layoutX="376.0" layoutY="164.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
-      <Button layoutX="124.0" layoutY="574.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
+      <Button layoutX="115.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="visualDungeonMaster" layoutX="53.0" layoutY="145.0" onMouseClicked="#getAi" prefHeight="174.0" prefWidth="160.0">
          <children>
             <ImageView fitHeight="122.0" fitWidth="117.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
@@ -138,5 +137,10 @@
             </ImageView>
          </children>
       </Pane>
+      <Button layoutX="1014.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+         <font>
+            <Font name="Old English Text MT" size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>

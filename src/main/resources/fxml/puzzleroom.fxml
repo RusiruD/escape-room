@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="620.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
+<Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="620.0" prefWidth="620.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
    <children>
       <ImageView fitHeight="620.0" fitWidth="792.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -29,7 +29,11 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <Button layoutX="49.0" layoutY="75.0" mnemonicParsing="false" onMouseClicked="#getHint" stylesheets="@../css/roomStylesheet.css" text="Hint" />
-      <Button layoutX="509.0" layoutY="20.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="87.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel" />
+      <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#getHint" stylesheets="@../css/roomStylesheet.css" text="Hint" />
+      <Button layoutX="533.0" layoutY="15.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+         <font>
+            <Font name="Old English Text MT" size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
