@@ -1,7 +1,7 @@
 .text-area {
 
     /* Set the background color */
-    -fx-font-family: "Crimson Text";
+    -fx-font-family: "Arial", sans-serif;
     /* Use the Papyrus font */
     -fx-font-size: 14px;
     /* Set the font size to 20px */
@@ -36,7 +36,7 @@
     /*-fx-background-color: #774c1c;
     -fx-border-color: #d4af37;*/
 
-    -fx-font-family: 'Old English Text MT', sans-serif;
+    -fx-font-family: "Arial", sans-serif;
     -fx-text-fill: black;
     /* Set text color to black */
     -fx-font-weight: bolder;
@@ -66,7 +66,7 @@
     /*-fx-background-color: #774c1c;
     -fx-border-color: #d4af37;*/
 
-    -fx-font-family: 'Old English Text MT', sans-serif;
+    -fx-font-family: "Arial", sans-serif;
     -fx-text-fill: black;
     /* Set text color to black */
     -fx-font-weight: bolder;
@@ -84,7 +84,7 @@
     -fx-font-weight: bold;
     /* Make text bold */
     -fx-font-size: 20px;
-    -fx-font-family: 'Old English Text MT', sans-serif;
+    -fx-font-family: "Arial", sans-serif;
     -fx-effect: dropshadow(gaussian, #00ff00, 10, 0.5, 0, 0);
     -fx-background-image: url('/images/parchmentbg1.jpg');
 }
