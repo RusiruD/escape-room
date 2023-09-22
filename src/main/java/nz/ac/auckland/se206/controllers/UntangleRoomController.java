@@ -34,6 +34,7 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
+import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 /** Drag the anchors around to change a polygon's points. */
@@ -193,28 +194,16 @@ public class UntangleRoomController implements Controller {
     Polygon polygon = new Polygon();
 
     // set the points of the
-    ObservableList<Double> polygon1 = 
+    ObservableList<Double> polygon1 =
         FXCollections.observableArrayList(
-            450d, 80d, 
-                    720d, 425d, 
-                    195d, 160d, 
-                    690d, 160d, 
-                    225d, 410d);
+            450d, 80d, 720d, 425d, 195d, 160d, 690d, 160d, 225d, 410d);
     ObservableList<Double> polygon2 =
         FXCollections.observableArrayList(
-            305d, 100d, 
-                    375d, 425d, 
-                    230d, 360d, 
-                    540d, 110d, 
-                    500d, 410d);
+            305d, 100d, 375d, 425d, 230d, 360d, 540d, 110d, 500d, 410d);
     ObservableList<Double> polygon3 =
         FXCollections.observableArrayList(
-            685d, 145d, 
-                    265d, 360d, 
-                    450d, 200d, 
-                    630d, 360d, 
-                    205d, 150d);
-    
+            685d, 145d, 265d, 360d, 450d, 200d, 630d, 360d, 205d, 150d);
+
     int random = (int) (Math.random() * 3);
     System.out.println(random + "random");
     if (random == 1) {
@@ -400,5 +389,11 @@ public class UntangleRoomController implements Controller {
     dialogueFormat.getStyleClass().add("popUp");
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
+  }
+
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utililty.exitGame();
   }
 }

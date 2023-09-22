@@ -11,14 +11,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="728.0" prefWidth="696.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="728.0" prefWidth="696.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/CorridorBackground.png" />
          </image>
       </ImageView>
-      <Button layoutX="562.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Cogwheel">
+      <Button layoutX="609.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
 
          <font>
             <Font name="Old English Text MT" size="18.0" />

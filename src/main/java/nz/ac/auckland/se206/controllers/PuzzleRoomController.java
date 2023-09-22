@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class PuzzleRoomController implements Controller {
@@ -83,5 +84,11 @@ public class PuzzleRoomController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.setRoot(AppUi.CHAT);
+  }
+
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utililty.exitGame();
   }
 }
