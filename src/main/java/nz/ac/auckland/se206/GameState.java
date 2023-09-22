@@ -83,6 +83,7 @@ public class GameState {
   }
 
   public static void reset() {
+    // reset all the game state variables
     isRiddleResolved = false;
     isKey1Collected = false;
     isKey2Collected = false;
