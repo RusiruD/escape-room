@@ -286,7 +286,7 @@ public class CorridorController implements Controller {
           "No Keys!", "The chest is locked, maybe you should come back after finding some...");
       return;
     }
-    App.setRoot(SceneManager.AppUi.CHEST);
+    App.goToChest();
   }
 
   @FXML

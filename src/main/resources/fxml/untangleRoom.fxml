@@ -51,7 +51,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="popUp" layoutX="325.0" layoutY="490.0" prefHeight="110.0" prefWidth="550.0" />
+      <Pane fx:id="popUp" layoutX="325.0" layoutY="518.0" prefHeight="110.0" prefWidth="550.0" />
       <Button layoutX="1114.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
          <font>
             <Font name="Old English Text MT" size="18.0" />
