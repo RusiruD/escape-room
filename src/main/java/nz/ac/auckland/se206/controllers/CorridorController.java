@@ -332,6 +332,7 @@ public class CorridorController implements Controller {
 
   @FXML
   public void getHint() throws IOException {
-    App.setRoot(AppUi.CHAT);
+    App.goToChat();
+    
   }
 }

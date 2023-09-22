@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState.State;
+import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.CorridorController;
 import nz.ac.auckland.se206.controllers.PuzzleController;
@@ -117,6 +118,56 @@ public class App extends Application {
    * Return to the corridor and navigate to the corridor view. Adjust the stage size to fit the
    * corridor dimensions.
    */
+  public static void goToChest(){
+    try{
+      App.setRoot(AppUi.CHEST);
+      ChestController chestController = ChestController.getInstance();
+      
+      double chestWidth = chestController.getChestWidth();
+      double chestHeight = chestController.getChestHeight();
+
+      Stage primaryStage = (Stage) scene.getWindow();
+      primaryStage.setWidth(chestWidth + 15);
+      primaryStage.setHeight(chestHeight + 38);}
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+    
+    }
+    public static void goToPuzzle(){
+      try{
+        App.setRoot(AppUi.PUZZLE);
+        PuzzleController puzzleController = PuzzleController.getInstance();
+        
+        double puzzleWidth = puzzleController.getPuzzleWidth();
+        double puzzleHeight = puzzleController.getPuzzleHeight();
+
+        Stage primaryStage = (Stage) scene.getWindow();
+        primaryStage.setWidth(puzzleWidth + 15);
+        primaryStage.setHeight(puzzleHeight + 38);}
+        catch (IOException e) {
+          e.printStackTrace();
+      }
+    }
+    
+
+    
+  
+  public static void goToChat(){
+    try{
+      App.setRoot(AppUi.CHAT);
+     ChatController chatController = ChatController.getInstance();
+      
+      double chatWidth = chatController.getChatWidth();
+      double chatHeight = chatController.getChatHeight();
+
+      Stage primaryStage = (Stage) scene.getWindow();
+      primaryStage.setWidth(chatWidth + 15);
+      primaryStage.setHeight(chatHeight + 38);}
+      catch (IOException e) {
+        e.printStackTrace();
+      }
+  }
   public static void returnToCorridor() {
     try {
       // Set the root view to the corridor

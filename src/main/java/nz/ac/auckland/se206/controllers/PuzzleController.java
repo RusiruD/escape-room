@@ -27,6 +27,7 @@ public class PuzzleController implements Controller {
 
   private String[][] tiles;
   private String[][] solution;
+  @FXML private Pane puzzlePane;
   @FXML private ImageView one;
   @FXML private ImageView two;
   @FXML private ImageView three;
@@ -84,7 +85,12 @@ public class PuzzleController implements Controller {
     DungeonMaster dungeonMaster = new DungeonMaster();
     call = new Riddle(dungeonMaster, question);
   }
-
+  public double getPuzzleWidth() {
+    return puzzlePane.getPrefWidth();
+  }
+  public double getPuzzleHeight() {
+    return puzzlePane.getPrefHeight();
+  }
   @FXML
   private void clickedBack(MouseEvent event) throws IOException {
     App.setRoot(AppUi.PUZZLEROOM);
@@ -180,7 +186,7 @@ public class PuzzleController implements Controller {
 
   @FXML
   public void getHint() throws IOException {
-    App.setRoot(AppUi.CHAT);
+    App.goToChat();
   }
 
   @FXML
