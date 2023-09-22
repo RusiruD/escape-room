@@ -28,6 +28,7 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
+import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -406,6 +407,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onKey1Clicked(MouseEvent event) {
+    GameState.hasKeyOne = true;
     addToInventory(key1);
     GameState.isKey1Collected = true;
 
@@ -512,5 +514,11 @@ public class RoomController implements Controller {
     } else {
 
     }
+  }
+
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utililty.exitGame();
   }
 }

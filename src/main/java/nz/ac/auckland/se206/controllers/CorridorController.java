@@ -22,6 +22,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
@@ -295,7 +296,7 @@ public class CorridorController implements Controller {
   @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    System.exit(0);
+    Utililty.exitGame();
   }
 
   @FXML
