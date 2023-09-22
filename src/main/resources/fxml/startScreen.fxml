@@ -31,7 +31,7 @@
             <Font name="Old English Text MT" size="35.0" />
          </font>
       </Label>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="182.0" prefHeight="187.0" prefWidth="321.0" stylesheets="@../css/roomStylesheet.css" text="You're trapped in a mysterious dungeon and must find a way to escape!" textFill="#c60000" wrapText="true">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="254.0" layoutY="182.0" prefHeight="187.0" prefWidth="321.0" stylesheets="@../css/roomStylesheet.css" text="You're trapped in a mysterious dungeon and must find a way to escape!" textAlignment="CENTER" textFill="#c60000" wrapText="true">
          <font>
             <Font name="Old English Text MT" size="23.0" />
          </font>
