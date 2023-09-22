@@ -217,7 +217,6 @@ public class ChatController {
       App.goToChest();
     } else if (App.oldScene.equals(AppUi.PUZZLE)) {
       App.goToPuzzle();
-    } else {
     }
   }
 
