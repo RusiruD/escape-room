@@ -44,8 +44,10 @@ public class DungeonMaster {
     Rectangle dungeonMasterRectangle = new Rectangle();
     dungeonMasterRectangle.setWidth(60);
     dungeonMasterRectangle.setHeight(60);
-    dungeonMasterRectangle.setStyle("-fx-fill: #000000");
-    ImageView dungeonMasterImage = new ImageView("images/player.png");
+    dungeonMasterRectangle.setStyle("-fx-fill: #ffffff");
+    ImageView dungeonMasterImage = new ImageView("images/dungeonMasterImageCrop.png");
+    dungeonMasterImage.setFitHeight(60);
+    dungeonMasterImage.setFitWidth(60);
     dungeonMasterStack.getChildren().addAll(dungeonMasterRectangle, dungeonMasterImage);
 
     // DIALOG BOX

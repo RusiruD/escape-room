@@ -23,7 +23,6 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class ChestController implements Controller {
 
@@ -89,19 +88,23 @@ public class ChestController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
 
-    String instructionsString = "THE CHEST IS LOCKED!. \n \n"
-        + "You need to find the correct keys to unlock the chest. \n \n"
-        + "The keys are hidden in the dungeon. \n \n"
-        + "You need to find the keys and insert them into the correct key holes. \n \n"
-        + "The correct keys will turn green. \n \n"
-        + "The incorrect keys will turn red. \n \n"
-        + "The empty key holes will are blue. \n \n"
-        + "Once you have inserted the correct keys, the chest will open. \n \n"
-        + "Good luck!";
+    String instructionsString =
+        "THE CHEST IS LOCKED!. \n \n"
+            + "You need to find the correct keys to unlock the chest. \n \n"
+            + "The keys are hidden in the dungeon. \n \n"
+            + "You need to find the keys and insert them into the correct key holes. \n \n"
+            + "The correct keys will turn green. \n \n"
+            + "The incorrect keys will turn red. \n \n"
+            + "The empty key holes will are blue. \n \n"
+            + "Once you have inserted the correct keys, the chest will open. \n \n"
+            + "Good luck!";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
+
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
 
     // Set text for key labels
     lblKey1.setText("");
@@ -176,7 +179,7 @@ public class ChestController implements Controller {
     updateKeys();
     if (correctKeys == 3) {
       GameState.isChestOpened = true;
-      //disable riddle button when finished
+      // disable riddle button when finished
       riddleButton.visibleProperty().set(false);
       riddleButton.mouseTransparentProperty().set(true);
       App.makeSwordAndShieldAppear();
@@ -188,12 +191,15 @@ public class ChestController implements Controller {
           "Chest Opened!", "You hear the clanging of metal on the floor of the corridor...");
     }
   }
+
   public double getChestHeight() {
     return chestPane.getPrefHeight();
   }
+
   public double getChestWidth() {
-   return chestPane.getPrefWidth();
+    return chestPane.getPrefWidth();
   }
+
   private void updateKeys() {
     // check if correct key
 

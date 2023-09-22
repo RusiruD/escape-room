@@ -64,11 +64,19 @@ public class PuzzleController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
 
-    String instructionsString = "INSTRUCTIONS GO HERE";
+    String instructionsString =
+        "The tiles are in the wrong order. \n\n"
+            + "Click on a tile to select it. Then click on the zero tile to swap the tiles. \n\n"
+            + "The zero tile can only be swapped with the tiles directly above, below, to the left,"
+            + " or to the right of it. \n\n"
+            + "The puzzle is solved when the tiles are in the correct order. \n\n";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
+
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
     // set the tiles and solution
     tiles =
         new String[][] {
@@ -85,12 +93,15 @@ public class PuzzleController implements Controller {
     DungeonMaster dungeonMaster = new DungeonMaster();
     call = new Riddle(dungeonMaster, question);
   }
+
   public double getPuzzleWidth() {
     return puzzlePane.getPrefWidth();
   }
+
   public double getPuzzleHeight() {
     return puzzlePane.getPrefHeight();
   }
+
   @FXML
   private void clickedBack(MouseEvent event) throws IOException {
     App.setRoot(AppUi.PUZZLEROOM);

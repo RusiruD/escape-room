@@ -23,7 +23,6 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
-import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
 public class CorridorController implements Controller {
 
@@ -65,6 +64,8 @@ public class CorridorController implements Controller {
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private Pane instructionsDisplay;
+
+  private boolean hasSword = false;
 
   // Animation timer for player movement
 
@@ -126,8 +127,7 @@ public class CorridorController implements Controller {
     Inventory.addToInventory("sword/shield");
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
-    GameState.isGameWon = true;
-    System.out.println(GameState.isGameWon);
+    hasSword = true;
 
     // Then, set the ImageView as the fill for your shape:
     Image image2 =
@@ -141,12 +141,18 @@ public class CorridorController implements Controller {
     instance = this;
     Image image = new Image("/images/character.png");
 
-    String instructionsString = "INSTRUCTIONS GO HERE";
+    String instructionsString =
+        "Use WASD to move around the room. \n\n"
+            + "The treasure chest needs keys to open it. \n\n"
+            + "Move into the rooms and solve their puzzles to get keys. \n\n";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
     instructionsDisplay.toFront();
+
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
@@ -294,6 +300,25 @@ public class CorridorController implements Controller {
   }
 
   @FXML
+  public void clickDungeonMaster() {
+    if (!GameState.isChestOpened) {
+      CustomNotifications.generateNotification(
+          "Silence",
+          "The dungeon master's stare is cold and unyielding. You should leave him alone.");
+    } else if (hasSword) {
+      // win game
+      GameState.isGameWon = true;
+      App.goToWinLoss();
+      WinLossController.getInstance().checkGameStatus();
+    } else {
+      CustomNotifications.generateNotification(
+          "Anticipation",
+          "The dungeon master stands ready to fight if you choose to pick up the sword and"
+              + " shield.");
+    }
+  }
+
+  @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();
@@ -333,6 +358,5 @@ public class CorridorController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.goToChat();
-    
   }
 }
