@@ -8,6 +8,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
@@ -40,18 +42,16 @@ public class ChatController {
 
     instance = this;
   }
+
   @FXML
   public double getChatWidth() {
     return chatPane.getPrefWidth();
-   
   }
-
 
   @FXML
   public double getChatHeight() {
     return chatPane.getPrefHeight();
   }
-
 
   /**
    * Initialize hints for the chat interface. This method sets up the initial chat request and
@@ -208,28 +208,27 @@ public class ChatController {
 
   @FXML
   private void onGoBack(ActionEvent event) throws ApiProxyException, IOException {
-    if(App.oldScene.equals(AppUi.CORRIDOR)){
+    if (App.oldScene.equals(AppUi.CORRIDOR)) {
       App.returnToCorridor();
 
-      
-    }
-    else if(App.oldScene.equals(AppUi.FIRST_ROOM)){
+    } else if (App.oldScene.equals(AppUi.FIRST_ROOM)) {
       App.goToDoor1();
-    }
-    else if(App.oldScene.equals(AppUi.PUZZLEROOM)){
+    } else if (App.oldScene.equals(AppUi.PUZZLEROOM)) {
       App.goToDoor3();
-    }
-    else if (App.oldScene.equals(AppUi.UNTANGLE)){
+    } else if (App.oldScene.equals(AppUi.UNTANGLE)) {
       App.goToDoor2();
-    }
-    else if (App.oldScene.equals(AppUi.CHEST)){
+    } else if (App.oldScene.equals(AppUi.CHEST)) {
       App.goToChest();
-    }
-    else if (App.oldScene.equals(AppUi.PUZZLE)){
+    } else if (App.oldScene.equals(AppUi.PUZZLE)) {
       App.goToPuzzle();
+    } else {
     }
-    else{}
+  }
 
-  
+  @FXML
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(null);
+    }
   }
 }
