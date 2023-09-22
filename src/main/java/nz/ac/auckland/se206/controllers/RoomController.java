@@ -319,10 +319,10 @@ public class RoomController implements Controller {
   }
 
   private void setRandomPosition(ImageView imageView) {
-    double minX = 150; // Minimum x-coordinate (left)
+    double minX = 200; // Minimum x-coordinate (left)
     double minY = 250; // Minimum y-coordinate (top)S
-    double maxX = 920; // Maximum x-coordinate (right)
-    double maxY = 580; // Maximum y-coordinate (bottom)
+    double maxX = 850; // Maximum x-coordinate (right)
+    double maxY = 560; // Maximum y-coordinate (bottom)
 
     // Randomly generate initial positions for the images
     double initialX = Math.random() * (maxX - minX) + minX;
