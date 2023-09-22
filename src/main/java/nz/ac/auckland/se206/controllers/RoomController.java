@@ -406,6 +406,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onKey1Clicked(MouseEvent event) {
+    GameState.hasKeyOne = true;
     addToInventory(key1);
     GameState.isKey1Collected = true;
 

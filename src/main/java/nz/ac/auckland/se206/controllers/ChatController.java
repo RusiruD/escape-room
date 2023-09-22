@@ -55,8 +55,8 @@ public class ChatController {
             chatCompletionRequest =
                 new ChatCompletionRequest()
                     .setN(1)
-                    .setTemperature(0.2)
-                    .setTopP(0.5)
+                    .setTemperature(0.7)
+                    .setTopP(0.8)
                     .setMaxTokens(100);
 
             // Run GPT-3 with an initial hint request
@@ -78,8 +78,8 @@ public class ChatController {
    *
    * @param msg The chat message to append
    */
-  private void appendChatMessage(ChatMessage msg) {
-    chatTextArea.appendText(msg.getRole() + ": " + msg.getContent() + "\n\n");
+  private void appendChatMessage(ChatMessage msg, String role) {
+    chatTextArea.appendText(role + ": " + msg.getContent() + "\n\n");
   }
 
   /**
@@ -98,7 +98,7 @@ public class ChatController {
       chatCompletionRequest.addMessage(result.getChatMessage());
 
       // Append the GPT-3 response to the chat interface
-      appendChatMessage(result.getChatMessage());
+      appendChatMessage(result.getChatMessage(), "Dungeon Master");
 
       return result.getChatMessage();
     } catch (ApiProxyException e) {
@@ -134,7 +134,12 @@ public class ChatController {
             inputText.clear();
             String hint = "";
             if (GameState.currentRoom == GameState.State.CHEST) {
-              hint = "\"The riddle as well as the keys unlock the chest.\"";
+              if (GameState.hasKeyOne && GameState.hasKeyTwo && GameState.hasKeyThree) {
+                hint = "\"The riddle gives the information of the keys unlock the chest\"";
+              } else {
+                hint = "\"Search the dungeon for three keys\"";
+              }
+
             } else if (GameState.currentRoom == GameState.State.MARCELLIN) {
               hint = "\"Move the points of the shape such that no lines between points overlap.\"";
             } else if (GameState.currentRoom == GameState.State.ZACH) {
@@ -149,18 +154,23 @@ public class ChatController {
               }
             }
 
-            String contextMsg = null;
-            if (GameState.hintsGiven < 1
-                || GameState.currentDifficulty == GameState.Difficulty.EASY) {
+            String contextMsg;
+            if (GameState.currentDifficulty == GameState.Difficulty.HARD) {
+              contextMsg = message;
+            } else if (GameState.currentDifficulty == GameState.Difficulty.EASY) {
               contextMsg = GptPromptEngineering.hintPrompt(message, hint);
-            } else { // No more hints left
-              contextMsg = GptPromptEngineering.noHintPrompt(message);
+            } else {
+              if (GameState.hintsGiven < 5) {
+                contextMsg = GptPromptEngineering.hintPrompt(message, hint);
+              } else {
+                contextMsg = GptPromptEngineering.noHintPrompt(message);
+              }
             }
 
             ChatMessage actualMessage = new ChatMessage("user", contextMsg);
 
             // Append the fake message to the chat interface
-            appendChatMessage(new ChatMessage("user", message));
+            appendChatMessage(new ChatMessage("user", message), "Player");
 
             // Run GPT-3 with the actual message
             ChatMessage last = runGpt(actualMessage);
