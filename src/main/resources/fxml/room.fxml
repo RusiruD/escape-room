@@ -16,7 +16,7 @@
             <Image url="@../images/RoomBackground.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="11.0" layoutY="14.0" prefHeight="38.0" prefWidth="160.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="11.0" layoutY="14.0" prefHeight="44.0" prefWidth="168.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <ImageView fx:id="imgTable" fitHeight="170.0" fitWidth="324.0" layoutX="114.0" layoutY="407.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />

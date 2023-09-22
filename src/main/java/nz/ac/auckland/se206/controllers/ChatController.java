@@ -1,8 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -34,6 +34,7 @@ public class ChatController {
   @FXML private TextField inputText;
   @FXML private Button sendButton;
   @FXML private AnchorPane chatPane;
+  private boolean isThinking = false;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -61,31 +62,29 @@ public class ChatController {
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
   public void intialiseHints() throws ApiProxyException {
-    // Create a background task for initializing chat and requesting hints
-    Task<Void> chatTask =
-        new Task<>() {
-          @Override
-          protected Void call() throws Exception {
-            // Configure the chat completion request
-            chatCompletionRequest =
-                new ChatCompletionRequest()
-                    .setN(1)
-                    .setTemperature(0.7)
-                    .setTopP(0.8)
-                    .setMaxTokens(100);
+    // Create a CompletableFuture for the background task
 
-            // Run GPT-3 with an initial hint request
-            runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
+    CompletableFuture.runAsync(
+        () -> {
+          sendButton.setVisible(false);
+          isThinking = true;
+          // Configure the chat completion request
+          chatCompletionRequest =
+              new ChatCompletionRequest()
+                  .setN(1)
+                  .setTemperature(0.7)
+                  .setTopP(0.8)
+                  .setMaxTokens(100);
 
-            // Ensure that the UI updates on the JavaFX application thread
-            Platform.runLater(() -> {});
-
-            return null;
-          }
-        };
-
-    // Start the background thread to initialize hints
-    new Thread(chatTask).start();
+          // Run GPT-3 with an initial hint request
+          runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
+          isThinking = false;
+          // Ensure that the UI updates on the JavaFX application thread
+          Platform.runLater(
+              () -> {
+                sendButton.setVisible(true);
+              });
+        });
   }
 
   /**
@@ -104,7 +103,7 @@ public class ChatController {
    * @return The response chat message from GPT-3
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  private ChatMessage runGpt(ChatMessage msg) throws ApiProxyException {
+  private ChatMessage runGpt(ChatMessage msg) {
     chatCompletionRequest.addMessage(msg);
     try {
       // Execute the chat completion request with GPT-3
@@ -133,77 +132,74 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
-    // Create a background task for sending and processing chat messages
-    Task<Void> chatTask =
-        new Task<>() {
-          @Override
-          protected Void call() throws Exception {
-            String message = inputText.getText();
 
-            // If the message is empty, return early
-            if (message.trim().isEmpty()) {
-              return null;
+    CompletableFuture.runAsync(
+        () -> {
+          sendButton.setVisible(false);
+          if (isThinking) {
+            return;
+          }
+          isThinking = true;
+          String message = inputText.getText();
+
+          // If the message is empty, return early
+          if (message.trim().isEmpty()) {
+            return;
+          }
+
+          // Clear the input field and create actual and fake chat messages
+          inputText.clear();
+          String hint = "";
+          if (GameState.currentRoom == GameState.State.CHEST) {
+            if (GameState.hasKeyOne && GameState.hasKeyTwo && GameState.hasKeyThree) {
+              hint = "\"The riddle gives the information of the keys unlock the chest\"";
+            } else {
+              hint = "\"Search the dungeon for three keys\"";
             }
-
-            // Clear the input field and create actual and fake chat messages
-            inputText.clear();
-            String hint = "";
-            if (GameState.currentRoom == GameState.State.CHEST) {
-              if (GameState.hasKeyOne && GameState.hasKeyTwo && GameState.hasKeyThree) {
-                hint = "\"The riddle gives the information of the keys unlock the chest\"";
-              } else {
-                hint = "\"Search the dungeon for three keys\"";
-              }
-
-            } else if (GameState.currentRoom == GameState.State.MARCELLIN) {
-              hint = "\"Move the points of the shape such that no lines between points overlap.\"";
-            } else if (GameState.currentRoom == GameState.State.ZACH) {
-              hint = "\"Investigate the door to find a sliding puzzle\"";
-            } else if (GameState.currentRoom == GameState.State.RUSIRU) {
-              if (GameState.noPapers == true) {
-                hint = "\"Pick up all the papers.\"";
-              } else if (GameState.noCombination == true && GameState.noPapers == false) {
-                hint = "\"Put all the papers on the table and read it.\"";
-              } else if (GameState.noPotionBoulder == true && GameState.noCombination == false) {
-                hint = "\"Brew a potion of strength to move the big rock.\"";
-              }
+          } else if (GameState.currentRoom == GameState.State.MARCELLIN) {
+            hint = "\"Move the points of the shape such that no lines between points overlap.\"";
+          } else if (GameState.currentRoom == GameState.State.ZACH) {
+            hint = "\"Investigate the door to find a sliding puzzle\"";
+          } else if (GameState.currentRoom == GameState.State.RUSIRU) {
+            if (GameState.noPapers == true) {
+              hint = "\"Pick up all the papers.\"";
+            } else if (GameState.noCombination == true && GameState.noPapers == false) {
+              hint = "\"Put all the papers on the table and read it.\"";
+            } else if (GameState.noPotionBoulder == true && GameState.noCombination == false) {
+              hint = "\"Brew a potion of strength to move the big rock.\"";
             }
+          }
 
-            String contextMsg;
-            if (GameState.currentDifficulty == GameState.Difficulty.HARD) {
-              contextMsg = message;
-            } else if (GameState.currentDifficulty == GameState.Difficulty.EASY) {
+          String contextMsg;
+          if (GameState.currentDifficulty == GameState.Difficulty.HARD) {
+            contextMsg = message;
+          } else if (GameState.currentDifficulty == GameState.Difficulty.EASY) {
+            contextMsg = GptPromptEngineering.hintPrompt(message, hint);
+          } else {
+            if (GameState.hintsGiven < 5) {
               contextMsg = GptPromptEngineering.hintPrompt(message, hint);
             } else {
-              if (GameState.hintsGiven < 5) {
-                contextMsg = GptPromptEngineering.hintPrompt(message, hint);
-              } else {
-                contextMsg = GptPromptEngineering.noHintPrompt(message);
-              }
+              contextMsg = GptPromptEngineering.noHintPrompt(message);
             }
-
-            ChatMessage actualMessage = new ChatMessage("user", contextMsg);
-
-            // Append the fake message to the chat interface
-            appendChatMessage(new ChatMessage("user", message), "Player");
-
-            // Run GPT-3 with the actual message
-            ChatMessage last = runGpt(actualMessage);
-
-            if (last.getContent().toLowerCase().contains("hint")) {
-              GameState.hintsGiven++;
-              System.out.println("HINT DETECTED!");
-            }
-
-            // Ensure that the UI updates on the JavaFX application thread
-            Platform.runLater(() -> {});
-
-            return null;
           }
-        };
 
-    // Start the background thread to send and process chat messages
-    new Thread(chatTask).start();
+          ChatMessage actualMessage = new ChatMessage("user", contextMsg);
+
+          // Append the fake message to the chat interface
+          appendChatMessage(new ChatMessage("user", message), "Player");
+
+          if (runGpt(actualMessage).getContent().toLowerCase().contains("hint")) {
+            GameState.hintsGiven++;
+            System.out.println("HINT DETECTED!");
+          }
+
+          // Ensure that the UI updates on the JavaFX application thread
+          Platform.runLater(
+              () -> {
+                sendButton.setVisible(true);
+              });
+          isThinking = false;
+        });
   }
 
   @FXML
