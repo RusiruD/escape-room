@@ -118,17 +118,19 @@ public class App extends Application {
    * Return to the corridor and navigate to the corridor view. Adjust the stage size to fit the
    * corridor dimensions.
    */
+  public static void setStageToSize(double width, double height) {
+    Stage primaryStage = (Stage) scene.getWindow();
+    primaryStage.setWidth(width + 15);
+    primaryStage.setHeight(height + 38);
+  }
+
+  
   public static void goToChest(){
     try{
       App.setRoot(AppUi.CHEST);
       ChestController chestController = ChestController.getInstance();
       
-      double chestWidth = chestController.getChestWidth();
-      double chestHeight = chestController.getChestHeight();
-
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(chestWidth + 15);
-      primaryStage.setHeight(chestHeight + 38);}
+      setStageToSize(chestController.getChestWidth(), chestController.getChestHeight());}
       catch (IOException e) {
         e.printStackTrace();
       }
@@ -139,12 +141,7 @@ public class App extends Application {
         App.setRoot(AppUi.PUZZLE);
         PuzzleController puzzleController = PuzzleController.getInstance();
         
-        double puzzleWidth = puzzleController.getPuzzleWidth();
-        double puzzleHeight = puzzleController.getPuzzleHeight();
-
-        Stage primaryStage = (Stage) scene.getWindow();
-        primaryStage.setWidth(puzzleWidth + 15);
-        primaryStage.setHeight(puzzleHeight + 38);}
+       setStageToSize(puzzleController.getPuzzleWidth(),puzzleController.getPuzzleHeight());}
         catch (IOException e) {
           e.printStackTrace();
       }
@@ -157,13 +154,7 @@ public class App extends Application {
     try{
       App.setRoot(AppUi.CHAT);
      ChatController chatController = ChatController.getInstance();
-      
-      double chatWidth = chatController.getChatWidth();
-      double chatHeight = chatController.getChatHeight();
-
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(chatWidth + 15);
-      primaryStage.setHeight(chatHeight + 38);}
+    setStageToSize(chatController.getChatWidth(), chatController.getChatHeight());}
       catch (IOException e) {
         e.printStackTrace();
       }
@@ -172,18 +163,9 @@ public class App extends Application {
     try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
-
+CorridorController corridorController = CorridorController.getInstance();
       // Get the corridor controller instance
-      CorridorController corridorController = CorridorController.getInstance();
-
-      // Get the dimensions of the corridor
-      double corridorWidth = corridorController.getCorridorWidth();
-      double corridorHeight = corridorController.getCorridorHeight();
-
-      // Get the primary stage and adjust its size to fit the corridor
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(corridorWidth + 15);
-      primaryStage.setHeight(corridorHeight + 38);
+   setStageToSize(corridorController.getCorridorWidth(), corridorController.getCorridorHeight());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -214,13 +196,7 @@ public class App extends Application {
       RoomController roomController = RoomController.getInstance();
 
       // Get the dimensions of the first room
-      double roomWidth = roomController.getRoomWidth();
-      double roomHeight = roomController.getRoomHeight();
-
-      // Get the primary stage and adjust its size to fit the first room
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(roomWidth + 15);
-      primaryStage.setHeight(roomHeight + 38);
+     setStageToSize(roomController.getRoomWidth(), roomController.getRoomHeight());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -244,13 +220,7 @@ public class App extends Application {
       UntangleRoomController untangleroomController = UntangleRoomController.getInstance();
 
       // Get the dimensions of the Untangle room
-      double untangleroomWidth = untangleroomController.getUntangleRoomWidth();
-      double untangleroomHeight = untangleroomController.getUntangleRoomHeight();
-
-      // Get the primary stage and adjust its size to fit the Untangle room
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(untangleroomWidth + 15);
-      primaryStage.setHeight(untangleroomHeight + 38);
+     setStageToSize(untangleroomController.getUntangleRoomWidth(), untangleroomController.getUntangleRoomHeight());
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -271,13 +241,7 @@ public class App extends Application {
       PuzzleRoomController puzzleroomController = PuzzleRoomController.getInstance();
 
       // Get the dimensions of the Puzzle room
-      double puzzleroomWidth = puzzleroomController.getPuzzleRoomWidth();
-      double puzzleroomHeight = puzzleroomController.getPuzzleRoomHeight();
-
-      // Get the primary stage and adjust its size to fit the Puzzle room
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(puzzleroomWidth + 15);
-      primaryStage.setHeight(puzzleroomHeight + 38);
+      setStageToSize(puzzleroomController.getPuzzleRoomWidth(), puzzleroomController.getPuzzleRoomHeight());
 
     } catch (IOException e) {
 
@@ -301,13 +265,7 @@ public class App extends Application {
       WinLossController winLossController = WinLossController.getInstance();
 
       // Get the dimensions of the Win/Loss screen content.
-      double winlossWidth = winLossController.getWinLossWidth();
-      double winlossHeight = winLossController.getWinLossHeight();
-
-      // Adjust the primary stage size to fit the Win/Loss screen content.
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(winlossWidth + 15);
-      primaryStage.setHeight(winlossHeight + 38);
+     setStageToSize(winLossController.getWinLossWidth(), winLossController.getWinLossHeight());
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
@@ -331,13 +289,7 @@ public class App extends Application {
       StartScreenController startScreenController = StartScreenController.getInstance();
 
       // Get the dimensions of the Start Screen content.
-      double startScreenWidth = startScreenController.getStartScreenWidth();
-      double startScreenHeight = startScreenController.getStartScreenHeight();
-
-      // Adjust the primary stage size to fit the Start Screen content.
-      Stage primaryStage = (Stage) scene.getWindow();
-      primaryStage.setWidth(startScreenWidth + 15);
-      primaryStage.setHeight(startScreenHeight + 38);
+      setStageToSize(startScreenController.getStartScreenWidth(), startScreenController.getStartScreenHeight());
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
