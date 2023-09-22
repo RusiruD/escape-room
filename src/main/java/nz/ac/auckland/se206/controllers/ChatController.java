@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -29,6 +30,7 @@ public class ChatController {
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
+  @FXML private AnchorPane chatPane;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -37,6 +39,18 @@ public class ChatController {
 
     instance = this;
   }
+  @FXML
+  public double getChatWidth() {
+    return chatPane.getPrefWidth();
+   
+  }
+
+
+  @FXML
+  public double getChatHeight() {
+    return chatPane.getPrefHeight();
+  }
+
 
   /**
    * Initialize hints for the chat interface. This method sets up the initial chat request and

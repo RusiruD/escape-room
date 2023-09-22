@@ -360,7 +360,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   public void getHint() throws IOException {
     // Go to the chat screen
-    App.setRoot(AppUi.CHAT);
+    App.goToChat();
   }
 
   // Call the AI to give a hint
