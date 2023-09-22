@@ -81,4 +81,24 @@ public class GameState {
 
     return transition;
   }
+
+  public static void reset() {
+    isRiddleResolved = false;
+    isKey1Collected = false;
+    isKey2Collected = false;
+    isKey3Collected = false;
+    isChestOpened = false;
+    isGameWon = false;
+    difficultyLevel = "";
+    firstPotion = "";
+    secondPotion = "";
+    hintsGiven = 0;
+    noPapers = true;
+    noCombination = true;
+    noPotionBoulder = true;
+    hasKeyOne = false;
+    hasKeyTwo = false;
+    hasKeyThree = false;
+    puzzleRoomSolved.set(false);
+  }
 }

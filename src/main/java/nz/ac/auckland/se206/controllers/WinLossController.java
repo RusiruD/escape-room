@@ -54,18 +54,29 @@ public class WinLossController implements Controller {
   @FXML
   private void onReplayGameClicked(ActionEvent event) {
     // Check game difficulty and time limit, then return to the corridor
+    try {
+      App.resetToDefault();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    Inventory.clearInventory();
     StartScreenController.getInstance()
         .checkDifficultyAndTimeLimit(GameState.gameTime, GameState.difficultyLevel);
     App.returnToCorridor();
-    Inventory.clearInventory();
     App.resetPlayerImage();
-    App.resetToDefault();
   }
 
   @FXML
   private void onNewGameClicked(ActionEvent event) {
     // Go back to the start screen
     App.goToStartScreen();
+    Inventory.clearInventory();
+    App.resetPlayerImage();
+    try {
+      App.resetToDefault();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   @FXML

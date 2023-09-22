@@ -10,6 +10,7 @@ public class TimerCounter {
 
   public void timerStart(int time) {
     final int[] timeCounter = new int[1];
+    System.out.println("timer started");
     timeCounter[0] = time;
     new Timer()
         .schedule(
@@ -33,7 +34,12 @@ public class TimerCounter {
                       // Game over condition
                       if (timeCounter[0] == 0) {
                         this.cancel();
+                        System.out.println("timer stopped");
                         gameOver();
+                      }
+                      if (GameState.isGameWon) {
+                        System.out.println("timer stopped");
+                        this.cancel();
                       }
                     });
               }
