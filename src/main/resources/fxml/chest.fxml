@@ -91,11 +91,11 @@
       <Button layoutX="22.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="popUp" layoutX="31.0" layoutY="462.0" prefHeight="80.0" prefWidth="550.0" />
       <Pane fx:id="instructionsDisplay" layoutX="112.0" layoutY="138.0" prefHeight="259.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
-      <Pane fx:id="visualDungeonMaster" layoutX="9.0" layoutY="179.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
+      <Pane fx:id="visualDungeonMaster" layoutY="171.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
          <children>
-            <ImageView fitHeight="88.0" fitWidth="71.0" layoutX="14.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="113.0" layoutX="8.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/armouredCharacter.png" />
+                  <Image url="@../images/dungeonMasterImageCrop.png" />
                </image>
             </ImageView>
             <ImageView fx:id="exclamationMark" fitHeight="64.0" fitWidth="64.0" layoutX="63.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">

@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="potionsRoomPane" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="potionsRoomPane" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
       <ImageView fx:id="imgBackground" fitHeight="620.0" fitWidth="1100.0" pickOnBounds="true">
          <image>
@@ -123,24 +123,24 @@
       <Button layoutX="11.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
       <Pane fx:id="instructionsDisplay" layoutX="376.0" layoutY="164.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
       <Button layoutX="115.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
-      <Pane fx:id="visualDungeonMaster" layoutX="53.0" layoutY="145.0" onMouseClicked="#getAi" prefHeight="174.0" prefWidth="160.0">
+      <Button layoutX="1014.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+         <font>
+            <Font name="Old English Text MT" size="18.0" />
+         </font>
+      </Button>
+      <Pane fx:id="visualDungeonMaster" layoutX="52.0" layoutY="206.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
          <children>
-            <ImageView fitHeight="122.0" fitWidth="117.0" layoutX="14.0" layoutY="26.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="100.0" fitWidth="113.0" layoutX="8.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../images/armouredCharacter.png" />
+                  <Image url="@../images/dungeonMasterImageCrop.png" />
                </image>
             </ImageView>
-            <ImageView fx:id="exclamationMark" fitHeight="64.0" fitWidth="64.0" layoutX="83.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="exclamationMark" fitHeight="64.0" fitWidth="64.0" layoutX="63.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/exclamation.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Button layoutX="1014.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
-         <font>
-            <Font name="Old English Text MT" size="18.0" />
-         </font>
-      </Button>
    </children>
 </Pane>
