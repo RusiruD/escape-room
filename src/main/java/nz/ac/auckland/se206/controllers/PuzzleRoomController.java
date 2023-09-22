@@ -42,6 +42,7 @@ public class PuzzleRoomController implements Controller {
 
   @FXML
   private void onKey3Clicked(MouseEvent event) {
+    GameState.hasKeyThree = true;
     // change the key3's visibility and disable it
     key3.visibleProperty().unbind();
     key3.disableProperty().unbind();

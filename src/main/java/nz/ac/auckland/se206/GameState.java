@@ -51,6 +51,9 @@ public class GameState {
   public static boolean noPapers = true;
   public static boolean noCombination = true;
   public static boolean noPotionBoulder = true;
+  public static boolean hasKeyOne = false;
+  public static boolean hasKeyTwo = false;
+  public static boolean hasKeyThree = false;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
 
