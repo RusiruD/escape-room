@@ -66,6 +66,8 @@ public class CorridorController implements Controller {
 
   @FXML private Pane instructionsDisplay;
 
+  private boolean hasSword = false;
+
   // Animation timer for player movement
 
   private AnimationTimer playerTimer =
@@ -126,8 +128,7 @@ public class CorridorController implements Controller {
     Inventory.addToInventory("sword/shield");
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
-    GameState.isGameWon = true;
-    System.out.println(GameState.isGameWon);
+    hasSword = true;
 
     // Then, set the ImageView as the fill for your shape:
     Image image2 =
@@ -295,6 +296,22 @@ public class CorridorController implements Controller {
         && !Inventory.contains("sword/shield")) {
       swordandshield.setVisible(true);
       swordandshield.setDisable(false);
+    }
+  }
+
+  @FXML
+  public void clickDungeonMaster() {
+    if (!GameState.isChestOpened) {
+      CustomNotifications.generateNotification(
+          "Silence", "The dungeon master's stare is cold and unyielding. You should leave him alone.");
+    } else if (hasSword) {
+      // win game
+      GameState.isGameWon = true;
+      App.goToWinLoss();
+      WinLossController.getInstance().checkGameStatus();
+    } else {
+      CustomNotifications.generateNotification(
+          "Anticipation", "The dungeon master stands ready to fight if you choose to pick up the sword and shield.");
     }
   }
 
