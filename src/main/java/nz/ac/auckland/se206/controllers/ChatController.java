@@ -6,12 +6,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -21,7 +23,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
-public class ChatController {
+public class ChatController implements Controller {
 
   private static ChatController instance;
 
@@ -30,6 +32,7 @@ public class ChatController {
     return instance;
   }
 
+  @FXML private Label lblTime;
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
@@ -225,5 +228,15 @@ public class ChatController {
     if (event.getCode() == KeyCode.ENTER) {
       onSendMessage(null);
     }
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
+  }
+
+  @FXML
+  public void updateInventory() {
+    // does nothing
   }
 }
