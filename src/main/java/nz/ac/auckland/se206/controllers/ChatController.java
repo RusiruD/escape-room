@@ -32,6 +32,7 @@ public class ChatController implements Controller {
     return instance;
   }
 
+  @FXML private Label hintField;
   @FXML private Label lblTime;
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
@@ -43,7 +44,7 @@ public class ChatController implements Controller {
 
   @FXML
   public void initialize() throws ApiProxyException {
-
+    hintField.setVisible(false);
     instance = this;
   }
 
@@ -64,7 +65,12 @@ public class ChatController implements Controller {
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public void intialiseHints() throws ApiProxyException {
+  public void initialiseAfterStart() throws ApiProxyException {
+
+    if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {
+      hintField.setVisible(true);
+    }
+
     // Create a CompletableFuture for the background task
 
     CompletableFuture.runAsync(
@@ -199,6 +205,11 @@ public class ChatController implements Controller {
           // Ensure that the UI updates on the JavaFX application thread
           Platform.runLater(
               () -> {
+                int hintsLeft = 5 - GameState.hintsGiven;
+                if (hintsLeft < 0) {
+                  hintsLeft = 0;
+                }
+                hintField.setText(hintsLeft + " Hints(s) Remaining");
                 sendButton.setVisible(true);
               });
           isThinking = false;
