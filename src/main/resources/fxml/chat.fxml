@@ -30,5 +30,7 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <TextArea fx:id="lastHintTextArea" editable="false" layoutX="29.0" layoutY="53.0" prefHeight="270.0" prefWidth="538.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+      <Button layoutX="395.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSwitch" text="Switch" />
   </children>
 </AnchorPane>

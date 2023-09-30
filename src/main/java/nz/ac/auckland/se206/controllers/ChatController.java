@@ -38,7 +38,9 @@ public class ChatController implements Controller {
   @FXML private TextField inputText;
   @FXML private Button sendButton;
   @FXML private AnchorPane chatPane;
+  @FXML private TextArea lastHintTextArea;
   private boolean isThinking = false;
+  private boolean isShowingLastHint = true;
 
   private ChatCompletionRequest chatCompletionRequest;
 
@@ -102,7 +104,9 @@ public class ChatController implements Controller {
    * @param msg The chat message to append
    */
   private void appendChatMessage(ChatMessage msg, String role) {
-    chatTextArea.appendText(role + ": " + msg.getContent() + "\n\n");
+    String message = role + ": " + msg.getContent() + "\n\n";
+    chatTextArea.appendText(message);
+    lastHintTextArea.appendText(message);
   }
 
   /**
@@ -141,6 +145,7 @@ public class ChatController implements Controller {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    lastHintTextArea.clear();
 
     CompletableFuture.runAsync(
         () -> {
@@ -249,5 +254,11 @@ public class ChatController implements Controller {
   @FXML
   public void updateInventory() {
     // does nothing
+  }
+
+  @FXML
+  public void onSwitch(ActionEvent event) {
+    isShowingLastHint = !isShowingLastHint;
+    lastHintTextArea.setVisible(isShowingLastHint);
   }
 }
