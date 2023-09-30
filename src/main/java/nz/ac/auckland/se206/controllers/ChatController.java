@@ -202,7 +202,7 @@ public class ChatController implements Controller {
           // Append the fake message to the chat interface
           appendChatMessage(new ChatMessage("user", message), "Player");
 
-          if (runGpt(actualMessage).getContent().toLowerCase().contains("hint")) {
+          if (runGpt(actualMessage).getContent().toLowerCase().substring(0, 4).equals("hint")) {
             GameState.hintsGiven++;
             System.out.println("HINT DETECTED!");
           }
