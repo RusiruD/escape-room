@@ -140,7 +140,8 @@ public class PuzzleController implements Controller {
     }
 
     // if the tiles are adjacent, swap them
-    if (Math.abs(apos[0] - bpos[0]) == 1 ^ Math.abs(apos[1] - bpos[1]) == 1) {
+    if ((apos[0] == bpos[0] && Math.abs(apos[1] - bpos[1]) == 1)
+        ^ (apos[1] == bpos[1] && Math.abs(apos[0] - bpos[0]) == 1)) {
       tiles[apos[0]][apos[1]] = b.getId();
       tiles[bpos[0]][bpos[1]] = a.getId();
       double ax = a.getLayoutX();

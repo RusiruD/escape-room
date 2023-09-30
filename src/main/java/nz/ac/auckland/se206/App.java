@@ -79,6 +79,7 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
+    SceneManager.addController(ChatController.getInstance());
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(WinLossController.getInstance());
     SceneManager.addController(RoomController.getInstance());
@@ -114,6 +115,7 @@ public class App extends Application {
 
     SceneManager.clearControllers();
 
+    SceneManager.addController(ChatController.getInstance());
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(WinLossController.getInstance());
     SceneManager.addController(RoomController.getInstance());

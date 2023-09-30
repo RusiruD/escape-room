@@ -52,7 +52,7 @@ public class StartScreenController {
 
     checkDifficultyAndTimeLimit(chosenTimeLimit, chosenDifficulty);
 
-    ChatController.getInstance().intialiseHints();
+    ChatController.getInstance().initialiseAfterStart();
 
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");

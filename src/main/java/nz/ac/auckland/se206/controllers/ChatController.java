@@ -6,12 +6,14 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.ChatMessage;
@@ -21,7 +23,7 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
-public class ChatController {
+public class ChatController implements Controller {
 
   private static ChatController instance;
 
@@ -30,17 +32,21 @@ public class ChatController {
     return instance;
   }
 
+  @FXML private Label hintField;
+  @FXML private Label lblTime;
   @FXML private TextArea chatTextArea;
   @FXML private TextField inputText;
   @FXML private Button sendButton;
   @FXML private AnchorPane chatPane;
+  @FXML private TextArea lastHintTextArea;
   private boolean isThinking = false;
+  private boolean isShowingLastHint = true;
 
   private ChatCompletionRequest chatCompletionRequest;
 
   @FXML
   public void initialize() throws ApiProxyException {
-
+    hintField.setVisible(false);
     instance = this;
   }
 
@@ -61,7 +67,12 @@ public class ChatController {
    *
    * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public void intialiseHints() throws ApiProxyException {
+  public void initialiseAfterStart() throws ApiProxyException {
+
+    if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {
+      hintField.setVisible(true);
+    }
+
     // Create a CompletableFuture for the background task
 
     CompletableFuture.runAsync(
@@ -93,7 +104,9 @@ public class ChatController {
    * @param msg The chat message to append
    */
   private void appendChatMessage(ChatMessage msg, String role) {
-    chatTextArea.appendText(role + ": " + msg.getContent() + "\n\n");
+    String message = role + ": " + msg.getContent() + "\n\n";
+    chatTextArea.appendText(message);
+    lastHintTextArea.appendText(message);
   }
 
   /**
@@ -132,6 +145,7 @@ public class ChatController {
    */
   @FXML
   private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
+    lastHintTextArea.clear();
 
     CompletableFuture.runAsync(
         () -> {
@@ -188,7 +202,7 @@ public class ChatController {
           // Append the fake message to the chat interface
           appendChatMessage(new ChatMessage("user", message), "Player");
 
-          if (runGpt(actualMessage).getContent().toLowerCase().contains("hint")) {
+          if (runGpt(actualMessage).getContent().toLowerCase().substring(0, 4).equals("hint")) {
             GameState.hintsGiven++;
             System.out.println("HINT DETECTED!");
           }
@@ -196,6 +210,11 @@ public class ChatController {
           // Ensure that the UI updates on the JavaFX application thread
           Platform.runLater(
               () -> {
+                int hintsLeft = 5 - GameState.hintsGiven;
+                if (hintsLeft < 0) {
+                  hintsLeft = 0;
+                }
+                hintField.setText(hintsLeft + " Hints(s) Remaining");
                 sendButton.setVisible(true);
               });
           isThinking = false;
@@ -225,5 +244,21 @@ public class ChatController {
     if (event.getCode() == KeyCode.ENTER) {
       onSendMessage(null);
     }
+  }
+
+  @FXML
+  public void updateTimerLabel(String time) {
+    lblTime.setText(time);
+  }
+
+  @FXML
+  public void updateInventory() {
+    // does nothing
+  }
+
+  @FXML
+  public void onSwitch(ActionEvent event) {
+    isShowingLastHint = !isShowingLastHint;
+    lastHintTextArea.setVisible(isShowingLastHint);
   }
 }
