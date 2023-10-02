@@ -7,24 +7,24 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="winlossPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.WinLossController">
+<Pane fx:id="winlossPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.WinLossController">
    <children>
-      <ImageView fitHeight="406.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/WinLossBackground.jpeg" />
          </image>
       </ImageView>
-      <Button fx:id="exitGame" layoutX="121.0" layoutY="237.0" mnemonicParsing="false" onAction="#onExitGameClicked" text="Quit" />
-      <Button fx:id="replayGame" layoutX="232.0" layoutY="237.0" mnemonicParsing="false" onAction="#onReplayGameClicked" text="Replay Game" />
-      <Button fx:id="newGame" layoutX="412.0" layoutY="237.0" mnemonicParsing="false" onAction="#onNewGameClicked" text="New Game" />
-      <Label fx:id="gameOutcome" alignment="CENTER" layoutX="215.0" layoutY="58.0" stylesheets="@../css/roomStylesheet.css" text="You Won" textFill="WHITE">
+      <Button fx:id="exitGame" layoutX="133.0" layoutY="594.0" mnemonicParsing="false" onAction="#onExitGameClicked" text="Quit" />
+      <Button fx:id="replayGame" layoutX="324.0" layoutY="594.0" mnemonicParsing="false" onAction="#onReplayGameClicked" text="Replay Game" />
+      <Button fx:id="newGame" layoutX="570.0" layoutY="594.0" mnemonicParsing="false" onAction="#onNewGameClicked" text="New Game" />
+      <Label fx:id="gameOutcome" alignment="CENTER" layoutX="199.0" layoutY="95.0" prefHeight="166.0" prefWidth="363.0" stylesheets="@../css/roomStylesheet.css" text="You Won" textFill="WHITE">
          <font>
-            <Font name="Arial" size="50.0" />
+            <Font name="Arial Bold" size="70.0" />
          </font>
       </Label>
-      <Label fx:id="gameOutcomeDescription" alignment="CENTER" layoutY="144.0" prefHeight="77.0" prefWidth="600.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon" textFill="WHITE">
+      <Label fx:id="gameOutcomeDescription" alignment="CENTER" layoutX="100.0" layoutY="283.0" prefHeight="159.0" prefWidth="600.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon&#10;and slayed the dungeon master" textAlignment="CENTER" textFill="WHITE">
          <font>
-            <Font name="Arial" size="32.0" />
+            <Font name="Arial" size="42.0" />
          </font>
       </Label>
    </children>

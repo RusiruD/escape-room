@@ -73,12 +73,11 @@ public class RoomController implements Controller {
 
   @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Button btnReturnToCorridor;
-  @FXML private ImageView parchment1;
-  @FXML private ImageView imgArt;
-  @FXML private Slider slider;
-  @FXML private ImageView parchment2;
+  
+
+  
   @FXML private Label lblTime;
-  @FXML private ImageView parchment3;
+ 
   @FXML private ImageView key1;
 
   @FXML private ImageView boulder;
@@ -90,23 +89,23 @@ public class RoomController implements Controller {
   @FXML private ImageView bluePotion;
   @FXML private ImageView greenPotion;
   @FXML private ImageView purplePotion;
-  @FXML private ImageView parchment4;
-  @FXML private ImageView parchment1duplicate;
+  
+ 
   @FXML private ImageView cauldron;
-  @FXML private ImageView parchment2duplicate;
 
-  @FXML private ImageView parchment3duplicate;
+
+  
   @FXML private ImageView exclamationMark;
   @FXML private TextArea chatTextArea;
 
-  @FXML private ImageView parchment4duplicate;
+ 
   @FXML private ImageView soundToggle;
 
   @FXML private Button btnHideNote;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
   private List<String> potionsincauldron = new ArrayList<>();
-  private int parchmentPieces = 0;
+ 
 
   private Riddle call;
 
@@ -214,10 +213,7 @@ public class RoomController implements Controller {
             + " potion in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Set the tiles and solution
-    setRandomPosition(parchment1);
-    setRandomPosition(parchment2);
-    setRandomPosition(parchment3);
-    setRandomPosition(parchment4);
+  
 
     // Allow the boulder to be dragged and dropped
 
@@ -337,14 +333,7 @@ public class RoomController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 
-  @FXML
-  private void hideParchment() {
-    parchment1duplicate.setVisible(false);
-    parchment2duplicate.setVisible(false);
-    parchment3duplicate.setVisible(false);
-    parchment4duplicate.setVisible(false);
-  }
-
+  
   @FXML
   private void onHideNote() {
     chatTextArea.setVisible(false);
@@ -402,6 +391,7 @@ public class RoomController implements Controller {
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
+    System.out.println("Note clicked");
     GameState.noCombination = false;
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
@@ -472,54 +462,8 @@ public class RoomController implements Controller {
     // if a parchment piece is selected it is made visible in the scene
     // and the parchment piece is removed from the combo box
     // if already three pieces are visible the note is shown instead
-    if (selectedItem != null && selectedItem.contains("parchment")) {
-      Inventory.removeFromInventory(selectedItem);
-      if (selectedItem.equals("parchment1")) {
-
-        if (parchmentPieces == 3) {
-          showNote();
-          hideParchment();
-          return;
-        }
-        parchmentPieces++;
-
-        parchment1duplicate.setVisible(true);
-      }
-      if (selectedItem.equals("parchment2")) {
-        if (parchmentPieces == 3) {
-          showNote();
-
-          hideParchment();
-          return;
-        }
-        parchmentPieces++;
-        parchment2duplicate.setVisible(true);
-      }
-      if (selectedItem.equals("parchment3")) {
-        if (parchmentPieces == 3) {
-          showNote();
-          hideParchment();
-          return;
-        }
-        parchmentPieces++;
-
-        parchment3duplicate.setVisible(true);
-      }
-      if (selectedItem.equals("parchment4")) {
-        if (parchmentPieces == 3) {
-          showNote();
-
-          hideParchment();
-          return;
-        }
-        parchmentPieces++;
-
-        parchment4duplicate.setVisible(true);
-      }
-
-    } else {
-
-    }
+   
+       
   }
 
   @FXML

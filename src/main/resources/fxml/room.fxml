@@ -9,37 +9,22 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="potionsRoomPane" focusTraversable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="620.0" prefWidth="1100.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
+<Pane fx:id="potionsRoomPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fx:id="imgBackground" fitHeight="620.0" fitWidth="1100.0" pickOnBounds="true">
+      <ImageView fx:id="imgBackground" fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/RoomBackground.jpg" />
          </image>
       </ImageView>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="11.0" layoutY="14.0" prefHeight="44.0" prefWidth="168.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <ImageView fx:id="imgTable" fitHeight="170.0" fitWidth="324.0" layoutX="114.0" layoutY="407.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="imgTable" fitHeight="100.0" fitWidth="258.0" layoutX="99.0" layoutY="521.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="parchment4duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="24.0" fitWidth="40.0" layoutX="206.0" layoutY="412.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="key1" fitHeight="78.0" fitWidth="141.0" layoutX="354.0" layoutY="421.0" onMouseClicked="#onKey1Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment1duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="24.0" fitWidth="50.0" layoutX="244.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment3duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="34.0" fitWidth="40.0" layoutX="207.0" layoutY="436.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment2duplicate" blendMode="HARD_LIGHT" disable="true" fitHeight="25.0" fitWidth="50.0" layoutX="243.0" layoutY="413.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/parchment.jpg" />
+            <Image url="@../images/key.png" />
          </image>
       </ImageView>
       <TextArea fx:id="chatTextArea" disable="true" editable="false" layoutX="264.0" layoutY="135.0" prefHeight="250.0" prefWidth="226.0" visible="false" wrapText="true">
@@ -47,83 +32,51 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </TextArea>
-      <ImageView fx:id="note" blendMode="HARD_LIGHT" disable="true" fitHeight="50.0" fitWidth="119.0" layoutX="205.0" layoutY="411.0" onMouseClicked="#onNoteClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
       <Button fx:id="btnHideNote" disable="true" layoutX="406.0" layoutY="348.0" mnemonicParsing="false" onAction="#onHideNote" prefHeight="38.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Hide" visible="false" />
-      <ImageView fx:id="key1" fitHeight="78.0" fitWidth="141.0" layoutX="512.0" layoutY="346.0" onMouseClicked="#onKey1Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/key.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="130.0" fitWidth="176.0" layoutX="500.0" layoutY="306.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
+      <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="130.0" fitWidth="176.0" layoutX="325.0" layoutY="396.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
          <image>
             <Image url="@../images/boulder.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="513.0" layoutY="27.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="376.0" layoutY="13.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="571.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
-      <Pane fx:id="popUp" layoutX="311.0" layoutY="451.0" maxHeight="80.0" maxWidth="550.0" prefHeight="80.0" prefWidth="550.0" style="-fx-background-color: null;" />
-      <ImageView fx:id="cauldron" fitHeight="99.0" fitWidth="125.0" layoutX="912.0" layoutY="483.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
+      <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="676.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
+      <ImageView fx:id="cauldron" fitHeight="131.0" fitWidth="138.0" layoutX="629.0" layoutY="552.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/cauldron.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="redPotion" fitHeight="67.0" fitWidth="64.0" layoutX="966.0" layoutY="344.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="redPotion" fitHeight="67.0" fitWidth="64.0" layoutX="698.0" layoutY="410.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bluePotion" fitHeight="67.0" fitWidth="42.0" layoutX="32.0" layoutY="361.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluePotion" fitHeight="67.0" fitWidth="42.0" layoutX="14.0" layoutY="429.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="yellowPotion" fitHeight="67.0" fitWidth="42.0" layoutX="108.0" layoutY="339.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowPotion" fitHeight="67.0" fitWidth="42.0" layoutX="67.0" layoutY="414.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="greenPotion" fitHeight="78.0" fitWidth="64.0" layoutX="1037.0" layoutY="342.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greenPotion" fitHeight="78.0" fitWidth="64.0" layoutX="746.0" layoutY="408.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="purplePotion" fitHeight="78.0" fitWidth="95.0" layoutX="185.0" layoutY="319.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purplePotion" fitHeight="78.0" fitWidth="95.0" layoutX="116.0" layoutY="385.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="parchment1" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="33.0" layoutY="495.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment4" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="823.0" layoutY="343.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment2" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="1036.0" layoutY="452.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="parchment3" blendMode="HARD_LIGHT" fitHeight="60.0" fitWidth="40.0" layoutX="357.0" layoutY="260.0" onMouseClicked="#clickedParchment" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/parchment.jpg" />
-         </image>
-      </ImageView>
       <Button layoutX="11.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
-      <Pane fx:id="instructionsDisplay" layoutX="376.0" layoutY="164.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
-      <Button layoutX="115.0" layoutY="571.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
-      <Button layoutX="1014.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+      <Button layoutX="116.0" layoutY="676.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
+      <Button layoutX="704.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
          <font>
             <Font name="Old English Text MT" size="18.0" />
          </font>
@@ -142,9 +95,16 @@
             </ImageView>
          </children>
       </Pane>
-      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="966.0" layoutY="14.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="638.0" layoutY="17.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sound/audioOn.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="instructionsDisplay" layoutX="301.0" layoutY="211.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
+      <Pane fx:id="popUp" layoutX="190.0" layoutY="607.0" maxHeight="80.0" maxWidth="550.0" prefHeight="80.0" prefWidth="550.0" style="-fx-background-color: null;" />
+      <ImageView fx:id="note" blendMode="HARD_LIGHT" fitHeight="47.0" fitWidth="84.0" layoutX="167.0" layoutY="521.0" onMouseClicked="#onNoteClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
    </children>

@@ -89,7 +89,7 @@ public class App extends Application {
     SceneManager.addController(ChestController.getInstance());
 
     root = SceneManager.getUiRoot(AppUi.START);
-    scene = new Scene(root, 780.0, 780.0);
+    scene = new Scene(root, 800, 730);
     stage.setScene(scene);
     stage.show();
     focus();
@@ -131,16 +131,14 @@ public class App extends Application {
    */
   public static void setStageToSize(double width, double height) {
     Stage primaryStage = (Stage) scene.getWindow();
-    primaryStage.setWidth(width + 15);
-    primaryStage.setHeight(height + 38);
+    primaryStage.setWidth(width);
+    primaryStage.setHeight(height);
   }
 
   public static void goToChest() {
     try {
       App.setRoot(AppUi.CHEST);
-      ChestController chestController = ChestController.getInstance();
-
-      setStageToSize(chestController.getChestWidth(), chestController.getChestHeight());
+     
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -149,9 +147,7 @@ public class App extends Application {
   public static void goToPuzzle() {
     try {
       App.setRoot(AppUi.PUZZLE);
-      PuzzleController puzzleController = PuzzleController.getInstance();
-
-      setStageToSize(puzzleController.getPuzzleWidth(), puzzleController.getPuzzleHeight());
+     
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -160,8 +156,7 @@ public class App extends Application {
   public static void goToChat() {
     try {
       App.setRoot(AppUi.CHAT);
-      ChatController chatController = ChatController.getInstance();
-      setStageToSize(chatController.getChatWidth(), chatController.getChatHeight());
+    
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -171,9 +166,7 @@ public class App extends Application {
     try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
-      CorridorController corridorController = CorridorController.getInstance();
-      // Get the corridor controller instance
-      setStageToSize(corridorController.getCorridorWidth(), corridorController.getCorridorHeight());
+      
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -201,10 +194,7 @@ public class App extends Application {
       App.setRoot(AppUi.FIRST_ROOM);
 
       // Get the first room controller instance
-      RoomController roomController = RoomController.getInstance();
-
-      // Get the dimensions of the first room
-      setStageToSize(roomController.getRoomWidth(), roomController.getRoomHeight());
+     
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -225,12 +215,7 @@ public class App extends Application {
       App.setRoot(AppUi.UNTANGLE);
 
       // Get the Untangle room controller instance
-      UntangleRoomController untangleroomController = UntangleRoomController.getInstance();
-
-      // Get the dimensions of the Untangle room
-      setStageToSize(
-          untangleroomController.getUntangleRoomWidth(),
-          untangleroomController.getUntangleRoomHeight());
+     
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -248,12 +233,7 @@ public class App extends Application {
       App.setRoot(AppUi.PUZZLEROOM);
 
       // Get the Puzzle room controller instance
-      PuzzleRoomController puzzleroomController = PuzzleRoomController.getInstance();
-
-      // Get the dimensions of the Puzzle room
-      setStageToSize(
-          puzzleroomController.getPuzzleRoomWidth(), puzzleroomController.getPuzzleRoomHeight());
-
+   
     } catch (IOException e) {
 
       e.printStackTrace();
@@ -272,11 +252,7 @@ public class App extends Application {
       // Set the root of the application to the Win/Loss screen.
       App.setRoot(AppUi.WINLOSS);
 
-      // Get the instance of the WinLossController.
-      WinLossController winLossController = WinLossController.getInstance();
-
-      // Get the dimensions of the Win/Loss screen content.
-      setStageToSize(winLossController.getWinLossWidth(), winLossController.getWinLossHeight());
+     
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
@@ -297,12 +273,7 @@ public class App extends Application {
       App.setRoot(AppUi.START);
 
       // Get the instance of the StartScreenController.
-      StartScreenController startScreenController = StartScreenController.getInstance();
-
-      // Get the dimensions of the Start Screen content.
-      setStageToSize(
-          startScreenController.getStartScreenWidth(),
-          startScreenController.getStartScreenHeight());
+     
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
