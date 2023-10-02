@@ -16,22 +16,22 @@
             <Image url="@../images/ChatBackground.jpeg" />
          </image>
       </ImageView>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="29.0" layoutY="53.0" prefHeight="270.0" prefWidth="538.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="29.0" layoutY="131.0" prefHeight="270.0" prefWidth="538.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
     <TextField fx:id="inputText" layoutX="35.0" layoutY="341.0" prefHeight="26.0" prefWidth="435.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
-    <Button fx:id="sendButton" layoutX="505.0" layoutY="335.0" mnemonicParsing="false" onAction="#onSendMessage" text="Send" />
-    <Button layoutX="505.0" layoutY="386.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="569.0" layoutY="7.0" prefHeight="37.0" prefWidth="88.0" text="s" textFill="WHITE">
+    <Button fx:id="sendButton" layoutX="664.0" layoutY="496.0" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="108.0" text="Send" />
+    <Button layoutX="664.0" layoutY="662.0" mnemonicParsing="false" onAction="#onGoBack" text="Go Back" />
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="340.0" layoutY="18.0" prefHeight="47.0" prefWidth="121.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="14.0" layoutY="18.0" prefHeight="37.0" prefWidth="201.0" text="5 Hint(s) Remaining" textFill="WHITE">
+      <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="14.0" layoutY="18.0" prefHeight="60.0" prefWidth="213.0" text="5 Hint(s) Remaining" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea fx:id="lastHintTextArea" editable="false" layoutX="29.0" layoutY="53.0" prefHeight="270.0" prefWidth="538.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-      <Button layoutX="395.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSwitch" text="Switch" />
+      <TextArea fx:id="lastHintTextArea" editable="false" layoutX="29.0" layoutY="131.0" prefHeight="402.0" prefWidth="623.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+      <Button layoutX="522.0" layoutY="662.0" mnemonicParsing="false" onAction="#onSwitch" text="Switch" />
       <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="594.0" layoutY="68.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sound/audioOn.png" />
