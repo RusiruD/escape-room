@@ -18,7 +18,6 @@
          </image>
       </ImageView>
       <Pane fx:id="pane" layoutX="17.0" layoutY="130.0" prefHeight="441.0" prefWidth="767.0" style="-fx-background-color: rgb(92, 95, 119, 0.4);" AnchorPane.bottomAnchor="159.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="130.0" />
-      <Pane fx:id="instructionsDisplay" prefHeight="430.0" prefWidth="360.0" stylesheets="@../css/roomStylesheet.css" />
       <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="669.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="38.0" prefWidth="132.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="14.0" prefHeight="38.0" prefWidth="169.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="307.0" layoutY="14.0" prefHeight="44.0" prefWidth="186.0" text="s" textAlignment="CENTER" textFill="WHITE">
@@ -62,6 +61,7 @@
             </ImageView>
          </children>
       </Pane>
+      <Pane fx:id="instructionsDisplay" layoutX="215.0" layoutY="95.0" prefHeight="359.0" prefWidth="335.0" stylesheets="@../css/roomStylesheet.css" />
 
    </children>
 </AnchorPane>
