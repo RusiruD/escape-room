@@ -47,6 +47,7 @@ public class CorridorController implements Controller {
   // JavaFX UI elements
 
   @FXML private ImageView backgroundImage;
+  @FXML private ImageView soundToggle;
   @FXML private Polygon polygon;
   @FXML private Group group;
   @FXML private Rectangle player;
@@ -358,5 +359,23 @@ public class CorridorController implements Controller {
   @FXML
   public void getHint() throws IOException {
     App.goToChat();
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.isMuted = !GameState.isMuted;
+    for (Controller controller : SceneManager.getControllers()) {
+      controller.updateMute();
+    }
+  }
+
+  @FXML
+  public void updateMute() {
+    if (GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 }

@@ -33,6 +33,8 @@ public class DungeonMaster {
   private String[] messages;
   private int messageIndex = 0;
 
+  private TextToSpeech tts;
+
   private ChatCompletionRequest chatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(250);
 
@@ -100,8 +102,9 @@ public class DungeonMaster {
   }
 
   // returns a pane with the text
-  public Pane getText(String role, String message) {
+  public Pane getText(String role, String message, TextToSpeech tts) {
     System.out.println("getting text");
+    this.tts = tts;
     messages = null;
     messageIndex = 0;
     // create a chat message
@@ -333,5 +336,9 @@ public class DungeonMaster {
 
   public boolean isMessageFinished() {
     return messageFinished;
+  }
+
+  public TextToSpeech getTts() {
+    return tts;
   }
 }

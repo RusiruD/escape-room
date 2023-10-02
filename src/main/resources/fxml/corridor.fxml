@@ -75,6 +75,11 @@
       </Group>
       <Button layoutX="14.0" layoutY="65.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
       <Button layoutX="15.0" layoutY="110.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
+      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="556.0" layoutY="21.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/sound/audioOn.png" />
+         </image>
+      </ImageView>
 
    </children>
 </Pane>

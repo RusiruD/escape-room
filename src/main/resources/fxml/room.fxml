@@ -142,5 +142,10 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="966.0" layoutY="14.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/sound/audioOn.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

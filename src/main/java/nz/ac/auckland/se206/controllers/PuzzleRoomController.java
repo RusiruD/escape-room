@@ -26,6 +26,7 @@ public class PuzzleRoomController implements Controller {
   @FXML private Pane puzzleRoomPane;
   @FXML private Label lblTime;
   @FXML private ImageView key3;
+  @FXML private ImageView soundToggle;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
 
@@ -90,5 +91,25 @@ public class PuzzleRoomController implements Controller {
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();
+  }
+
+
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.isMuted = !GameState.isMuted;
+    for (Controller controller : SceneManager.getControllers()) {
+      controller.updateMute();
+    }
+  }
+
+  @FXML
+  public void updateMute() {
+    if (GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 }

@@ -100,4 +100,9 @@ public class WinLossController implements Controller {
   public void updateInventory() {
     // Implementation not provided, but should update the inventory
   }
+
+  @Override
+  public void updateMute() {
+    // Implementation not provided, but should update the mute button
+  }
 }

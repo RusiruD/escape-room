@@ -38,6 +38,7 @@ public class GameState {
   public static boolean isKey3Collected = false;
   public static boolean isChestOpened = false;
   public static boolean isGameWon = false;
+  public static boolean isMuted = false;
   public static String difficultyLevel = "";
   public static String gameTime = "";
 

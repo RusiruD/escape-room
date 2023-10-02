@@ -145,6 +145,7 @@ public class UntangleRoomController implements Controller {
   @FXML private Pane visualDungeonMaster;
   @FXML private ImageView exclamationMark;
   @FXML private ImageView key2;
+  @FXML private ImageView soundToggle;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
 
@@ -400,5 +401,24 @@ public class UntangleRoomController implements Controller {
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    call.getDungeonMaster().getTts().terminate();
+    GameState.isMuted = !GameState.isMuted;
+    for (Controller controller : SceneManager.getControllers()) {
+      controller.updateMute();
+    }
+  }
+
+  @FXML
+  public void updateMute() {
+    if (GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 }

@@ -87,5 +87,15 @@
             </ImageView>
          </children>
       </Pane>
+      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="492.0" layoutY="14.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/sound/audioOn.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="541.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+         <font>
+            <Font name="Old English Text MT" size="18.0" />
+         </font>
+      </Button>
    </children>
 </Pane>
