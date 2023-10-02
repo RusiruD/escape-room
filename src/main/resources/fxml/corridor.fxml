@@ -11,9 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="728.0" prefWidth="696.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
-      <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="backgroundImage" fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/CorridorBackground.png" />
          </image>
