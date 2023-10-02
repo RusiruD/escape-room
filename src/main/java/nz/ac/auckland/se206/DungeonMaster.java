@@ -20,7 +20,6 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class DungeonMaster {
   private Pane popUp;
@@ -82,7 +81,9 @@ public class DungeonMaster {
     quitButton.setStyle("-fx-fill: #f38ba8");
     quitButton.setOnMouseClicked(
         e -> {
+          GameState.tts.terminate();
           popUp.visibleProperty().set(false);
+          System.out.println("quit");
         });
 
     StackPane dialogueContainer = new StackPane();
@@ -200,7 +201,6 @@ public class DungeonMaster {
     // popup -> dialog container -> next button
     ImageView nextButton =
         (ImageView) ((StackPane) popUp.getChildren().get(1)).getChildren().get(1);
-    TextToSpeech tts = new TextToSpeech();
     System.out.println("mss " + messages.length + " " + messageIndex);
     isSpeaking = true;
     // if there are more messages
@@ -218,7 +218,7 @@ public class DungeonMaster {
             @Override
             protected Void call() {
               System.out.println(messages[messageIndex]);
-              tts.speak(messages[messageIndex]);
+              GameState.tts.speak(messages[messageIndex]);
               return null;
             }
           };

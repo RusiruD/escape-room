@@ -16,7 +16,6 @@ public class Riddle {
 
   public Riddle(DungeonMaster dungeonMaster, String question) {
     // get the riddle from the dungeon master
-
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     Task<Void> task =

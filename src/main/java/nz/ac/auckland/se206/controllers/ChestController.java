@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
+import nz.ac.auckland.se206.Utililty;
 
 public class ChestController implements Controller {
 
@@ -61,6 +62,7 @@ public class ChestController implements Controller {
   @FXML private Label lblKey6;
 
   @FXML private ImageView exclamationMark;
+  @FXML private ImageView soundToggle;
 
   @FXML private Pane chestPane;
   @FXML private Pane popUp;
@@ -501,5 +503,26 @@ public class ChestController implements Controller {
     dialogueFormat.getStyleClass().add("popUp");
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
+  }
+
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utililty.exitGame();
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.mute();
+  }
+
+  @FXML
+  public void updateMute() {
+    if (!GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 }

@@ -7,5 +7,7 @@ public interface Controller {
 
   public void updateTimerLabel(String time);
 
+  public void updateMute();
+
   public void updateInventory();
 }

@@ -100,6 +100,7 @@ public class RoomController implements Controller {
   @FXML private TextArea chatTextArea;
 
   @FXML private ImageView parchment4duplicate;
+  @FXML private ImageView soundToggle;
 
   @FXML private Button btnHideNote;
   private double horizontalOffset = 0;
@@ -525,5 +526,20 @@ public class RoomController implements Controller {
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.mute();
+  }
+
+  @FXML
+  public void updateMute() {
+    if (!GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 }

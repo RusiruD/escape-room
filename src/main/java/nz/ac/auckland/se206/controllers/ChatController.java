@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -39,6 +40,7 @@ public class ChatController implements Controller {
   @FXML private Button sendButton;
   @FXML private AnchorPane chatPane;
   @FXML private TextArea lastHintTextArea;
+  @FXML private ImageView soundToggle;
   private boolean isThinking = false;
   private boolean isShowingLastHint = true;
 
@@ -260,5 +262,20 @@ public class ChatController implements Controller {
   public void onSwitch(ActionEvent event) {
     isShowingLastHint = !isShowingLastHint;
     lastHintTextArea.setVisible(isShowingLastHint);
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.mute();
+  }
+
+  @FXML
+  public void updateMute() {
+    if (!GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 }

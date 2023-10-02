@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="438.0" prefWidth="657.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="438.0" prefWidth="657.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
       <ImageView fitHeight="447.0" fitWidth="657.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -32,5 +32,10 @@
       </Label>
       <TextArea fx:id="lastHintTextArea" editable="false" layoutX="29.0" layoutY="53.0" prefHeight="270.0" prefWidth="538.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
       <Button layoutX="395.0" layoutY="386.0" mnemonicParsing="false" onAction="#onSwitch" text="Switch" />
+      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="594.0" layoutY="68.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/sound/audioOn.png" />
+         </image>
+      </ImageView>
   </children>
 </AnchorPane>
