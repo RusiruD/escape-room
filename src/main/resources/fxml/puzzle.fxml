@@ -54,11 +54,6 @@
             <Image url="@../images/numbers/N9.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" onMouseClicked="#clickedTile" pickOnBounds="true">
-         <image>
-            <Image url="@../images/numbers/N3.png" />
-         </image>
-      </ImageView>
       <Button layoutX="360.0" layoutY="654.0" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="62.0" prefWidth="110.0" text="BACK">
          <font>
             <Font size="24.0" />
@@ -70,7 +65,6 @@
          </font>
       </Label>
       <Button layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
-      <Pane fx:id="instructionsDisplay" layoutX="340.0" layoutY="61.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
       <Button layoutX="14.0" layoutY="673.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="popUp" layoutX="113.0" layoutY="563.0" prefHeight="80.0" prefWidth="550.0" />
       <Pane fx:id="visualDungeonMaster" layoutY="189.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
@@ -97,5 +91,11 @@
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
+      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" layoutX="479.0" layoutY="202.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+         <image>
+            <Image url="@../images/numbers/N3.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="instructionsDisplay" layoutX="200.0" layoutY="233.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
    </children>
 </Pane>
