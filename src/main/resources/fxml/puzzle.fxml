@@ -54,7 +54,7 @@
             <Image url="@../images/numbers/N9.png" />
          </image>
       </ImageView>
-      <Button layoutX="360.0" layoutY="654.0" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="62.0" prefWidth="110.0" text="BACK">
+      <Button layoutX="360.0" layoutY="654.0" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="62.0" prefWidth="110.0" text="Back">
          <font>
             <Font size="24.0" />
          </font>
