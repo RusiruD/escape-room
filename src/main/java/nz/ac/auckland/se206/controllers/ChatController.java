@@ -267,15 +267,12 @@ public class ChatController implements Controller {
   @FXML
   private void mute() {
     // Handle click on mute
-    GameState.isMuted = !GameState.isMuted;
-    for (Controller controller : SceneManager.getControllers()) {
-      controller.updateMute();
-    }
+    GameState.mute();
   }
 
   @FXML
   public void updateMute() {
-    if (GameState.isMuted) {
+    if (!GameState.isMuted) {
       soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
       return;
     }

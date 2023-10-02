@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class Riddle {
   private String riddle;
@@ -17,14 +16,13 @@ public class Riddle {
 
   public Riddle(DungeonMaster dungeonMaster, String question) {
     // get the riddle from the dungeon master
-    TextToSpeech textToSpeech = new TextToSpeech();
     this.dungeonMaster = dungeonMaster;
     // get the riddle from the dungeon master
     Task<Void> task =
         new Task<Void>() {
           @Override
           protected Void call() throws Exception {
-            dungeonMaster.getText("user", question, textToSpeech);
+            dungeonMaster.getText("user", question);
             return null;
           }
         };

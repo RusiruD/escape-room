@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import nz.ac.auckland.se206.controllers.SceneManager;
+import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Represents the state of the game. */
 public class GameState {
@@ -46,6 +48,7 @@ public class GameState {
   public static String secondPotion = "";
 
   public static Riddle riddle;
+  public static TextToSpeech tts = new TextToSpeech();
 
   public static int hintsGiven = 0;
 
@@ -102,5 +105,20 @@ public class GameState {
     hasKeyTwo = false;
     hasKeyThree = false;
     puzzleRoomSolved.set(false);
+  }
+
+  public static void mute() {
+    // mute the game
+    if (isMuted) {
+      System.out.println("unmute");
+      isMuted = false;
+    } else {
+      System.out.println("mute");
+      tts.cancel();
+      isMuted = true;
+    }
+    for (Controller controller : SceneManager.getControllers()) {
+      controller.updateMute();
+    }
   }
 }

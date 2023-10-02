@@ -6,6 +6,8 @@ import javax.speech.EngineException;
 import javax.speech.synthesis.Synthesizer;
 import javax.speech.synthesis.SynthesizerModeDesc;
 
+import nz.ac.auckland.se206.GameState;
+
 /** Text-to-speech API using the JavaX speech library. */
 public class TextToSpeech {
   /** Custom unchecked exception for Text-to-speech issues. */
@@ -59,7 +61,9 @@ public class TextToSpeech {
    */
   public void speak(final String... sentences) {
     boolean isFirst = true;
-
+    if (GameState.isMuted) {
+      return;
+    }
     for (final String sentence : sentences) {
       if (isFirst) {
         isFirst = false;
@@ -80,6 +84,9 @@ public class TextToSpeech {
   public void speak(final String sentence) {
     if (sentence == null) {
       throw new IllegalArgumentException("Text cannot be null.");
+    }
+    if (GameState.isMuted) {
+      return;
     }
 
     try {
@@ -110,5 +117,13 @@ public class TextToSpeech {
     } catch (final EngineException e) {
       throw new TextToSpeechException(e.getMessage());
     }
+  }
+
+  public void cancel() {
+    synthesizer.cancel();
+  }
+
+  public boolean isSpeaking() {
+    return !synthesizer.testEngineState(Synthesizer.QUEUE_EMPTY);
   }
 }

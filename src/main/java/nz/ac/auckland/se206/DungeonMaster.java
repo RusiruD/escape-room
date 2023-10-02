@@ -20,7 +20,6 @@ import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
-import nz.ac.auckland.se206.speech.TextToSpeech;
 
 public class DungeonMaster {
   private Pane popUp;
@@ -32,8 +31,6 @@ public class DungeonMaster {
   private String message;
   private String[] messages;
   private int messageIndex = 0;
-
-  private TextToSpeech tts;
 
   private ChatCompletionRequest chatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(250);
@@ -84,7 +81,9 @@ public class DungeonMaster {
     quitButton.setStyle("-fx-fill: #f38ba8");
     quitButton.setOnMouseClicked(
         e -> {
+          GameState.tts.terminate();
           popUp.visibleProperty().set(false);
+          System.out.println("quit");
         });
 
     StackPane dialogueContainer = new StackPane();
@@ -102,9 +101,8 @@ public class DungeonMaster {
   }
 
   // returns a pane with the text
-  public Pane getText(String role, String message, TextToSpeech tts) {
+  public Pane getText(String role, String message) {
     System.out.println("getting text");
-    this.tts = tts;
     messages = null;
     messageIndex = 0;
     // create a chat message
@@ -203,7 +201,6 @@ public class DungeonMaster {
     // popup -> dialog container -> next button
     ImageView nextButton =
         (ImageView) ((StackPane) popUp.getChildren().get(1)).getChildren().get(1);
-    TextToSpeech tts = new TextToSpeech();
     System.out.println("mss " + messages.length + " " + messageIndex);
     isSpeaking = true;
     // if there are more messages
@@ -221,7 +218,7 @@ public class DungeonMaster {
             @Override
             protected Void call() {
               System.out.println(messages[messageIndex]);
-              tts.speak(messages[messageIndex]);
+              GameState.tts.speak(messages[messageIndex]);
               return null;
             }
           };
@@ -336,9 +333,5 @@ public class DungeonMaster {
 
   public boolean isMessageFinished() {
     return messageFinished;
-  }
-
-  public TextToSpeech getTts() {
-    return tts;
   }
 }
