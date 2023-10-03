@@ -166,9 +166,9 @@ public class RoomController implements Controller {
     translateTransition.play();
     // Set the dungeon master to be invisible and mouse transparent
     String instructionsString =
-        "Pieces of parchment are all over the room and you see a key gleaming behind the boulder."
+        "Read the Note on the table and see what it has to say."
             + " \n"
-            + "Combine the parchments on the table to see what they have to say. \n";
+            + "Mix potions together by selecting them and clicking the cauldron \n";
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
@@ -317,19 +317,7 @@ public class RoomController implements Controller {
     updateInventory();
   }
 
-  private void setRandomPosition(ImageView imageView) {
-    double minX = 200; // Minimum x-coordinate (left)
-    double minY = 250; // Minimum y-coordinate (top)S
-    double maxX = 850; // Maximum x-coordinate (right)
-    double maxY = 560; // Maximum y-coordinate (bottom)
-
-    // Randomly generate initial positions for the images
-    double initialX = Math.random() * (maxX - minX) + minX;
-    double initialY = Math.random() * (maxY - minY) + minY;
-
-    imageView.setLayoutX(initialX);
-    imageView.setLayoutY(initialY);
-  }
+ 
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
@@ -397,15 +385,12 @@ public class RoomController implements Controller {
     shrink((ImageView) event.getSource());
   }
 
-  @FXML
-  private void clickedParchment(MouseEvent event) {
-    addToInventory((ImageView) event.getSource());
-  }
+ 
 
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-    System.out.println("Note clicked");
+    
     GameState.noCombination = false;
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
