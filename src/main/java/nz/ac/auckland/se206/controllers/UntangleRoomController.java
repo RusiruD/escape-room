@@ -28,6 +28,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Shape;
 import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeType;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
@@ -355,6 +356,17 @@ public class UntangleRoomController implements Controller {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
+      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+
+    // Create a Timeline to revert the shadow back to its original state after 2 seconds
+    Duration duration = Duration.seconds(0.5);
+    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
+        new javafx.animation.KeyFrame(duration, event -> {
+            // Revert the CSS style to remove the shadow (or set it to the original style)
+            inventoryChoiceBox.setStyle("");
+        })
+    );
+    timeline.play();
   }
 
   @FXML
