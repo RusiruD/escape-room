@@ -1,8 +1,10 @@
 package nz.ac.auckland.se206.controllers;
 
+import javafx.animation.PauseTransition;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.Controller;
 
 public class Inventory {
@@ -11,6 +13,7 @@ public class Inventory {
   public static void addToInventory(String string) {
     inventory.add(string);
     update();
+    
   }
 
   public static ObservableList<String> getInventory() {

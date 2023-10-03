@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -300,9 +301,10 @@ public class RoomController implements Controller {
     GameState.noPapers = false;
     image.setVisible(false);
     image.setDisable(true);
-
+ 
     Inventory.addToInventory(image.getId());
     updateInventory();
+    
   }
 
   @FXML
@@ -331,6 +333,18 @@ public class RoomController implements Controller {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
+    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+
+    // Create a Timeline to revert the shadow back to its original state after 2 seconds
+    Duration duration = Duration.seconds(0.5);
+    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
+        new javafx.animation.KeyFrame(duration, event -> {
+            // Revert the CSS style to remove the shadow (or set it to the original style)
+            inventoryChoiceBox.setStyle("");
+        })
+    );
+    timeline.play();
+    
   }
 
   
