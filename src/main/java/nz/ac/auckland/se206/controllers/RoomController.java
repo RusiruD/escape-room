@@ -362,7 +362,6 @@ public class RoomController implements Controller {
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-
     GameState.noCombination = false;
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
