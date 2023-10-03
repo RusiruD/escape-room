@@ -290,7 +290,6 @@ public class ChestController implements Controller {
   public void updateInventory() {
 
     inventoryChoiceBox.setItems(Inventory.getInventory());
-     
   }
 
   @FXML
@@ -415,17 +414,19 @@ public class ChestController implements Controller {
         correctKeyMap.put("hole" + num, "false");
       }
       inventoryChoiceBox.getItems().remove(inventoryChoiceBox.getValue());
-       inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
-    // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
-        new javafx.animation.KeyFrame(duration, event -> {
-            // Revert the CSS style to remove the shadow (or set it to the original style)
-            inventoryChoiceBox.setStyle("");
-        })
-    );
-    timeline.play();
+      // Create a Timeline to revert the shadow back to its original state after 2 seconds
+      Duration duration = Duration.seconds(0.5);
+      javafx.animation.Timeline timeline =
+          new javafx.animation.Timeline(
+              new javafx.animation.KeyFrame(
+                  duration,
+                  event -> {
+                    // Revert the CSS style to remove the shadow (or set it to the original style)
+                    inventoryChoiceBox.setStyle("");
+                  }));
+      timeline.play();
       // sets to yellow for filled
     } else {
       // if its filled then set back to default (get back key) on click
@@ -435,17 +436,19 @@ public class ChestController implements Controller {
       setLabelKeyHole(num, "");
       System.out.println("got back key " + keyHoleMap.get("hole" + num));
       inventoryChoiceBox.getItems().add(keyMap.get("hole" + num));
-       inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
-    // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
-        new javafx.animation.KeyFrame(duration, event -> {
-            // Revert the CSS style to remove the shadow (or set it to the original style)
-            inventoryChoiceBox.setStyle("");
-        })
-    );
-    timeline.play();
+      // Create a Timeline to revert the shadow back to its original state after 2 seconds
+      Duration duration = Duration.seconds(0.5);
+      javafx.animation.Timeline timeline =
+          new javafx.animation.Timeline(
+              new javafx.animation.KeyFrame(
+                  duration,
+                  event -> {
+                    // Revert the CSS style to remove the shadow (or set it to the original style)
+                    inventoryChoiceBox.setStyle("");
+                  }));
+      timeline.play();
     }
   }
 

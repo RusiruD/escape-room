@@ -16,7 +16,7 @@
             <Image url="@../images/RoomBackground.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="11.0" layoutY="14.0" prefHeight="44.0" prefWidth="168.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <ImageView fx:id="imgTable" fitHeight="100.0" fitWidth="258.0" layoutX="99.0" layoutY="521.0" onMouseClicked="#onTableClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />
@@ -38,12 +38,12 @@
             <Image url="@../images/boulder.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="376.0" layoutY="13.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="11.0" layoutY="676.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="24.0" prefWidth="84.0" text="Back" />
+      <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="680.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" text="Back" />
       <ImageView fx:id="cauldron" fitHeight="131.0" fitWidth="138.0" layoutX="629.0" layoutY="552.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/cauldron.png" />
@@ -74,9 +74,9 @@
             <Image url="@../images/potion5.png" />
          </image>
       </ImageView>
-      <Button layoutX="11.0" layoutY="63.0" mnemonicParsing="false" onMouseClicked="#getHint" text="Hint" />
-      <Button layoutX="116.0" layoutY="676.0" mnemonicParsing="false" onMouseClicked="#getInstructions" stylesheets="@../css/roomStylesheet.css" text="How to play" />
-      <Button layoutX="704.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+      <Button layoutX="20.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" text="Hint" />
+      <Button layoutX="20.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
+      <Button layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="40.0" prefWidth="70.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
          <font>
             <Font name="Old English Text MT" size="18.0" />
          </font>
@@ -95,7 +95,7 @@
             </ImageView>
          </children>
       </Pane>
-      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="638.0" layoutY="17.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sound/audioOn.png" />
          </image>

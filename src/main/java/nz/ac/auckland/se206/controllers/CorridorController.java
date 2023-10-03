@@ -136,16 +136,18 @@ public class CorridorController implements Controller {
         new Image(
             "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
-     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
     Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
-        new javafx.animation.KeyFrame(duration, eventflash -> {
-            // Revert the CSS style to remove the shadow (or set it to the original style)
-            inventoryChoiceBox.setStyle("");
-        })
-    );
+    javafx.animation.Timeline timeline =
+        new javafx.animation.Timeline(
+            new javafx.animation.KeyFrame(
+                duration,
+                eventflash -> {
+                  // Revert the CSS style to remove the shadow (or set it to the original style)
+                  inventoryChoiceBox.setStyle("");
+                }));
     timeline.play();
   }
 

@@ -17,9 +17,9 @@
          </image>
       </ImageView>
       <Rectangle fx:id="puzzleButton" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="362.0" layoutY="321.0" onMouseClicked="#clickPuzzle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
-      <Button fx:id="btnReturnToCorridor" layoutX="14.0" layoutY="678.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="38.0" prefWidth="87.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="14.0" layoutY="15.0" prefHeight="38.0" prefWidth="166.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="373.0" layoutY="21.0" prefHeight="25.0" prefWidth="125.0" text="s">
+      <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
+      <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
@@ -29,16 +29,18 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <Button layoutX="14.0" layoutY="68.0" mnemonicParsing="false" onMouseClicked="#getHint" stylesheets="@../css/roomStylesheet.css" text="Hint" />
-      <Button layoutX="704.0" layoutY="25.0" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="38.0" prefWidth="72.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
+      <Button layoutX="20.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" stylesheets="@../css/roomStylesheet.css" text="Hint" />
+      <Button layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="40.0" prefWidth="70.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
          <font>
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
-      <ImageView fx:id="soundToggle" fitHeight="38.0" fitWidth="42.0" layoutX="644.0" layoutY="25.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
+      <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How To Play" />
+      <Pane fx:id="instructionsDisplay" layoutX="313.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/roomStylesheet.css" />
    </children>
 </Pane>

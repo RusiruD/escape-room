@@ -13,6 +13,7 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
@@ -30,12 +31,22 @@ public class PuzzleRoomController implements Controller {
   @FXML private ImageView soundToggle;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
+  @FXML private Pane instructionsDisplay;
 
   public void initialize() {
     key3.visibleProperty().bind(GameState.puzzleRoomSolved);
     key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
 
     instance = this;
+    String instructionsString = "Click the center of the door to enter \n\n";
+
+    Instructions instructions = new Instructions(instructionsString);
+    Pane instructionsPane = instructions.getInstructionsPane();
+    instructionsDisplay.getChildren().add(instructionsPane);
+    instructionsPane.getStyleClass().add("riddle");
+
+    instructionsDisplay.visibleProperty().set(false);
+    instructionsDisplay.mouseTransparentProperty().set(true);
   }
 
   @FXML
@@ -64,17 +75,27 @@ public class PuzzleRoomController implements Controller {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
-      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
     Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
-        new javafx.animation.KeyFrame(duration, event -> {
-            // Revert the CSS style to remove the shadow (or set it to the original style)
-            inventoryChoiceBox.setStyle("");
-        })
-    );
+    javafx.animation.Timeline timeline =
+        new javafx.animation.Timeline(
+            new javafx.animation.KeyFrame(
+                duration,
+                event -> {
+                  // Revert the CSS style to remove the shadow (or set it to the original style)
+                  inventoryChoiceBox.setStyle("");
+                }));
     timeline.play();
+  }
+
+  @FXML
+  public void getInstructions(MouseEvent event) {
+    // Set the instructions pane to be visible and not mouse transparent
+    instructionsDisplay.visibleProperty().set(true);
+    instructionsDisplay.mouseTransparentProperty().set(false);
+    instructionsDisplay.toFront();
   }
 
   @FXML
@@ -104,8 +125,6 @@ public class PuzzleRoomController implements Controller {
     // Handle click on exit
     Utililty.exitGame();
   }
-
-
 
   @FXML
   private void mute() {
