@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
-import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -14,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -74,11 +72,9 @@ public class RoomController implements Controller {
 
   @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Button btnReturnToCorridor;
-  
 
-  
   @FXML private Label lblTime;
- 
+
   @FXML private ImageView key1;
 
   @FXML private ImageView boulder;
@@ -90,23 +86,18 @@ public class RoomController implements Controller {
   @FXML private ImageView bluePotion;
   @FXML private ImageView greenPotion;
   @FXML private ImageView purplePotion;
-  
- 
+
   @FXML private ImageView cauldron;
 
-
-  
   @FXML private ImageView exclamationMark;
   @FXML private TextArea chatTextArea;
 
- 
   @FXML private ImageView soundToggle;
 
   @FXML private Button btnHideNote;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
   private List<String> potionsincauldron = new ArrayList<>();
- 
 
   private Riddle call;
 
@@ -214,7 +205,6 @@ public class RoomController implements Controller {
             + " potion in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Set the tiles and solution
-  
 
     // Allow the boulder to be dragged and dropped
 
@@ -301,10 +291,9 @@ public class RoomController implements Controller {
     GameState.noPapers = false;
     image.setVisible(false);
     image.setDisable(true);
- 
+
     Inventory.addToInventory(image.getId());
     updateInventory();
-    
   }
 
   @FXML
@@ -317,25 +306,10 @@ public class RoomController implements Controller {
     updateInventory();
   }
 
- 
-
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
-
-    // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
-        new javafx.animation.KeyFrame(duration, event -> {
-            // Revert the CSS style to remove the shadow (or set it to the original style)
-            inventoryChoiceBox.setStyle("");
-        })
-    );
-    timeline.play();
-    
   }
 
-  
   @FXML
   private void onHideNote() {
     chatTextArea.setVisible(false);
@@ -385,12 +359,9 @@ public class RoomController implements Controller {
     shrink((ImageView) event.getSource());
   }
 
- 
-
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-    
     GameState.noCombination = false;
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
@@ -461,8 +432,7 @@ public class RoomController implements Controller {
     // if a parchment piece is selected it is made visible in the scene
     // and the parchment piece is removed from the combo box
     // if already three pieces are visible the note is shown instead
-   
-       
+
   }
 
   @FXML

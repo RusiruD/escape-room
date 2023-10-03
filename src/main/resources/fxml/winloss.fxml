@@ -14,9 +14,9 @@
             <Image url="@../images/WinLossBackground.jpeg" />
          </image>
       </ImageView>
-      <Button fx:id="exitGame" layoutX="133.0" layoutY="594.0" mnemonicParsing="false" onAction="#onExitGameClicked" text="Quit" />
-      <Button fx:id="replayGame" layoutX="324.0" layoutY="594.0" mnemonicParsing="false" onAction="#onReplayGameClicked" text="Replay Game" />
-      <Button fx:id="newGame" layoutX="570.0" layoutY="594.0" mnemonicParsing="false" onAction="#onNewGameClicked" text="New Game" />
+      <Button fx:id="exitGame" layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onExitGameClicked" prefHeight="40.0" prefWidth="70.0" text="Quit" />
+      <Button fx:id="replayGame" layoutX="200.0" layoutY="580.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReplayGameClicked" prefHeight="40.0" prefWidth="160.0" text="Replay Game" />
+      <Button fx:id="newGame" layoutX="400.0" layoutY="580.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="40.0" prefWidth="140.0" text="New Game" />
       <Label fx:id="gameOutcome" alignment="CENTER" layoutX="199.0" layoutY="95.0" prefHeight="166.0" prefWidth="363.0" stylesheets="@../css/roomStylesheet.css" text="You Won" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="70.0" />
