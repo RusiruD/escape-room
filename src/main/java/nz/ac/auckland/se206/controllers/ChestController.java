@@ -40,8 +40,6 @@ public class ChestController implements Controller {
   private HashMap<String, String> keyMap = new HashMap<String, String>();
   private List<String> keys = Arrays.asList("key1", "key2", "key3");
 
-  private int correctKeys = 0;
-
   @FXML private Button riddleButton;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
@@ -79,6 +77,9 @@ public class ChestController implements Controller {
   private Riddle riddle;
   private Riddle call;
   private Boolean riddleCalled = false;
+  private Boolean key1Correct = false;
+  private Boolean key2Correct = false;
+  private Boolean key3Correct = false;
 
   public void initialize() {
 
@@ -180,7 +181,10 @@ public class ChestController implements Controller {
     System.out.println("open chest");
     // check if correct combination
     updateKeys();
-    if (correctKeys == 3) {
+    System.out.println("key1Correct " + key1Correct);
+    System.out.println("key2Correct " + key2Correct);
+    System.out.println("key3Correct " + key3Correct);
+    if (key1Correct && key2Correct && key3Correct) {
       GameState.isChestOpened = true;
       // disable riddle button when finished
       riddleButton.visibleProperty().set(false);
@@ -405,7 +409,17 @@ public class ChestController implements Controller {
       // check if correct key
       if (keyHoleMap.get("hole" + num).equals(inventoryChoiceBox.getValue())) {
         System.out.println("correct key");
-        correctKeys++;
+        // sets the key states
+        if (inventoryChoiceBox.getValue().equals("key1")) {
+          key1Correct = true;
+          System.out.println("key1 correct");
+        } else if (inventoryChoiceBox.getValue().equals("key2")) {
+          key2Correct = true;
+          System.out.println("key2 correct");
+        } else if (inventoryChoiceBox.getValue().equals("key3")) {
+          key3Correct = true;
+          System.out.println("key3 correct");
+        }
         correctKeyMap.put("hole" + num, "true");
         System.out.println("removed key " + inventoryChoiceBox.getValue() + " from inventory");
 
@@ -431,6 +445,17 @@ public class ChestController implements Controller {
     } else {
       // if its filled then set back to default (get back key) on click
       keyHole.styleProperty().set("-fx-fill: #1e90ff");
+      // resets the key states
+      if (keyMap.get("hole" + num).equals("key1")) {
+        key1Correct = false;
+        System.out.println("key1 incorrect");
+      } else if (keyMap.get("hole" + num).equals("key2")) {
+        key2Correct = false;
+        System.out.println("key2 incorrect");
+      } else if (keyMap.get("hole" + num).equals("key3")) {
+        key3Correct = false;
+        System.out.println("key3 incorrect");
+      }
       // puts key states back to normal
       correctKeyMap.put("hole" + num, "empty");
       setLabelKeyHole(num, "");
