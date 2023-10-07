@@ -411,49 +411,14 @@ public class CorridorController implements Controller {
 
   @FXML
   private void showChat(ActionEvent event) {
-
-    textArea.setVisible(true);
-    textArea.setDisable(false);
-
-    inputText.setVisible(true);
-    inputText.setDisable(false);
-
-    closeButton.setVisible(true);
-    closeButton.setDisable(false);
-
-    showButton.setVisible(false);
-    showButton.setDisable(true);
-
-    chatBackground.setVisible(true);
-
-    sendButton.setVisible(true);
-    sendButton.setDisable(false);
-
-    switchButton.setVisible(true);
-    switchButton.setDisable(false);
+    GameState.chat.massEnable(
+        textArea, inputText, closeButton, showButton, chatBackground, sendButton, switchButton);
   }
 
   @FXML
   private void closeChat(ActionEvent event) {
-    textArea.setVisible(false);
-    textArea.setDisable(true);
-
-    inputText.setVisible(false);
-    inputText.setDisable(true);
-
-    closeButton.setVisible(false);
-    closeButton.setDisable(true);
-
-    showButton.setVisible(true);
-    showButton.setDisable(false);
-
-    chatBackground.setVisible(false);
-
-    sendButton.setVisible(false);
-    sendButton.setDisable(true);
-
-    switchButton.setVisible(false);
-    switchButton.setDisable(true);
+    GameState.chat.massDisable(
+        textArea, inputText, closeButton, showButton, chatBackground, sendButton, switchButton);
   }
 
   private void handleTextInput() {
@@ -478,22 +443,8 @@ public class CorridorController implements Controller {
 
   public void initialiseAfterStart() {
 
-    textArea.setVisible(false);
-    textArea.setDisable(true);
-
-    inputText.setVisible(false);
-    inputText.setDisable(true);
-
-    closeButton.setVisible(false);
-    closeButton.setDisable(true);
-
-    chatBackground.setVisible(false);
-
-    sendButton.setVisible(false);
-    sendButton.setDisable(true);
-
-    switchButton.setVisible(false);
-    switchButton.setDisable(true);
+    GameState.chat.massDisable(
+        textArea, inputText, closeButton, showButton, chatBackground, sendButton, switchButton);
 
     addChatToList();
   }

@@ -6,8 +6,11 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -92,17 +95,15 @@ public class Chat {
   }
 
   public void onSendMessage(
-      String inputText, TextArea actualText, Button showButton, Button switchButton)
+      String inputText, TextArea actualText, Button sendButton, Button switchButton)
       throws ApiProxyException, IOException {
 
     if (isThinking) {
       return;
     }
 
-    showButton.setVisible(false);
-    showButton.setDisable(true);
-    switchButton.setVisible(false);
-    switchButton.setDisable(true);
+    disableNode(sendButton);
+    disableNode(switchButton);
     lastHintArea.clear();
 
     String message = inputText;
@@ -164,10 +165,8 @@ public class Chat {
           // Ensure that the UI updates on the JavaFX application thread
           Platform.runLater(
               () -> {
-                showButton.setVisible(true);
-                showButton.setDisable(false);
-                switchButton.setVisible(true);
-                switchButton.setDisable(false);
+                enableNode(switchButton);
+                enableNode(sendButton);
               });
         });
   }
@@ -186,5 +185,53 @@ public class Chat {
   public void lastHintToggle() {
     showLastHintOnly = !showLastHintOnly;
     updateChats();
+  }
+
+  private void enableNode(Object node) {
+    Node actualNode = (Node) node;
+    actualNode.setVisible(true);
+    actualNode.setDisable(false);
+  }
+
+  private void disableNode(Object node) {
+    Node actualNode = (Node) node;
+    actualNode.setVisible(false);
+    actualNode.setDisable(true);
+  }
+
+  public void massDisable(
+      TextArea textArea,
+      TextField inputText,
+      Button closeButton,
+      Button showButton,
+      ImageView chatBackground,
+      Button sendButton,
+      Button switchButton) {
+
+    disableNode(textArea);
+    disableNode(inputText);
+    disableNode(closeButton);
+    enableNode(showButton);
+    disableNode(chatBackground);
+    disableNode(sendButton);
+    disableNode(switchButton);
+  }
+
+  public void massEnable(
+      TextArea textArea,
+      TextField inputText,
+      Button closeButton,
+      Button showButton,
+      ImageView chatBackground,
+      Button sendButton,
+      Button switchButton) {
+
+    enableNode(textArea);
+    enableNode(inputText);
+    enableNode(closeButton);
+    disableNode(showButton);
+    enableNode(chatBackground);
+    enableNode(sendButton);
+    enableNode(switchButton);
   }
 }
