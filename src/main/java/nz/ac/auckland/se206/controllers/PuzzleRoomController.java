@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
@@ -47,6 +48,8 @@ public class PuzzleRoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+  private HintNode hintNode;
+  private Chat.AppUi appUi;
 
   public void initialize() {
     key3.visibleProperty().bind(GameState.puzzleRoomSolved);
@@ -152,57 +155,16 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
-  }
-
-  public void initialiseAfterStart() {
-    onCloseChat(null);
-    addChatToList();
-  }
-
-  @FXML
-  private void onSwitchChatView(ActionEvent event) {
-    GameState.chat.lastHintToggle();
-  }
-
-  @FXML
   private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      onSendMessage(null);
+      handleTextInput();
     }
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
   }
 
   private void handleTextInput() {
     try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
+      GameState.chat.onSendMessage(inputText.getText(), appUi);
+    } catch (Exception e) {
       e.printStackTrace();
     }
     inputText.clear();
@@ -211,5 +173,37 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void onSendMessage(ActionEvent event) {
     handleTextInput();
+  }
+
+  @FXML
+  private void onShowChat(ActionEvent event) {
+    GameState.chat.massEnable(appUi);
+  }
+
+  @FXML
+  private void onCloseChat(ActionEvent event) {
+    GameState.chat.massDisable(appUi);
+  }
+
+  public void initialiseAfterStart() {
+    appUi = Chat.AppUi.PUZZLEROOM;
+    hintNode =
+        new HintNode(
+            textArea,
+            inputText,
+            showButton,
+            closeButton,
+            sendButton,
+            chatBackground,
+            switchButton,
+            hintField);
+    GameState.chat.addToMap(appUi, hintNode);
+    onCloseChat(null);
+    GameState.chat.addChat(textArea);
+  }
+
+  @FXML
+  private void onSwitchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
   }
 }

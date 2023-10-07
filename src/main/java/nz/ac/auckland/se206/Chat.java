@@ -12,8 +12,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import nz.ac.auckland.se206.controllers.HintNode;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -112,89 +110,7 @@ public class Chat {
     }
   }
 
-  public void onSendMessage(
-      String inputText,
-      TextArea actualText,
-      Button sendButton,
-      Button switchButton,
-      Label hintField,
-      Button closeButton)
-      throws ApiProxyException, IOException {
-
-    if (isThinking) {
-      return;
-    }
-    disableNode(closeButton);
-    disableNode(sendButton);
-    disableNode(switchButton);
-    lastHintArea.clear();
-
-    String message = inputText;
-
-    // If the message is empty, return early
-    if (message.trim().isEmpty()) {
-      return;
-    }
-
-    // Append the fake message to the chat interface
-    appendChatMessage(new ChatMessage("user", message), "Player");
-
-    CompletableFuture.runAsync(
-        () -> {
-          isThinking = true;
-
-          // Clear the input field and create actual and fake chat messages
-          String hint = "";
-          if (GameState.currentRoom == GameState.State.CHEST) {
-            if (GameState.hasKeyOne && GameState.hasKeyTwo && GameState.hasKeyThree) {
-              hint = "\"The riddle gives the information of the keys unlock the chest\"";
-            } else {
-              hint = "\"Search the dungeon for three keys\"";
-            }
-          } else if (GameState.currentRoom == GameState.State.MARCELLIN) {
-            hint = "\"Move the points of the shape such that no lines between points overlap.\"";
-          } else if (GameState.currentRoom == GameState.State.ZACH) {
-            hint = "\"Investigate the door to find a sliding puzzle\"";
-          } else if (GameState.currentRoom == GameState.State.RUSIRU) {
-            hint = "\"See if you can craft a potion using the cauldron\"";
-          }
-
-          String contextMsg;
-          if (GameState.currentDifficulty == GameState.Difficulty.HARD) {
-            contextMsg = message;
-          } else if (GameState.currentDifficulty == GameState.Difficulty.EASY) {
-            contextMsg = GptPromptEngineering.hintPrompt(message, hint);
-          } else {
-            if (GameState.hintsGiven < 5) {
-              contextMsg = GptPromptEngineering.hintPrompt(message, hint);
-            } else {
-              contextMsg = GptPromptEngineering.noHintPrompt(message);
-            }
-          }
-
-          ChatMessage actualMessage = new ChatMessage("user", contextMsg);
-
-          if (runGpt(actualMessage).getContent().toLowerCase().substring(0, 4).equals("hint")) {
-            GameState.hintsGiven++;
-            System.out.println("HINT DETECTED!");
-          }
-          isThinking = false;
-          // Ensure that the UI updates on the JavaFX application thread
-          Platform.runLater(
-              () -> {
-                enableNode(switchButton);
-                enableNode(sendButton);
-                enableNode(closeButton);
-                int hintsLeft = 5 - GameState.hintsGiven;
-                if (hintsLeft < 0) {
-                  hintsLeft = 0;
-                }
-                hintField.setText(hintsLeft + " Hints(s) Remaining");
-              });
-        });
-  }
-
-  public void onSendMessage(String inputText, AppUi appUi) throws ApiProxyException, IOException {
+  public void onSendMessage(String message, AppUi appUi) throws ApiProxyException, IOException {
 
     HintNode hintNode = nodeMap.get(appUi);
 
@@ -211,8 +127,6 @@ public class Chat {
     disableNode(sendButton);
     disableNode(switchButton);
     lastHintArea.clear();
-
-    String message = inputText;
 
     // If the message is empty, return early
     if (message.trim().isEmpty()) {
@@ -303,46 +217,6 @@ public class Chat {
     Node actualNode = (Node) node;
     actualNode.setVisible(false);
     actualNode.setDisable(true);
-  }
-
-  public void massDisable(
-      TextArea textArea,
-      TextField inputText,
-      Button closeButton,
-      Button showButton,
-      ImageView chatBackground,
-      Button sendButton,
-      Button switchButton,
-      Label hintField) {
-
-    disableNode(textArea);
-    disableNode(inputText);
-    disableNode(closeButton);
-    enableNode(showButton);
-    disableNode(chatBackground);
-    disableNode(sendButton);
-    disableNode(switchButton);
-    disableNode(hintField);
-  }
-
-  public void massEnable(
-      TextArea textArea,
-      TextField inputText,
-      Button closeButton,
-      Button showButton,
-      ImageView chatBackground,
-      Button sendButton,
-      Button switchButton,
-      Label hintField) {
-
-    enableNode(textArea);
-    enableNode(inputText);
-    enableNode(closeButton);
-    disableNode(showButton);
-    enableNode(chatBackground);
-    enableNode(sendButton);
-    enableNode(switchButton);
-    enableHintField(hintField);
   }
 
   public void massEnable(AppUi appUi) {

@@ -17,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
@@ -72,6 +73,8 @@ public class PuzzleController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+  private HintNode hintNode;
+  private Chat.AppUi appUi;
 
   public void initialize() {
     // set the instance
@@ -231,8 +234,6 @@ public class PuzzleController implements Controller {
     timeline.play();
   }
 
-
-
   @FXML
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
@@ -268,35 +269,6 @@ public class PuzzleController implements Controller {
     GameState.mute();
   }
 
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
-      e.printStackTrace();
-    }
-    inputText.clear();
-  }
-
-  @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
-  }
-
-  public void initialiseAfterStart() {
-    onCloseChat(null);
-    addChatToList();
-  }
-
-  @FXML
-  private void onSwitchChatView(ActionEvent event) {
-    GameState.chat.lastHintToggle();
-  }
-
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -307,35 +279,55 @@ public class PuzzleController implements Controller {
   }
 
   @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
-  }
-
-  @FXML
   private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
       onSendMessage(null);
     }
+  }
+
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(inputText.getText(), appUi);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  @FXML
+  private void onShowChat(ActionEvent event) {
+    GameState.chat.massEnable(appUi);
+  }
+
+  @FXML
+  private void onCloseChat(ActionEvent event) {
+    GameState.chat.massDisable(appUi);
+  }
+
+  public void initialiseAfterStart() {
+    appUi = Chat.AppUi.PUZZLE;
+    hintNode =
+        new HintNode(
+            textArea,
+            inputText,
+            showButton,
+            closeButton,
+            sendButton,
+            chatBackground,
+            switchButton,
+            hintField);
+    GameState.chat.addToMap(appUi, hintNode);
+    onCloseChat(null);
+    GameState.chat.addChat(textArea);
+  }
+
+  @FXML
+  private void onSwitchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
   }
 }
