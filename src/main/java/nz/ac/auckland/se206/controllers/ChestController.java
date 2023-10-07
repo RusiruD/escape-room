@@ -79,8 +79,11 @@ public class ChestController implements Controller {
   private final String correctColour = "#a8e6cf";
   private final String incorrectColour = "#f38ba8";
 
-  private Riddle riddle;
-  private Riddle call;
+  private String riddleQuestion;
+  private String callQuestion;
+
+  private DungeonMaster callDungeonMaster;
+  private DungeonMaster riddleDungeonMaster;
   private Boolean riddleCalled = false;
   private Boolean key1Correct = false;
   private Boolean key2Correct = false;
@@ -99,6 +102,9 @@ public class ChestController implements Controller {
 
     // Initialize the instance field with the current instance of the class
     instance = this;
+
+    callDungeonMaster = new DungeonMaster();
+    riddleDungeonMaster = new DungeonMaster();
 
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
@@ -157,7 +163,7 @@ public class ChestController implements Controller {
     }
 
     // Create a riddle question
-    String question =
+    riddleQuestion =
         "You are the dungeon master of an escape room. Tell me a riddle where the first solution is"
             + " "
             + solutions[0]
@@ -169,13 +175,9 @@ public class ChestController implements Controller {
             + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
             + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
             + " long. Do not go over 100 words.";
-    System.out.println(question);
+    System.out.println(riddleQuestion);
 
-    // Create a DungeonMaster and initiate a task to generate a riddle
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    riddle = new Riddle(dungeonMaster, question);
-
-    String callQuestion =
+    callQuestion =
         "Congratulate the player on solving the riddle and unlocking the chest with the solution"
             + " that key1 goest into keyhole "
             + solutions[0]
@@ -186,9 +188,6 @@ public class ChestController implements Controller {
             + " Tell the player that the sword and shield have fallen out to the corridor. Tell the"
             + " player that they can now return to the corridor and fight you. Be antagonistic and"
             + " confident that you will win. Keep this message short";
-
-    DungeonMaster dungeonMasterCall = new DungeonMaster();
-    call = new Riddle(dungeonMasterCall, callQuestion);
   }
 
   public void openChest(MouseEvent event) {
@@ -326,7 +325,7 @@ public class ChestController implements Controller {
 
   @FXML
   public void getAi(MouseEvent event) {
-    callAi(call);
+    callAi();
   }
 
   @FXML
@@ -379,14 +378,12 @@ public class ChestController implements Controller {
 
   @FXML
   public void getRiddle() {
-    DungeonMaster dungeonMaster = riddle.getDungeonMaster();
     System.out.println("get riddle");
     if (riddleCalled) {
       System.out.println("riddle pane called");
       // gets the riddle pane if already asked dungeon master for riddle
-      String riddleText = riddle.getRiddle();
-
-      Pane riddlePane = riddle.riddlePane(riddleText);
+      String riddleText = riddleDungeonMaster.getRiddle();
+      Pane riddlePane = Riddle.riddlePane(riddleText);
       riddleDisplay.getChildren().add(riddlePane);
       riddlePane.getStyleClass().add("riddle");
       riddleDisplay.toFront();
@@ -395,11 +392,14 @@ public class ChestController implements Controller {
 
     } else {
       // gets the dungeon master to speak the riddle dialogue
-      Pane dialogue = dungeonMaster.getPopUp();
-      Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-      popUp.getChildren().add(dialogueFormat);
-
-      dialogueFormat.getStyleClass().add("popUp");
+      popUp.visibleProperty().set(false);
+      riddleDungeonMaster.createPopUp(popUp);
+      riddleDungeonMaster.getText("user", riddleQuestion);
+      // set style class
+      popUp.getStyleClass().add("popUp");
+      popUp.visibleProperty().set(true);
+      popUp.mouseTransparentProperty().set(false);
+      popUp.toFront();
       riddleCalled = true;
     }
   }
@@ -555,18 +555,17 @@ public class ChestController implements Controller {
   }
 
   // Call the AI to give a hint
-  private void callAi(Riddle call) {
+  private void callAi() {
     // Get the dungeon master and the pop up pane
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    Pane dialogue = dungeonMaster.getPopUp();
-    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    popUp.visibleProperty().set(false);
+    callDungeonMaster.createPopUp(popUp);
+    callDungeonMaster.getText("user", callQuestion);
+    // Set style class
+    popUp.getStyleClass().add("popUp");
+    popUp.visibleProperty().set(true);
+    popUp.mouseTransparentProperty().set(false);
     popUp.toFront();
-    if (popUp.getChildren() != null) {
-      popUp.getChildren().clear();
-    }
-    popUp.getChildren().add(dialogueFormat);
-    // Set the dialogue to be visible and not mouse transparent
-    dialogueFormat.getStyleClass().add("popUp");
+
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
   }

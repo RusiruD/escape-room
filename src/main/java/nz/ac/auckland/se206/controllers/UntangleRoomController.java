@@ -39,7 +39,6 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -167,12 +166,15 @@ public class UntangleRoomController implements Controller {
 
   private boolean isSolved = false;
 
-  private Riddle call;
+  private String callQuestion;
+  private DungeonMaster callDungeonMaster;
 
   // add a new score to the leaderboard
   public void initialize() {
     // set the instance
     instance = this;
+
+    callDungeonMaster = new DungeonMaster();
 
     popUp.toBack();
 
@@ -204,10 +206,8 @@ public class UntangleRoomController implements Controller {
     root.getChildren().addAll(createControlAnchorsFor(polygon.getPoints()));
     pane.getChildren().add(root);
 
-    String question =
+    callQuestion =
         "Congratulate the player on correctly untangling the lines and solving the puzzle";
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    call = new Riddle(dungeonMaster, question);
   }
 
   // creates a triangle.
@@ -388,7 +388,16 @@ public class UntangleRoomController implements Controller {
 
   @FXML
   public void getAi(MouseEvent event) {
-    callAi(call);
+    popUp.visibleProperty().set(false);
+    callDungeonMaster.createPopUp(popUp);
+    callDungeonMaster.getText("user", callQuestion);
+    // Set style class
+    popUp.getStyleClass().add("popUp");
+    popUp.visibleProperty().set(true);
+    popUp.mouseTransparentProperty().set(false);
+    popUp.toFront();
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML
@@ -435,21 +444,6 @@ public class UntangleRoomController implements Controller {
         sendButton,
         switchButton,
         hintField);
-  }
-
-  // Call the AI to give a hint
-  private void callAi(Riddle call) {
-    // Get the dungeon master and the pop up pane
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    Pane dialogue = dungeonMaster.getPopUp();
-    // Format the dialogue
-    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-    popUp.toFront();
-    popUp.getChildren().add(dialogueFormat);
-    // Set the dialogue to be visible and not mouse transparent
-    dialogueFormat.getStyleClass().add("popUp");
-    visualDungeonMaster.visibleProperty().set(false);
-    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML

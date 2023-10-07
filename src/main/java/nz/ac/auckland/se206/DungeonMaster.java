@@ -1,8 +1,5 @@
 package nz.ac.auckland.se206;
 
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
@@ -24,7 +21,6 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class DungeonMaster {
   private Pane popUp;
 
-  private boolean taskDone = false;
   private boolean isSpeaking = false;
   private boolean messageFinished = false;
 
@@ -35,8 +31,10 @@ public class DungeonMaster {
   private ChatCompletionRequest chatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(250);
 
-  public Pane createPopUp() {
-    popUp = new HBox();
+  public void createPopUp(Pane popUp) {
+    System.out.println("creating pop up");
+    this.popUp = popUp;
+    HBox popUpHBox = new HBox();
 
     // DUNGEON MASTER IMAGE
     StackPane dungeonMasterStack = new StackPane();
@@ -56,7 +54,7 @@ public class DungeonMaster {
     Label name = new Label("Dungeon Master");
 
     // DIALOG
-    Text dialogue = new Text(messages[messageIndex]);
+    Text dialogue = new Text("...");
     dialogueBox.getChildren().addAll(name);
     dialogueBox.getChildren().addAll(dialogue);
     dialogue.setWrappingWidth(430);
@@ -94,14 +92,14 @@ public class DungeonMaster {
     quitButton.setTranslateX(220);
 
     // ADDING TO POP UP
-    popUp.getChildren().addAll(dungeonMasterStack);
-    popUp.getChildren().addAll(dialogueContainer);
-
-    return popUp;
+    popUpHBox.getChildren().addAll(dungeonMasterStack);
+    popUpHBox.getChildren().addAll(dialogueContainer);
+    popUp.getChildren().add(popUpHBox);
+    paneFormat(popUp);
   }
 
   // returns a pane with the text
-  public Pane getText(String role, String message) {
+  public void getText(String role, String message) {
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;
@@ -132,7 +130,7 @@ public class DungeonMaster {
     gptTask.setOnSucceeded(
         e -> {
           System.out.println("gpt task succeeded");
-          taskDone = true;
+          nextMessage();
         });
     gptTask.setOnFailed(
         e -> {
@@ -147,60 +145,35 @@ public class DungeonMaster {
     Thread thread = new Thread(gptTask);
     thread.setDaemon(true);
     thread.start();
-
-    // waits until task is done
-    ExecutorService executor = Executors.newSingleThreadExecutor();
-    CountDownLatch latch = new CountDownLatch(1);
-    // create executor service to wait until task is done
-    executor.submit(
-        () -> {
-          try {
-            while (!taskDone) {
-              Thread.sleep(100);
-            }
-          } catch (InterruptedException e) {
-            e.printStackTrace();
-          }
-          latch.countDown();
-        });
-
-    try {
-      latch.await();
-    } catch (InterruptedException e1) {
-      e1.printStackTrace();
-    }
-    System.out.println("done");
-    executor.shutdown();
-    popUp = createPopUp();
-    return popUp;
   }
 
-  // returns a pane with the text
+  // returns the riddle
   public String getRiddle() {
     return message;
   }
 
   public void appendChatMessage(ChatMessage msg) {
     message = msg.getContent();
-    messages = msg.getContent().split("\n");
-  }
-
-  public Pane update() {
-    System.out.println("update");
-    nextMessage();
-    return popUp;
+    messages = message.split("(?<=[a-z])\\.\\s+");
   }
 
   public void nextMessage() {
-    // popup -> dialog container -> dialog box -> text
+    System.out.println("next message");
+    // popup -> hbox -> dialog container -> dialog box -> text
     Text dialogue =
         (Text)
-            ((VBox) ((StackPane) popUp.getChildren().get(1)).getChildren().get(0))
+            ((VBox)
+                    ((StackPane) ((HBox) popUp.getChildren().get(0)).getChildren().get(1))
+                        .getChildren()
+                        .get(0))
                 .getChildren()
                 .get(1);
-    // popup -> dialog container -> next button
+    // popup -> hbox -> dialog container -> next button
     ImageView nextButton =
-        (ImageView) ((StackPane) popUp.getChildren().get(1)).getChildren().get(1);
+        (ImageView)
+            ((StackPane) ((HBox) popUp.getChildren().get(0)).getChildren().get(1))
+                .getChildren()
+                .get(1);
     System.out.println("mss " + messages.length + " " + messageIndex);
     isSpeaking = true;
     // if there are more messages
@@ -217,7 +190,6 @@ public class DungeonMaster {
           new Task<Void>() {
             @Override
             protected Void call() {
-              System.out.println(messages[messageIndex]);
               GameState.tts.speak(messages[messageIndex]);
               return null;
             }
@@ -226,48 +198,15 @@ public class DungeonMaster {
       speakTask.setOnSucceeded(
           e -> {
             System.out.println("speak task succeeded");
-            taskDone = true;
             isSpeaking = false;
-            nextButton.visibleProperty().set(true);
+            if (messageIndex < messages.length - 1) {
+              nextButton.visibleProperty().set(true);
+            }
           });
 
       Thread thread = new Thread(speakTask);
       thread.setDaemon(true);
       thread.start();
-
-      // waits until finished speaking
-      ExecutorService executor = Executors.newSingleThreadExecutor();
-      CountDownLatch latch = new CountDownLatch(1);
-      // create executor service to wait until task is done
-      executor.submit(
-          () -> {
-            try {
-              while (!taskDone) {
-                Thread.sleep(250);
-              }
-            } catch (InterruptedException e) {
-              e.printStackTrace();
-            }
-            latch.countDown();
-          });
-
-      try {
-        latch.await();
-      } catch (InterruptedException e1) {
-        e1.printStackTrace();
-      }
-      executor.shutdown();
-    }
-    messageIndex++;
-    if (messageIndex >= messages.length) {
-      // when no more messages turn off next indicator and close popup
-      popUp.setOnMouseClicked(
-          e -> {
-            popUp.getParent().visibleProperty().set(false);
-            popUp.getParent().mouseTransparentProperty().set(true);
-            messageFinished = true;
-          });
-      nextButton.visibleProperty().set(false);
     }
   }
 
@@ -275,47 +214,55 @@ public class DungeonMaster {
    * Formats the dialogue pane and attaches event handlers to its elements.
    *
    * @param dialogue The dialogue pane to be formatted.
-   * @param dungeonMaster The DungeonMaster responsible for managing the dialogue.
-   * @return The formatted dialogue pane.
    */
-  public Pane paneFormat(Pane dialogue, DungeonMaster dungeonMaster) {
+  public void paneFormat(Pane dialogue) {
     // Retrieve and configure UI elements within the dialogue pane
     Rectangle exitButton =
-        (Rectangle) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(2);
+        (Rectangle)
+            ((StackPane) ((HBox) dialogue.getChildren().get(0)).getChildren().get(1))
+                .getChildren()
+                .get(2);
     Text dialogueText =
         (Text)
-            ((VBox) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(0))
+            ((VBox)
+                    ((StackPane) ((HBox) dialogue.getChildren().get(0)).getChildren().get(1))
+                        .getChildren()
+                        .get(0))
                 .getChildren()
                 .get(1);
     ImageView nextButton =
-        (ImageView) ((StackPane) dialogue.getChildren().get(1)).getChildren().get(1);
+        (ImageView)
+            ((StackPane) ((HBox) dialogue.getChildren().get(0)).getChildren().get(1))
+                .getChildren()
+                .get(1);
 
     // Attach an event handler to the exit button to close the dialogue
     exitButton.setOnMouseClicked(
         event1 -> {
-          popUp.getParent().visibleProperty().set(false);
-          popUp.getParent().mouseTransparentProperty().set(true);
+          GameState.tts.cancel();
+          popUp.getChildren().clear();
+          popUp.visibleProperty().set(false);
+          popUp.mouseTransparentProperty().set(true);
           messageFinished = true;
         });
 
     // Attach an event handler to the dialogue text to allow advancing the dialogue
     dialogueText.setOnMouseClicked(
         event1 -> {
-          if (!dungeonMaster.isSpeaking()) {
-            dungeonMaster.update();
+          if (!isSpeaking()) {
+            messageIndex++;
+            nextMessage();
           }
         });
 
     // Attach an event handler to the next button to allow advancing the dialogue
     nextButton.setOnMouseClicked(
         event1 -> {
-          if (!dungeonMaster.isSpeaking()) {
-            dungeonMaster.update();
+          if (!isSpeaking()) {
+            messageIndex++;
+            nextMessage();
           }
         });
-
-    // Return the formatted dialogue pane
-    return dialogue;
   }
 
   public boolean isSpeaking() {
@@ -327,7 +274,6 @@ public class DungeonMaster {
   }
 
   public Pane getPopUp() {
-    update();
     return popUp;
   }
 
