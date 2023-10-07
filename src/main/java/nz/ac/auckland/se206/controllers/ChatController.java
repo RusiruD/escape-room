@@ -183,13 +183,7 @@ public class ChatController implements Controller {
           } else if (GameState.currentRoom == GameState.State.ZACH) {
             hint = "\"Investigate the door to find a sliding puzzle\"";
           } else if (GameState.currentRoom == GameState.State.RUSIRU) {
-            if (GameState.noPapers == true) {
-              hint = "\"Pick up all the papers.\"";
-            } else if (GameState.noCombination == true && GameState.noPapers == false) {
-              hint = "\"Put all the papers on the table and read it.\"";
-            } else if (GameState.noPotionBoulder == true && GameState.noCombination == false) {
-              hint = "\"Brew a potion of strength to move the big rock.\"";
-            }
+
           }
 
           String contextMsg;

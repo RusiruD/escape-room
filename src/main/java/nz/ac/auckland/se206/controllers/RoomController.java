@@ -133,7 +133,7 @@ public class RoomController implements Controller {
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
-    GameState.noCombination = false;
+
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
@@ -287,7 +287,7 @@ public class RoomController implements Controller {
           "Something Happens!",
           "You feel far stronger... like energy's coursing through you and you could move"
               + " anything...");
-      GameState.noPotionBoulder = false;
+
       allowImageToBeDragged(boulder);
     }
   }
@@ -300,7 +300,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void addToInventory(ImageView image) {
-    GameState.noPapers = false;
+
     image.setVisible(false);
     image.setDisable(true);
 
@@ -374,7 +374,7 @@ public class RoomController implements Controller {
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-    GameState.noCombination = false;
+
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
     // if a note is selected it is made visible in the scene
