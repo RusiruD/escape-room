@@ -49,9 +49,7 @@ public class Chat {
 
   public void initialiseAfterStart() throws ApiProxyException {
 
-    if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {}
-
-    // Create a CompletableFuture for the background task
+      // Create a CompletableFuture for the background task
 
     CompletableFuture.runAsync(
         () -> {

@@ -276,6 +276,35 @@ public class PuzzleController implements Controller {
     GameState.mute();
   }
 
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(
+          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
+    } catch (ApiProxyException | IOException e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    onCloseChat(null);
+    addChatToList();
+  }
+
+  @FXML
+  private void onSwitchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
+  }
+
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -309,35 +338,6 @@ public class PuzzleController implements Controller {
         sendButton,
         switchButton,
         hintField);
-  }
-
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
-      e.printStackTrace();
-    }
-    inputText.clear();
-  }
-
-  @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
-  }
-
-  public void initialiseAfterStart() {
-    onCloseChat(null);
-    addChatToList();
-  }
-
-  @FXML
-  private void onSwitchChatView(ActionEvent event) {
-    GameState.chat.lastHintToggle();
   }
 
   @FXML

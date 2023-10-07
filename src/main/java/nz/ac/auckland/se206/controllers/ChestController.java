@@ -593,6 +593,11 @@ public class ChestController implements Controller {
   }
 
   @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  @FXML
   private void onShowChat(ActionEvent event) {
     GameState.chat.massEnable(
         textArea,
@@ -626,11 +631,6 @@ public class ChestController implements Controller {
       e.printStackTrace();
     }
     inputText.clear();
-  }
-
-  @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
   }
 
   public void addChatToList() {
