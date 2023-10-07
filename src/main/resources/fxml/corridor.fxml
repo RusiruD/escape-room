@@ -26,26 +26,6 @@
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
-      <Group layoutX="-47.0" layoutY="359.0">
-         <children>
-            <ImageView fx:id="chatBackground1" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/ChatBackground.jpeg" />
-               </image>
-            </ImageView>
-            <Button fx:id="closeButton1" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#closeChat" prefHeight="40.0" prefWidth="84.0" text="Close" />
-            <TextArea fx:id="textArea1" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-            <Button fx:id="sendButton1" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
-            <TextField fx:id="inputText1" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
-            <Button fx:id="switchButton1" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchChatView" text="Switch" />
-            <Button fx:id="showButton1" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#showChat" text="Chat" />
-            <Label fx:id="hintField1" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
-               <font>
-                  <Font name="Old English Text MT" size="28.0" />
-               </font>
-            </Label>
-         </children>
-      </Group>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
@@ -102,6 +82,26 @@
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
+      <Group layoutX="-47.0" layoutY="359.0">
+         <children>
+            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/ChatBackground.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#closeChat" prefHeight="40.0" prefWidth="84.0" text="Close" />
+            <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+            <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
+            <TextField fx:id="inputText" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+            <Button fx:id="switchButton" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchChatView" text="Switch" />
+            <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#showChat" text="Chat" />
+            <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
+               <font>
+                  <Font name="Old English Text MT" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
 
    </children>
 </Pane>

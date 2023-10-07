@@ -59,6 +59,10 @@ public class StartScreenController {
 
     CorridorController.getInstance().initialiseAfterStart();
     RoomController.getInstance().initialiseAfterStart();
+    ChestController.getInstance().initialiseAfterStart();
+    PuzzleController.getInstance().initialiseAfterStart();
+    PuzzleRoomController.getInstance().initialiseAfterStart();
+    UntangleRoomController.getInstance().initialiseAfterStart();
 
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");

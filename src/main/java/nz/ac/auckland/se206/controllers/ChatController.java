@@ -68,10 +68,8 @@ public class ChatController implements Controller {
    * Initialize hints for the chat interface. This method sets up the initial chat request and
    * configuration for requesting hints from GPT-3. It runs GPT-3 in the background to prepare for
    * hint requests.
-   *
-   * @throws ApiProxyException if there is an error communicating with the API proxy
    */
-  public void initialiseAfterStart() throws ApiProxyException {
+  public void initialiseAfterStart() {
 
     if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {
       hintField.setVisible(true);
@@ -285,5 +283,17 @@ public class ChatController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  @Override
+  public void addChatToList() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'addChatToList'");
+  }
+
+  @Override
+  public void switchChatView(ActionEvent event) {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'switchChatView'");
   }
 }
