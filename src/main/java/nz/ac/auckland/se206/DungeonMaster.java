@@ -154,7 +154,7 @@ public class DungeonMaster {
 
   public void appendChatMessage(ChatMessage msg) {
     message = msg.getContent();
-    messages = msg.getContent().split("\n");
+    messages = message.split("(?<=[a-z])\\.\\s+");
   }
 
   public void nextMessage() {

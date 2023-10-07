@@ -21,7 +21,6 @@ import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
-import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
@@ -389,19 +388,5 @@ public class CorridorController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
-  }
-
-  @FXML
-  public void callPopUp() {
-    // Set the pop up pane to be visible and not mouse transparent
-    popUp.visibleProperty().set(false);
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    dungeonMaster.createPopUp(popUp);
-    dungeonMaster.getText("user", "riddle");
-    // set style class
-    popUp.getStyleClass().add("popUp");
-    popUp.visibleProperty().set(true);
-    popUp.mouseTransparentProperty().set(false);
-    popUp.toFront();
   }
 }
