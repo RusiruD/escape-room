@@ -81,8 +81,8 @@ public class CorridorController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
-  private HintNode hintNode;
-  private AppUi appUi;
+  private HintNode winterNode;
+  private AppUi state;
 
   private boolean hasSword = false;
 
@@ -271,7 +271,7 @@ public class CorridorController implements Controller {
   public void onKeyPressed(KeyEvent event) {
 
     if (event.getCode() == KeyCode.ENTER) {
-      handleTextInput();
+      doTextEntry();
     }
 
     // Handle key press events
@@ -407,33 +407,14 @@ public class CorridorController implements Controller {
     GameState.mute();
   }
 
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(inputText.getText(), appUi);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    inputText.clear();
-  }
-
   @FXML
   private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(appUi);
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(appUi);
+    doTextEntry();
   }
 
   public void initialiseAfterStart() {
-    appUi = AppUi.CORRIDOR;
-    hintNode =
+    state = AppUi.CORRIDOR;
+    winterNode =
         new HintNode(
             textArea,
             inputText,
@@ -443,13 +424,32 @@ public class CorridorController implements Controller {
             chatBackground,
             switchButton,
             hintField);
-    GameState.chat.addToMap(appUi, hintNode);
-    onCloseChat(null);
+    GameState.chat.addToMap(state, winterNode);
+    GameState.chat.massDisable(state);
     GameState.chat.addChat(textArea);
   }
 
   @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  private void onEnableHint(ActionEvent event) {
+    GameState.chat.massEnable(state);
+  }
+
+  @FXML
+  private void onDisableHint(ActionEvent event) {
+    GameState.chat.massDisable(state);
+  }
+
+  @FXML
+  private void onChatSwitch(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  private void doTextEntry() {
+    try {
+      GameState.chat.onSendMessage(inputText.getText(), state);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
   }
 }
