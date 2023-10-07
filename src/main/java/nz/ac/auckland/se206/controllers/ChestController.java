@@ -381,12 +381,12 @@ public class ChestController implements Controller {
 
     } else {
       // gets the dungeon master to speak the riddle dialogue
-      Pane dialogue = dungeonMaster.getPopUp();
-      Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-      popUp.getChildren().add(dialogueFormat);
+      // Pane dialogue = dungeonMaster.getPopUp();
+      // Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+      // popUp.getChildren().add(dialogueFormat);
 
-      dialogueFormat.getStyleClass().add("popUp");
-      riddleCalled = true;
+      // dialogueFormat.getStyleClass().add("popUp");
+      // riddleCalled = true;
     }
   }
 
@@ -543,18 +543,18 @@ public class ChestController implements Controller {
   // Call the AI to give a hint
   private void callAi(Riddle call) {
     // Get the dungeon master and the pop up pane
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    Pane dialogue = dungeonMaster.getPopUp();
-    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-    popUp.toFront();
-    if (popUp.getChildren() != null) {
-      popUp.getChildren().clear();
-    }
-    popUp.getChildren().add(dialogueFormat);
-    // Set the dialogue to be visible and not mouse transparent
-    dialogueFormat.getStyleClass().add("popUp");
-    visualDungeonMaster.visibleProperty().set(false);
-    visualDungeonMaster.mouseTransparentProperty().set(true);
+    // DungeonMaster dungeonMaster = call.getDungeonMaster();
+    // Pane dialogue = dungeonMaster.getPopUp();
+    // Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    // popUp.toFront();
+    // if (popUp.getChildren() != null) {
+    //   popUp.getChildren().clear();
+    // }
+    // popUp.getChildren().add(dialogueFormat);
+    // // Set the dialogue to be visible and not mouse transparent
+    // dialogueFormat.getStyleClass().add("popUp");
+    // visualDungeonMaster.visibleProperty().set(false);
+    // visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML

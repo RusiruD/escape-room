@@ -236,16 +236,16 @@ public class PuzzleController implements Controller {
 
   // Call the AI to give a hint
   private void callAi(Riddle call) {
-    // Get the dungeon master and the pop up pane
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    Pane dialogue = dungeonMaster.getPopUp();
-    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-    popUp.toFront();
-    popUp.getChildren().add(dialogueFormat);
-    // Set the dialogue to be visible and not mouse transparent
-    dialogueFormat.getStyleClass().add("popUp");
-    visualDungeonMaster.visibleProperty().set(false);
-    visualDungeonMaster.mouseTransparentProperty().set(true);
+    // // Get the dungeon master and the pop up pane
+    // DungeonMaster dungeonMaster = call.getDungeonMaster();
+    // Pane dialogue = dungeonMaster.getPopUp();
+    // Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    // popUp.toFront();
+    // popUp.getChildren().add(dialogueFormat);
+    // // Set the dialogue to be visible and not mouse transparent
+    // dialogueFormat.getStyleClass().add("popUp");
+    // visualDungeonMaster.visibleProperty().set(false);
+    // visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML

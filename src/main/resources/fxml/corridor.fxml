@@ -69,7 +69,7 @@
                   <Image url="@../images/dungeonMasterImage.png" />
                </image>
             </ImageView>
-            <Pane fx:id="popUp" layoutX="-190.0" layoutY="75.0" prefHeight="80.0" prefWidth="550.0" />
+            <Pane fx:id="popUp" layoutX="-247.0" layoutY="71.0" prefHeight="80.0" prefWidth="550.0" />
 
          </children>
       </Group>
@@ -80,6 +80,7 @@
          </image>
       </ImageView>
       <Button layoutX="20.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" text="Hint" />
+      <Button layoutX="259.0" layoutY="37.0" mnemonicParsing="false" onMouseClicked="#callPopUp" text="Button" />
 
    </children>
 </Pane>

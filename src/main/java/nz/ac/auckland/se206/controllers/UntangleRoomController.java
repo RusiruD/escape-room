@@ -356,16 +356,18 @@ public class UntangleRoomController implements Controller {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
-      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
     Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline = new javafx.animation.Timeline(
-        new javafx.animation.KeyFrame(duration, event -> {
-            // Revert the CSS style to remove the shadow (or set it to the original style)
-            inventoryChoiceBox.setStyle("");
-        })
-    );
+    javafx.animation.Timeline timeline =
+        new javafx.animation.Timeline(
+            new javafx.animation.KeyFrame(
+                duration,
+                event -> {
+                  // Revert the CSS style to remove the shadow (or set it to the original style)
+                  inventoryChoiceBox.setStyle("");
+                }));
     timeline.play();
   }
 
@@ -396,17 +398,17 @@ public class UntangleRoomController implements Controller {
 
   // Call the AI to give a hint
   private void callAi(Riddle call) {
-    // Get the dungeon master and the pop up pane
-    DungeonMaster dungeonMaster = call.getDungeonMaster();
-    Pane dialogue = dungeonMaster.getPopUp();
-    // Format the dialogue
-    Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-    popUp.toFront();
-    popUp.getChildren().add(dialogueFormat);
-    // Set the dialogue to be visible and not mouse transparent
-    dialogueFormat.getStyleClass().add("popUp");
-    visualDungeonMaster.visibleProperty().set(false);
-    visualDungeonMaster.mouseTransparentProperty().set(true);
+    // // Get the dungeon master and the pop up pane
+    // DungeonMaster dungeonMaster = call.getDungeonMaster();
+    // Pane dialogue = dungeonMaster.getPopUp();
+    // // Format the dialogue
+    // Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
+    // popUp.toFront();
+    // popUp.getChildren().add(dialogueFormat);
+    // // Set the dialogue to be visible and not mouse transparent
+    // dialogueFormat.getStyleClass().add("popUp");
+    // visualDungeonMaster.visibleProperty().set(false);
+    // visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML

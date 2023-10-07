@@ -162,7 +162,7 @@
     -fx-shape: " ";
 }
 
-.popUp {
+.popUp HBox {
     -fx-alignment: center-left;
     -fx-padding: 10px;
     -fx-background-color: #45475a;
@@ -174,23 +174,23 @@
     -fx-border-width: 1px;
 }
 
-.popUp .label {
+.popUp HBox .label {
     -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
 }
 
-.popUp VBox {
+.popUp HBox VBox {
     -fx-alignment: center-left;
     -fx-padding: 2.5px 10px 2.5px 10px;
 }
 
-.popUp VBox Text {
+.popUp HBox VBox Text {
     -fx-text-fill: #ffffff;
     -fx-font-size: 15px;
 }
 
-.popUp StackPane ImageView:hover {
+.popUp HBox StackPane ImageView:hover {
     -fx-cursor: hand;
 }
 
