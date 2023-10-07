@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -11,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -79,7 +81,17 @@
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="chatBackground" fitHeight="277.0" fitWidth="800.0" layoutX="1.0" layoutY="462.0" pickOnBounds="true">
+         <image>
+            <Image url="@../images/ChatBackground.jpeg" />
+         </image>
+      </ImageView>
       <Button layoutX="20.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" text="Hint" />
+      <Button fx:id="showButton" layoutX="-2.0" layoutY="688.0" mnemonicParsing="false" onAction="#showChat" text="Chat" />
+      <TextArea fx:id="textArea" editable="false" layoutX="1.0" layoutY="462.0" prefHeight="206.0" prefWidth="800.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+      <TextField fx:id="inputText" layoutX="4.0" layoutY="685.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+      <Button fx:id="closeButton" layoutX="3.0" layoutY="425.0" mnemonicParsing="false" onAction="#closeChat" text="Close" />
+      <Button fx:id="sendButton" layoutX="676.0" layoutY="676.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="40.0" prefWidth="110.0" text="Send" />
 
    </children>
 </Pane>

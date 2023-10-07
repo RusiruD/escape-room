@@ -1,16 +1,23 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 import javafx.animation.AnimationTimer;
+import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -24,6 +31,7 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CorridorController implements Controller {
 
@@ -66,6 +74,12 @@ public class CorridorController implements Controller {
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private Pane instructionsDisplay;
+
+  @FXML private TextArea textArea;
+  @FXML private TextField inputText;
+  @FXML private Button showButton;
+  @FXML private Button closeButton;
+  @FXML private ImageView chatBackground;
 
   private boolean hasSword = false;
 
@@ -152,6 +166,17 @@ public class CorridorController implements Controller {
   }
 
   public void initialize() {
+
+    textArea.setVisible(false);
+    textArea.setDisable(true);
+
+    inputText.setVisible(false);
+    inputText.setDisable(true);
+
+    closeButton.setVisible(false);
+    closeButton.setDisable(true);
+
+    chatBackground.setVisible(false);
 
     instance = this;
     Image image = new Image("/images/character.png");
@@ -252,6 +277,11 @@ public class CorridorController implements Controller {
 
   @FXML
   public void onKeyPressed(KeyEvent event) {
+
+    if (event.getCode() == KeyCode.ENTER) {
+      handleTextInput();
+    }
+
     // Handle key press events
     switch (event.getCode()) {
       case W:
@@ -388,5 +418,66 @@ public class CorridorController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  @FXML
+  private void showChat(ActionEvent event) {
+
+    textArea.setVisible(true);
+    textArea.setDisable(false);
+
+    inputText.setVisible(true);
+    inputText.setDisable(false);
+
+    closeButton.setVisible(true);
+    closeButton.setDisable(false);
+
+    showButton.setVisible(false);
+    showButton.setDisable(true);
+
+    chatBackground.setVisible(true);
+  }
+
+  @FXML
+  private void closeChat(ActionEvent event) {
+    textArea.setVisible(false);
+    textArea.setDisable(true);
+
+    inputText.setVisible(false);
+    inputText.setDisable(true);
+
+    closeButton.setVisible(false);
+    closeButton.setDisable(true);
+
+    showButton.setVisible(true);
+    showButton.setDisable(false);
+
+    chatBackground.setVisible(false);
+  }
+
+  private void handleTextInput() {
+    CompletableFuture.runAsync(
+        () -> {
+          try {
+            GameState.chat.onSendMessage(inputText.getText(), textArea);
+          } catch (ApiProxyException | IOException e) {
+            e.printStackTrace();
+          }
+          Platform.runLater(() -> {});
+        });
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    addChatToList();
   }
 }
