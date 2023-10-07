@@ -54,21 +54,15 @@ public class Chat {
 
           // Run GPT-3 with an initial hint request
           runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
-          // Ensure that the UI updates on the JavaFX application thread
-          Platform.runLater(
-              () -> {
-                for (TextArea textArea : variousChatScreens) {
-                  textArea.setText(chatTextArea.getText());
-                }
-              });
         });
   }
 
   private void appendChatMessage(ChatMessage msg, String role) {
 
     String message = role + ": " + msg.getContent() + "\n\n";
-    System.out.println(message);
+
     chatTextArea.appendText(message);
+    updateChats();
   }
 
   private ChatMessage runGpt(ChatMessage msg) {
@@ -89,18 +83,21 @@ public class Chat {
     }
   }
 
-  @FXML
   public void onSendMessage(String inputText, TextArea actualText)
       throws ApiProxyException, IOException {
 
+    String message = inputText;
+
+    // If the message is empty, return early
+    if (message.trim().isEmpty()) {
+      return;
+    }
+
+    // Append the fake message to the chat interface
+    appendChatMessage(new ChatMessage("user", message), "Player");
+
     CompletableFuture.runAsync(
         () -> {
-          String message = inputText;
-
-          // If the message is empty, return early
-          if (message.trim().isEmpty()) {
-            return;
-          }
 
           // Clear the input field and create actual and fake chat messages
           String hint = "";
@@ -139,21 +136,19 @@ public class Chat {
 
           ChatMessage actualMessage = new ChatMessage("user", contextMsg);
 
-          // Append the fake message to the chat interface
-          appendChatMessage(new ChatMessage("user", message), "Player");
-
           if (runGpt(actualMessage).getContent().toLowerCase().substring(0, 4).equals("hint")) {
             GameState.hintsGiven++;
             System.out.println("HINT DETECTED!");
           }
 
           // Ensure that the UI updates on the JavaFX application thread
-          Platform.runLater(
-              () -> {
-                for (TextArea textArea : variousChatScreens) {
-                  textArea.setText(chatTextArea.getText());
-                }
-              });
+          Platform.runLater(() -> {});
         });
+  }
+
+  private void updateChats() {
+    for (TextArea textArea : variousChatScreens) {
+      textArea.setText(chatTextArea.getText());
+    }
   }
 }

@@ -1,9 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.concurrent.CompletableFuture;
 import javafx.animation.AnimationTimer;
-import javafx.application.Platform;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -166,17 +164,6 @@ public class CorridorController implements Controller {
   }
 
   public void initialize() {
-
-    textArea.setVisible(false);
-    textArea.setDisable(true);
-
-    inputText.setVisible(false);
-    inputText.setDisable(true);
-
-    closeButton.setVisible(false);
-    closeButton.setDisable(true);
-
-    chatBackground.setVisible(false);
 
     instance = this;
     Image image = new Image("/images/character.png");
@@ -456,15 +443,14 @@ public class CorridorController implements Controller {
   }
 
   private void handleTextInput() {
-    CompletableFuture.runAsync(
-        () -> {
-          try {
-            GameState.chat.onSendMessage(inputText.getText(), textArea);
-          } catch (ApiProxyException | IOException e) {
-            e.printStackTrace();
-          }
-          Platform.runLater(() -> {});
-        });
+
+    try {
+      GameState.chat.onSendMessage(inputText.getText(), textArea);
+    } catch (ApiProxyException | IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+
     inputText.clear();
   }
 
@@ -478,6 +464,17 @@ public class CorridorController implements Controller {
   }
 
   public void initialiseAfterStart() {
+
+    textArea.setVisible(false);
+    textArea.setDisable(true);
+
+    inputText.setVisible(false);
+    inputText.setDisable(true);
+
+    closeButton.setVisible(false);
+    closeButton.setDisable(true);
+
+    chatBackground.setVisible(false);
     addChatToList();
   }
 }
