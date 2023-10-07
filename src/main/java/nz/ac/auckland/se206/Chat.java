@@ -2,7 +2,9 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.controllers.HintNode;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -20,6 +23,19 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class Chat {
+  public enum AppUi {
+    START,
+    FIRST_ROOM,
+    CORRIDOR,
+    PUZZLEROOM,
+    PUZZLE,
+    CHAT,
+    UNTANGLE,
+    LEADERBOARD,
+    CHEST,
+    WINLOSS
+  }
+
   private static Chat instance;
 
   public static Chat getInstance() {
@@ -33,8 +49,10 @@ public class Chat {
   private List<TextArea> variousChatScreens;
   private boolean isThinking;
   private boolean showLastHintOnly;
+  private Map<AppUi, HintNode> nodeMap;
 
   public Chat() {
+    nodeMap = new HashMap<>();
     isThinking = true;
     instance = this;
     showLastHintOnly = false;
@@ -49,7 +67,7 @@ public class Chat {
 
   public void initialiseAfterStart() throws ApiProxyException {
 
-      // Create a CompletableFuture for the background task
+    // Create a CompletableFuture for the background task
 
     CompletableFuture.runAsync(
         () -> {
@@ -106,6 +124,89 @@ public class Chat {
     if (isThinking) {
       return;
     }
+    disableNode(closeButton);
+    disableNode(sendButton);
+    disableNode(switchButton);
+    lastHintArea.clear();
+
+    String message = inputText;
+
+    // If the message is empty, return early
+    if (message.trim().isEmpty()) {
+      return;
+    }
+
+    // Append the fake message to the chat interface
+    appendChatMessage(new ChatMessage("user", message), "Player");
+
+    CompletableFuture.runAsync(
+        () -> {
+          isThinking = true;
+
+          // Clear the input field and create actual and fake chat messages
+          String hint = "";
+          if (GameState.currentRoom == GameState.State.CHEST) {
+            if (GameState.hasKeyOne && GameState.hasKeyTwo && GameState.hasKeyThree) {
+              hint = "\"The riddle gives the information of the keys unlock the chest\"";
+            } else {
+              hint = "\"Search the dungeon for three keys\"";
+            }
+          } else if (GameState.currentRoom == GameState.State.MARCELLIN) {
+            hint = "\"Move the points of the shape such that no lines between points overlap.\"";
+          } else if (GameState.currentRoom == GameState.State.ZACH) {
+            hint = "\"Investigate the door to find a sliding puzzle\"";
+          } else if (GameState.currentRoom == GameState.State.RUSIRU) {
+            hint = "\"See if you can craft a potion using the cauldron\"";
+          }
+
+          String contextMsg;
+          if (GameState.currentDifficulty == GameState.Difficulty.HARD) {
+            contextMsg = message;
+          } else if (GameState.currentDifficulty == GameState.Difficulty.EASY) {
+            contextMsg = GptPromptEngineering.hintPrompt(message, hint);
+          } else {
+            if (GameState.hintsGiven < 5) {
+              contextMsg = GptPromptEngineering.hintPrompt(message, hint);
+            } else {
+              contextMsg = GptPromptEngineering.noHintPrompt(message);
+            }
+          }
+
+          ChatMessage actualMessage = new ChatMessage("user", contextMsg);
+
+          if (runGpt(actualMessage).getContent().toLowerCase().substring(0, 4).equals("hint")) {
+            GameState.hintsGiven++;
+            System.out.println("HINT DETECTED!");
+          }
+          isThinking = false;
+          // Ensure that the UI updates on the JavaFX application thread
+          Platform.runLater(
+              () -> {
+                enableNode(switchButton);
+                enableNode(sendButton);
+                enableNode(closeButton);
+                int hintsLeft = 5 - GameState.hintsGiven;
+                if (hintsLeft < 0) {
+                  hintsLeft = 0;
+                }
+                hintField.setText(hintsLeft + " Hints(s) Remaining");
+              });
+        });
+  }
+
+  public void onSendMessage(String inputText, AppUi appUi) throws ApiProxyException, IOException {
+
+    HintNode hintNode = nodeMap.get(appUi);
+
+    if (isThinking) {
+      return;
+    }
+
+    Button closeButton = hintNode.getCloseButton();
+    Button sendButton = hintNode.getSendButton();
+    Button switchButton = hintNode.getSwiButton();
+    Label hintField = hintNode.getHintField();
+
     disableNode(closeButton);
     disableNode(sendButton);
     disableNode(switchButton);
@@ -244,9 +345,31 @@ public class Chat {
     enableHintField(hintField);
   }
 
+  public void massEnable(AppUi appUi) {
+    HintNode hintNode = nodeMap.get(appUi);
+    for (Node node : hintNode.getNodeList()) {
+      enableNode(node);
+    }
+    disableNode(hintNode.getShowButton());
+    enableHintField(hintNode.getHintField());
+  }
+
+  public void massDisable(AppUi appUi) {
+    HintNode hintNode = nodeMap.get(appUi);
+    for (Node node : hintNode.getNodeList()) {
+      disableNode(node);
+    }
+    enableNode(hintNode.getShowButton());
+    disableNode(hintNode.getHintField());
+  }
+
   private void enableHintField(Label hintField) {
     if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {
       enableNode(hintField);
     }
+  }
+
+  public void addToMap(AppUi appUi, HintNode hintNode) {
+    nodeMap.put(appUi, hintNode);
   }
 }

@@ -131,11 +131,6 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  public void getHint() throws IOException {
-    App.goToChat();
-  }
-
-  @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();

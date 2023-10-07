@@ -219,10 +219,6 @@ public class RoomController implements Controller {
 
   }
 
-  @FXML
-  public void getHint() throws IOException {
-    App.goToChat();
-  }
 
   @FXML
   private void enlarge(ImageView image) {

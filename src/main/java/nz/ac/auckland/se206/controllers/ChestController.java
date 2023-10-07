@@ -549,10 +549,7 @@ public class ChestController implements Controller {
     }
   }
 
-  @FXML
-  public void getHint() throws IOException {
-    App.goToChat();
-  }
+
 
   // Call the AI to give a hint
   private void callAi() {

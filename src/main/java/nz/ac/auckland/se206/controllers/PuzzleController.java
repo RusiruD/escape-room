@@ -231,10 +231,7 @@ public class PuzzleController implements Controller {
     timeline.play();
   }
 
-  @FXML
-  public void getHint() throws IOException {
-    App.goToChat();
-  }
+
 
   @FXML
   public void getAi(MouseEvent event) {

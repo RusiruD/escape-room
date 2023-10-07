@@ -415,12 +415,6 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
-  public void getHint() throws IOException {
-    // Go to the chat screen
-    App.goToChat();
-  }
-
-  @FXML
   private void onShowChat(ActionEvent event) {
     GameState.chat.massEnable(
         textArea,
@@ -467,18 +461,14 @@ public class UntangleRoomController implements Controller {
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
-      e.printStackTrace();
-    }
+  private void handleTextInput() throws ApiProxyException, IOException {
+    GameState.chat.onSendMessage(
+        inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
     inputText.clear();
   }
 
   @FXML
-  private void onSendMessage(ActionEvent event) {
+  private void onSendMessage(ActionEvent event) throws ApiProxyException, IOException {
     handleTextInput();
   }
 
