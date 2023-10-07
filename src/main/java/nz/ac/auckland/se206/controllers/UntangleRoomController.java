@@ -35,6 +35,7 @@ import javafx.scene.shape.StrokeLineCap;
 import javafx.scene.shape.StrokeType;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
@@ -163,6 +164,8 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+  private HintNode hintNode;
+  private Chat.AppUi appUi;
 
   private boolean isSolved = false;
 
@@ -415,38 +418,6 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
-  public void getHint() throws IOException {
-    // Go to the chat screen
-    App.goToChat();
-  }
-
-  @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
-  }
-
-  @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();
@@ -467,11 +438,17 @@ public class UntangleRoomController implements Controller {
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 
+  @FXML
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(null);
+    }
+  }
+
   private void handleTextInput() {
     try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
+      GameState.chat.onSendMessage(inputText.getText(), appUi);
+    } catch (Exception e) {
       e.printStackTrace();
     }
     inputText.clear();
@@ -482,24 +459,35 @@ public class UntangleRoomController implements Controller {
     handleTextInput();
   }
 
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
+  @FXML
+  private void onShowChat(ActionEvent event) {
+    GameState.chat.massEnable(appUi);
+  }
+
+  @FXML
+  private void onCloseChat(ActionEvent event) {
+    GameState.chat.massDisable(appUi);
   }
 
   public void initialiseAfterStart() {
+    appUi = Chat.AppUi.UNTANGLE;
+    hintNode =
+        new HintNode(
+            textArea,
+            inputText,
+            showButton,
+            closeButton,
+            sendButton,
+            chatBackground,
+            switchButton,
+            hintField);
+    GameState.chat.addToMap(appUi, hintNode);
     onCloseChat(null);
-    addChatToList();
+    GameState.chat.addChat(textArea);
   }
 
   @FXML
   private void onSwitchChatView(ActionEvent event) {
     GameState.chat.lastHintToggle();
-  }
-
-  @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
-    if (event.getCode() == KeyCode.ENTER) {
-      onSendMessage(null);
-    }
   }
 }

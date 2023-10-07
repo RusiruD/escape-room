@@ -2,7 +2,9 @@ package nz.ac.auckland.se206;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -10,8 +12,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
+import nz.ac.auckland.se206.controllers.HintNode;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -20,6 +21,19 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
 public class Chat {
+  public enum AppUi {
+    START,
+    FIRST_ROOM,
+    CORRIDOR,
+    PUZZLEROOM,
+    PUZZLE,
+    CHAT,
+    UNTANGLE,
+    LEADERBOARD,
+    CHEST,
+    WINLOSS
+  }
+
   private static Chat instance;
 
   public static Chat getInstance() {
@@ -33,8 +47,10 @@ public class Chat {
   private List<TextArea> variousChatScreens;
   private boolean isThinking;
   private boolean showLastHintOnly;
+  private Map<AppUi, HintNode> nodeMap;
 
   public Chat() {
+    nodeMap = new HashMap<>();
     isThinking = true;
     instance = this;
     showLastHintOnly = false;
@@ -49,7 +65,7 @@ public class Chat {
 
   public void initialiseAfterStart() throws ApiProxyException {
 
-      // Create a CompletableFuture for the background task
+    // Create a CompletableFuture for the background task
 
     CompletableFuture.runAsync(
         () -> {
@@ -94,24 +110,23 @@ public class Chat {
     }
   }
 
-  public void onSendMessage(
-      String inputText,
-      TextArea actualText,
-      Button sendButton,
-      Button switchButton,
-      Label hintField,
-      Button closeButton)
-      throws ApiProxyException, IOException {
+  public void onSendMessage(String message, AppUi appUi) throws ApiProxyException, IOException {
+
+    HintNode hintNode = nodeMap.get(appUi);
 
     if (isThinking) {
       return;
     }
+
+    Button closeButton = hintNode.getCloseButton();
+    Button sendButton = hintNode.getSendButton();
+    Button switchButton = hintNode.getSwiButton();
+    Label hintField = hintNode.getHintField();
+
     disableNode(closeButton);
     disableNode(sendButton);
     disableNode(switchButton);
     lastHintArea.clear();
-
-    String message = inputText;
 
     // If the message is empty, return early
     if (message.trim().isEmpty()) {
@@ -204,49 +219,31 @@ public class Chat {
     actualNode.setDisable(true);
   }
 
-  public void massDisable(
-      TextArea textArea,
-      TextField inputText,
-      Button closeButton,
-      Button showButton,
-      ImageView chatBackground,
-      Button sendButton,
-      Button switchButton,
-      Label hintField) {
-
-    disableNode(textArea);
-    disableNode(inputText);
-    disableNode(closeButton);
-    enableNode(showButton);
-    disableNode(chatBackground);
-    disableNode(sendButton);
-    disableNode(switchButton);
-    disableNode(hintField);
+  public void massEnable(AppUi appUi) {
+    HintNode hintNode = nodeMap.get(appUi);
+    for (Node node : hintNode.getNodeList()) {
+      enableNode(node);
+    }
+    disableNode(hintNode.getShowButton());
+    enableHintField(hintNode.getHintField());
   }
 
-  public void massEnable(
-      TextArea textArea,
-      TextField inputText,
-      Button closeButton,
-      Button showButton,
-      ImageView chatBackground,
-      Button sendButton,
-      Button switchButton,
-      Label hintField) {
-
-    enableNode(textArea);
-    enableNode(inputText);
-    enableNode(closeButton);
-    disableNode(showButton);
-    enableNode(chatBackground);
-    enableNode(sendButton);
-    enableNode(switchButton);
-    enableHintField(hintField);
+  public void massDisable(AppUi appUi) {
+    HintNode hintNode = nodeMap.get(appUi);
+    for (Node node : hintNode.getNodeList()) {
+      disableNode(node);
+    }
+    enableNode(hintNode.getShowButton());
+    disableNode(hintNode.getHintField());
   }
 
   private void enableHintField(Label hintField) {
     if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {
       enableNode(hintField);
     }
+  }
+
+  public void addToMap(AppUi appUi, HintNode hintNode) {
+    nodeMap.put(appUi, hintNode);
   }
 }

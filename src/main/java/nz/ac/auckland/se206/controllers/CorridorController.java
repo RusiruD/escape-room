@@ -24,12 +24,12 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Chat.AppUi;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
-import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class CorridorController implements Controller {
 
@@ -81,6 +81,8 @@ public class CorridorController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+  private HintNode hintNode;
+  private AppUi appUi;
 
   private boolean hasSword = false;
 
@@ -390,36 +392,6 @@ public class CorridorController implements Controller {
     return room.getPrefHeight();
   }
 
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
-      e.printStackTrace();
-    }
-    inputText.clear();
-  }
-
-  @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
-  }
-
-  @FXML
-  public void getHint() throws IOException {
-    App.goToChat();
-  }
-
-  @FXML
-  private void mute() {
-    // Handle click on mute
-    GameState.mute();
-  }
-
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -430,34 +402,50 @@ public class CorridorController implements Controller {
   }
 
   @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.mute();
+  }
+
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(inputText.getText(), appUi);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  @FXML
   private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
+    GameState.chat.massEnable(appUi);
   }
 
   @FXML
   private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
+    GameState.chat.massDisable(appUi);
   }
 
   public void initialiseAfterStart() {
+    appUi = AppUi.CORRIDOR;
+    hintNode =
+        new HintNode(
+            textArea,
+            inputText,
+            showButton,
+            closeButton,
+            sendButton,
+            chatBackground,
+            switchButton,
+            hintField);
+    GameState.chat.addToMap(appUi, hintNode);
     onCloseChat(null);
-    addChatToList();
+    GameState.chat.addChat(textArea);
   }
 
   @FXML
