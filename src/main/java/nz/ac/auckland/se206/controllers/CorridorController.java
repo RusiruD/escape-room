@@ -80,6 +80,7 @@ public class CorridorController implements Controller {
   @FXML private Button sendButton;
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
+  @FXML private Label hintField;
 
   private boolean hasSword = false;
 
@@ -412,23 +413,36 @@ public class CorridorController implements Controller {
   @FXML
   private void showChat(ActionEvent event) {
     GameState.chat.massEnable(
-        textArea, inputText, closeButton, showButton, chatBackground, sendButton, switchButton);
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
   }
 
   @FXML
   private void closeChat(ActionEvent event) {
     GameState.chat.massDisable(
-        textArea, inputText, closeButton, showButton, chatBackground, sendButton, switchButton);
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
   }
 
   private void handleTextInput() {
-
     try {
-      GameState.chat.onSendMessage(inputText.getText(), textArea, sendButton, switchButton);
+      GameState.chat.onSendMessage(
+          inputText.getText(), textArea, sendButton, switchButton, hintField);
     } catch (ApiProxyException | IOException e) {
       e.printStackTrace();
     }
-
     inputText.clear();
   }
 
@@ -442,10 +456,7 @@ public class CorridorController implements Controller {
   }
 
   public void initialiseAfterStart() {
-
-    GameState.chat.massDisable(
-        textArea, inputText, closeButton, showButton, chatBackground, sendButton, switchButton);
-
+    closeChat(null);
     addChatToList();
   }
 

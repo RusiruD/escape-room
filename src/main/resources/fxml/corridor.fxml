@@ -93,6 +93,11 @@
       <Button fx:id="closeButton" layoutX="3.0" layoutY="425.0" mnemonicParsing="false" onAction="#closeChat" text="Close" />
       <Button fx:id="sendButton" layoutX="700.0" layoutY="676.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="40.0" prefWidth="86.0" text="Send" />
       <Button fx:id="switchButton" layoutX="609.0" layoutY="678.0" mnemonicParsing="false" onAction="#switchChatView" text="Switch" />
+      <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="94.0" layoutY="424.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
+         <font>
+            <Font name="Old English Text MT" size="28.0" />
+         </font>
+      </Label>
 
    </children>
 </Pane>

@@ -8,6 +8,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -34,7 +35,7 @@ public class Chat {
   private boolean showLastHintOnly;
 
   public Chat() {
-    isThinking = false;
+    isThinking = true;
     instance = this;
     showLastHintOnly = false;
     chatTextArea = new TextArea();
@@ -64,6 +65,7 @@ public class Chat {
 
           // Run GPT-3 with an initial hint request
           runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
+          isThinking = false;
         });
   }
 
@@ -95,7 +97,11 @@ public class Chat {
   }
 
   public void onSendMessage(
-      String inputText, TextArea actualText, Button sendButton, Button switchButton)
+      String inputText,
+      TextArea actualText,
+      Button sendButton,
+      Button switchButton,
+      Label hintField)
       throws ApiProxyException, IOException {
 
     if (isThinking) {
@@ -167,6 +173,11 @@ public class Chat {
               () -> {
                 enableNode(switchButton);
                 enableNode(sendButton);
+                int hintsLeft = 5 - GameState.hintsGiven;
+                if (hintsLeft < 0) {
+                  hintsLeft = 0;
+                }
+                hintField.setText(hintsLeft + " Hints(s) Remaining");
               });
         });
   }
@@ -206,7 +217,8 @@ public class Chat {
       Button showButton,
       ImageView chatBackground,
       Button sendButton,
-      Button switchButton) {
+      Button switchButton,
+      Label hintField) {
 
     disableNode(textArea);
     disableNode(inputText);
@@ -215,6 +227,7 @@ public class Chat {
     disableNode(chatBackground);
     disableNode(sendButton);
     disableNode(switchButton);
+    disableNode(hintField);
   }
 
   public void massEnable(
@@ -224,7 +237,8 @@ public class Chat {
       Button showButton,
       ImageView chatBackground,
       Button sendButton,
-      Button switchButton) {
+      Button switchButton,
+      Label hintField) {
 
     enableNode(textArea);
     enableNode(inputText);
@@ -233,5 +247,12 @@ public class Chat {
     enableNode(chatBackground);
     enableNode(sendButton);
     enableNode(switchButton);
+    enableHintField(hintField);
+  }
+
+  private void enableHintField(Label hintField) {
+    if (GameState.currentDifficulty == GameState.Difficulty.MEDIUM) {
+      enableNode(hintField);
+    }
   }
 }
