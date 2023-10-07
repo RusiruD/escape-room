@@ -103,22 +103,4 @@ public class WinLossController implements Controller {
   public void updateMute() {
     // Implementation not provided, but should update the mute button
   }
-
-  @Override
-  public void addChatToList() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'addChatToList'");
-  }
-
-  @Override
-  public void initialiseAfterStart() {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'initialiseAfterStart'");
-  }
-
-  @Override
-  public void switchChatView(ActionEvent event) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'switchChatView'");
-  }
 }

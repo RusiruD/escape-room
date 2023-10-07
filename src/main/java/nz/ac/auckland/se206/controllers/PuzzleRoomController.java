@@ -39,7 +39,7 @@ public class PuzzleRoomController implements Controller {
   @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Pane instructionsDisplay;
 
-    @FXML private TextArea textArea;
+  @FXML private TextArea textArea;
   @FXML private TextField inputText;
   @FXML private Button showButton;
   @FXML private Button closeButton;
@@ -156,8 +156,8 @@ public class PuzzleRoomController implements Controller {
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 
-    @FXML
-  private void showChat(ActionEvent event) {
+  @FXML
+  private void onShowChat(ActionEvent event) {
     GameState.chat.massEnable(
         textArea,
         inputText,
@@ -170,7 +170,7 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void closeChat(ActionEvent event) {
+  private void onCloseChat(ActionEvent event) {
     GameState.chat.massDisable(
         textArea,
         inputText,
@@ -185,7 +185,7 @@ public class PuzzleRoomController implements Controller {
   private void handleTextInput() {
     try {
       GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField,closeButton);
+          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
     } catch (ApiProxyException | IOException e) {
       e.printStackTrace();
     }
@@ -202,12 +202,12 @@ public class PuzzleRoomController implements Controller {
   }
 
   public void initialiseAfterStart() {
-    closeChat(null);
+    onCloseChat(null);
     addChatToList();
   }
 
   @FXML
-  public void switchChatView(ActionEvent event) {
+  private void onSwitchChatView(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 

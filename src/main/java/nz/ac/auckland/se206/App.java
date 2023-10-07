@@ -75,7 +75,6 @@ public class App extends Application {
     SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
     SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
     SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
-    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(WinLossController.getInstance());

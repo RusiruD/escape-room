@@ -286,7 +286,7 @@ public class PuzzleController implements Controller {
   }
 
   @FXML
-  private void showChat(ActionEvent event) {
+  private void onShowChat(ActionEvent event) {
     GameState.chat.massEnable(
         textArea,
         inputText,
@@ -299,7 +299,7 @@ public class PuzzleController implements Controller {
   }
 
   @FXML
-  private void closeChat(ActionEvent event) {
+  private void onCloseChat(ActionEvent event) {
     GameState.chat.massDisable(
         textArea,
         inputText,
@@ -314,7 +314,7 @@ public class PuzzleController implements Controller {
   private void handleTextInput() {
     try {
       GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField,closeButton);
+          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
     } catch (ApiProxyException | IOException e) {
       e.printStackTrace();
     }
@@ -331,12 +331,12 @@ public class PuzzleController implements Controller {
   }
 
   public void initialiseAfterStart() {
-    closeChat(null);
+    onCloseChat(null);
     addChatToList();
   }
 
   @FXML
-  public void switchChatView(ActionEvent event) {
+  private void onSwitchChatView(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 
