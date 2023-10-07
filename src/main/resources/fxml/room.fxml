@@ -45,7 +45,7 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="16.0" layoutY="171.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" text="Back" />
+      <Button fx:id="btnReturnToCorridor" layoutX="16.0" layoutY="121.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" text="Back" />
       <ImageView fx:id="cauldron" fitHeight="131.0" fitWidth="138.0" layoutX="629.0" layoutY="552.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/cauldron.png" />
@@ -76,7 +76,6 @@
             <Image url="@../images/potion5.png" />
          </image>
       </ImageView>
-      <Button layoutX="20.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" text="Hint" />
       <Button layoutX="20.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Button layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="40.0" prefWidth="70.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
          <font>

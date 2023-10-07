@@ -81,14 +81,13 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="197.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
+      <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <Label fx:id="lblKey1" layoutX="181.0" layoutY="293.0" style="-fx-background-color: white;" text="Label" />
       <Label fx:id="lblKey2" layoutX="378.0" layoutY="293.0" style="-fx-background-color: white;" text="Label" />
       <Label fx:id="lblKey3" layoutX="546.0" layoutY="293.0" style="-fx-background-color: white;" text="Label" />
       <Label fx:id="lblKey4" layoutX="182.0" layoutY="448.0" style="-fx-background-color: white;" stylesheets="@../css/roomStylesheet.css" text="Label" />
       <Label fx:id="lblKey5" layoutX="378.0" layoutY="448.0" style="-fx-background-color: white;" stylesheets="@../css/roomStylesheet.css" text="Label" />
       <Label fx:id="lblKey6" layoutX="546.0" layoutY="448.0" style="-fx-background-color: white;" stylesheets="@../css/roomStylesheet.css" text="Label" />
-      <Button layoutX="20.0" layoutY="120.0" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" stylesheets="@../css/roomStylesheet.css" text="Hint" />
       <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="popUp" layoutX="36.0" layoutY="547.0" prefHeight="80.0" prefWidth="550.0" />
       <Pane fx:id="instructionsDisplay" layoutX="130.0" layoutY="56.0" prefHeight="436.0" prefWidth="537.0" stylesheets="@../css/roomStylesheet.css" />

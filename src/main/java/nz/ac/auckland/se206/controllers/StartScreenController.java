@@ -53,7 +53,6 @@ public class StartScreenController {
 
     checkDifficultyAndTimeLimit(chosenTimeLimit, chosenDifficulty);
 
-    ChatController.getInstance().initialiseAfterStart();
     GameState.chat = new Chat();
     GameState.chat.initialiseAfterStart();
 
