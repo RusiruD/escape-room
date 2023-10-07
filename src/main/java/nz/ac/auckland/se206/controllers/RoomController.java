@@ -14,7 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -101,6 +104,15 @@ public class RoomController implements Controller {
 
   private Riddle call;
 
+  @FXML private TextArea textArea;
+  @FXML private TextField inputText;
+  @FXML private Button showButton;
+  @FXML private Button closeButton;
+  @FXML private Button sendButton;
+  @FXML private ImageView chatBackground;
+  @FXML private Button switchButton;
+  @FXML private Label hintField;
+
   @FXML
   public double getRoomWidth() {
 
@@ -121,7 +133,7 @@ public class RoomController implements Controller {
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
-    GameState.noCombination = false;
+
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
@@ -275,7 +287,7 @@ public class RoomController implements Controller {
           "Something Happens!",
           "You feel far stronger... like energy's coursing through you and you could move"
               + " anything...");
-      GameState.noPotionBoulder = false;
+
       allowImageToBeDragged(boulder);
     }
   }
@@ -288,7 +300,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void addToInventory(ImageView image) {
-    GameState.noPapers = false;
+
     image.setVisible(false);
     image.setDisable(true);
 
@@ -362,7 +374,7 @@ public class RoomController implements Controller {
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-    GameState.noCombination = false;
+
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
     // if a note is selected it is made visible in the scene
@@ -454,5 +466,67 @@ public class RoomController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  @FXML
+  private void showChat(ActionEvent event) {
+    GameState.chat.massEnable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  @FXML
+  private void closeChat(ActionEvent event) {
+    GameState.chat.massDisable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(
+          inputText.getText(), textArea, sendButton, switchButton, hintField,closeButton);
+    } catch (ApiProxyException | IOException e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    closeChat(null);
+    addChatToList();
+  }
+
+  @FXML
+  public void switchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
+  }
+
+  @FXML
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(null);
+    }
   }
 }

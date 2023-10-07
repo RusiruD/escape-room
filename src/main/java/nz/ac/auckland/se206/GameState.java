@@ -52,12 +52,13 @@ public class GameState {
 
   public static int hintsGiven = 0;
 
-  public static boolean noPapers = true;
-  public static boolean noCombination = true;
-  public static boolean noPotionBoulder = true;
+
+
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
+
+  public static Chat chat = null;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
 
@@ -98,9 +99,7 @@ public class GameState {
     firstPotion = "";
     secondPotion = "";
     hintsGiven = 0;
-    noPapers = true;
-    noCombination = true;
-    noPotionBoulder = true;
+
     hasKeyOne = false;
     hasKeyTwo = false;
     hasKeyThree = false;

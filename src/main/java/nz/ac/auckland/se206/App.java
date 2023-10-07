@@ -7,7 +7,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import nz.ac.auckland.se206.GameState.State;
-import nz.ac.auckland.se206.controllers.ChatController;
 import nz.ac.auckland.se206.controllers.ChestController;
 import nz.ac.auckland.se206.controllers.CorridorController;
 import nz.ac.auckland.se206.controllers.PuzzleController;
@@ -15,7 +14,6 @@ import nz.ac.auckland.se206.controllers.PuzzleRoomController;
 import nz.ac.auckland.se206.controllers.RoomController;
 import nz.ac.auckland.se206.controllers.SceneManager;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
-import nz.ac.auckland.se206.controllers.StartScreenController;
 import nz.ac.auckland.se206.controllers.UntangleRoomController;
 import nz.ac.auckland.se206.controllers.WinLossController;
 
@@ -79,7 +77,6 @@ public class App extends Application {
     SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
     SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
 
-    SceneManager.addController(ChatController.getInstance());
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(WinLossController.getInstance());
     SceneManager.addController(RoomController.getInstance());
@@ -115,7 +112,6 @@ public class App extends Application {
 
     SceneManager.clearControllers();
 
-    SceneManager.addController(ChatController.getInstance());
     SceneManager.addController(PuzzleRoomController.getInstance());
     SceneManager.addController(WinLossController.getInstance());
     SceneManager.addController(RoomController.getInstance());
@@ -138,7 +134,7 @@ public class App extends Application {
   public static void goToChest() {
     try {
       App.setRoot(AppUi.CHEST);
-     
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -147,7 +143,7 @@ public class App extends Application {
   public static void goToPuzzle() {
     try {
       App.setRoot(AppUi.PUZZLE);
-     
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -156,7 +152,7 @@ public class App extends Application {
   public static void goToChat() {
     try {
       App.setRoot(AppUi.CHAT);
-    
+
     } catch (IOException e) {
       e.printStackTrace();
     }
@@ -166,7 +162,6 @@ public class App extends Application {
     try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
-      
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -194,7 +189,6 @@ public class App extends Application {
       App.setRoot(AppUi.FIRST_ROOM);
 
       // Get the first room controller instance
-     
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -215,7 +209,6 @@ public class App extends Application {
       App.setRoot(AppUi.UNTANGLE);
 
       // Get the Untangle room controller instance
-     
 
     } catch (IOException e) {
       e.printStackTrace();
@@ -233,7 +226,7 @@ public class App extends Application {
       App.setRoot(AppUi.PUZZLEROOM);
 
       // Get the Puzzle room controller instance
-   
+
     } catch (IOException e) {
 
       e.printStackTrace();
@@ -251,8 +244,6 @@ public class App extends Application {
     try {
       // Set the root of the application to the Win/Loss screen.
       App.setRoot(AppUi.WINLOSS);
-
-     
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
@@ -273,7 +264,6 @@ public class App extends Application {
       App.setRoot(AppUi.START);
 
       // Get the instance of the StartScreenController.
-     
 
     } catch (IOException e) {
       // Handle any IOException that might occur during the switch.
