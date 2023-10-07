@@ -95,7 +95,7 @@ public class PuzzleController implements Controller {
     callQuestion =
         "Congratulate the user on rearranging the tiles correctly and solving the puzzle.";
 
-    DungeonMaster callDungeonMaster = new DungeonMaster();
+    callDungeonMaster = new DungeonMaster();
   }
 
   public double getPuzzleWidth() {
