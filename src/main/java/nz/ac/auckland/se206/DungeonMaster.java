@@ -239,6 +239,7 @@ public class DungeonMaster {
     // Attach an event handler to the exit button to close the dialogue
     exitButton.setOnMouseClicked(
         event1 -> {
+          GameState.tts.cancel();
           popUp.getChildren().clear();
           popUp.visibleProperty().set(false);
           popUp.mouseTransparentProperty().set(true);
