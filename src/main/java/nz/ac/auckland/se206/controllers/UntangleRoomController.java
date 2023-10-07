@@ -15,9 +15,14 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -35,6 +40,7 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Drag the anchors around to change a polygon's points. */
 // see https://stackoverflow.com/questions/13056795/cubiccurve-javafx
@@ -148,6 +154,15 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView soundToggle;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
+
+  @FXML private TextArea textArea;
+  @FXML private TextField inputText;
+  @FXML private Button showButton;
+  @FXML private Button closeButton;
+  @FXML private Button sendButton;
+  @FXML private ImageView chatBackground;
+  @FXML private Button switchButton;
+  @FXML private Label hintField;
 
   private boolean isSolved = false;
 
@@ -406,6 +421,32 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
+  private void onShowChat(ActionEvent event) {
+    GameState.chat.massEnable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  @FXML
+  private void onCloseChat(ActionEvent event) {
+    GameState.chat.massDisable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utililty.exitGame();
@@ -424,5 +465,41 @@ public class UntangleRoomController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(
+          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
+    } catch (ApiProxyException | IOException e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    onCloseChat(null);
+    addChatToList();
+  }
+
+  @FXML
+  private void onSwitchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
+  }
+
+  @FXML
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(null);
+    }
   }
 }

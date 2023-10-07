@@ -2,11 +2,17 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
@@ -18,6 +24,7 @@ import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
+import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class PuzzleController implements Controller {
 
@@ -56,6 +63,15 @@ public class PuzzleController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane visualDungeonMaster;
   @FXML private ComboBox<String> inventoryChoiceBox;
+
+  @FXML private TextArea textArea;
+  @FXML private TextField inputText;
+  @FXML private Button showButton;
+  @FXML private Button closeButton;
+  @FXML private Button sendButton;
+  @FXML private ImageView chatBackground;
+  @FXML private Button switchButton;
+  @FXML private Label hintField;
 
   public void initialize() {
     // set the instance
@@ -255,6 +271,35 @@ public class PuzzleController implements Controller {
     GameState.mute();
   }
 
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(
+          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
+    } catch (ApiProxyException | IOException e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    onCloseChat(null);
+    addChatToList();
+  }
+
+  @FXML
+  private void onSwitchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
+  }
+
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -262,5 +307,38 @@ public class PuzzleController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  @FXML
+  private void onShowChat(ActionEvent event) {
+    GameState.chat.massEnable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  @FXML
+  private void onCloseChat(ActionEvent event) {
+    GameState.chat.massDisable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  @FXML
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(null);
+    }
   }
 }

@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.TimerCounter;
@@ -52,7 +53,15 @@ public class StartScreenController {
 
     checkDifficultyAndTimeLimit(chosenTimeLimit, chosenDifficulty);
 
-    ChatController.getInstance().initialiseAfterStart();
+    GameState.chat = new Chat();
+    GameState.chat.initialiseAfterStart();
+
+    CorridorController.getInstance().initialiseAfterStart();
+    RoomController.getInstance().initialiseAfterStart();
+    ChestController.getInstance().initialiseAfterStart();
+    PuzzleController.getInstance().initialiseAfterStart();
+    PuzzleRoomController.getInstance().initialiseAfterStart();
+    UntangleRoomController.getInstance().initialiseAfterStart();
 
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");
