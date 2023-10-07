@@ -26,7 +26,6 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -99,7 +98,8 @@ public class RoomController implements Controller {
   private double verticalOffset = 0;
   private List<String> potionsincauldron = new ArrayList<>();
 
-  private Riddle call;
+  private String callQuestion;
+  private DungeonMaster callDungeonMaster;
 
   @FXML
   public double getRoomWidth() {
@@ -129,26 +129,25 @@ public class RoomController implements Controller {
 
   @FXML
   public void getAi(MouseEvent event) {
-    callAi(call);
-  }
+    popUp.visibleProperty().set(false);
+    callDungeonMaster.createPopUp(popUp);
+    callDungeonMaster.getText("user", callQuestion);
+    // Set style class
+    popUp.getStyleClass().add("popUp");
+    popUp.visibleProperty().set(true);
+    popUp.mouseTransparentProperty().set(false);
+    popUp.toFront();
 
-  // Call the AI to give a hint
-  private void callAi(Riddle call) {
-    // // Get the dungeon master and the pop up pane
-    // DungeonMaster dungeonMaster = call.getDungeonMaster();
-    // Pane dialogue = dungeonMaster.getPopUp();
-    // Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-    // popUp.toFront();
-    // popUp.getChildren().add(dialogueFormat);
-    // // Set the dialogue to be visible and not mouse transparent
-    // dialogueFormat.getStyleClass().add("popUp");
-    // visualDungeonMaster.visibleProperty().set(false);
-    // visualDungeonMaster.mouseTransparentProperty().set(true);
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   public void initialize() throws ApiProxyException {
     // Set the instance variable to this object
     instance = this;
+
+    callDungeonMaster = new DungeonMaster();
+
     popUp.toBack();
     visualDungeonMaster.visibleProperty().set(false);
     visualDungeonMaster.mouseTransparentProperty().set(true);
@@ -187,15 +186,13 @@ public class RoomController implements Controller {
     // Randomly select two colors from the array
     String secondPotion = colors[secondIndex];
     GameState.secondPotion = secondPotion + " Potion";
-    // Create a new dungeon master
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    String message =
+    // Set the question
+    callQuestion =
         "Congratulate a player for moving the boulder to get the key commenting on them mixing the "
             + firstPotion
             + " and the "
             + secondPotion
             + " to increase their strength. Keep this short";
-    call = new Riddle(dungeonMaster, message);
     // Set the tiles and solution
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "

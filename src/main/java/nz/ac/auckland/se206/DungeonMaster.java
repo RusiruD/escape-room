@@ -32,6 +32,7 @@ public class DungeonMaster {
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(250);
 
   public void createPopUp(Pane popUp) {
+    System.out.println("creating pop up");
     this.popUp = popUp;
     HBox popUpHBox = new HBox();
 
@@ -146,7 +147,7 @@ public class DungeonMaster {
     thread.start();
   }
 
-  // returns a pane with the text
+  // returns the riddle
   public String getRiddle() {
     return message;
   }
@@ -238,6 +239,7 @@ public class DungeonMaster {
     // Attach an event handler to the exit button to close the dialogue
     exitButton.setOnMouseClicked(
         event1 -> {
+          popUp.getChildren().clear();
           popUp.visibleProperty().set(false);
           popUp.mouseTransparentProperty().set(true);
           messageFinished = true;

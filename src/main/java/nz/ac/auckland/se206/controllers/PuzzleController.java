@@ -16,7 +16,6 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.Utililty;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 
@@ -48,7 +47,8 @@ public class PuzzleController implements Controller {
   private ImageView firstSelection;
   private ImageView secondSelection;
 
-  private Riddle call;
+  private DungeonMaster callDungeonMaster;
+  private String callQuestion;
 
   @FXML private Label lblTime;
 
@@ -92,11 +92,10 @@ public class PuzzleController implements Controller {
           {"one", "two", "zero"}, {"four", "six", "three"}, {"eight", "five", "nine"}
         };
 
-    String question =
+    callQuestion =
         "Congratulate the user on rearranging the tiles correctly and solving the puzzle.";
 
-    DungeonMaster dungeonMaster = new DungeonMaster();
-    call = new Riddle(dungeonMaster, question);
+    DungeonMaster callDungeonMaster = new DungeonMaster();
   }
 
   public double getPuzzleWidth() {
@@ -223,7 +222,17 @@ public class PuzzleController implements Controller {
 
   @FXML
   public void getAi(MouseEvent event) {
-    callAi(call);
+    popUp.visibleProperty().set(false);
+    callDungeonMaster.createPopUp(popUp);
+    callDungeonMaster.getText("user", callQuestion);
+    // Set style class
+    popUp.getStyleClass().add("popUp");
+    popUp.visibleProperty().set(true);
+    popUp.mouseTransparentProperty().set(false);
+    popUp.toFront();
+
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML
@@ -232,20 +241,6 @@ public class PuzzleController implements Controller {
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
-  }
-
-  // Call the AI to give a hint
-  private void callAi(Riddle call) {
-    // // Get the dungeon master and the pop up pane
-    // DungeonMaster dungeonMaster = call.getDungeonMaster();
-    // Pane dialogue = dungeonMaster.getPopUp();
-    // Pane dialogueFormat = dungeonMaster.paneFormat(dialogue, dungeonMaster);
-    // popUp.toFront();
-    // popUp.getChildren().add(dialogueFormat);
-    // // Set the dialogue to be visible and not mouse transparent
-    // dialogueFormat.getStyleClass().add("popUp");
-    // visualDungeonMaster.visibleProperty().set(false);
-    // visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
   @FXML
