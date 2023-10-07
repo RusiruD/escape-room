@@ -34,7 +34,7 @@ public class DungeonMaster {
   public void createPopUp(Pane popUp) {
     System.out.println("creating pop up");
     this.popUp = popUp;
-    HBox popUpHBox = new HBox();
+    HBox popUpBox = new HBox();
 
     // DUNGEON MASTER IMAGE
     StackPane dungeonMasterStack = new StackPane();
@@ -92,9 +92,9 @@ public class DungeonMaster {
     quitButton.setTranslateX(220);
 
     // ADDING TO POP UP
-    popUpHBox.getChildren().addAll(dungeonMasterStack);
-    popUpHBox.getChildren().addAll(dialogueContainer);
-    popUp.getChildren().add(popUpHBox);
+    popUpBox.getChildren().addAll(dungeonMasterStack);
+    popUpBox.getChildren().addAll(dialogueContainer);
+    popUp.getChildren().add(popUpBox);
     paneFormat(popUp);
   }
 

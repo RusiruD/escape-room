@@ -621,7 +621,10 @@ public class ChestController implements Controller {
   }
 
   public void initialiseAfterStart() {
+    // Set the initial UI state to 'CHEST'.
     appUi = AppUi.CHEST;
+
+    // Create a new HintNode instance with various UI elements.
     hintNode =
         new HintNode(
             textArea,
@@ -632,8 +635,14 @@ public class ChestController implements Controller {
             chatBackground,
             switchButton,
             hintField);
+
+    // Add the UI state and its corresponding HintNode to the chat interface.
     GameState.chat.addToMap(appUi, hintNode);
+
+    // Close the chat interface to reset its state.
     onCloseChat(null);
+
+    // Add the text area for displaying chat messages to the chat interface.
     GameState.chat.addChat(textArea);
   }
 
