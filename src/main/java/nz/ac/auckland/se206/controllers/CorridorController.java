@@ -439,7 +439,7 @@ public class CorridorController implements Controller {
   private void handleTextInput() {
     try {
       GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField);
+          inputText.getText(), textArea, sendButton, switchButton, hintField,closeButton);
     } catch (ApiProxyException | IOException e) {
       e.printStackTrace();
     }

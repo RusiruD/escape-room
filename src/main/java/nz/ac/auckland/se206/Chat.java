@@ -101,13 +101,14 @@ public class Chat {
       TextArea actualText,
       Button sendButton,
       Button switchButton,
-      Label hintField)
+      Label hintField,
+      Button closeButton)
       throws ApiProxyException, IOException {
 
     if (isThinking) {
       return;
     }
-
+    disableNode(closeButton);
     disableNode(sendButton);
     disableNode(switchButton);
     lastHintArea.clear();
@@ -173,6 +174,7 @@ public class Chat {
               () -> {
                 enableNode(switchButton);
                 enableNode(sendButton);
+                enableNode(closeButton);
                 int hintsLeft = 5 - GameState.hintsGiven;
                 if (hintsLeft < 0) {
                   hintsLeft = 0;
