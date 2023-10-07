@@ -56,7 +56,9 @@ public class StartScreenController {
     ChatController.getInstance().initialiseAfterStart();
     GameState.chat = new Chat();
     GameState.chat.initialiseAfterStart();
+
     CorridorController.getInstance().initialiseAfterStart();
+    RoomController.getInstance().initialiseAfterStart();
 
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");

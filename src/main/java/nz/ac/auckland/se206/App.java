@@ -37,7 +37,7 @@ public class App extends Application {
   }
 
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
-
+    
     oldScene = newScene;
     newScene = appUi;
 

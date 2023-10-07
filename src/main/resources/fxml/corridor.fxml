@@ -13,7 +13,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
+<Pane fx:id="room" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="730.0" prefWidth="798.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
       <ImageView fx:id="backgroundImage" fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -26,12 +26,33 @@
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
+      <Group layoutX="-47.0" layoutY="359.0">
+         <children>
+            <ImageView fx:id="chatBackground1" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/ChatBackground.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeButton1" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#closeChat" prefHeight="40.0" prefWidth="84.0" text="Close" />
+            <TextArea fx:id="textArea1" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+            <Button fx:id="sendButton1" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
+            <TextField fx:id="inputText1" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+            <Button fx:id="switchButton1" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#switchChatView" text="Switch" />
+            <Button fx:id="showButton1" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#showChat" text="Chat" />
+            <Label fx:id="hintField1" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
+               <font>
+                  <Font name="Old English Text MT" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
+      <Button layoutX="20.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" text="Hint" />
       <Pane fx:id="instructionsDisplay" layoutX="160.0" layoutY="160.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
 
       <Group layoutX="401.0" layoutY="529.0">
@@ -81,23 +102,6 @@
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="chatBackground" fitHeight="277.0" fitWidth="800.0" layoutX="1.0" layoutY="462.0" pickOnBounds="true">
-         <image>
-            <Image url="@../images/ChatBackground.jpeg" />
-         </image>
-      </ImageView>
-      <Button layoutX="20.0" layoutY="120.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getHint" prefHeight="40.0" prefWidth="70.0" text="Hint" />
-      <Button fx:id="showButton" layoutX="-2.0" layoutY="688.0" mnemonicParsing="false" onAction="#showChat" text="Chat" />
-      <TextArea fx:id="textArea" editable="false" layoutX="1.0" layoutY="462.0" prefHeight="206.0" prefWidth="800.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-      <TextField fx:id="inputText" layoutX="4.0" layoutY="685.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
-      <Button fx:id="closeButton" layoutX="3.0" layoutY="425.0" mnemonicParsing="false" onAction="#closeChat" text="Close" />
-      <Button fx:id="sendButton" layoutX="700.0" layoutY="676.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="40.0" prefWidth="86.0" text="Send" />
-      <Button fx:id="switchButton" layoutX="609.0" layoutY="678.0" mnemonicParsing="false" onAction="#switchChatView" text="Switch" />
-      <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="94.0" layoutY="424.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
-         <font>
-            <Font name="Old English Text MT" size="28.0" />
-         </font>
-      </Label>
 
    </children>
 </Pane>

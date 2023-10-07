@@ -182,7 +182,7 @@ public class Chat {
         });
   }
 
-  private void updateChats() {
+  public void updateChats() {
 
     for (TextArea textArea : variousChatScreens) {
       if (showLastHintOnly) {
