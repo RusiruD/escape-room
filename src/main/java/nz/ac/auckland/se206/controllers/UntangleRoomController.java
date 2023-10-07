@@ -411,6 +411,32 @@ public class UntangleRoomController implements Controller {
     App.goToChat();
   }
 
+  @FXML
+  private void onShowChat(ActionEvent event) {
+    GameState.chat.massEnable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
+  @FXML
+  private void onCloseChat(ActionEvent event) {
+    GameState.chat.massDisable(
+        textArea,
+        inputText,
+        closeButton,
+        showButton,
+        chatBackground,
+        sendButton,
+        switchButton,
+        hintField);
+  }
+
   // Call the AI to give a hint
   private void callAi(Riddle call) {
     // Get the dungeon master and the pop up pane
@@ -445,32 +471,6 @@ public class UntangleRoomController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
-  }
-
-  @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(
-        textArea,
-        inputText,
-        closeButton,
-        showButton,
-        chatBackground,
-        sendButton,
-        switchButton,
-        hintField);
   }
 
   private void handleTextInput() {

@@ -454,6 +454,20 @@ public class RoomController implements Controller {
   }
 
   @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    onCloseChat(null);
+    addChatToList();
+  }
+
+  @FXML
   private void mute() {
     // Handle click on mute
     GameState.mute();
@@ -505,21 +519,7 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
-  }
-
-  public void initialiseAfterStart() {
-    onCloseChat(null);
-    addChatToList();
-  }
-
-  @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  public void onSwitchChatView(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 

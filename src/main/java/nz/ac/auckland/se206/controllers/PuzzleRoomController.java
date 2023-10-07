@@ -169,6 +169,27 @@ public class PuzzleRoomController implements Controller {
         hintField);
   }
 
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
+  public void initialiseAfterStart() {
+    onCloseChat(null);
+    addChatToList();
+  }
+
+  @FXML
+  private void onSwitchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
+  }
+
+  @FXML
+  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+    if (event.getCode() == KeyCode.ENTER) {
+      onSendMessage(null);
+    }
+  }
+
   @FXML
   private void onCloseChat(ActionEvent event) {
     GameState.chat.massDisable(
@@ -195,26 +216,5 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void onSendMessage(ActionEvent event) {
     handleTextInput();
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
-  }
-
-  public void initialiseAfterStart() {
-    onCloseChat(null);
-    addChatToList();
-  }
-
-  @FXML
-  private void onSwitchChatView(ActionEvent event) {
-    GameState.chat.lastHintToggle();
-  }
-
-  @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
-    if (event.getCode() == KeyCode.ENTER) {
-      onSendMessage(null);
-    }
   }
 }

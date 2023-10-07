@@ -390,6 +390,25 @@ public class CorridorController implements Controller {
     return room.getPrefHeight();
   }
 
+  private void handleTextInput() {
+    try {
+      GameState.chat.onSendMessage(
+          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
+    } catch (ApiProxyException | IOException e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onSendMessage(ActionEvent event) {
+    handleTextInput();
+  }
+
+  public void addChatToList() {
+    GameState.chat.addChat(textArea);
+  }
+
   @FXML
   public void getHint() throws IOException {
     App.goToChat();
@@ -434,25 +453,6 @@ public class CorridorController implements Controller {
         sendButton,
         switchButton,
         hintField);
-  }
-
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(
-          inputText.getText(), textArea, sendButton, switchButton, hintField, closeButton);
-    } catch (ApiProxyException | IOException e) {
-      e.printStackTrace();
-    }
-    inputText.clear();
-  }
-
-  @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  public void addChatToList() {
-    GameState.chat.addChat(textArea);
   }
 
   public void initialiseAfterStart() {
