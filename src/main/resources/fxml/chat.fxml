@@ -9,23 +9,22 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
+<AnchorPane fx:id="chatPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChatController">
   <children>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/ChatBackground.jpeg" />
          </image>
       </ImageView>
-    <TextArea fx:id="chatTextArea" editable="false" layoutX="29.0" layoutY="131.0" prefHeight="270.0" prefWidth="538.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-    <TextField fx:id="inputText" layoutX="35.0" layoutY="341.0" prefHeight="26.0" prefWidth="435.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+    <TextArea fx:id="chatTextArea" editable="false" layoutX="29.0" layoutY="131.0" prefHeight="412.0" prefWidth="623.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
     <Button fx:id="sendButton" layoutX="660.0" layoutY="500.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="40.0" prefWidth="110.0" text="Send" />
     <Button layoutX="20.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onGoBack" prefHeight="40.0" prefWidth="80.0" text="Back" />
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="52.0" prefWidth="125.0" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="240.0" text="5 Hint(s) Remaining" textFill="WHITE">
+      <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="264.0" text="5 Hint(s) Remaining" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="28.0" />
          </font>
@@ -38,5 +37,6 @@
          </image>
       </ImageView>
       <Button layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="40.0" prefWidth="70.0" text="Quit" />
+    <TextField fx:id="inputText" layoutX="29.0" layoutY="552.0" prefHeight="26.0" prefWidth="435.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
   </children>
 </AnchorPane>
