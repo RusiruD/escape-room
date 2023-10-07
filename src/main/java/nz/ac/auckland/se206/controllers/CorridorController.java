@@ -77,7 +77,9 @@ public class CorridorController implements Controller {
   @FXML private TextField inputText;
   @FXML private Button showButton;
   @FXML private Button closeButton;
+  @FXML private Button sendButton;
   @FXML private ImageView chatBackground;
+  @FXML private Button switchButton;
 
   private boolean hasSword = false;
 
@@ -423,6 +425,12 @@ public class CorridorController implements Controller {
     showButton.setDisable(true);
 
     chatBackground.setVisible(true);
+
+    sendButton.setVisible(true);
+    sendButton.setDisable(false);
+
+    switchButton.setVisible(true);
+    switchButton.setDisable(false);
   }
 
   @FXML
@@ -440,14 +448,19 @@ public class CorridorController implements Controller {
     showButton.setDisable(false);
 
     chatBackground.setVisible(false);
+
+    sendButton.setVisible(false);
+    sendButton.setDisable(true);
+
+    switchButton.setVisible(false);
+    switchButton.setDisable(true);
   }
 
   private void handleTextInput() {
 
     try {
-      GameState.chat.onSendMessage(inputText.getText(), textArea);
+      GameState.chat.onSendMessage(inputText.getText(), textArea, sendButton, switchButton);
     } catch (ApiProxyException | IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
 
@@ -475,6 +488,18 @@ public class CorridorController implements Controller {
     closeButton.setDisable(true);
 
     chatBackground.setVisible(false);
+
+    sendButton.setVisible(false);
+    sendButton.setDisable(true);
+
+    switchButton.setVisible(false);
+    switchButton.setDisable(true);
+
     addChatToList();
+  }
+
+  @FXML
+  public void switchChatView(ActionEvent event) {
+    GameState.chat.lastHintToggle();
   }
 }

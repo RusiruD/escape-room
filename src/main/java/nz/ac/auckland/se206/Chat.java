@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import nz.ac.auckland.se206.gpt.ChatMessage;
 import nz.ac.auckland.se206.gpt.GptPromptEngineering;
@@ -22,13 +23,19 @@ public class Chat {
   }
 
   @FXML private TextArea chatTextArea;
+  @FXML private TextArea lastHintArea;
 
   private ChatCompletionRequest chatCompletionRequest;
   private List<TextArea> variousChatScreens;
+  private boolean isThinking;
+  private boolean showLastHintOnly;
 
   public Chat() {
+    isThinking = false;
     instance = this;
+    showLastHintOnly = false;
     chatTextArea = new TextArea();
+    lastHintArea = new TextArea();
     variousChatScreens = new ArrayList<>();
   }
 
@@ -61,6 +68,7 @@ public class Chat {
 
     String message = role + ": " + msg.getContent() + "\n\n";
 
+    lastHintArea.appendText(message);
     chatTextArea.appendText(message);
     updateChats();
   }
@@ -83,8 +91,19 @@ public class Chat {
     }
   }
 
-  public void onSendMessage(String inputText, TextArea actualText)
+  public void onSendMessage(
+      String inputText, TextArea actualText, Button showButton, Button switchButton)
       throws ApiProxyException, IOException {
+
+    if (isThinking) {
+      return;
+    }
+
+    showButton.setVisible(false);
+    showButton.setDisable(true);
+    switchButton.setVisible(false);
+    switchButton.setDisable(true);
+    lastHintArea.clear();
 
     String message = inputText;
 
@@ -98,6 +117,7 @@ public class Chat {
 
     CompletableFuture.runAsync(
         () -> {
+          isThinking = true;
 
           // Clear the input field and create actual and fake chat messages
           String hint = "";
@@ -140,15 +160,31 @@ public class Chat {
             GameState.hintsGiven++;
             System.out.println("HINT DETECTED!");
           }
-
+          isThinking = false;
           // Ensure that the UI updates on the JavaFX application thread
-          Platform.runLater(() -> {});
+          Platform.runLater(
+              () -> {
+                showButton.setVisible(true);
+                showButton.setDisable(false);
+                switchButton.setVisible(true);
+                switchButton.setDisable(false);
+              });
         });
   }
 
   private void updateChats() {
+
     for (TextArea textArea : variousChatScreens) {
-      textArea.setText(chatTextArea.getText());
+      if (showLastHintOnly) {
+        textArea.setText(lastHintArea.getText());
+      } else {
+        textArea.setText(chatTextArea.getText());
+      }
     }
+  }
+
+  public void lastHintToggle() {
+    showLastHintOnly = !showLastHintOnly;
+    updateChats();
   }
 }
