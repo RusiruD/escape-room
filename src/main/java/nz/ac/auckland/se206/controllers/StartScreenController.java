@@ -12,6 +12,7 @@ import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/** Controller class for the game start screen. */
 public class StartScreenController {
   private static StartScreenController instance;
 
@@ -69,6 +70,12 @@ public class StartScreenController {
     App.returnToCorridor();
   }
 
+  /**
+   * Checks the chosen difficulty and time limit, then starts the game timer accordingly.
+   *
+   * @param time The chosen time limit ("2 Minutes", "4 Minutes", or "6 Minutes").
+   * @param difficulty The chosen difficulty level ("Easy", "Medium", or "Hard").
+   */
   @FXML
   public void checkDifficultyAndTimeLimit(String time, String difficulty) {
 

@@ -25,6 +25,7 @@ import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/** Controller class for managing interactions and logic within the Puzzle Room UI. */
 public class PuzzleRoomController implements Controller {
 
   private static PuzzleRoomController instance;
@@ -52,6 +53,10 @@ public class PuzzleRoomController implements Controller {
   private HintNode hintNode;
   private Chat.AppUi appUi;
 
+  /**
+   * Initializes the class. This method is typically used for setting up initial state and
+   * properties.
+   */
   public void initialize() {
     TimerCounter.addTimerLabel(lblTime);
 
@@ -96,6 +101,10 @@ public class PuzzleRoomController implements Controller {
     GameState.currentRoom = GameState.State.CHEST;
   }
 
+  /**
+   * Updates the inventory UI by setting items to the inventory choice box and applying a temporary
+   * shadow effect.
+   */
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
@@ -113,6 +122,12 @@ public class PuzzleRoomController implements Controller {
     timeline.play();
   }
 
+  /**
+   * Displays the instructions pane when the user clicks the instructions button. Sets the
+   * instructions pane to be visible and allows mouse interaction with it.
+   *
+   * @param event The MouseEvent triggered by clicking the instructions button.
+   */
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
@@ -145,6 +160,10 @@ public class PuzzleRoomController implements Controller {
     GameState.mute();
   }
 
+  /**
+   * Updates the mute button's appearance based on the current sound state (muted or unmuted). If
+   * the sound is unmuted, it displays the audio-on icon; otherwise, it displays the audio-off icon.
+   */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -185,6 +204,11 @@ public class PuzzleRoomController implements Controller {
     GameState.chat.massDisable(appUi);
   }
 
+  /**
+   * Initializes the chat functionality after the application start. Sets the current application UI
+   * to PUZZLEROOM and creates a HintNode with necessary UI components. Adds the HintNode to the
+   * chat map in the GameState, closes the chat interface, and adds the text area to the chat.
+   */
   public void onInitializationAfterStart() {
     // Set the current application UI to PUZZLEROOM
     appUi = Chat.AppUi.PUZZLEROOM;

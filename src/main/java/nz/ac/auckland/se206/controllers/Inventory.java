@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import nz.ac.auckland.se206.Controller;
 
+/** Represents the inventory system in the game, managing collected items and their availability. */
 public class Inventory {
   @FXML private static ObservableList<String> inventory = FXCollections.observableArrayList();
 

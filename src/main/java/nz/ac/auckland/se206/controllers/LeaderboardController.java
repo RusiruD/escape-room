@@ -18,6 +18,7 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import nz.ac.auckland.se206.ScoreEntry;
 
+/** Controller class for managing the leaderboard functionality in the game. */
 public class LeaderboardController {
 
   @FXML private StackPane graph;
@@ -33,7 +34,7 @@ public class LeaderboardController {
 
   private int scaleFactor = 200;
 
-  // add a new score to the leaderboard
+  /** Initializes the leaderboard by adding sample scores and sorting them. */
   public void initialize() {
     // add some scores to the leaderboard
     scores.add(new ScoreEntry("John Doe1", 0, 0, new double[] {0, 0, 0, 0, 0, 0}));

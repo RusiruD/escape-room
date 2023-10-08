@@ -32,6 +32,7 @@ import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 
+/** Controller class for managing interactions related to the corridor section in the game. */
 public class CorridorController implements Controller {
 
   private static CorridorController instance;
@@ -140,6 +141,15 @@ public class CorridorController implements Controller {
     player.setFill(new ImagePattern(image));
   }
 
+  /**
+   * Handles the mouse click event on the sword and shield item. Generates a notification indicating
+   * that the player has become stronger and can now fight the dungeon master. Adds the sword and
+   * shield to the player's inventory, hides and disables the sword and shield item, updates the
+   * player's appearance, and adds a flash effect to the inventory choice box to indicate the item
+   * has been picked up.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
     CustomNotifications.generateNotification(
@@ -169,6 +179,9 @@ public class CorridorController implements Controller {
     timeline.play();
   }
 
+  /**
+   * Initializes the CorridorController. Sets up timers, player character, and game instructions.
+   */
   public void initialize() {
 
     TimerCounter.addTimerLabel(lblTime);
@@ -270,6 +283,12 @@ public class CorridorController implements Controller {
     rightPressed.set(false);
   }
 
+  /**
+   * Handles key pressed events. Triggers specific actions based on the pressed key, such as text
+   * entry or movement.
+   *
+   * @param event The KeyEvent triggered by the key press.
+   */
   @FXML
   public void onKeyPressed(KeyEvent event) {
 
@@ -296,6 +315,12 @@ public class CorridorController implements Controller {
     }
   }
 
+  /**
+   * Handles key released events. Stops specific movement actions when corresponding keys are
+   * released.
+   *
+   * @param event The KeyEvent triggered by the key release.
+   */
   @FXML
   public void onKeyReleased(KeyEvent event) {
     // Handle key release events
@@ -317,6 +342,13 @@ public class CorridorController implements Controller {
     }
   }
 
+  /**
+   * Handles the mouse click event on the treasure chest. Checks if the required keys are collected
+   * and navigates to the chest screen if the conditions are met.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   * @throws IOException if an error occurs during screen navigation.
+   */
   @FXML
   public void onTreasureChestClicked(MouseEvent event) throws IOException {
     // Handle click on treasure chest
@@ -347,6 +379,10 @@ public class CorridorController implements Controller {
     }
   }
 
+  /**
+   * Handles the click event on the Dungeon Master character. Displays appropriate notifications
+   * based on the game state and player's actions.
+   */
   @FXML
   public void clickDungeonMaster() {
     if (!GameState.isChestOpened) {
@@ -372,6 +408,12 @@ public class CorridorController implements Controller {
     Utility.exitGame();
   }
 
+  /**
+   * Handles the mouse click event to display instructions. Sets the instructions pane to be visible
+   * and not mouse transparent.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
@@ -397,6 +439,7 @@ public class CorridorController implements Controller {
     return room.getPrefHeight();
   }
 
+  /** Updates the mute state and toggles the sound icon image accordingly. */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -417,6 +460,7 @@ public class CorridorController implements Controller {
     doTextEntry();
   }
 
+  /** Initializes the chat and sets up the UI state after the game starts. */
   public void initialiseAfterStart() {
     // Initialise the chat
     state = AppUi.CORRIDOR;

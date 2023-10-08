@@ -150,7 +150,6 @@ public class Chat {
       return;
     }
 
-    Button closeButton = hintNode.getCloseButton();
     Button sendButton = hintNode.getSendButton();
     Button switchButton = hintNode.getSwiButton();
     Label hintField = hintNode.getHintField();
@@ -261,13 +260,22 @@ public class Chat {
    * @param appUi The AppUi instance whose associated UI components need to be enabled.
    */
   public void massEnable(AppUi appUi) {
+    // Get the corresponding HintNode from the nodeMap using the provided AppUi object.
     HintNode hintNode = nodeMap.get(appUi);
+
+    // Iterate through the NodeList of the retrieved HintNode and enable each node.
     for (Node node : hintNode.getNodeList()) {
       enableNode(node);
     }
+
+    // Disable the 'Show' button associated with the HintNode.
     disableNode(hintNode.getShowButton());
+
+    // Enable the hint field associated with the HintNode.
     enableHintField(hintNode.getHintField());
 
+    // If the system is currently in a 'thinking' state (boolean variable isThinking is true),
+    // disable the 'SWI' button and 'Send' button associated with the HintNode.
     if (isThinking) {
       disableNode(hintNode.getSwiButton());
       disableNode(hintNode.getSendButton());

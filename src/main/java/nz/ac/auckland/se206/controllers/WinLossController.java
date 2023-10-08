@@ -9,6 +9,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 
+/** Controller class for handling the win and loss outcomes of the game. */
 public class WinLossController implements Controller {
   // Singleton instance
   private static WinLossController instance;
@@ -29,6 +30,11 @@ public class WinLossController implements Controller {
     instance = this;
   }
 
+  /**
+   * Checks the game status and updates the UI components accordingly. If the game is won, sets the
+   * text to indicate a win and escaping the dungeon. If the game is lost, sets the text to indicate
+   * a loss and failure to escape.
+   */
   public void checkGameStatus() {
     if (GameState.isGameWon) {
 

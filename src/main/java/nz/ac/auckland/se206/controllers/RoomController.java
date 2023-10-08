@@ -34,6 +34,7 @@ import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/** Controller class for managing room-related functionality. */
 public class RoomController implements Controller {
   private static RoomController instance;
 
@@ -41,6 +42,12 @@ public class RoomController implements Controller {
     return instance;
   }
 
+  /**
+   * Converts a color name to a JavaFX Color object.
+   *
+   * @param colorName The name of the color to be converted.
+   * @return The corresponding JavaFX Color object.
+   */
   public static Color convertStringToColor(String colorName) {
     switch (colorName) {
       case "Red Potion":
@@ -162,6 +169,10 @@ public class RoomController implements Controller {
     visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
+  /**
+   * Initializes the Puzzle Room UI components and sets up the puzzle logic. This method is called
+   * after the Puzzle Room UI is loaded.
+   */
   public void initialize() throws ApiProxyException {
     TimerCounter.addTimerLabel(lblTime);
     // Set the instance variable to this object
