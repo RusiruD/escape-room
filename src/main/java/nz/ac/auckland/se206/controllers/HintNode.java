@@ -10,6 +10,10 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
+/**
+ * Represents a HintNode containing various UI components for displaying hints and managing user
+ * interactions.
+ */
 public class HintNode {
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -22,6 +26,19 @@ public class HintNode {
 
   private List<Node> nodeList;
 
+  /**
+   * Constructs a HintNode object with the specified UI components. Initializes the UI components
+   * and creates a nodeList containing the components for easy manipulation.
+   *
+   * @param textArea The TextArea for displaying chat messages.
+   * @param inputText The TextField for user input.
+   * @param showButton The Button for toggling show/hide of chat history.
+   * @param closeButton The Button for closing the chat interface.
+   * @param sendButton The Button for sending user messages.
+   * @param chatBackground The ImageView representing the chat interface background.
+   * @param switchButton The Button for switching chat modes (hint vs. message).
+   * @param hintField The Label for displaying remaining hints.
+   */
   public HintNode(
       TextArea textArea,
       TextField inputText,
