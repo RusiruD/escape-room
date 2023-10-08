@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
@@ -100,6 +101,11 @@ public class ChestController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+
+  @FXML private VBox inventoryKey1;
+  @FXML private VBox inventoryKey2;
+  @FXML private VBox inventoryKey3;
+  
   private HintNode hintNode;
   private AppUi appUi;
 
@@ -323,6 +329,17 @@ public class ChestController implements Controller {
   public void updateInventory() {
 
     inventoryChoiceBox.setItems(Inventory.getInventory());
+
+    // set key visibility
+    if (GameState.hasKeyOne) {
+      inventoryKey1.getChildren().get(1).setOpacity(1); 
+    }
+    if (GameState.hasKeyTwo) {
+      inventoryKey2.getChildren().get(1).setOpacity(1); 
+    }
+    if (GameState.hasKeyThree) {
+      inventoryKey3.getChildren().get(1).setOpacity(1); 
+    }
   }
 
   /**

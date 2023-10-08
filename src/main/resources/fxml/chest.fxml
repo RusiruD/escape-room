@@ -10,6 +10,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
@@ -137,5 +138,48 @@
             </Label>
          </children>
       </Group>
+      <VBox layoutX="700.0" layoutY="120.0" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
+         <children>
+            <VBox fx:id="inventoryKey1" alignment="CENTER" onMouseClicked="#key1Click" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Key 1" />
+                  <ImageView fitHeight="60.0" fitWidth="85.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/key.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="inventoryKey2" alignment="CENTER" onMouseClicked="#key2Click" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Key 2" />
+                  <ImageView fitHeight="60.0" fitWidth="85.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/key.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="inventoryKey3" alignment="CENTER" onMouseClicked="#key3Click" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Key 3" />
+                  <ImageView fitHeight="60.0" fitWidth="85.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/key.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
    </children>
 </Pane>

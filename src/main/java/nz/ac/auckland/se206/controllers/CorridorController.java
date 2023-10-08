@@ -19,6 +19,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -84,6 +85,11 @@ public class CorridorController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+
+  @FXML private VBox inventoryKey1;
+  @FXML private VBox inventoryKey2;
+  @FXML private VBox inventoryKey3;
+
   private HintNode winterNode;
   private AppUi state;
 
@@ -452,6 +458,17 @@ public class CorridorController implements Controller {
   // Method to update inventory in the UI
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
+
+    // set key visibility
+    if (GameState.hasKeyOne) {
+      inventoryKey1.getChildren().get(1).setOpacity(1); 
+    }
+    if (GameState.hasKeyTwo) {
+      inventoryKey2.getChildren().get(1).setOpacity(1); 
+    }
+    if (GameState.hasKeyThree) {
+      inventoryKey3.getChildren().get(1).setOpacity(1); 
+    }
   }
 
   @FXML
