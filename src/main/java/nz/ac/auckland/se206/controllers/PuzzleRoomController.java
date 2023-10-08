@@ -169,7 +169,26 @@ public class PuzzleRoomController implements Controller {
     // Handle click on mute
     GameState.mute();
   }
+  @FXML
+  private void enlargeItem(MouseEvent event) {
+    enlarge((ImageView) event.getSource());
+  }
 
+  @FXML
+  private void shrinkItem(MouseEvent event) {
+    shrink((ImageView) event.getSource());
+  }
+  @FXML
+  private void shrink(ImageView image) {
+    image.setScaleX(1.0);
+    image.setScaleY(1.0);
+  }
+
+  @FXML
+  private void enlarge(ImageView image) {
+    image.setScaleX(1.5);
+    image.setScaleY(1.5);
+  }
   /**
    * Updates the mute button's appearance based on the current sound state (muted or unmuted). If
    * the sound is unmuted, it displays the audio-on icon; otherwise, it displays the audio-off icon.
