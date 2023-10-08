@@ -29,6 +29,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 
 public class CorridorController implements Controller {
@@ -169,6 +170,8 @@ public class CorridorController implements Controller {
   }
 
   public void initialize() {
+
+    TimerCounter.addTimerLabel(lblTime);
 
     instance = this;
     Image image = new Image("/images/character.png");
@@ -372,12 +375,6 @@ public class CorridorController implements Controller {
   // Method to update inventory in the UI
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
-  }
-
-  @FXML
-  public void updateTimerLabel(String time) {
-    // Update the timer label in the UI
-    lblTime.setText(time);
   }
 
   @FXML

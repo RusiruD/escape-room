@@ -90,11 +90,6 @@ public class WinLossController implements Controller {
   }
 
   @Override
-  public void updateTimerLabel(String time) {
-    // Implementation not provided, but should update the timer label
-  }
-
-  @Override
   public void updateInventory() {
     // Implementation not provided, but should update the inventory
   }

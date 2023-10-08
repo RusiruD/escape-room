@@ -20,6 +20,7 @@ import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -52,6 +53,8 @@ public class PuzzleRoomController implements Controller {
   private Chat.AppUi appUi;
 
   public void initialize() {
+    TimerCounter.addTimerLabel(lblTime);
+
     // Set the instance
     key3.visibleProperty().bind(GameState.puzzleRoomSolved);
     // Bind the key3's disable property to the puzzleRoomSolved property
@@ -128,11 +131,6 @@ public class PuzzleRoomController implements Controller {
   public double getPuzzleRoomHeight() {
 
     return puzzleRoomPane.getPrefHeight();
-  }
-
-  @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
   }
 
   @FXML

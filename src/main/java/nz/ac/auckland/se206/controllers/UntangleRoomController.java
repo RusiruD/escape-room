@@ -40,6 +40,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -174,6 +175,7 @@ public class UntangleRoomController implements Controller {
 
   // add a new score to the leaderboard
   public void initialize() {
+    TimerCounter.addTimerLabel(lblTime);
     // set the instance
     instance = this;
 
@@ -409,12 +411,6 @@ public class UntangleRoomController implements Controller {
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
-  }
-
-  @FXML
-  public void updateTimerLabel(String time) {
-    // Set the label to the time
-    lblTime.setText(time);
   }
 
   @FXML

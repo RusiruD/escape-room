@@ -30,6 +30,7 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -129,11 +130,6 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
-
-  @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
 
@@ -158,6 +154,7 @@ public class RoomController implements Controller {
   }
 
   public void initialize() throws ApiProxyException {
+    TimerCounter.addTimerLabel(lblTime);
     // Set the instance variable to this object
     instance = this;
 

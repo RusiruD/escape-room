@@ -29,6 +29,7 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
+import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -102,6 +103,7 @@ public class ChestController implements Controller {
   private AppUi appUi;
 
   public void initialize() {
+    TimerCounter.addTimerLabel(lblTime);
 
     // Initialize the instance field with the current instance of the class
     instance = this;
@@ -310,12 +312,6 @@ public class ChestController implements Controller {
   public void updateInventory() {
 
     inventoryChoiceBox.setItems(Inventory.getInventory());
-  }
-
-  @FXML
-  public void updateTimerLabel(String time) {
-    // Update the timer label in the UI
-    lblTime.setText(time);
   }
 
   @FXML
