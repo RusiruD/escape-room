@@ -460,7 +460,6 @@ public class CorridorController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
 
     // set key visibility
-    System.out.println("key1 " + GameState.hasKeyOne + " key2 " + GameState.hasKeyTwo + " key3 " + GameState.hasKeyThree);
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
