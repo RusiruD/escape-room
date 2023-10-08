@@ -94,11 +94,12 @@ public class PuzzleRoomController implements Controller {
     // change the key3's visibility and disable it
     key3.visibleProperty().unbind();
     key3.disableProperty().unbind();
-    Inventory.addToInventory("key3");
+    
     key3.setVisible(false);
     key3.setDisable(true);
     // update the game state
     GameState.isKey3Collected = true;
+    Inventory.update();
   }
 
   @FXML

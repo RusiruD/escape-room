@@ -371,10 +371,11 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onKey2Clicked(MouseEvent event) {
     GameState.hasKeyTwo = true;
-    Inventory.addToInventory("key2");
+    
     key2.setVisible(false);
     key2.setDisable(true);
     GameState.isKey2Collected = true;
+    Inventory.update();
   }
 
   @FXML

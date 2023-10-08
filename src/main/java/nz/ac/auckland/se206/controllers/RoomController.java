@@ -407,11 +407,15 @@ public class RoomController implements Controller {
   @FXML
   private void onKey1Clicked(MouseEvent event) {
     GameState.hasKeyOne = true;
-    addToInventory(key1);
+    
     GameState.isKey1Collected = true;
+
+    key1.visibleProperty().set(false);
+    key1.mouseTransparentProperty().set(true);
 
     visualDungeonMaster.visibleProperty().set(true);
     visualDungeonMaster.mouseTransparentProperty().set(false);
+    Inventory.update();
   }
 
   @FXML
