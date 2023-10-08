@@ -98,6 +98,12 @@ public class Chat {
           // Run GPT-3 with an initial hint request
           runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
           isThinking = false;
+          Platform.runLater(
+              () -> {
+                HintNode hintNode = nodeMap.get(AppUi.CORRIDOR);
+                enableNode(hintNode.getSwiButton());
+                enableNode(hintNode.getSendButton());
+              });
         });
   }
 
@@ -149,7 +155,6 @@ public class Chat {
     Button switchButton = hintNode.getSwiButton();
     Label hintField = hintNode.getHintField();
 
-    disableNode(closeButton);
     disableNode(sendButton);
     disableNode(switchButton);
     lastHintArea.clear();
@@ -207,7 +212,7 @@ public class Chat {
               () -> {
                 enableNode(switchButton);
                 enableNode(sendButton);
-                enableNode(closeButton);
+
                 int hintsLeft = 5 - GameState.hintsGiven;
                 if (hintsLeft < 0) {
                   hintsLeft = 0;
@@ -262,6 +267,11 @@ public class Chat {
     }
     disableNode(hintNode.getShowButton());
     enableHintField(hintNode.getHintField());
+
+    if (isThinking) {
+      disableNode(hintNode.getSwiButton());
+      disableNode(hintNode.getSendButton());
+    }
   }
 
   /**
