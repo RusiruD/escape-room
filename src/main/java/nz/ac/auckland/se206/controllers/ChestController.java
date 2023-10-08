@@ -33,6 +33,7 @@ import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/** Controller class for managing interactions related to the chest puzzle in the game. */
 public class ChestController implements Controller {
 
   private static ChestController instance;
@@ -102,6 +103,10 @@ public class ChestController implements Controller {
   private HintNode hintNode;
   private AppUi appUi;
 
+  /**
+   * Initializes the class. This method is typically used for setting up initial state and
+   * properties.
+   */
   public void initialize() {
     TimerCounter.addTimerLabel(lblTime);
 
@@ -195,6 +200,12 @@ public class ChestController implements Controller {
             + " confident that you will win. Keep this message short";
   }
 
+  /**
+   * Handles the mouse click event to open the chest. Checks if the correct key combination is
+   * inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   public void openChest(MouseEvent event) {
     System.out.println("open chest");
     // check if correct combination
@@ -314,6 +325,12 @@ public class ChestController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
   }
 
+  /**
+   * Displays the instructions pane when triggered by a mouse click event. Sets the pane to be
+   * visible and not mouse transparent, bringing it to the front.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
@@ -327,6 +344,11 @@ public class ChestController implements Controller {
     callAi();
   }
 
+  /**
+   * Handles the mouse click event on the first key hole. Checks if the correct key is inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void clickKeyHole1(MouseEvent event) {
     // check if correct key
@@ -334,6 +356,11 @@ public class ChestController implements Controller {
     clickKeyHoleHelper(1, keyHole);
   }
 
+  /**
+   * Handles the mouse click event on the second key hole. Checks if the correct key is inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void clickKeyHole2(MouseEvent event) {
     // check if correct key
@@ -341,6 +368,11 @@ public class ChestController implements Controller {
     clickKeyHoleHelper(2, keyHole);
   }
 
+  /**
+   * Handles the mouse click event on the third key hole. Checks if the correct key is inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void clickKeyHole3(MouseEvent event) {
     // check if correct key
@@ -348,6 +380,11 @@ public class ChestController implements Controller {
     clickKeyHoleHelper(3, keyHole);
   }
 
+  /**
+   * Handles the mouse click event on the fourth key hole. Checks if the correct key is inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void clickKeyHole4(MouseEvent event) {
     // check if correct key
@@ -355,6 +392,11 @@ public class ChestController implements Controller {
     clickKeyHoleHelper(4, keyHole);
   }
 
+  /**
+   * Handles the mouse click event on the fifth key hole. Checks if the correct key is inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void clickKeyHole5(MouseEvent event) {
     // check if correct key
@@ -362,6 +404,11 @@ public class ChestController implements Controller {
     clickKeyHoleHelper(5, keyHole);
   }
 
+  /**
+   * Handles the mouse click event on the sixth key hole. Checks if the correct key is inserted.
+   *
+   * @param event The MouseEvent triggered by the mouse click.
+   */
   @FXML
   public void clickKeyHole6(MouseEvent event) {
     // check if correct key
@@ -375,6 +422,11 @@ public class ChestController implements Controller {
     App.returnToCorridor();
   }
 
+  /**
+   * Handles getting the riddle from the Dungeon Master. Displays the riddle either as a pop-up
+   * dialogue or in a dedicated riddle pane, depending on whether the riddle has been previously
+   * called.
+   */
   @FXML
   public void getRiddle() {
     System.out.println("get riddle");
@@ -576,6 +628,10 @@ public class ChestController implements Controller {
     GameState.mute();
   }
 
+  /**
+   * Updates the mute button's appearance based on the current sound state (muted or unmuted). If
+   * the sound is unmuted, it displays the audio-on icon; otherwise, it displays the audio-off icon.
+   */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -611,6 +667,12 @@ public class ChestController implements Controller {
     processChatRequest();
   }
 
+  /**
+   * Initializes the UI state at the start of the game. Sets the initial UI state to 'CHEST',
+   * creates a new HintNode instance with various UI elements, adds the UI state and its
+   * corresponding HintNode to the chat interface, closes the chat interface to reset its state, and
+   * adds the text area for displaying chat messages to the chat interface.
+   */
   public void initialiseStart() {
     // Set the initial UI state to 'CHEST'.
     appUi = AppUi.CHEST;

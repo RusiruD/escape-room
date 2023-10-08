@@ -34,6 +34,12 @@ public class App extends Application {
     launch();
   }
 
+  /**
+   * Sets the root of the scene to the specified AppUi.
+   *
+   * @param appUi The AppUi enum representing the new scene to be set.
+   * @throws IOException If there is an error loading the FXML file for the specified AppUi.
+   */
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
 
     oldScene = newScene;

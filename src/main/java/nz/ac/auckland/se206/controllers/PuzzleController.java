@@ -28,6 +28,7 @@ import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
+/** Controller class for handling puzzle-related logic and UI interactions. */
 public class PuzzleController implements Controller {
 
   private static PuzzleController instance;
@@ -77,6 +78,10 @@ public class PuzzleController implements Controller {
   private HintNode hintNode;
   private Chat.AppUi appUi;
 
+  /**
+   * Initializes the PuzzleController. This method is automatically called after the FXML file has
+   * been loaded.
+   */
   public void initialize() {
 
     TimerCounter.addTimerLabel(lblTime);
@@ -216,6 +221,7 @@ public class PuzzleController implements Controller {
     }
   }
 
+  /** Initializes the leaderboard by adding sample scores and sorting them. */
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
@@ -233,6 +239,12 @@ public class PuzzleController implements Controller {
     timeline.play();
   }
 
+  /**
+   * Handles the event when the player interacts with the AI button, displaying a popup to
+   * communicate with the Dungeon Master.
+   *
+   * @param event The MouseEvent representing the player's interaction with the AI button.
+   */
   @FXML
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
@@ -248,6 +260,12 @@ public class PuzzleController implements Controller {
     visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
+  /**
+   * Displays the instructions pane when the user clicks the instructions button. Sets the
+   * instructions pane to be visible and allows mouse interaction with it.
+   *
+   * @param event The MouseEvent triggered by clicking the instructions button.
+   */
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
@@ -268,6 +286,10 @@ public class PuzzleController implements Controller {
     GameState.mute();
   }
 
+  /**
+   * Updates the mute button's image based on the current mute state of the game. If the game is not
+   * muted, sets the button image to audio on; otherwise, sets it to audio off.
+   */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -284,7 +306,10 @@ public class PuzzleController implements Controller {
     }
   }
 
-  // Initialise the chat
+  /**
+   * Creates and initializes the puzzle-related chat functionality. Sets the chat to be disabled in
+   * the PUZZLE view.
+   */
   public void createClass() {
     // Set the chat to be disabled
     appUi = Chat.AppUi.PUZZLE;

@@ -173,7 +173,10 @@ public class UntangleRoomController implements Controller {
   private String callQuestion;
   private DungeonMaster callDungeonMaster;
 
-  // add a new score to the leaderboard
+  /**
+   * Initializes the PuzzleController. This method is automatically called after the FXML file has
+   * been loaded.
+   */
   public void initialize() {
     TimerCounter.addTimerLabel(lblTime);
     // set the instance
@@ -374,6 +377,10 @@ public class UntangleRoomController implements Controller {
     GameState.currentRoom = GameState.State.CHEST;
   }
 
+  /**
+   * Updates the inventory UI by setting items to the inventory choice box and applying a temporary
+   * shadow effect.
+   */
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
@@ -391,6 +398,12 @@ public class UntangleRoomController implements Controller {
     timeline.play();
   }
 
+  /**
+   * Handles the event when the player interacts with the AI button, displaying a popup to
+   * communicate with the Dungeon Master.
+   *
+   * @param event The MouseEvent representing the player's interaction with the AI button.
+   */
   @FXML
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
@@ -405,6 +418,12 @@ public class UntangleRoomController implements Controller {
     visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 
+  /**
+   * Displays the instructions pane when the user clicks the instructions button. Sets the
+   * instructions pane to be visible and allows mouse interaction with it.
+   *
+   * @param event The MouseEvent triggered by clicking the instructions button.
+   */
   @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
@@ -425,6 +444,10 @@ public class UntangleRoomController implements Controller {
     GameState.mute();
   }
 
+  /**
+   * Updates the mute button's image based on the current mute state of the game. If the game is not
+   * muted, sets the button image to audio on; otherwise, sets it to audio off.
+   */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
@@ -465,6 +488,10 @@ public class UntangleRoomController implements Controller {
     GameState.chat.massDisable(appUi);
   }
 
+  /**
+   * Enables the chat functionality for the untangle puzzle room. Initializes the chat interface and
+   * sets the UI components for chat interactions.
+   */
   public void enableClassAction() {
     // Set the instance
     appUi = Chat.AppUi.UNTANGLE;

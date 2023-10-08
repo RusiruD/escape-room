@@ -34,7 +34,14 @@ public class GptPromptEngineering {
     return prompt;
   }
 
-  // Add more prompts
+  /**
+   * Generates a response prompt giving a contextual hint based on the current room if the user is
+   * asking for a hint. Responds normally if the user is not asking for a hint.
+   *
+   * @param original The original user's message.
+   * @param hint The contextual hint to be provided.
+   * @return A response with a contextual hint or a normal response based on user's request.
+   */
   public static String hintPrompt(String original, String hint) {
     // Gives a contextual hint based on the current room
     return "The user has hints available. If the user is asking for a hint, give them a hint based"
@@ -47,6 +54,13 @@ public class GptPromptEngineering {
         + "\".";
   }
 
+  /**
+   * Generates a response prompt indicating that the user has run out of hints and taunts them.
+   * Under no circumstances provides any information or answers to the user.
+   *
+   * @param original The original user's message.
+   * @return A response indicating the user has no hints available.
+   */
   public static String noHintPrompt(String original) {
     return "The user no long has hints available. Taunt them that they've run out of hints. Under"
         + " no circumstances should you offer any information or answers to the user. Under"
