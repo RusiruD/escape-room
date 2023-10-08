@@ -18,6 +18,10 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
+/**
+ * The DungeonMaster class represents the character in the game who provides guidance and challenges
+ * to the player. It handles dialogues, hints, and interactions with the player.
+ */
 public class DungeonMaster {
   private Pane popUp;
 
@@ -31,6 +35,11 @@ public class DungeonMaster {
   private ChatCompletionRequest chatCompletionRequest =
       new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(250);
 
+  /**
+   * Creates a pop-up dialog with the Dungeon Master's image, name, and dialogue.
+   *
+   * @param popUp The pane representing the pop-up dialog.
+   */
   public void createPopUp(Pane popUp) {
     System.out.println("creating pop up");
     this.popUp = popUp;
@@ -98,7 +107,12 @@ public class DungeonMaster {
     paneFormat(popUp);
   }
 
-  // returns a pane with the text
+  /**
+   * Retrieves a response from the GPT model based on the given role and message.
+   *
+   * @param role The role of the message sender (e.g., "user", "assistant").
+   * @param message The message sent to the GPT model for generating a response.
+   */
   public void getText(String role, String message) {
     System.out.println("getting text");
     messages = null;
@@ -157,6 +171,11 @@ public class DungeonMaster {
     messages = message.split("(?<=[a-z])\\.\\s+");
   }
 
+  /**
+   * Proceeds to the next message in the dialogue with the Dungeon Master, updating the pop-up
+   * dialog. If there are more messages, it displays the next message; if not, it hides the "Next"
+   * button.
+   */
   public void nextMessage() {
     System.out.println("next message");
     // popup -> hbox -> dialog container -> dialog box -> text

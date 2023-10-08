@@ -101,6 +101,11 @@ public class App extends Application {
     root.requestFocus();
   }
 
+  /**
+   * Resets the game to its default state, including UI components and controllers.
+   *
+   * @throws IOException If there are issues loading FXML files.
+   */
   public static void resetToDefault() throws IOException {
     // Reset the game state
     GameState.reset();
@@ -135,6 +140,7 @@ public class App extends Application {
     primaryStage.setHeight(height);
   }
 
+  /** Redirects the user to the chest view. */
   public static void goToChest() {
     try {
       App.setRoot(AppUi.CHEST);
@@ -144,6 +150,7 @@ public class App extends Application {
     }
   }
 
+  /** Redirects the user to the puzzle view. */
   public static void goToPuzzle() {
     try {
       App.setRoot(AppUi.PUZZLE);
@@ -153,6 +160,7 @@ public class App extends Application {
     }
   }
 
+  /** Switches the application UI to the chat interface. */
   public static void goToChat() {
     try {
       App.setRoot(AppUi.CHAT);
@@ -162,6 +170,7 @@ public class App extends Application {
     }
   }
 
+  /** Redirects the user back to the corridor view. */
   public static void returnToCorridor() {
     try {
       // Set the root view to the corridor
@@ -196,6 +205,7 @@ public class App extends Application {
     corridorController.resetPlayerImage();
   }
 
+  /** Redirects the user to the first room (door 1) view. */
   public static void goToDoor1() {
 
     try {

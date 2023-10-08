@@ -8,10 +8,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Instructions class represents in-game instructions for the players. It provides information
+ * about how to play the game and its rules.
+ */
 public class Instructions {
   private String instructions;
   private Pane instructionsPane;
 
+  /**
+   * Constructor to initialize the Instructions object with the provided text.
+   *
+   * @param instructions The text containing game instructions.
+   */
   public Instructions(String instructions) {
     Pane instructionsPane = new Pane();
 

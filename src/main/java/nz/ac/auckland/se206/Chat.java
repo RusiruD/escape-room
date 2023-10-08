@@ -101,8 +101,11 @@ public class Chat {
           Platform.runLater(
               () -> {
                 HintNode hintNode = nodeMap.get(AppUi.CORRIDOR);
-                enableNode(hintNode.getSwiButton());
-                enableNode(hintNode.getSendButton());
+
+                if (!hintNode.getSwiButton().isDisabled()) {
+                  enableNode(hintNode.getSwiButton());
+                  enableNode(hintNode.getSendButton());
+                }
               });
         });
   }

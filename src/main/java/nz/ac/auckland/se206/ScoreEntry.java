@@ -1,6 +1,11 @@
 package nz.ac.auckland.se206;
 
+/**
+ * The ScoreEntry class represents a score entry in the leaderboard. It includes information such as
+ * player name, score, and movements made during the game.
+ */
 public class ScoreEntry {
+  /** Enum representing different types of movements. */
   public enum Movement {
     UP,
     DOWN,
