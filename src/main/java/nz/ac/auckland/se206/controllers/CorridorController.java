@@ -394,6 +394,22 @@ public class CorridorController implements Controller {
       // win game
       GameState.isGameWon = true;
       String time = lblTime.getText();
+      String[] timeSplit = time.split(":");
+      int minutes = Integer.parseInt(timeSplit[0]);
+      int seconds = Integer.parseInt(timeSplit[1]);
+      int timeLeft = seconds + (minutes * 60);
+      int totalTime;
+      if (GameState.currentTimeLimit == GameState.TimeLimit.TWO_MINUTES) {
+        totalTime = 120 - timeLeft;
+      } else if (GameState.currentTimeLimit == GameState.TimeLimit.FOUR_MINUTES) {
+        totalTime = 240 - timeLeft;
+      } else {
+        totalTime = 360 - timeLeft;
+      }
+      GameState.totalTime += totalTime;
+      GameState.gamesWon++;
+      GameState.hintsUsed += GameState.hintsGiven;
+
       ScoreEntry scoreEntry = new ScoreEntry(GameState.difficultyLevel, 0, time);
       GameState.scores.add(scoreEntry);
       LeaderboardController.getInstance().sortScores();

@@ -48,7 +48,7 @@
                               <Insets bottom="5.0" right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="labelGames" text="273 Games Won" textFill="WHITE">
+                        <Label fx:id="labelGames" text="0 Games Won" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -73,7 +73,7 @@
                               <Insets bottom="5.0" right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="labelPlayTime" text="1:00:2 time spent" textFill="WHITE">
+                        <Label fx:id="labelPlayTime" text="00:00 time spent" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>
@@ -98,7 +98,7 @@
                               <Insets bottom="5.0" right="10.0" />
                            </HBox.margin>
                         </ImageView>
-                        <Label fx:id="labelHintsUsed" text="201 Hints Used" textFill="WHITE">
+                        <Label fx:id="labelHintsUsed" text="0 Hints Used" textFill="WHITE">
                            <font>
                               <Font size="16.0" />
                            </font>

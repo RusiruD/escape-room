@@ -21,9 +21,9 @@ public class LeaderboardController {
   @FXML private StackPane graph;
   @FXML private ScrollPane scrollPane;
   @FXML private Label curretProfile;
-  @FXML private Label label1;
-  @FXML private Label label2;
-  @FXML private Label label3;
+  @FXML private Label labelGames;
+  @FXML private Label labelPlayTime;
+  @FXML private Label labelHintsUsed;
   @FXML private VBox leaderboard;
   @FXML private VBox leaderboardContainer;
 
@@ -96,7 +96,7 @@ public class LeaderboardController {
     difficultyLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
     firstHalf.getChildren().add(difficultyLabel);
 
-    Label timeLabel = new Label("Time: " + time);
+    Label timeLabel = new Label("Time Left: " + time);
     timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 15 0 10;");
     secondHalf.getChildren().add(timeLabel);
 
@@ -113,11 +113,21 @@ public class LeaderboardController {
 
   /** Sorts the scores list by time and updates the leaderboard UI. */
   public void sortScores() {
+    // sets up updated leaderboard
+    leaderboard.getChildren().clear();
+    if (leaderboardContainer.getChildren().size() > 2) {
+      leaderboardContainer.getChildren().remove(2);
+    }
+    labelGames.setText(GameState.gamesWon + " Games Won");
+    String formatTime = String.format("%02d:%02d", GameState.totalTime / 60, GameState.totalTime % 60);
+    labelPlayTime.setText(formatTime + " Time Spent");
+    labelHintsUsed.setText(GameState.hintsUsed + " Hints Used");
+
     // Store the last (highest) score entry temporarily
     ScoreEntry temp = GameState.scores.get(GameState.scores.size() - 1);
 
     // Sort the scores list based on time using a comparator
-    GameState.scores.sort(Comparator.comparing(ScoreEntry::getTime));
+    GameState.scores.sort(Comparator.comparing(ScoreEntry::getTime).reversed());
 
     // Iterate through the sorted scores list and update leaderboard positions
     for (int i = 0; i < GameState.scores.size(); i++) {
@@ -134,7 +144,7 @@ public class LeaderboardController {
       addTime(diffuclty, score, i, false);
     }
 
-    // Retrieve the time and name of the highest score entry
+    // Retrieve the time and name of the latest score entry
     String time = temp.getTime();
     String difficulty = temp.getDifficulty();
 

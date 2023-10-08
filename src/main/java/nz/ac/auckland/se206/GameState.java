@@ -32,7 +32,15 @@ public class GameState {
     HARD,
   }
 
+  public enum TimeLimit {
+    TWO_MINUTES,
+    FOUR_MINUTES,
+    SIX_MINUTES,
+  }
+
   public static Difficulty currentDifficulty = Difficulty.EASY;
+
+  public static TimeLimit currentTimeLimit = TimeLimit.TWO_MINUTES;
 
   public static State currentRoom = State.CHEST;
 
@@ -61,6 +69,9 @@ public class GameState {
   public static TextToSpeech tts = new TextToSpeech();
 
   public static int hintsGiven = 0;
+  public static int hintsUsed = 0;
+  public static int totalTime = 0;
+  public static int gamesWon = 0;  
 
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;
