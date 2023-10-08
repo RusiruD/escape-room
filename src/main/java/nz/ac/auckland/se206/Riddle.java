@@ -8,8 +8,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * The Riddle class represents a riddle in the game. It provides functionality to create a graphical
+ * user interface for displaying riddles to the player.
+ */
 public class Riddle {
-
+  /**
+   * Creates a Pane containing the riddle text, a hint button, and a close button.
+   *
+   * @param riddleText The text of the riddle to be displayed.
+   * @return A Pane containing the riddle, hint button, and close button.
+   */
   public static Pane riddlePane(String riddleText) {
     // create a pane to hold the riddle
     Pane riddlePane = new Pane();

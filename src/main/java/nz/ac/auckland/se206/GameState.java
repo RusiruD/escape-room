@@ -24,6 +24,7 @@ public class GameState {
     CHEST
   }
 
+  /** Enum representing different difficulty levels for the game. */
   public enum Difficulty {
     EASY,
     MEDIUM,
@@ -97,6 +98,10 @@ public class GameState {
     return transition;
   }
 
+  /**
+   * Static method to reset all the game state variables. It sets various game state variables to
+   * their initial values.
+   */
   public static void reset() {
     // reset all the game state variables
     isRiddleResolved = false;
@@ -116,6 +121,11 @@ public class GameState {
     puzzleRoomSolved.set(false);
   }
 
+  /**
+   * Static method to toggle the mute state of the game. If the game is currently muted, it will be
+   * unmuted; otherwise, it will be muted. This method also updates the mute status for all
+   * controllers in the scene.
+   */
   public static void mute() {
     // mute the game
     if (isMuted) {
