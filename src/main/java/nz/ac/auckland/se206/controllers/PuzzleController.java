@@ -15,6 +15,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
@@ -75,6 +76,11 @@ public class PuzzleController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+
+  @FXML private VBox inventoryKey1;
+  @FXML private VBox inventoryKey2;
+  @FXML private VBox inventoryKey3;
+
   private HintNode hintNode;
   private Chat.AppUi appUi;
 
@@ -225,7 +231,7 @@ public class PuzzleController implements Controller {
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
-
+    
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
     Duration duration = Duration.seconds(0.5);
     javafx.animation.Timeline timeline =
@@ -237,6 +243,9 @@ public class PuzzleController implements Controller {
                   inventoryChoiceBox.setStyle("");
                 }));
     timeline.play();
+
+    // set key visibility
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   /**

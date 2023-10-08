@@ -32,8 +32,7 @@ public class Inventory {
     return inventory.contains(string);
   }
 
-  private static void update() {
-
+  public static void update() {
     for (Controller controller : SceneManager.getControllers()) {
       if (controller.equals(WinLossController.getInstance())) {
         continue;

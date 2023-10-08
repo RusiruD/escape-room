@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
@@ -50,6 +51,11 @@ public class PuzzleRoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+
+  @FXML private VBox inventoryKey1;
+  @FXML private VBox inventoryKey2;
+  @FXML private VBox inventoryKey3;
+
   private HintNode hintNode;
   private Chat.AppUi appUi;
 
@@ -88,11 +94,12 @@ public class PuzzleRoomController implements Controller {
     // change the key3's visibility and disable it
     key3.visibleProperty().unbind();
     key3.disableProperty().unbind();
-    Inventory.addToInventory("key3");
+    
     key3.setVisible(false);
     key3.setDisable(true);
     // update the game state
     GameState.isKey3Collected = true;
+    Inventory.update();
   }
 
   @FXML
@@ -120,6 +127,9 @@ public class PuzzleRoomController implements Controller {
                   inventoryChoiceBox.setStyle("");
                 }));
     timeline.play();
+
+    // set key visibility
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   /**

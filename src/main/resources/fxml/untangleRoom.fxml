@@ -11,16 +11,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="untangleRoomAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="730.0" prefWidth="800.0" style="-fx-background-image: url('..\images\background.png');" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.UntangleRoomController">
+<AnchorPane fx:id="untangleRoomAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="730.0" prefWidth="800.0" style="-fx-background-image: url('..\images\background.png');" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.UntangleRoomController">
    <children>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/UnentangleRoomBackground.jpeg" />
          </image>
       </ImageView>
-      <Pane fx:id="pane" layoutX="17.0" layoutY="167.0" prefHeight="441.0" prefWidth="767.0" style="-fx-background-color: rgb(92, 95, 119, 0.4);" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="17.0" AnchorPane.rightAnchor="16.0" AnchorPane.topAnchor="167.0" />
+      <Pane fx:id="pane" layoutX="122.0" layoutY="167.0" prefHeight="441.0" prefWidth="550.0" style="-fx-background-color: rgb(92, 95, 119, 0.4);" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="167.0" />
       <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="125.0" text="s" textAlignment="CENTER" textFill="WHITE">
@@ -83,6 +84,49 @@
             </Label>
          </children>
       </Group>
+      <VBox layoutX="700.0" layoutY="120.0" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
+         <children>
+            <VBox fx:id="inventoryKey1" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Key 1" />
+                  <ImageView fitHeight="60.0" fitWidth="85.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/key.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="inventoryKey2" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Key 2" />
+                  <ImageView fitHeight="60.0" fitWidth="85.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/key.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+            <VBox fx:id="inventoryKey3" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="Key 3" />
+                  <ImageView fitHeight="60.0" fitWidth="85.0" opacity="0.35" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/key.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <padding>
+                  <Insets top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
 
    </children>
 </AnchorPane>

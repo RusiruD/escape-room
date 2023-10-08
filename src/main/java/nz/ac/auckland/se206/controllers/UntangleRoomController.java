@@ -26,6 +26,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
@@ -165,6 +166,11 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+
+  @FXML private VBox inventoryKey1;
+  @FXML private VBox inventoryKey2;
+  @FXML private VBox inventoryKey3;
+
   private HintNode hintNode;
   private Chat.AppUi appUi;
 
@@ -226,13 +232,13 @@ public class UntangleRoomController implements Controller {
     // set the points of the
     ObservableList<Double> polygon1 =
         FXCollections.observableArrayList(
-            450d, 80d, 720d, 425d, 195d, 160d, 690d, 160d, 225d, 410d);
+            300d, 60d, 390d, 410d, 90d, 160d, 485d, 160d, 130d, 400d);
     ObservableList<Double> polygon2 =
         FXCollections.observableArrayList(
-            305d, 100d, 375d, 425d, 230d, 360d, 540d, 110d, 500d, 410d);
+            175d, 90d, 270d, 355d, 140d, 320d, 400d, 90d, 380d, 340d);
     ObservableList<Double> polygon3 =
         FXCollections.observableArrayList(
-            685d, 145d, 265d, 360d, 450d, 200d, 630d, 360d, 205d, 150d);
+            480d, 140d, 150d, 350d, 305d, 190d, 470d, 350d, 115d, 140d);
 
     int random = (int) (Math.random() * 3);
     System.out.println(random + "random");
@@ -365,10 +371,11 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onKey2Clicked(MouseEvent event) {
     GameState.hasKeyTwo = true;
-    Inventory.addToInventory("key2");
+    
     key2.setVisible(false);
     key2.setDisable(true);
     GameState.isKey2Collected = true;
+    Inventory.update();
   }
 
   @FXML
@@ -396,6 +403,9 @@ public class UntangleRoomController implements Controller {
                   inventoryChoiceBox.setStyle("");
                 }));
     timeline.play();
+
+    // set key visibility
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   /**

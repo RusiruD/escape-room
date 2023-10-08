@@ -20,6 +20,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
@@ -130,6 +131,11 @@ public class RoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+
+  @FXML private VBox inventoryKey1;
+  @FXML private VBox inventoryKey2;
+  @FXML private VBox inventoryKey3;
+
   private HintNode hintNode;
   private AppUi appUi;
 
@@ -332,6 +338,9 @@ public class RoomController implements Controller {
 
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
+
+    // set key visibility
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   @FXML
@@ -398,11 +407,15 @@ public class RoomController implements Controller {
   @FXML
   private void onKey1Clicked(MouseEvent event) {
     GameState.hasKeyOne = true;
-    addToInventory(key1);
+    
     GameState.isKey1Collected = true;
+
+    key1.visibleProperty().set(false);
+    key1.mouseTransparentProperty().set(true);
 
     visualDungeonMaster.visibleProperty().set(true);
     visualDungeonMaster.mouseTransparentProperty().set(false);
+    Inventory.update();
   }
 
   @FXML
