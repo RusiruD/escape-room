@@ -1,5 +1,7 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
+
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
@@ -52,6 +54,8 @@ public class GameState {
 
   public static String firstPotion = "";
   public static String secondPotion = "";
+
+  public static ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 
   public static Riddle riddle;
   public static TextToSpeech tts = new TextToSpeech();

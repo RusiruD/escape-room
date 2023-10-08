@@ -70,6 +70,11 @@ public class StartScreenController {
     App.returnToCorridor();
   }
 
+  @FXML
+  public void toLeaderboard() {
+    App.goToLeaderboard();
+  }
+
   /**
    * Checks the chosen difficulty and time limit, then starts the game timer accordingly.
    *

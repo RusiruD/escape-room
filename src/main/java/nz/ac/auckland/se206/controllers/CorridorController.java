@@ -29,6 +29,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
+import nz.ac.auckland.se206.ScoreEntry;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 
@@ -392,6 +393,10 @@ public class CorridorController implements Controller {
     } else if (hasSword) {
       // win game
       GameState.isGameWon = true;
+      String time = lblTime.getText();
+      ScoreEntry scoreEntry = new ScoreEntry(GameState.difficultyLevel, 0, time);
+      GameState.scores.add(scoreEntry);
+      LeaderboardController.getInstance().sortScores();
       App.goToWinLoss();
       WinLossController.getInstance().checkGameStatus();
     } else {

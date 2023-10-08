@@ -172,6 +172,16 @@ public class App extends Application {
     }
   }
 
+  public static void goToLeaderboard() {
+    try {
+      // Set the root view to the leaderboard
+      App.setRoot(AppUi.LEADERBOARD);
+
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
+
   public static void makeSwordAndShieldAppear() {
     CorridorController corridorController = CorridorController.getInstance();
     corridorController.onTreasureChestUnlocked();
