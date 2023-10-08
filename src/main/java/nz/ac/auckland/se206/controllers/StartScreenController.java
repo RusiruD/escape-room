@@ -70,6 +70,11 @@ public class StartScreenController {
     App.returnToCorridor();
   }
 
+  @FXML
+  public void toLeaderboard() {
+    App.goToLeaderboard();
+  }
+
   /**
    * Checks the chosen difficulty and time limit, then starts the game timer accordingly.
    *
@@ -84,10 +89,13 @@ public class StartScreenController {
 
     // Start the timer based on the chosen time limit
     if (time.equals("2 Minutes")) {
+      GameState.currentTimeLimit = GameState.TimeLimit.TWO_MINUTES;
       timer.timerStart(120);
     } else if (time.equals("4 Minutes")) {
+      GameState.currentTimeLimit = GameState.TimeLimit.FOUR_MINUTES;
       timer.timerStart(240);
     } else {
+      GameState.currentTimeLimit = GameState.TimeLimit.SIX_MINUTES;
       timer.timerStart(360);
     }
 

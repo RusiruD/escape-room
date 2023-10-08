@@ -9,12 +9,9 @@ public class ScoreEntry {
 
   private Movement movement;
 
-  // keystones being quickness, accuracy, memory, creativity, spatial awareness
-  private double[] statPoints;
-
-  private String name;
+  private String difficulty;
   private int leaderboardPos;
-  private int time;
+  private String time;
 
   /**
    * Constructs a ScoreEntry object with the specified parameters.
@@ -22,21 +19,19 @@ public class ScoreEntry {
    * @param name The name associated with the score entry.
    * @param leaderboardPos The position of the entry on the leaderboard.
    * @param time The time taken to achieve the score.
-   * @param statPoints An array of statistical points associated with the score entry.
    */
-  public ScoreEntry(String name, int leaderboardPos, int time, double[] statPoints) {
-    this.name = name;
+  public ScoreEntry(String difficulty, int leaderboardPos, String time) {
+    this.difficulty = difficulty;
     this.leaderboardPos = leaderboardPos;
     this.time = time;
-    this.statPoints = statPoints;
     movement = Movement.NONE; // Set the initial movement to NONE
   }
 
-  public String getName() {
-    return name;
+  public String getDifficulty() {
+    return difficulty;
   }
 
-  public int getTime() {
+  public String getTime() {
     return time;
   }
 
@@ -46,10 +41,6 @@ public class ScoreEntry {
 
   public Movement getMovement() {
     return movement;
-  }
-
-  public double[] getStatPoints() {
-    return statPoints;
   }
 
   public void setLeaderboardPos(int leaderboardPos) {
