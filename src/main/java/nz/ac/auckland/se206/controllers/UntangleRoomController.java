@@ -470,7 +470,9 @@ public class UntangleRoomController implements Controller {
   }
 
   public void initialiseAfterStart() {
+    // Set the instance
     appUi = Chat.AppUi.UNTANGLE;
+    // Create a CompletableFuture for the background task
     hintNode =
         new HintNode(
             textArea,
@@ -482,6 +484,7 @@ public class UntangleRoomController implements Controller {
             switchButton,
             hintField);
     GameState.chat.addToMap(appUi, hintNode);
+    // Set the current application UI to UNTANGLE
     onCloseChat(null);
     GameState.chat.addChat(textArea);
   }

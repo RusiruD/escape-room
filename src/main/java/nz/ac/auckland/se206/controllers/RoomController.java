@@ -495,7 +495,9 @@ public class RoomController implements Controller {
   }
 
   public void initialiseAfterStart() {
+    // Set the instance variable to this object
     appUi = AppUi.FIRST_ROOM;
+    // hintNode setup
     hintNode =
         new HintNode(
             textArea,
@@ -507,6 +509,7 @@ public class RoomController implements Controller {
             switchButton,
             hintField);
     GameState.chat.addToMap(appUi, hintNode);
+    // Set the current application UI to FIRST_ROOM
     onCloseChat(null);
     GameState.chat.addChat(textArea);
   }

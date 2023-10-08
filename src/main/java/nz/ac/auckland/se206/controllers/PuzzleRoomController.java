@@ -52,17 +52,19 @@ public class PuzzleRoomController implements Controller {
   private Chat.AppUi appUi;
 
   public void initialize() {
+    // Set the instance
     key3.visibleProperty().bind(GameState.puzzleRoomSolved);
+    // Bind the key3's disable property to the puzzleRoomSolved property
     key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
-
+    // Bind the inventory choice box to the inventory
     instance = this;
     String instructionsString = "Click the center of the door to enter \n\n";
-
+    // Add the instructions to the pane
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
-
+    // Set the instructions pane to be invisible and mouse transparent
     instructionsDisplay.visibleProperty().set(false);
     instructionsDisplay.mouseTransparentProperty().set(true);
   }
@@ -186,7 +188,11 @@ public class PuzzleRoomController implements Controller {
   }
 
   public void initialiseAfterStart() {
+    // Set the current application UI to PUZZLEROOM
     appUi = Chat.AppUi.PUZZLEROOM;
+
+    // Create a new HintNode with UI components: textArea, inputText, showButton,
+    // closeButton, sendButton, chatBackground, switchButton, and hintField
     hintNode =
         new HintNode(
             textArea,
@@ -197,8 +203,14 @@ public class PuzzleRoomController implements Controller {
             chatBackground,
             switchButton,
             hintField);
+
+    // Add the HintNode to the chat map in the GameState
     GameState.chat.addToMap(appUi, hintNode);
+
+    // Close the chat interface (onCloseChat method is called with null parameter)
     onCloseChat(null);
+
+    // Add the text area to the chat
     GameState.chat.addChat(textArea);
   }
 

@@ -413,7 +413,9 @@ public class CorridorController implements Controller {
   }
 
   public void initialiseAfterStart() {
+    // Initialise the chat
     state = AppUi.CORRIDOR;
+    // Create a CompletableFuture for the background task
     winterNode =
         new HintNode(
             textArea,
@@ -424,6 +426,7 @@ public class CorridorController implements Controller {
             chatBackground,
             switchButton,
             hintField);
+    // Configure the chat completion request
     GameState.chat.addToMap(state, winterNode);
     GameState.chat.massDisable(state);
     GameState.chat.addChat(textArea);

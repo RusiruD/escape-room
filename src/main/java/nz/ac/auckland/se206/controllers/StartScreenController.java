@@ -58,8 +58,8 @@ public class StartScreenController {
 
     CorridorController.getInstance().initialiseAfterStart();
     RoomController.getInstance().initialiseAfterStart();
-    ChestController.getInstance().initialiseAfterStart();
-    PuzzleController.getInstance().initialiseAfterStart();
+    ChestController.getInstance().initialiseStart();
+    PuzzleController.getInstance().createClass();
     PuzzleRoomController.getInstance().initialiseAfterStart();
     UntangleRoomController.getInstance().initialiseAfterStart();
 
