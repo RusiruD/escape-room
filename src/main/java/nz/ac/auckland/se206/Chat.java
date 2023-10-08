@@ -20,7 +20,15 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionRequest;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult;
 import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 
+/**
+ * This class represents the chat interface and handles interactions with GPT-3 for generating
+ * responses. It manages various chat screens, message processing, and UI updates.
+ */
 public class Chat {
+  /**
+   * Enumeration representing different states of the application user interface. The states include
+   * the different rooms, chat interface, puzzle screens, and game outcome screens.
+   */
   public enum AppUi {
     START,
     FIRST_ROOM,
@@ -49,6 +57,9 @@ public class Chat {
   private boolean showLastHintOnly;
   private Map<AppUi, HintNode> nodeMap;
 
+  /**
+   * Constructs a Chat object. Initializes data structures and properties for chat functionality.
+   */
   public Chat() {
     nodeMap = new HashMap<>();
     isThinking = true;
@@ -63,6 +74,13 @@ public class Chat {
     variousChatScreens.add(chat);
   }
 
+  /**
+   * Initializes chat functionality after the application starts. Configures the chat completion
+   * request and runs GPT-3 with an initial hint request in a background task using
+   * CompletableFuture.
+   *
+   * @throws ApiProxyException If there is an error with the API proxy.
+   */
   public void initialiseAfterStart() throws ApiProxyException {
 
     // Create a CompletableFuture for the background task
@@ -110,6 +128,14 @@ public class Chat {
     }
   }
 
+  /**
+   * Handles sending a message in the chat interface based on the current application UI state.
+   *
+   * @param message The message to be sent.
+   * @param appUi The current application UI state.
+   * @throws ApiProxyException If there is an error with the API proxy.
+   * @throws IOException If there is an I/O error.
+   */
   public void onSendMessage(String message, AppUi appUi) throws ApiProxyException, IOException {
 
     HintNode hintNode = nodeMap.get(appUi);
@@ -191,6 +217,10 @@ public class Chat {
         });
   }
 
+  /**
+   * Updates chat messages on various chat screens. It sets the text on each TextArea based on the
+   * current chat display mode, either showing the last hint only or the entire chat history.
+   */
   public void updateChats() {
 
     for (TextArea textArea : variousChatScreens) {
@@ -219,6 +249,12 @@ public class Chat {
     actualNode.setDisable(true);
   }
 
+  /**
+   * Enables a group of UI components associated with the given AppUi instance. It enables all nodes
+   * in the HintNode's nodeList, disables the show button, and enables the hint field.
+   *
+   * @param appUi The AppUi instance whose associated UI components need to be enabled.
+   */
   public void massEnable(AppUi appUi) {
     HintNode hintNode = nodeMap.get(appUi);
     for (Node node : hintNode.getNodeList()) {
@@ -228,11 +264,20 @@ public class Chat {
     enableHintField(hintNode.getHintField());
   }
 
+  /**
+   * Disables a group of UI components associated with the given AppUi instance. It disables all
+   * nodes in the HintNode's nodeList, enabling the show button, and disabling the hint field.
+   *
+   * @param appUi The AppUi instance whose associated UI components need to be disabled.
+   */
   public void massDisable(AppUi appUi) {
+
     HintNode hintNode = nodeMap.get(appUi);
+
     for (Node node : hintNode.getNodeList()) {
       disableNode(node);
     }
+
     enableNode(hintNode.getShowButton());
     disableNode(hintNode.getHintField());
   }

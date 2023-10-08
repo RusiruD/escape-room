@@ -103,7 +103,6 @@ public class App extends Application {
     SceneManager.addUi(AppUi.PUZZLE, loadFxml("puzzle"));
     SceneManager.addUi(AppUi.PUZZLEROOM, loadFxml("puzzleroom"));
     SceneManager.addUi(AppUi.CHEST, loadFxml("chest"));
-    SceneManager.addUi(AppUi.CHAT, loadFxml("chat"));
     SceneManager.addUi(AppUi.FIRST_ROOM, loadFxml("room"));
     SceneManager.addUi(AppUi.CORRIDOR, loadFxml("corridor"));
     SceneManager.addUi(AppUi.UNTANGLE, loadFxml("untangleRoom"));
