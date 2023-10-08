@@ -30,7 +30,8 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class RoomController implements Controller {
@@ -129,11 +130,6 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
-
-  @FXML
   public void getInstructions(MouseEvent event) {
     // Set the instructions pane to be visible and not mouse transparent
 
@@ -158,6 +154,7 @@ public class RoomController implements Controller {
   }
 
   public void initialize() throws ApiProxyException {
+    TimerCounter.addTimerLabel(lblTime);
     // Set the instance variable to this object
     instance = this;
 
@@ -445,7 +442,7 @@ public class RoomController implements Controller {
   @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -464,13 +461,13 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyPressEvent(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      handleTextInput();
+      onTextInputHandled();
     }
   }
 
-  private void handleTextInput() {
+  private void onTextInputHandled() {
     try {
       GameState.chat.onSendMessage(inputText.getText(), appUi);
     } catch (Exception e) {
@@ -480,22 +477,24 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
+  private void onMessageSent(ActionEvent event) {
+    onTextInputHandled();
   }
 
   @FXML
-  private void onShowChat(ActionEvent event) {
+  private void onChatShown(ActionEvent event) {
     GameState.chat.massEnable(appUi);
   }
 
   @FXML
-  private void onCloseChat(ActionEvent event) {
+  private void onChatClosed(ActionEvent event) {
     GameState.chat.massDisable(appUi);
   }
 
-  public void initialiseAfterStart() {
+  public void onInitializationAfterStart() {
+    // Set the instance variable to this object
     appUi = AppUi.FIRST_ROOM;
+    // hintNode setup
     hintNode =
         new HintNode(
             textArea,
@@ -507,12 +506,13 @@ public class RoomController implements Controller {
             switchButton,
             hintField);
     GameState.chat.addToMap(appUi, hintNode);
-    onCloseChat(null);
+    // Set the current application UI to FIRST_ROOM
+    onChatClosed(null);
     GameState.chat.addChat(textArea);
   }
 
   @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  private void onChatViewChanged(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 }

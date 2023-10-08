@@ -29,7 +29,8 @@ import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 public class ChestController implements Controller {
@@ -102,6 +103,7 @@ public class ChestController implements Controller {
   private AppUi appUi;
 
   public void initialize() {
+    TimerCounter.addTimerLabel(lblTime);
 
     // Initialize the instance field with the current instance of the class
     instance = this;
@@ -310,12 +312,6 @@ public class ChestController implements Controller {
   public void updateInventory() {
 
     inventoryChoiceBox.setItems(Inventory.getInventory());
-  }
-
-  @FXML
-  public void updateTimerLabel(String time) {
-    // Update the timer label in the UI
-    lblTime.setText(time);
   }
 
   @FXML
@@ -571,7 +567,7 @@ public class ChestController implements Controller {
   @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -590,13 +586,18 @@ public class ChestController implements Controller {
   }
 
   @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyboardInput(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      onSendMessage(null);
+      onClickSend(null);
     }
   }
 
-  private void handleTextInput() {
+  @FXML
+  private void onCreate(ActionEvent event) {
+    GameState.chat.massEnable(appUi);
+  }
+
+  private void processChatRequest() {
     try {
       GameState.chat.onSendMessage(inputText.getText(), appUi);
     } catch (Exception e) {
@@ -606,21 +607,11 @@ public class ChestController implements Controller {
   }
 
   @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
+  private void onClickSend(ActionEvent event) {
+    processChatRequest();
   }
 
-  @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(appUi);
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(appUi);
-  }
-
-  public void initialiseAfterStart() {
+  public void initialiseStart() {
     // Set the initial UI state to 'CHEST'.
     appUi = AppUi.CHEST;
 
@@ -640,14 +631,19 @@ public class ChestController implements Controller {
     GameState.chat.addToMap(appUi, hintNode);
 
     // Close the chat interface to reset its state.
-    onCloseChat(null);
+    onHandleChat(null);
 
     // Add the text area for displaying chat messages to the chat interface.
     GameState.chat.addChat(textArea);
   }
 
   @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  private void onHandleChat(ActionEvent event) {
+    GameState.chat.massDisable(appUi);
+  }
+
+  @FXML
+  private void onSwitchView(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 }

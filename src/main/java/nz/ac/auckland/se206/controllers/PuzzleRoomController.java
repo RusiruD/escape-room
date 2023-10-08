@@ -20,7 +20,8 @@ import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -52,17 +53,21 @@ public class PuzzleRoomController implements Controller {
   private Chat.AppUi appUi;
 
   public void initialize() {
-    key3.visibleProperty().bind(GameState.puzzleRoomSolved);
-    key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
+    TimerCounter.addTimerLabel(lblTime);
 
+    // Set the instance
+    key3.visibleProperty().bind(GameState.puzzleRoomSolved);
+    // Bind the key3's disable property to the puzzleRoomSolved property
+    key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
+    // Bind the inventory choice box to the inventory
     instance = this;
     String instructionsString = "Click the center of the door to enter \n\n";
-
+    // Add the instructions to the pane
     Instructions instructions = new Instructions(instructionsString);
     Pane instructionsPane = instructions.getInstructionsPane();
     instructionsDisplay.getChildren().add(instructionsPane);
     instructionsPane.getStyleClass().add("riddle");
-
+    // Set the instructions pane to be invisible and mouse transparent
     instructionsDisplay.visibleProperty().set(false);
     instructionsDisplay.mouseTransparentProperty().set(true);
   }
@@ -129,14 +134,9 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
-
-  @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -155,13 +155,13 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyPress(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      handleTextInput();
+      onTextInput();
     }
   }
 
-  private void handleTextInput() {
+  private void onTextInput() {
     try {
       GameState.chat.onSendMessage(inputText.getText(), appUi);
     } catch (Exception e) {
@@ -171,22 +171,26 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
+  private void onMessageSent(ActionEvent event) {
+    onTextInput();
   }
 
   @FXML
-  private void onShowChat(ActionEvent event) {
+  private void onChatShown(ActionEvent event) {
     GameState.chat.massEnable(appUi);
   }
 
   @FXML
-  private void onCloseChat(ActionEvent event) {
+  private void onChatClosed(ActionEvent event) {
     GameState.chat.massDisable(appUi);
   }
 
-  public void initialiseAfterStart() {
+  public void onInitializationAfterStart() {
+    // Set the current application UI to PUZZLEROOM
     appUi = Chat.AppUi.PUZZLEROOM;
+
+    // Create a new HintNode with UI components: textArea, inputText, showButton,
+    // closeButton, sendButton, chatBackground, switchButton, and hintField
     hintNode =
         new HintNode(
             textArea,
@@ -197,13 +201,19 @@ public class PuzzleRoomController implements Controller {
             chatBackground,
             switchButton,
             hintField);
+
+    // Add the HintNode to the chat map in the GameState
     GameState.chat.addToMap(appUi, hintNode);
-    onCloseChat(null);
+
+    // Close the chat interface (onCloseChat method is called with null parameter)
+    onChatClosed(null);
+
+    // Add the text area to the chat
     GameState.chat.addChat(textArea);
   }
 
   @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  private void onChatViewSwitched(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 }

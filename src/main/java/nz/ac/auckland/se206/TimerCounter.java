@@ -1,12 +1,16 @@
 package nz.ac.auckland.se206;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
-import nz.ac.auckland.se206.controllers.SceneManager;
+import javafx.scene.control.Label;
 import nz.ac.auckland.se206.controllers.WinLossController;
 
 public class TimerCounter {
+
+  private static List<Label> timerLabels = new ArrayList<>();
 
   public void timerStart(int time) {
     final int[] timeCounter = new int[1];
@@ -54,11 +58,12 @@ public class TimerCounter {
   }
 
   private void updateTimers(String string) {
-    for (Controller controller : SceneManager.getControllers()) {
-      if (controller.equals(WinLossController.getInstance())) {
-        continue;
-      }
-      controller.updateTimerLabel(string);
+    for (Label label : timerLabels) {
+      label.setText(string);
     }
+  }
+
+  public static void addTimerLabel(Label label) {
+    timerLabels.add(label);
   }
 }

@@ -57,11 +57,11 @@ public class StartScreenController {
     GameState.chat.initialiseAfterStart();
 
     CorridorController.getInstance().initialiseAfterStart();
-    RoomController.getInstance().initialiseAfterStart();
-    ChestController.getInstance().initialiseAfterStart();
-    PuzzleController.getInstance().initialiseAfterStart();
-    PuzzleRoomController.getInstance().initialiseAfterStart();
-    UntangleRoomController.getInstance().initialiseAfterStart();
+    RoomController.getInstance().onInitializationAfterStart();
+    ChestController.getInstance().initialiseStart();
+    PuzzleController.getInstance().createClass();
+    PuzzleRoomController.getInstance().onInitializationAfterStart();
+    UntangleRoomController.getInstance().enableClassAction();
 
     timerChoice.getStyleClass().add("choice-box");
     difficultyChoice.getStyleClass().add("choice-box");

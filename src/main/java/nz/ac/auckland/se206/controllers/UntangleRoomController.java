@@ -40,7 +40,8 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Drag the anchors around to change a polygon's points. */
@@ -174,6 +175,7 @@ public class UntangleRoomController implements Controller {
 
   // add a new score to the leaderboard
   public void initialize() {
+    TimerCounter.addTimerLabel(lblTime);
     // set the instance
     instance = this;
 
@@ -412,15 +414,9 @@ public class UntangleRoomController implements Controller {
   }
 
   @FXML
-  public void updateTimerLabel(String time) {
-    // Set the label to the time
-    lblTime.setText(time);
-  }
-
-  @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -445,7 +441,7 @@ public class UntangleRoomController implements Controller {
     }
   }
 
-  private void handleTextInput() {
+  private void enforceTextRetrieval() {
     try {
       GameState.chat.onSendMessage(inputText.getText(), appUi);
     } catch (Exception e) {
@@ -456,7 +452,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML
   private void onSendMessage(ActionEvent event) {
-    handleTextInput();
+    enforceTextRetrieval();
   }
 
   @FXML
@@ -469,8 +465,10 @@ public class UntangleRoomController implements Controller {
     GameState.chat.massDisable(appUi);
   }
 
-  public void initialiseAfterStart() {
+  public void enableClassAction() {
+    // Set the instance
     appUi = Chat.AppUi.UNTANGLE;
+    // Create a CompletableFuture for the background task
     hintNode =
         new HintNode(
             textArea,
@@ -482,6 +480,7 @@ public class UntangleRoomController implements Controller {
             switchButton,
             hintField);
     GameState.chat.addToMap(appUi, hintNode);
+    // Set the current application UI to UNTANGLE
     onCloseChat(null);
     GameState.chat.addChat(textArea);
   }

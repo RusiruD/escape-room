@@ -23,7 +23,8 @@ import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -77,6 +78,9 @@ public class PuzzleController implements Controller {
   private Chat.AppUi appUi;
 
   public void initialize() {
+
+    TimerCounter.addTimerLabel(lblTime);
+
     // set the instance
     instance = this;
 
@@ -212,11 +216,6 @@ public class PuzzleController implements Controller {
     }
   }
 
-  @FXML
-  public void updateTimerLabel(String time) {
-    lblTime.setText(time);
-  }
-
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
@@ -260,7 +259,7 @@ public class PuzzleController implements Controller {
   @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -279,38 +278,17 @@ public class PuzzleController implements Controller {
   }
 
   @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyEntered(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      onSendMessage(null);
+      onProcessMessage(null);
     }
   }
 
-  private void handleTextInput() {
-    try {
-      GameState.chat.onSendMessage(inputText.getText(), appUi);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    inputText.clear();
-  }
-
-  @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
-  }
-
-  @FXML
-  private void onShowChat(ActionEvent event) {
-    GameState.chat.massEnable(appUi);
-  }
-
-  @FXML
-  private void onCloseChat(ActionEvent event) {
-    GameState.chat.massDisable(appUi);
-  }
-
-  public void initialiseAfterStart() {
+  // Initialise the chat
+  public void createClass() {
+    // Set the chat to be disabled
     appUi = Chat.AppUi.PUZZLE;
+    // Initialise the chat
     hintNode =
         new HintNode(
             textArea,
@@ -321,13 +299,39 @@ public class PuzzleController implements Controller {
             chatBackground,
             switchButton,
             hintField);
+    // Add the chat to the map
     GameState.chat.addToMap(appUi, hintNode);
-    onCloseChat(null);
+    onDeleteChat(null);
+    // Add the chat to the chat list
     GameState.chat.addChat(textArea);
   }
 
   @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  private void onCreateChat(ActionEvent event) {
+    GameState.chat.massEnable(appUi);
+  }
+
+  private void enableTextReturn() {
+    try {
+      GameState.chat.onSendMessage(inputText.getText(), appUi);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    inputText.clear();
+  }
+
+  @FXML
+  private void onProcessMessage(ActionEvent event) {
+    enableTextReturn();
+  }
+
+  @FXML
+  private void onDeleteChat(ActionEvent event) {
+    GameState.chat.massDisable(appUi);
+  }
+
+  @FXML
+  private void onReverseChat(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 }
