@@ -61,12 +61,21 @@ public class RoomController implements Controller {
     } // Default to black if the color name is not recognized
   }
 
+  /**
+   * Calculates and returns the average color resulting from blending two input colors.
+   *
+   * @param color1 The first color to be blended.
+   * @param color2 The second color to be blended.
+   * @return The average color obtained by averaging the RGB values of the input colors.
+   */
   public static Color calculateAverageColor(Color color1, Color color2) {
+    // Calculate the average RGB values of the input colors
     double avgRed = (color1.getRed() + color2.getRed()) / 2.0;
     double avgGreen = (color1.getGreen() + color2.getGreen()) / 2.0;
     double avgBlue = (color1.getBlue() + color2.getBlue()) / 2.0;
 
-    return new Color(avgRed, avgGreen, avgBlue, 1.0); // Alpha value set to 1.0 (fully opaque)
+    // Return the average color with fully opaque alpha value (1.0)
+    return new Color(avgRed, avgGreen, avgBlue, 1.0);
   }
 
   @FXML private Pane potionsRoomPane;
@@ -491,10 +500,17 @@ public class RoomController implements Controller {
     GameState.chat.massDisable(appUi);
   }
 
+  /**
+   * Performs initialization tasks after the application starts. Sets the instance variable "appUi"
+   * to the FIRST_ROOM, creates and sets up a HintNode, adds the HintNode to the chat map in the
+   * GameState, sets the current application UI to FIRST_ROOM, and adds the text area to the chat in
+   * the GameState.
+   */
   public void onInitializationAfterStart() {
     // Set the instance variable to this object
     appUi = AppUi.FIRST_ROOM;
-    // hintNode setup
+
+    // HintNode setup
     hintNode =
         new HintNode(
             textArea,
@@ -505,9 +521,14 @@ public class RoomController implements Controller {
             chatBackground,
             switchButton,
             hintField);
+
+    // Add HintNode to the chat map in GameState
     GameState.chat.addToMap(appUi, hintNode);
+
     // Set the current application UI to FIRST_ROOM
     onChatClosed(null);
+
+    // Add the text area to the chat in GameState
     GameState.chat.addChat(textArea);
   }
 

@@ -16,12 +16,20 @@ public class ScoreEntry {
   private int leaderboardPos;
   private int time;
 
+  /**
+   * Constructs a ScoreEntry object with the specified parameters.
+   *
+   * @param name The name associated with the score entry.
+   * @param leaderboardPos The position of the entry on the leaderboard.
+   * @param time The time taken to achieve the score.
+   * @param statPoints An array of statistical points associated with the score entry.
+   */
   public ScoreEntry(String name, int leaderboardPos, int time, double[] statPoints) {
     this.name = name;
     this.leaderboardPos = leaderboardPos;
     this.time = time;
     this.statPoints = statPoints;
-    movement = Movement.NONE;
+    movement = Movement.NONE; // Set the initial movement to NONE
   }
 
   public String getName() {

@@ -11,6 +11,12 @@ import nz.ac.auckland.se206.speech.TextToSpeech;
 /** Represents the state of the game. */
 public class GameState {
 
+  /**
+   * Enumeration representing different states or rooms in a game scenario. This enum helps
+   * determine the current room the player is in. The possible states include MARCELLIN, RUSIRU,
+   * ZACH, and CHEST. Players can use these states to track their location and progress within the
+   * game.
+   */
   public enum State {
     MARCELLIN,
     RUSIRU,
@@ -52,8 +58,6 @@ public class GameState {
 
   public static int hintsGiven = 0;
 
-
-
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
@@ -74,8 +78,14 @@ public class GameState {
     return puzzleRoomSolved.get();
   }
 
+  /**
+   * Creates a TranslateTransition for the specified ImageView, making it bounce vertically.
+   *
+   * @param image The ImageView to apply the bouncing animation to.
+   * @return The TranslateTransition with bouncing animation properties.
+   */
   public static TranslateTransition translate(ImageView image) {
-    // default transition for boucning
+    // Default transition for bouncing
     TranslateTransition transition = new TranslateTransition();
     transition.setDuration(Duration.seconds(1));
     transition.setNode(image);

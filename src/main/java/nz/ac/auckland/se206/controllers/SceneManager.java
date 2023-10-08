@@ -6,7 +6,9 @@ import java.util.List;
 import javafx.scene.Parent;
 import nz.ac.auckland.se206.Controller;
 
+/** Utility class for managing different states of the application user interface. */
 public class SceneManager {
+  /** Enumeration representing different states of the application user interface. */
   public enum AppUi {
     START,
     FIRST_ROOM,

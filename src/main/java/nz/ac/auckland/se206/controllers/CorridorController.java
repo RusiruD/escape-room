@@ -329,13 +329,21 @@ public class CorridorController implements Controller {
     App.goToChest();
   }
 
+  /**
+   * Handles the logic when the treasure chest is unlocked. If the chest is opened, the
+   * "swordandshield" item is made visible and enabled if it is not already in the inventory. This
+   * method is typically triggered in response to a user action indicating the successful unlocking
+   * of the treasure chest.
+   */
   @FXML
   public void onTreasureChestUnlocked() {
-    if (GameState.isChestOpened == true
-        && swordandshield.visibleProperty().get() == false
-        && !Inventory.contains("sword/shield")) {
-      swordandshield.setVisible(true);
-      swordandshield.setDisable(false);
+    // Check if the chest is opened, the "swordandshield" item is not in inventory, and it is
+    // currently not visible
+    if (GameState.isChestOpened
+        && !Inventory.contains("sword/shield")
+        && !swordandshield.isVisible()) {
+      swordandshield.setVisible(true); // Make the "swordandshield" item visible
+      swordandshield.setDisable(false); // Enable the "swordandshield" item for interaction
     }
   }
 

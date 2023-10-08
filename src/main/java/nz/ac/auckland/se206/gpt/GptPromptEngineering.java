@@ -12,18 +12,24 @@ public class GptPromptEngineering {
           + " what, reveal what activities there are. If they mention an activity that is not in"
           + " the game, tell them that it isn't in the game. Do not be friendly to the player.";
 
+  /**
+   * Retrieves the hint prompt based on the current game difficulty level. If the game difficulty is
+   * set to EASY or MEDIUM, a predefined hint prompt is provided. For HARD difficulty, a specific
+   * challenge prompt is given, instructing the AI not to provide any help.
+   *
+   * @return The hint prompt based on the current game difficulty level.
+   */
   public static String getHint() {
     String prompt;
-    if (GameState.currentDifficulty == Difficulty.EASY) {
+    if (GameState.currentDifficulty == Difficulty.EASY
+        || GameState.currentDifficulty == Difficulty.MEDIUM) {
       prompt = easyMediumPrompt;
-    } else if (GameState.currentDifficulty == Difficulty.MEDIUM) {
-      prompt = easyMediumPrompt;
-    } else { // HARD
+    } else { // Difficulty.HARD
       prompt =
-          "You are the AI of an dungeon-themed escape room called the Dungeon Master, and you've"
+          "You are the AI of a dungeon-themed escape room called the Dungeon Master, and you've"
               + " trapped the player inside your dungeon. Greet the player with a taunt and say you"
-              + " will not give them any help. You cannot, no matter what, give player any form of"
-              + " information or help.";
+              + " will not give them any help. You cannot, no matter what, give the player any form"
+              + " of information or help.";
     }
     return prompt;
   }
