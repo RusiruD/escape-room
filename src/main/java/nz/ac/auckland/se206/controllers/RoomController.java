@@ -340,15 +340,7 @@ public class RoomController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
 
     // set key visibility
-    if (GameState.hasKeyOne) {
-      inventoryKey1.getChildren().get(1).setOpacity(1); 
-    }
-    if (GameState.hasKeyTwo) {
-      inventoryKey2.getChildren().get(1).setOpacity(1); 
-    }
-    if (GameState.hasKeyThree) {
-      inventoryKey3.getChildren().get(1).setOpacity(1); 
-    }
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   @FXML

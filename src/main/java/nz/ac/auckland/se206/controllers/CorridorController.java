@@ -460,15 +460,8 @@ public class CorridorController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
 
     // set key visibility
-    if (GameState.hasKeyOne) {
-      inventoryKey1.getChildren().get(1).setOpacity(1); 
-    }
-    if (GameState.hasKeyTwo) {
-      inventoryKey2.getChildren().get(1).setOpacity(1); 
-    }
-    if (GameState.hasKeyThree) {
-      inventoryKey3.getChildren().get(1).setOpacity(1); 
-    }
+    System.out.println("key1 " + GameState.hasKeyOne + " key2 " + GameState.hasKeyTwo + " key3 " + GameState.hasKeyThree);
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   @FXML

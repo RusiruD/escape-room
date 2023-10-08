@@ -5,6 +5,7 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.SceneManager;
 import nz.ac.auckland.se206.speech.TextToSpeech;
@@ -153,6 +154,24 @@ public class GameState {
     }
     for (Controller controller : SceneManager.getControllers()) {
       controller.updateMute();
+    }
+  }
+
+  public static void setKeys(VBox key1, VBox key2, VBox key3) {
+    if (hasKeyOne) {
+      key1.getChildren().get(1).setOpacity(1);
+    } else {
+      key1.getChildren().get(1).setOpacity(0.35);
+    }
+    if (hasKeyTwo) {
+      key2.getChildren().get(1).setOpacity(1);
+    } else {
+      key2.getChildren().get(1).setOpacity(0.35);
+    }
+    if (hasKeyThree) {
+      key3.getChildren().get(1).setOpacity(1);
+    } else {
+      key3.getChildren().get(1).setOpacity(0.35);
     }
   }
 }

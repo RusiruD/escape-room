@@ -44,10 +44,10 @@ public class ChestController implements Controller {
     return instance;
   }
 
-  private HashMap<String, String> keyHoleMap = new HashMap<String, String>();
+  private HashMap<String, Integer> keyHoleMap = new HashMap<String, Integer>();
   private HashMap<String, String> correctKeyMap = new HashMap<String, String>();
-  private HashMap<String, String> keyMap = new HashMap<String, String>();
-  private List<String> keys = Arrays.asList("key1", "key2", "key3");
+  private HashMap<String, Integer> keyMap = new HashMap<String, Integer>();
+  private List<Integer> keys = Arrays.asList(1, 2, 3);
 
   @FXML private Button riddleButton;
 
@@ -105,9 +105,11 @@ public class ChestController implements Controller {
   @FXML private VBox inventoryKey1;
   @FXML private VBox inventoryKey2;
   @FXML private VBox inventoryKey3;
-  
+
   private HintNode hintNode;
   private AppUi appUi;
+
+  private int currentKey = 0;
 
   /**
    * Initializes the class. This method is typically used for setting up initial state and
@@ -159,7 +161,7 @@ public class ChestController implements Controller {
     ArrayList<Integer> randomNumbers = new ArrayList<Integer>();
     for (int i = 1; i <= 6; i++) {
       randomNumbers.add(i);
-      keyHoleMap.put("hole" + i, "empty");
+      keyHoleMap.put("hole" + i, 0);
     }
 
     // Create an array to store solutions and shuffle the random numbers
@@ -330,16 +332,7 @@ public class ChestController implements Controller {
 
     inventoryChoiceBox.setItems(Inventory.getInventory());
 
-    // set key visibility
-    if (GameState.hasKeyOne) {
-      inventoryKey1.getChildren().get(1).setOpacity(1); 
-    }
-    if (GameState.hasKeyTwo) {
-      inventoryKey2.getChildren().get(1).setOpacity(1); 
-    }
-    if (GameState.hasKeyThree) {
-      inventoryKey3.getChildren().get(1).setOpacity(1); 
-    }
+    GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
   /**
@@ -479,38 +472,39 @@ public class ChestController implements Controller {
     System.out.println("click key hole " + num);
     if (correctKeyMap.get("hole" + num) == "empty") {
       // in the case that the key hole is empty when clicked
-      if (!keys.contains(inventoryChoiceBox.getValue())) {
+      if (currentKey == 0) {
         return;
       }
 
       // set to orange for inserting and add to key map
       keyHole.styleProperty().set("-fx-fill: #fab387");
-      keyMap.put("hole" + num, inventoryChoiceBox.getValue());
-      setLabelKeyHole(num, inventoryChoiceBox.getValue());
+      keyMap.put("hole" + num, currentKey);
+      String key = "key" + currentKey;
+      setLabelKeyHole(num, key);
 
       // check if correct key
-      if (keyHoleMap.get("hole" + num).equals(inventoryChoiceBox.getValue())) {
+      if (keyHoleMap.get("hole" + num).equals(currentKey)) {
         System.out.println("correct key");
         // sets the key states
-        if (inventoryChoiceBox.getValue().equals("key1")) {
+        if (currentKey == 1) {
           key1Correct = true;
           System.out.println("key1 correct");
-        } else if (inventoryChoiceBox.getValue().equals("key2")) {
+        } else if (currentKey == 2) {
           key2Correct = true;
           System.out.println("key2 correct");
-        } else if (inventoryChoiceBox.getValue().equals("key3")) {
+        } else if (currentKey == 3) {
           key3Correct = true;
           System.out.println("key3 correct");
         }
         correctKeyMap.put("hole" + num, "true");
-        System.out.println("removed key " + inventoryChoiceBox.getValue() + " from inventory");
-
+        System.out.println("removed key " + currentKey + " from inventory");
+        removeKey(currentKey);
       } else {
         System.out.println("incorrect key");
         correctKeyMap.put("hole" + num, "false");
+        removeKey(currentKey);
       }
-      inventoryChoiceBox.getItems().remove(inventoryChoiceBox.getValue());
-      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
+
 
       // Create a Timeline to revert the shadow back to its original state after 2 seconds
       Duration duration = Duration.seconds(0.5);
@@ -528,22 +522,21 @@ public class ChestController implements Controller {
       // if its filled then set back to default (get back key) on click
       keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // resets the key states
-      if (keyMap.get("hole" + num).equals("key1")) {
+      if (keyMap.get("hole" + num).equals(1)) {
         key1Correct = false;
         System.out.println("key1 incorrect");
-      } else if (keyMap.get("hole" + num).equals("key2")) {
+      } else if (keyMap.get("hole" + num).equals(2)) {
         key2Correct = false;
         System.out.println("key2 incorrect");
-      } else if (keyMap.get("hole" + num).equals("key3")) {
+      } else if (keyMap.get("hole" + num).equals(3)) {
         key3Correct = false;
         System.out.println("key3 incorrect");
       }
       // puts key states back to normal
       correctKeyMap.put("hole" + num, "empty");
+      returnKey(keyMap.get("hole" + num));
       setLabelKeyHole(num, "");
       System.out.println("got back key " + keyHoleMap.get("hole" + num));
-      inventoryChoiceBox.getItems().add(keyMap.get("hole" + num));
-      inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
       // Create a Timeline to revert the shadow back to its original state after 2 seconds
       Duration duration = Duration.seconds(0.5);
@@ -724,5 +717,70 @@ public class ChestController implements Controller {
   @FXML
   private void onSwitchView(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+  
+  private void returnKey(int key) {
+    if (key == 1) {
+      GameState.hasKeyOne = true;
+      inventoryKey1.getChildren().get(1).setOpacity(1); 
+    } else if (key == 2) {
+      GameState.hasKeyTwo = true;
+      inventoryKey2.getChildren().get(1).setOpacity(1); 
+    } else if (key == 3) {
+      GameState.hasKeyThree = true;
+      inventoryKey3.getChildren().get(1).setOpacity(1);
+    }
+    Inventory.update();
+  }
+
+  private void removeKey(int key) {
+    currentKey = 0;
+    if (key == 1) {
+      GameState.hasKeyOne = false;
+      inventoryKey1.getChildren().get(1).setOpacity(0.35); 
+      inventoryKey1.setStyle("-fx-border-color: transparent");
+    } else if (key == 2) {
+      GameState.hasKeyTwo = false;
+      inventoryKey2.getChildren().get(1).setOpacity(0.35); 
+      inventoryKey2.setStyle("-fx-border-color: transparent");
+    } else if (key == 3) {
+      GameState.hasKeyThree = false;
+      inventoryKey3.getChildren().get(1).setOpacity(0.35);
+      inventoryKey3.setStyle("-fx-border-color: transparent");
+    }
+    Inventory.update();
+  }
+
+  @FXML
+  private void key1Click(MouseEvent event) {
+    if (!GameState.hasKeyOne) {
+      return;
+    }
+    currentKey = 1;
+    inventoryKey1.setStyle("-fx-border-color: #00ff00");
+    inventoryKey2.setStyle("-fx-border-color: transparent");
+    inventoryKey3.setStyle("-fx-border-color: transparent");
+  }
+
+  @FXML
+  private void key2Click(MouseEvent event) {
+    if (!GameState.hasKeyTwo) {
+      return;
+    }
+    currentKey = 2;
+    inventoryKey1.setStyle("-fx-border-color: transparent");
+    inventoryKey2.setStyle("-fx-border-color: #00ff00");
+    inventoryKey3.setStyle("-fx-border-color: transparent");
+  }
+
+  @FXML
+  private void key3Click(MouseEvent event) {
+    if (!GameState.hasKeyThree) {
+      return;
+    }
+    currentKey = 3;
+    inventoryKey1.setStyle("-fx-border-color: transparent");
+    inventoryKey2.setStyle("-fx-border-color: transparent");
+    inventoryKey3.setStyle("-fx-border-color: #00ff00");
   }
 }
