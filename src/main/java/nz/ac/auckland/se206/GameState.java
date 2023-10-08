@@ -1,7 +1,6 @@
 package nz.ac.auckland.se206;
 
 import java.util.ArrayList;
-
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
@@ -33,6 +32,7 @@ public class GameState {
     HARD,
   }
 
+  /** Enumeration representing different time limits for the game. */
   public enum TimeLimit {
     TWO_MINUTES,
     FOUR_MINUTES,
@@ -72,7 +72,7 @@ public class GameState {
   public static int hintsGiven = 0;
   public static int hintsUsed = 0;
   public static int totalTime = 0;
-  public static int gamesWon = 0;  
+  public static int gamesWon = 0;
 
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;

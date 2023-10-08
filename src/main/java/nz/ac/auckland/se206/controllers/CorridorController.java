@@ -386,19 +386,23 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void clickDungeonMaster() {
+    // Handle click on dungeon master
     if (!GameState.isChestOpened) {
       CustomNotifications.generateNotification(
           "Silence",
           "The dungeon master's stare is cold and unyielding. You should leave him alone.");
     } else if (hasSword) {
       // win game
+      //
       GameState.isGameWon = true;
+      // Calculate time taken to win
       String time = lblTime.getText();
       String[] timeSplit = time.split(":");
       int minutes = Integer.parseInt(timeSplit[0]);
       int seconds = Integer.parseInt(timeSplit[1]);
       int timeLeft = seconds + (minutes * 60);
       int totalTime;
+      // Calculate total time taken
       if (GameState.currentTimeLimit == GameState.TimeLimit.TWO_MINUTES) {
         totalTime = 120 - timeLeft;
       } else if (GameState.currentTimeLimit == GameState.TimeLimit.FOUR_MINUTES) {
@@ -406,14 +410,16 @@ public class CorridorController implements Controller {
       } else {
         totalTime = 360 - timeLeft;
       }
+      // Update game state
       GameState.totalTime += totalTime;
       GameState.gamesWon++;
       GameState.hintsUsed += GameState.hintsGiven;
-
+      // Add score to leaderboard
       ScoreEntry scoreEntry = new ScoreEntry(GameState.difficultyLevel, 0, time);
       GameState.scores.add(scoreEntry);
       LeaderboardController.getInstance().sortScores();
       App.goToWinLoss();
+      // Add win/loss to leaderboard
       WinLossController.getInstance().checkGameStatus();
     } else {
       CustomNotifications.generateNotification(

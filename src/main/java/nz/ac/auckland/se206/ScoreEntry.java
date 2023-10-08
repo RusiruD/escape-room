@@ -19,11 +19,12 @@ public class ScoreEntry {
   private String time;
 
   /**
-   * Constructs a ScoreEntry object with the specified parameters.
+   * Constructor for creating a ScoreEntry instance with specified difficulty, leaderboard position,
+   * and time.
    *
-   * @param name The name associated with the score entry.
-   * @param leaderboardPos The position of the entry on the leaderboard.
-   * @param time The time taken to achieve the score.
+   * @param difficulty The difficulty level of the game.
+   * @param leaderboardPos The position of the player on the leaderboard.
+   * @param time The time taken to complete the game.
    */
   public ScoreEntry(String difficulty, int leaderboardPos, String time) {
     this.difficulty = difficulty;

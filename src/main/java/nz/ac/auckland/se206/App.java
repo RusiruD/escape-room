@@ -181,6 +181,11 @@ public class App extends Application {
     }
   }
 
+  /**
+   * This method navigates the application to the leaderboard view.
+   *
+   * @throws IOException if there is an error loading the leaderboard view.
+   */
   public static void goToLeaderboard() {
     try {
       // Set the root view to the leaderboard

@@ -18,6 +18,12 @@ import nz.ac.auckland.se206.ScoreEntry;
 /** Controller class for managing the leaderboard functionality in the game. */
 public class LeaderboardController {
 
+  private static LeaderboardController instance;
+
+  public static LeaderboardController getInstance() {
+    return instance;
+  }
+
   @FXML private StackPane graph;
   @FXML private ScrollPane scrollPane;
   @FXML private Label curretProfile;
@@ -27,19 +33,14 @@ public class LeaderboardController {
   @FXML private VBox leaderboard;
   @FXML private VBox leaderboardContainer;
 
-  private static LeaderboardController instance;
-
   /** Initializes the leaderboard by adding sample scores and sorting them. */
   public void initialize() {
     instance = this;
   }
 
-  public static LeaderboardController getInstance() {
-    return instance;
-  }
-
   /**
-   * Adds a time entry to the leaderboard with the specified difficulty, time, position, and final status.
+   * Adds a time entry to the leaderboard with the specified difficulty, time, position, and final
+   * status.
    *
    * @param difficultyString The difficulty the player was on.
    * @param time The time achieved by the player.
@@ -119,7 +120,8 @@ public class LeaderboardController {
       leaderboardContainer.getChildren().remove(2);
     }
     labelGames.setText(GameState.gamesWon + " Games Won");
-    String formatTime = String.format("%02d:%02d", GameState.totalTime / 60, GameState.totalTime % 60);
+    String formatTime =
+        String.format("%02d:%02d", GameState.totalTime / 60, GameState.totalTime % 60);
     labelPlayTime.setText(formatTime + " Time Spent");
     labelHintsUsed.setText(GameState.hintsUsed + " Hints Used");
 
@@ -137,7 +139,7 @@ public class LeaderboardController {
       // Set the leaderboard position for each score entry
       GameState.scores.get(i).setLeaderboardPos(i);
 
-        // Retrieve the name of the player
+      // Retrieve the name of the player
       String diffuclty = GameState.scores.get(i).getDifficulty();
 
       // Update the leaderboard UI with the player's name, score, and position
