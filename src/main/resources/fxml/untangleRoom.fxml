@@ -32,7 +32,7 @@
             <Insets />
          </opaqueInsets>
       </Label>
-      <ImageView fx:id="key2" disable="true" fitHeight="110.0" fitWidth="150.0" layoutX="453.0" layoutY="624.0" onMouseClicked="#onKey2Clicked" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="key2" disable="true" fitHeight="110.0" fitWidth="150.0" layoutX="453.0" layoutY="624.0" onMouseClicked="#onKey2Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../images/key.png" />
          </image>

@@ -53,27 +53,27 @@
             <Image url="@../images/cauldron.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="redPotion" fitHeight="67.0" fitWidth="64.0" layoutX="698.0" layoutY="410.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="redPotion" fitHeight="67.0" fitWidth="64.0" layoutX="698.0" layoutY="410.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bluePotion" fitHeight="67.0" fitWidth="42.0" layoutX="14.0" layoutY="429.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluePotion" fitHeight="67.0" fitWidth="42.0" layoutX="14.0" layoutY="429.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="yellowPotion" fitHeight="67.0" fitWidth="42.0" layoutX="67.0" layoutY="414.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowPotion" fitHeight="67.0" fitWidth="42.0" layoutX="67.0" layoutY="414.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="greenPotion" fitHeight="78.0" fitWidth="64.0" layoutX="746.0" layoutY="408.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greenPotion" fitHeight="78.0" fitWidth="64.0" layoutX="746.0" layoutY="408.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="purplePotion" fitHeight="78.0" fitWidth="95.0" layoutX="116.0" layoutY="385.0" onMouseClicked="#addToInventoryFromScene" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purplePotion" fitHeight="78.0" fitWidth="95.0" layoutX="116.0" layoutY="385.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion5.png" />
          </image>

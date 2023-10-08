@@ -145,6 +145,7 @@ public class PuzzleController implements Controller {
     App.setRoot(AppUi.PUZZLEROOM);
   }
 
+
   private void clicked(ImageView object) {
     // if there is no selection, select the object
     if (!hasSelection && !object.equals(zero)) {

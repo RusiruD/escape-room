@@ -258,6 +258,30 @@ public class UntangleRoomController implements Controller {
 
     return polygon;
   }
+    
+  
+  @FXML
+  private void shrinkItem(MouseEvent event) {
+    shrink((ImageView) event.getSource());
+  }
+  @FXML
+  private void enlargeItem(MouseEvent event) {
+    enlarge((ImageView) event.getSource());
+  }
+
+  @FXML
+  private void shrink(ImageView image) {
+    image.setScaleX(1.0);
+    image.setScaleY(1.0);
+  }
+
+  @FXML
+  private void enlarge(ImageView image) {
+    image.setScaleX(1.5);
+    image.setScaleY(1.5);
+  }
+      
+
 
   private void isIntersecting(Polygon polygon) {
     // Untangle lines to solve the puzzle

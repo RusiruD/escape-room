@@ -29,7 +29,7 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <ImageView fx:id="key3" fitHeight="102.0" fitWidth="134.0" layoutX="570.0" layoutY="570.0" onMouseClicked="#onKey3Clicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="key3" fitHeight="102.0" fitWidth="134.0" layoutX="570.0" layoutY="570.0" onMouseClicked="#onKey3Clicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/key.png" />
          </image>
