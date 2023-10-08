@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="potionsRoomPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity"
-   minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" prefHeight="730.0"
+   minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressEvent" prefHeight="730.0"
    prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19"
    xmlns:fx="http://javafx.com/fxml/1"
    fx:controller="nz.ac.auckland.se206.controllers.RoomController">
@@ -155,20 +155,20 @@
                </image>
             </ImageView>
             <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false"
-               onAction="#onCloseChat" prefHeight="40.0" prefWidth="84.0" text="Close" />
+               onAction="#onChatClosed" prefHeight="40.0" prefWidth="84.0" text="Close" />
             <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0"
                prefHeight="207.0" prefWidth="782.0" styleClass="text-area"
                stylesheets="@../css/roomStylesheet.css" wrapText="true" />
             <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity"
                maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-               mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0"
+               mnemonicParsing="false" onAction="#onMessageSent" prefHeight="37.0" prefWidth="86.0"
                text="Send" />
             <TextField fx:id="inputText" layoutX="57.0" layoutY="318.0" prefHeight="40.0"
                prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
             <Button fx:id="switchButton" layoutX="661.0" layoutY="319.0" mnemonicParsing="false"
-               onAction="#onSwitchChatView" text="Switch" />
+               onAction="#onChatViewChanged" text="Switch" />
             <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false"
-               onAction="#onShowChat" text="Chat" />
+               onAction="#onChatShown" text="Chat" />
             <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0"
                layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
                minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining"

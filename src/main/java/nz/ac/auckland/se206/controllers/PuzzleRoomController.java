@@ -20,7 +20,7 @@ import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
@@ -138,7 +138,7 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -157,13 +157,13 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void onKeyPressed(KeyEvent event) throws ApiProxyException, IOException {
+  private void onKeyPress(KeyEvent event) throws ApiProxyException, IOException {
     if (event.getCode() == KeyCode.ENTER) {
-      handleTextInput();
+      onTextInput();
     }
   }
 
-  private void handleTextInput() {
+  private void onTextInput() {
     try {
       GameState.chat.onSendMessage(inputText.getText(), appUi);
     } catch (Exception e) {
@@ -173,21 +173,21 @@ public class PuzzleRoomController implements Controller {
   }
 
   @FXML
-  private void onSendMessage(ActionEvent event) {
-    handleTextInput();
+  private void onMessageSent(ActionEvent event) {
+    onTextInput();
   }
 
   @FXML
-  private void onShowChat(ActionEvent event) {
+  private void onChatShown(ActionEvent event) {
     GameState.chat.massEnable(appUi);
   }
 
   @FXML
-  private void onCloseChat(ActionEvent event) {
+  private void onChatClosed(ActionEvent event) {
     GameState.chat.massDisable(appUi);
   }
 
-  public void initialiseAfterStart() {
+  public void onInitializationAfterStart() {
     // Set the current application UI to PUZZLEROOM
     appUi = Chat.AppUi.PUZZLEROOM;
 
@@ -208,14 +208,14 @@ public class PuzzleRoomController implements Controller {
     GameState.chat.addToMap(appUi, hintNode);
 
     // Close the chat interface (onCloseChat method is called with null parameter)
-    onCloseChat(null);
+    onChatClosed(null);
 
     // Add the text area to the chat
     GameState.chat.addChat(textArea);
   }
 
   @FXML
-  private void onSwitchChatView(ActionEvent event) {
+  private void onChatViewSwitched(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
 }

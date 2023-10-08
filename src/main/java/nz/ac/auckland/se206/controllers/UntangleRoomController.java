@@ -40,7 +40,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
-import nz.ac.auckland.se206.Utililty;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Drag the anchors around to change a polygon's points. */
@@ -420,7 +420,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void clickExit(MouseEvent event) {
     // Handle click on exit
-    Utililty.exitGame();
+    Utility.exitGame();
   }
 
   @FXML
@@ -445,7 +445,7 @@ public class UntangleRoomController implements Controller {
     }
   }
 
-  private void handleTextInput() {
+  private void enforceTextRetrieval() {
     try {
       GameState.chat.onSendMessage(inputText.getText(), appUi);
     } catch (Exception e) {
@@ -456,7 +456,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML
   private void onSendMessage(ActionEvent event) {
-    handleTextInput();
+    enforceTextRetrieval();
   }
 
   @FXML
@@ -469,7 +469,7 @@ public class UntangleRoomController implements Controller {
     GameState.chat.massDisable(appUi);
   }
 
-  public void initialiseAfterStart() {
+  public void enableClassAction() {
     // Set the instance
     appUi = Chat.AppUi.UNTANGLE;
     // Create a CompletableFuture for the background task
