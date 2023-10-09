@@ -487,6 +487,8 @@ public class ChestController implements Controller {
       if (keyHoleMap.get("hole" + num).equals(currentKey)) {
         System.out.println("correct key");
         // sets the key states
+        Image newImage = new Image("/images/unlockedlock.png");
+        keyHole.setImage(newImage);
         if (currentKey == 1) {
           key1Correct = true;
           System.out.println("key1 correct");
