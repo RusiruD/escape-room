@@ -26,56 +26,81 @@
             <Image url="@../images/lockedlock.png" />
          </image>
       </ImageView>
-      <Label layoutX="182.0" layoutY="188.0" style="-fx-background-color: white;" text="1">
+      <Label layoutX="180.0" layoutY="194.0" prefHeight="17.0" prefWidth="21.0" text="1" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="376.0" layoutY="195.0" style="-fx-background-color: white;" text="2">
+      <ImageView fx:id="keyHole6" fitHeight="131.0" fitWidth="161.0" layoutX="517.0" layoutY="310.0" onMouseClicked="#clickKeyHole6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="376.0" layoutY="195.0" prefHeight="30.0" prefWidth="31.0" text="2" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="545.0" layoutY="196.0" style="-fx-background-color: white;" text="3">
+      <ImageView fx:id="keyHole5" fitHeight="131.0" fitWidth="161.0" layoutX="349.0" layoutY="310.0" onMouseClicked="#clickKeyHole5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="545.0" layoutY="196.0" text="3" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="180.0" layoutY="335.0" style="-fx-background-color: white;" text="4">
+      <Label layoutX="180.0" layoutY="323.0" prefHeight="17.0" prefWidth="33.0" text="4" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="377.0" layoutY="335.0" style="-fx-background-color: white;" text="5">
+      <ImageView fx:id="keyHole3" fitHeight="131.0" fitWidth="161.0" layoutX="517.0" layoutY="175.0" onMouseClicked="#clickKeyHole3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="376.0" layoutY="334.0" text="5" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
-      <Label layoutX="545.0" layoutY="335.0" style="-fx-background-color: white;" text="6">
+      <ImageView fx:id="keyHole4" fitHeight="131.0" fitWidth="161.0" layoutX="153.0" layoutY="300.0" onMouseClicked="#clickKeyHole4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="541.0" layoutY="331.0" prefHeight="29.0" prefWidth="34.0" text="6" textFill="WHITE">
          <font>
-            <Font size="20.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
          <padding>
             <Insets left="10.0" right="10.0" />
          </padding>
       </Label>
+      <ImageView fx:id="keyHole2" fitHeight="131.0" fitWidth="161.0" layoutX="349.0" layoutY="175.0" onMouseClicked="#clickKeyHole2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="125.0" text="s" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="31.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="125.0" text="s" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
@@ -179,30 +204,5 @@
             </VBox>
          </children>
       </VBox>
-      <ImageView fx:id="keyHole6" fitHeight="131.0" fitWidth="161.0" layoutX="517.0" layoutY="310.0" onMouseClicked="#clickKeyHole6" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/lockedlock.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="keyHole5" fitHeight="131.0" fitWidth="161.0" layoutX="349.0" layoutY="310.0" onMouseClicked="#clickKeyHole5" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/lockedlock.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="keyHole4" fitHeight="131.0" fitWidth="161.0" layoutX="153.0" layoutY="300.0" onMouseClicked="#clickKeyHole4" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/lockedlock.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="keyHole3" fitHeight="131.0" fitWidth="161.0" layoutX="517.0" layoutY="175.0" onMouseClicked="#clickKeyHole3" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/lockedlock.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="keyHole2" fitHeight="131.0" fitWidth="161.0" layoutX="349.0" layoutY="175.0" onMouseClicked="#clickKeyHole2" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/lockedlock.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>
