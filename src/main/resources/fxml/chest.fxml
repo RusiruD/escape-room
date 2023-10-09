@@ -18,7 +18,7 @@
       <Pane fx:id="riddleDisplay" layoutX="112.0" layoutY="106.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
-            <Image url="@../images/chest.png" />
+            <Image url="@../images/ChestBackground.png" />
          </image>
       </ImageView>
       <ImageView fx:id="keyHole1" fitHeight="131.0" fitWidth="161.0" layoutX="160.0" layoutY="160.0" onMouseClicked="#clickKeyHole1" pickOnBounds="true" preserveRatio="true">
