@@ -136,9 +136,9 @@ public class ChestController implements Controller {
             + "You need to find the correct keys to unlock the chest. \n \n"
             + "The keys are hidden in the dungeon. \n \n"
             + "You need to find the keys and insert them into the correct key holes. \n \n"
-            + "The correct keys will turn green. \n \n"
-            + "The incorrect keys will turn red. \n \n"
-            + "The empty key holes will are blue. \n \n"
+            + "The correct keys will open the lock. \n \n"
+            + "The incorrect keys will not. \n \n"
+            
             + "Once you have inserted the correct keys, the chest will open. \n \n"
             + "Good luck!";
     Instructions instructions = new Instructions(instructionsString);
@@ -528,6 +528,8 @@ public class ChestController implements Controller {
       // if its filled then set back to default (get back key) on click
      // keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // resets the key states
+      if(correctKeyMap.get("hole" + num)=="false"){
+
       
       if (keyMap.get("hole" + num).equals(1)) {
         
@@ -556,7 +558,7 @@ public class ChestController implements Controller {
                     inventoryChoiceBox.setStyle("");
                   }));
       timeline.play();
-    }
+    }};
   }
 
   /**
@@ -574,22 +576,22 @@ public class ChestController implements Controller {
       // Depending on the keyhole number, set the corresponding label to display the key inserted
       switch (num) {
         case 1:
-          lblKey1.setText(key + " inserted");
+          //lblKey1.setText(key + " inserted");
           break;
         case 2:
-          lblKey2.setText(key + " inserted");
+          //lblKey2.setText(key + " inserted");
           break;
         case 3:
-          lblKey3.setText(key + " inserted");
+          //lblKey3.setText(key + " inserted");
           break;
         case 4:
-          lblKey4.setText(key + " inserted");
+          //lblKey4.setText(key + " inserted");
           break;
         case 5:
-          lblKey5.setText(key + " inserted");
+          //lblKey5.setText(key + " inserted");
           break;
         case 6:
-          lblKey6.setText(key + " inserted");
+          //lblKey6.setText(key + " inserted");
           break;
       }
     } else {
