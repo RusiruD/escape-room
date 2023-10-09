@@ -49,6 +49,8 @@ public class ChestController implements Controller {
   private HashMap<String, String> correctKeyMap = new HashMap<String, String>();
   private HashMap<String, Integer> keyMap = new HashMap<String, Integer>();
   private List<Integer> keys = Arrays.asList(1, 2, 3);
+   Rectangle[] keysInHoles = new Rectangle[6];
+
 
   @FXML private Button riddleButton;
 
@@ -69,6 +71,12 @@ public class ChestController implements Controller {
   @FXML private Label lblKey4;
   @FXML private Label lblKey5;
   @FXML private Label lblKey6;
+  @FXML private Rectangle keyinlock1;
+  @FXML private Rectangle keyinlock2;
+  @FXML private Rectangle keyinlock3;
+  @FXML private Rectangle keyinlock4;
+  @FXML private Rectangle keyinlock5;
+  @FXML private Rectangle keyinlock6;
 
   @FXML private ImageView exclamationMark;
   @FXML private ImageView soundToggle;
@@ -207,6 +215,15 @@ public class ChestController implements Controller {
             + " Tell the player that the sword and shield have fallen out to the corridor. Tell the"
             + " player that they can now return to the corridor and fight you. Be antagonistic and"
             + " confident that you will win. Keep this message short";
+
+            
+            keysInHoles[0] = keyinlock1;
+            keysInHoles[1] = keyinlock2;
+            keysInHoles[2] = keyinlock3;
+            keysInHoles[3] = keyinlock4;
+           keysInHoles[4] = keyinlock5;
+            keysInHoles[5] = keyinlock6;
+
   }
 
   /**
@@ -249,83 +266,7 @@ public class ChestController implements Controller {
     // check if correct key
 
     System.out.println("update keys");
-    for (int i = 0; i < 6; i++) {
-      if (correctKeyMap.get("hole" + (i + 1)) == "true") {
-        // set to green for correct
-        // get key hole
-        switch (i) {
-          case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole1.mouseTransparentProperty().set(true);
-            break;
-          case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole2.mouseTransparentProperty().set(true);
-            break;
-          case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole3.mouseTransparentProperty().set(true);
-            break;
-          case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole4.mouseTransparentProperty().set(true);
-            break;
-          case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole5.mouseTransparentProperty().set(true);
-            break;
-          case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole6.mouseTransparentProperty().set(true);
-            break;
-        }
-      } else if (correctKeyMap.get("hole" + (i + 1)) == "false") {
-        // set to red for incorrect and let them try again
-        System.out.println("hole " + (i + 1) + " is incorrect");
-        switch (i) {
-          case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-        }
-      } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
-        // set back to default
-        switch (i) {
-          case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-        }
-      }
-    }
+  
   }
 
   // Method to update inventory in the UI
@@ -465,7 +406,7 @@ public class ChestController implements Controller {
       riddleCalled = true;
     }
   }
-
+ 
   private void clickKeyHoleHelper(int num, ImageView keyHole) {
     // check if correct key
     // if the key is already correct then do nothing
@@ -478,12 +419,12 @@ public class ChestController implements Controller {
         return;
       }
 
-      // set to orange for inserting and add to key map
-      //keyHole.styleProperty().set("-fx-fill: #fab387");
+      
+      keysInHoles[num-1].setVisible(true);
       keyMap.put("hole" + num, currentKey);
       String key = "key" + currentKey;
       setLabelKeyHole(num, key);
-
+      
       // check if correct key
       if (keyHoleMap.get("hole" + num).equals(currentKey)) {
         System.out.println("correct key");
@@ -529,6 +470,7 @@ public class ChestController implements Controller {
      // keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // resets the key states
       if(correctKeyMap.get("hole" + num)=="false"){
+         keysInHoles[num-1].setVisible(false);
 
       
       if (keyMap.get("hole" + num).equals(1)) {
