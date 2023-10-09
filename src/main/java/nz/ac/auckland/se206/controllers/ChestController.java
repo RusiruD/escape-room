@@ -530,13 +530,13 @@ public class ChestController implements Controller {
       // resets the key states
       
       if (keyMap.get("hole" + num).equals(1)) {
-        key1Correct = false;
+        
         System.out.println("key1 incorrect");
       } else if (keyMap.get("hole" + num).equals(2)) {
-        key2Correct = false;
+       
         System.out.println("key2 incorrect");
       } else if (keyMap.get("hole" + num).equals(3)) {
-        key3Correct = false;
+       
         System.out.println("key3 incorrect");
       }
       // puts key states back to normal
