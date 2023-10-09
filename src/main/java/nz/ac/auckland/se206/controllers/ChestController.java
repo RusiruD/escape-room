@@ -473,6 +473,7 @@ public class ChestController implements Controller {
     System.out.println("click key hole " + num);
     if (correctKeyMap.get("hole" + num) == "empty") {
       // in the case that the key hole is empty when clicked
+      System.out.println("empty key hole");
       if (currentKey == 0) {
         return;
       }
@@ -502,9 +503,11 @@ public class ChestController implements Controller {
         correctKeyMap.put("hole" + num, "true");
         System.out.println("removed key " + currentKey + " from inventory");
         removeKey(currentKey);
-      } else {
+      } 
+      else {
         System.out.println("incorrect key");
         correctKeyMap.put("hole" + num, "false");
+       
         removeKey(currentKey);
       }
 
@@ -525,6 +528,7 @@ public class ChestController implements Controller {
       // if its filled then set back to default (get back key) on click
      // keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // resets the key states
+      
       if (keyMap.get("hole" + num).equals(1)) {
         key1Correct = false;
         System.out.println("key1 incorrect");
