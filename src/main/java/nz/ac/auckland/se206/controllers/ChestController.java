@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -55,12 +56,12 @@ public class ChestController implements Controller {
 
   @FXML private Label lblTime;
 
-  @FXML private Rectangle keyHole1;
-  @FXML private Rectangle keyHole2;
-  @FXML private Rectangle keyHole3;
-  @FXML private Rectangle keyHole4;
-  @FXML private Rectangle keyHole5;
-  @FXML private Rectangle keyHole6;
+  @FXML private ImageView keyHole1;
+  @FXML private ImageView keyHole2;
+  @FXML private ImageView keyHole3;
+  @FXML private ImageView keyHole4;
+  @FXML private ImageView keyHole5;
+  @FXML private ImageView keyHole6;
 
   @FXML private Label lblKey1;
   @FXML private Label lblKey2;
@@ -362,7 +363,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole1(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(1, keyHole);
   }
 
@@ -374,7 +375,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole2(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(2, keyHole);
   }
 
@@ -386,7 +387,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole3(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+   ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(3, keyHole);
   }
 
@@ -398,7 +399,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole4(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(4, keyHole);
   }
 
@@ -410,7 +411,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole5(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+   ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(5, keyHole);
   }
 
@@ -422,7 +423,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole6(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(6, keyHole);
   }
 
@@ -465,7 +466,7 @@ public class ChestController implements Controller {
     }
   }
 
-  private void clickKeyHoleHelper(int num, Rectangle keyHole) {
+  private void clickKeyHoleHelper(int num, ImageView keyHole) {
     // check if correct key
     // if the key is already correct then do nothing
     // check if inserting a key
@@ -477,7 +478,7 @@ public class ChestController implements Controller {
       }
 
       // set to orange for inserting and add to key map
-      keyHole.styleProperty().set("-fx-fill: #fab387");
+      //keyHole.styleProperty().set("-fx-fill: #fab387");
       keyMap.put("hole" + num, currentKey);
       String key = "key" + currentKey;
       setLabelKeyHole(num, key);
@@ -520,7 +521,7 @@ public class ChestController implements Controller {
       // sets to yellow for filled
     } else {
       // if its filled then set back to default (get back key) on click
-      keyHole.styleProperty().set("-fx-fill: #1e90ff");
+     // keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // resets the key states
       if (keyMap.get("hole" + num).equals(1)) {
         key1Correct = false;

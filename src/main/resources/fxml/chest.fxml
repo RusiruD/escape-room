@@ -11,7 +11,6 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <Pane fx:id="chestPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyboardInput" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.ChestController">
@@ -22,12 +21,11 @@
             <Image url="@../images/chest.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="keyHole1" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="170.0" layoutY="236.0" onMouseClicked="#clickKeyHole1" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole2" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="366.0" layoutY="236.0" onMouseClicked="#clickKeyHole2" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole3" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="534.0" layoutY="236.0" onMouseClicked="#clickKeyHole3" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole5" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="366.0" layoutY="377.0" onMouseClicked="#clickKeyHole5" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole6" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="534.0" layoutY="377.0" onMouseClicked="#clickKeyHole6" stroke="BLACK" strokeType="INSIDE" width="52.0" />
-      <Rectangle fx:id="keyHole4" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="50.0" layoutX="170.0" layoutY="377.0" onMouseClicked="#clickKeyHole4" stroke="BLACK" strokeType="INSIDE" width="52.0" />
+      <ImageView fx:id="keyHole1" fitHeight="131.0" fitWidth="161.0" layoutX="154.0" layoutY="175.0" onMouseClicked="#clickKeyHole1" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
       <Label layoutX="182.0" layoutY="188.0" style="-fx-background-color: white;" text="1">
          <font>
             <Font size="20.0" />
@@ -91,7 +89,7 @@
       <Label fx:id="lblKey6" layoutX="546.0" layoutY="448.0" style="-fx-background-color: white;" stylesheets="@../css/roomStylesheet.css" text="Label" />
       <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="popUp" layoutX="125.0" layoutY="550.0" prefHeight="80.0" prefWidth="550.0" />
-      <Pane fx:id="instructionsDisplay" layoutX="130.0" layoutY="56.0" prefHeight="436.0" prefWidth="537.0" stylesheets="@../css/roomStylesheet.css" />
+      <Pane fx:id="instructionsDisplay" layoutX="-277.0" layoutY="465.0" prefHeight="436.0" prefWidth="537.0" stylesheets="@../css/roomStylesheet.css" />
       <Pane fx:id="visualDungeonMaster" layoutX="651.0" layoutY="569.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
          <children>
             <ImageView fitHeight="100.0" fitWidth="113.0" layoutX="8.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
@@ -181,5 +179,30 @@
             </VBox>
          </children>
       </VBox>
+      <ImageView fx:id="keyHole6" fitHeight="131.0" fitWidth="161.0" layoutX="517.0" layoutY="310.0" onMouseClicked="#clickKeyHole6" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="keyHole5" fitHeight="131.0" fitWidth="161.0" layoutX="349.0" layoutY="310.0" onMouseClicked="#clickKeyHole5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="keyHole4" fitHeight="131.0" fitWidth="161.0" layoutX="153.0" layoutY="300.0" onMouseClicked="#clickKeyHole4" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="keyHole3" fitHeight="131.0" fitWidth="161.0" layoutX="517.0" layoutY="175.0" onMouseClicked="#clickKeyHole3" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="keyHole2" fitHeight="131.0" fitWidth="161.0" layoutX="349.0" layoutY="175.0" onMouseClicked="#clickKeyHole2" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/lockedlock.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
