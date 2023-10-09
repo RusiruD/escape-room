@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -48,6 +49,7 @@ public class ChestController implements Controller {
   private HashMap<String, String> correctKeyMap = new HashMap<String, String>();
   private HashMap<String, Integer> keyMap = new HashMap<String, Integer>();
   private List<Integer> keys = Arrays.asList(1, 2, 3);
+  Rectangle[] keysInHoles = new Rectangle[6];
 
   @FXML private Button riddleButton;
 
@@ -55,12 +57,12 @@ public class ChestController implements Controller {
 
   @FXML private Label lblTime;
 
-  @FXML private Rectangle keyHole1;
-  @FXML private Rectangle keyHole2;
-  @FXML private Rectangle keyHole3;
-  @FXML private Rectangle keyHole4;
-  @FXML private Rectangle keyHole5;
-  @FXML private Rectangle keyHole6;
+  @FXML private ImageView keyHole1;
+  @FXML private ImageView keyHole2;
+  @FXML private ImageView keyHole3;
+  @FXML private ImageView keyHole4;
+  @FXML private ImageView keyHole5;
+  @FXML private ImageView keyHole6;
 
   @FXML private Label lblKey1;
   @FXML private Label lblKey2;
@@ -68,6 +70,12 @@ public class ChestController implements Controller {
   @FXML private Label lblKey4;
   @FXML private Label lblKey5;
   @FXML private Label lblKey6;
+  @FXML private Rectangle keyinlock1;
+  @FXML private Rectangle keyinlock2;
+  @FXML private Rectangle keyinlock3;
+  @FXML private Rectangle keyinlock4;
+  @FXML private Rectangle keyinlock5;
+  @FXML private Rectangle keyinlock6;
 
   @FXML private ImageView exclamationMark;
   @FXML private ImageView soundToggle;
@@ -135,9 +143,8 @@ public class ChestController implements Controller {
             + "You need to find the correct keys to unlock the chest. \n \n"
             + "The keys are hidden in the dungeon. \n \n"
             + "You need to find the keys and insert them into the correct key holes. \n \n"
-            + "The correct keys will turn green. \n \n"
-            + "The incorrect keys will turn red. \n \n"
-            + "The empty key holes will are blue. \n \n"
+            + "The correct keys will open the lock. \n \n"
+            + "The incorrect keys will not. \n \n"
             + "Once you have inserted the correct keys, the chest will open. \n \n"
             + "Good luck!";
     Instructions instructions = new Instructions(instructionsString);
@@ -206,6 +213,13 @@ public class ChestController implements Controller {
             + " Tell the player that the sword and shield have fallen out to the corridor. Tell the"
             + " player that they can now return to the corridor and fight you. Be antagonistic and"
             + " confident that you will win. Keep this message short";
+
+    keysInHoles[0] = keyinlock1;
+    keysInHoles[1] = keyinlock2;
+    keysInHoles[2] = keyinlock3;
+    keysInHoles[3] = keyinlock4;
+    keysInHoles[4] = keyinlock5;
+    keysInHoles[5] = keyinlock6;
   }
 
   /**
@@ -248,83 +262,6 @@ public class ChestController implements Controller {
     // check if correct key
 
     System.out.println("update keys");
-    for (int i = 0; i < 6; i++) {
-      if (correctKeyMap.get("hole" + (i + 1)) == "true") {
-        // set to green for correct
-        // get key hole
-        switch (i) {
-          case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole1.mouseTransparentProperty().set(true);
-            break;
-          case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole2.mouseTransparentProperty().set(true);
-            break;
-          case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole3.mouseTransparentProperty().set(true);
-            break;
-          case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole4.mouseTransparentProperty().set(true);
-            break;
-          case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole5.mouseTransparentProperty().set(true);
-            break;
-          case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + correctColour);
-            keyHole6.mouseTransparentProperty().set(true);
-            break;
-        }
-      } else if (correctKeyMap.get("hole" + (i + 1)) == "false") {
-        // set to red for incorrect and let them try again
-        System.out.println("hole " + (i + 1) + " is incorrect");
-        switch (i) {
-          case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-          case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + incorrectColour);
-            break;
-        }
-      } else if (correctKeyMap.get("hole" + (i + 1)) == "empty") {
-        // set back to default
-        switch (i) {
-          case 0:
-            keyHole1.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 1:
-            keyHole2.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 2:
-            keyHole3.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 3:
-            keyHole4.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 4:
-            keyHole5.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-          case 5:
-            keyHole6.styleProperty().set("-fx-fill: " + defaultColour);
-            break;
-        }
-      }
-    }
   }
 
   // Method to update inventory in the UI
@@ -362,7 +299,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole1(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(1, keyHole);
   }
 
@@ -374,7 +311,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole2(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(2, keyHole);
   }
 
@@ -386,7 +323,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole3(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(3, keyHole);
   }
 
@@ -398,7 +335,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole4(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(4, keyHole);
   }
 
@@ -410,7 +347,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole5(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(5, keyHole);
   }
 
@@ -422,7 +359,7 @@ public class ChestController implements Controller {
   @FXML
   public void clickKeyHole6(MouseEvent event) {
     // check if correct key
-    Rectangle keyHole = (Rectangle) event.getSource();
+    ImageView keyHole = (ImageView) event.getSource();
     clickKeyHoleHelper(6, keyHole);
   }
 
@@ -465,19 +402,19 @@ public class ChestController implements Controller {
     }
   }
 
-  private void clickKeyHoleHelper(int num, Rectangle keyHole) {
+  private void clickKeyHoleHelper(int num, ImageView keyHole) {
     // check if correct key
     // if the key is already correct then do nothing
     // check if inserting a key
     System.out.println("click key hole " + num);
     if (correctKeyMap.get("hole" + num) == "empty") {
       // in the case that the key hole is empty when clicked
+      System.out.println("empty key hole");
       if (currentKey == 0) {
         return;
       }
 
-      // set to orange for inserting and add to key map
-      keyHole.styleProperty().set("-fx-fill: #fab387");
+      keysInHoles[num - 1].setVisible(true);
       keyMap.put("hole" + num, currentKey);
       String key = "key" + currentKey;
       setLabelKeyHole(num, key);
@@ -486,6 +423,8 @@ public class ChestController implements Controller {
       if (keyHoleMap.get("hole" + num).equals(currentKey)) {
         System.out.println("correct key");
         // sets the key states
+        Image newImage = new Image("/images/unlockedlock.png");
+        keyHole.setImage(newImage);
         if (currentKey == 1) {
           key1Correct = true;
           System.out.println("key1 correct");
@@ -502,9 +441,9 @@ public class ChestController implements Controller {
       } else {
         System.out.println("incorrect key");
         correctKeyMap.put("hole" + num, "false");
+
         removeKey(currentKey);
       }
-
 
       // Create a Timeline to revert the shadow back to its original state after 2 seconds
       Duration duration = Duration.seconds(0.5);
@@ -520,36 +459,41 @@ public class ChestController implements Controller {
       // sets to yellow for filled
     } else {
       // if its filled then set back to default (get back key) on click
-      keyHole.styleProperty().set("-fx-fill: #1e90ff");
+      // keyHole.styleProperty().set("-fx-fill: #1e90ff");
       // resets the key states
-      if (keyMap.get("hole" + num).equals(1)) {
-        key1Correct = false;
-        System.out.println("key1 incorrect");
-      } else if (keyMap.get("hole" + num).equals(2)) {
-        key2Correct = false;
-        System.out.println("key2 incorrect");
-      } else if (keyMap.get("hole" + num).equals(3)) {
-        key3Correct = false;
-        System.out.println("key3 incorrect");
-      }
-      // puts key states back to normal
-      correctKeyMap.put("hole" + num, "empty");
-      returnKey(keyMap.get("hole" + num));
-      setLabelKeyHole(num, "");
-      System.out.println("got back key " + keyHoleMap.get("hole" + num));
+      if (correctKeyMap.get("hole" + num) == "false") {
+        keysInHoles[num - 1].setVisible(false);
 
-      // Create a Timeline to revert the shadow back to its original state after 2 seconds
-      Duration duration = Duration.seconds(0.5);
-      javafx.animation.Timeline timeline =
-          new javafx.animation.Timeline(
-              new javafx.animation.KeyFrame(
-                  duration,
-                  event -> {
-                    // Revert the CSS style to remove the shadow (or set it to the original style)
-                    inventoryChoiceBox.setStyle("");
-                  }));
-      timeline.play();
+        if (keyMap.get("hole" + num).equals(1)) {
+
+          System.out.println("key1 incorrect");
+        } else if (keyMap.get("hole" + num).equals(2)) {
+
+          System.out.println("key2 incorrect");
+        } else if (keyMap.get("hole" + num).equals(3)) {
+
+          System.out.println("key3 incorrect");
+        }
+        // puts key states back to normal
+        correctKeyMap.put("hole" + num, "empty");
+        returnKey(keyMap.get("hole" + num));
+        setLabelKeyHole(num, "");
+        System.out.println("got back key " + keyHoleMap.get("hole" + num));
+
+        // Create a Timeline to revert the shadow back to its original state after 2 seconds
+        Duration duration = Duration.seconds(0.5);
+        javafx.animation.Timeline timeline =
+            new javafx.animation.Timeline(
+                new javafx.animation.KeyFrame(
+                    duration,
+                    event -> {
+                      // Revert the CSS style to remove the shadow (or set it to the original style)
+                      inventoryChoiceBox.setStyle("");
+                    }));
+        timeline.play();
+      }
     }
+    ;
   }
 
   /**
@@ -567,22 +511,22 @@ public class ChestController implements Controller {
       // Depending on the keyhole number, set the corresponding label to display the key inserted
       switch (num) {
         case 1:
-          lblKey1.setText(key + " inserted");
+          // lblKey1.setText(key + " inserted");
           break;
         case 2:
-          lblKey2.setText(key + " inserted");
+          // lblKey2.setText(key + " inserted");
           break;
         case 3:
-          lblKey3.setText(key + " inserted");
+          // lblKey3.setText(key + " inserted");
           break;
         case 4:
-          lblKey4.setText(key + " inserted");
+          // lblKey4.setText(key + " inserted");
           break;
         case 5:
-          lblKey5.setText(key + " inserted");
+          // lblKey5.setText(key + " inserted");
           break;
         case 6:
-          lblKey6.setText(key + " inserted");
+          // lblKey6.setText(key + " inserted");
           break;
       }
     } else {
@@ -718,14 +662,14 @@ public class ChestController implements Controller {
   private void onSwitchView(ActionEvent event) {
     GameState.chat.lastHintToggle();
   }
-  
+
   private void returnKey(int key) {
     if (key == 1) {
       GameState.hasKeyOne = true;
-      inventoryKey1.getChildren().get(1).setOpacity(1); 
+      inventoryKey1.getChildren().get(1).setOpacity(1);
     } else if (key == 2) {
       GameState.hasKeyTwo = true;
-      inventoryKey2.getChildren().get(1).setOpacity(1); 
+      inventoryKey2.getChildren().get(1).setOpacity(1);
     } else if (key == 3) {
       GameState.hasKeyThree = true;
       inventoryKey3.getChildren().get(1).setOpacity(1);
@@ -737,11 +681,11 @@ public class ChestController implements Controller {
     currentKey = 0;
     if (key == 1) {
       GameState.hasKeyOne = false;
-      inventoryKey1.getChildren().get(1).setOpacity(0.35); 
+      inventoryKey1.getChildren().get(1).setOpacity(0.35);
       inventoryKey1.setStyle("-fx-border-color: transparent");
     } else if (key == 2) {
       GameState.hasKeyTwo = false;
-      inventoryKey2.getChildren().get(1).setOpacity(0.35); 
+      inventoryKey2.getChildren().get(1).setOpacity(0.35);
       inventoryKey2.setStyle("-fx-border-color: transparent");
     } else if (key == 3) {
       GameState.hasKeyThree = false;

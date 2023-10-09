@@ -141,7 +141,8 @@ public class CorridorController implements Controller {
           checkCollision();
         }
       };
-      @FXML
+
+  @FXML
   private void enlargeItem(MouseEvent event) {
     enlarge((ImageView) event.getSource());
   }
@@ -150,6 +151,7 @@ public class CorridorController implements Controller {
   private void shrinkItem(MouseEvent event) {
     shrink((ImageView) event.getSource());
   }
+
   @FXML
   private void shrink(ImageView image) {
     image.setScaleX(1.0);
@@ -161,6 +163,7 @@ public class CorridorController implements Controller {
     image.setScaleX(1.5);
     image.setScaleY(1.5);
   }
+
   @FXML
   public void resetPlayerImage() {
     Image image = new Image("/images/character.png");
@@ -190,7 +193,6 @@ public class CorridorController implements Controller {
         new Image(
             "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
-   
   }
 
   /**
