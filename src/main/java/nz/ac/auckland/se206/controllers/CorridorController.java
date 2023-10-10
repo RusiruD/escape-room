@@ -28,6 +28,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat.AppUi;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
+import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.ScoreEntry;
@@ -92,6 +93,8 @@ public class CorridorController implements Controller {
 
   private HintNode winterNode;
   private AppUi state;
+
+  private DungeonMaster callDungeonMaster;
 
   private boolean hasSword = false;
 
@@ -201,6 +204,8 @@ public class CorridorController implements Controller {
   public void initialize() {
 
     TimerCounter.addTimerLabel(lblTime);
+
+    callDungeonMaster = new DungeonMaster();
 
     instance = this;
     Image image = new Image("/images/character.png");
@@ -402,11 +407,7 @@ public class CorridorController implements Controller {
   @FXML
   public void clickDungeonMaster() {
     // Handle click on dungeon master
-    if (!GameState.isChestOpened) {
-      CustomNotifications.generateNotification(
-          "Silence",
-          "The dungeon master's stare is cold and unyielding. You should leave him alone.");
-    } else if (hasSword) {
+    if (hasSword) {
       // win game
       //
       GameState.isGameWon = true;
@@ -437,10 +438,15 @@ public class CorridorController implements Controller {
       // Add win/loss to leaderboard
       WinLossController.getInstance().checkGameStatus();
     } else {
-      CustomNotifications.generateNotification(
-          "Anticipation",
-          "The dungeon master stands ready to fight if you choose to pick up the sword and"
-              + " shield.");
+
+      callDungeonMaster.createPopUp(popUp);
+      String context = DungeonMaster.getDungeonMasterResponse();
+      callDungeonMaster.getText("user", context);
+      // set style class
+      popUp.getStyleClass().add("popUp");
+      popUp.visibleProperty().set(true);
+      popUp.mouseTransparentProperty().set(false);
+      popUp.toFront();
     }
   }
 

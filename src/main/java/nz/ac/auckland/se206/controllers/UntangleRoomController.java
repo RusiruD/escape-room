@@ -176,7 +176,6 @@ public class UntangleRoomController implements Controller {
 
   private boolean isSolved = false;
 
-  private String callQuestion;
   private DungeonMaster callDungeonMaster;
 
   /**
@@ -219,9 +218,6 @@ public class UntangleRoomController implements Controller {
     root.getChildren().add(polygon);
     root.getChildren().addAll(createControlAnchorsFor(polygon.getPoints()));
     pane.getChildren().add(root);
-
-    callQuestion =
-        "Congratulate the player on correctly untangling the lines and solving the puzzle";
   }
 
   // creates a triangle.
@@ -231,11 +227,9 @@ public class UntangleRoomController implements Controller {
 
     // set the points of the
     ObservableList<Double> polygon1 =
-        FXCollections.observableArrayList(
-            300d, 60d, 390d, 410d, 90d, 160d, 485d, 160d, 130d, 400d);
+        FXCollections.observableArrayList(300d, 60d, 390d, 410d, 90d, 160d, 485d, 160d, 130d, 400d);
     ObservableList<Double> polygon2 =
-        FXCollections.observableArrayList(
-            175d, 90d, 270d, 355d, 140d, 320d, 400d, 90d, 380d, 340d);
+        FXCollections.observableArrayList(175d, 90d, 270d, 355d, 140d, 320d, 400d, 90d, 380d, 340d);
     ObservableList<Double> polygon3 =
         FXCollections.observableArrayList(
             480d, 140d, 150d, 350d, 305d, 190d, 470d, 350d, 115d, 140d);
@@ -258,12 +252,12 @@ public class UntangleRoomController implements Controller {
 
     return polygon;
   }
-    
-  
+
   @FXML
   private void shrinkItem(MouseEvent event) {
     shrink((ImageView) event.getSource());
   }
+
   @FXML
   private void enlargeItem(MouseEvent event) {
     enlarge((ImageView) event.getSource());
@@ -280,8 +274,6 @@ public class UntangleRoomController implements Controller {
     image.setScaleX(1.5);
     image.setScaleY(1.5);
   }
-      
-
 
   private void isIntersecting(Polygon polygon) {
     // Untangle lines to solve the puzzle
@@ -395,7 +387,7 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onKey2Clicked(MouseEvent event) {
     GameState.hasKeyTwo = true;
-    
+
     key2.setVisible(false);
     key2.setDisable(true);
     GameState.isKey2Collected = true;
@@ -442,7 +434,8 @@ public class UntangleRoomController implements Controller {
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
     callDungeonMaster.createPopUp(popUp);
-    callDungeonMaster.getText("user", callQuestion);
+    String context = DungeonMaster.getDungeonMasterComment();
+    callDungeonMaster.getText("user", context);
     // Set style class
     popUp.getStyleClass().add("popUp");
     popUp.visibleProperty().set(true);

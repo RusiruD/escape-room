@@ -27,13 +27,14 @@ public class DungeonMaster {
 
   private boolean isSpeaking = false;
   private boolean messageFinished = false;
+  private static boolean commentStrength = false;
 
   private String message;
   private String[] messages;
   private int messageIndex = 0;
 
   private ChatCompletionRequest chatCompletionRequest =
-      new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(250);
+      new ChatCompletionRequest().setN(1).setTemperature(0.2).setTopP(0.5).setMaxTokens(400);
 
   /**
    * Creates a pop-up dialog with the Dungeon Master's image, name, and dialogue.
@@ -298,5 +299,102 @@ public class DungeonMaster {
 
   public boolean isMessageFinished() {
     return messageFinished;
+  }
+
+  public static String getDungeonMasterComment() {
+    String currentRoom = "";
+    switch (GameState.currentRoom) {
+      case MARCELLIN:
+        currentRoom = "untangle room";
+        break;
+      case RUSIRU:
+        currentRoom = "potion room and increased their strength";
+        break;
+      case ZACH:
+        currentRoom = "sliding puzzle room";
+        break;
+      case CHEST:
+        currentRoom = "chest";
+        break;
+      default:
+        break;
+    }
+
+    String keyStatus = "The player needs to get the keys to the following rooms ";
+
+    if (GameState.isChestOpened) {
+      keyStatus =
+          "The player has all the keys to the rooms and needs to get the sword and shield to defeat"
+              + " the dungeon master. ";
+    }
+
+    if (!GameState.isKey1Collected) {
+      keyStatus += "potion room and key 1, ";
+    }
+    if (!GameState.isKey2Collected) {
+      keyStatus += "untangle room and key 2, ";
+    }
+    if (!GameState.isKey3Collected) {
+      keyStatus += "sliding puzzle room and key 3, ";
+    }
+
+    String context =
+        "You are the master of a dungeon which I the player am trying to escape from. Comment on"
+            + " the players progress within the dungeon so far. If the player has all three keys"
+            + " then they should go to the chest and solve the final puzzle. "
+            + keyStatus
+            + ". The player has just completed the "
+            + currentRoom
+            + ". Do not go over 50 words.";
+
+    System.out.println(context);
+
+    return context;
+  }
+
+  public static String getDungeonMasterResponse() {
+    String response =
+        "You are the master of a dungeon which I the player am trying to escape from. If the player"
+            + " has all three keys then they should go to the chest and solve the final puzzle. ";
+
+    if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
+      response += "The player has not collected any keys yet. ";
+    } else {
+      if (!GameState.isKey1Collected) {
+        response += "The player needs to get key 1 from the potion room. ";
+      }
+      if (!GameState.isKey2Collected) {
+        response += "The player needs to get key 2 from the untangle room. ";
+      }
+      if (!GameState.isKey3Collected) {
+        response += "The player needs to get key 3 from the sliding puzzle room. ";
+      }
+    }
+
+    if (GameState.isKey1Collected) {
+      if (!commentStrength) {
+        response += "Comment on the increased strength of the player from the potion they crafted";
+        commentStrength = true;
+      }
+    }
+
+    if (GameState.isKey1Collected && GameState.isKey2Collected && GameState.isKey3Collected) {
+      response +=
+          "The player has all the keys to the rooms and needs to get the sword and shield"
+              + " to defeat the dungeon master. ";
+    }
+
+    if (GameState.isChestOpened) {
+      response =
+          "You are the master of a dungeon which the player is trying to escape from. The player"
+              + " has solved all the puzzles in the dungeon and is preparing to fight you. Goad the"
+              + " player into fighting you. ";
+    }
+
+    response += "Do not go over 50 words.";
+
+    System.out.println(response);
+
+    return response;
   }
 }

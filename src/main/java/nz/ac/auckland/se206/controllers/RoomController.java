@@ -120,7 +120,6 @@ public class RoomController implements Controller {
   private double verticalOffset = 0;
   private List<String> potionsincauldron = new ArrayList<>();
 
-  private String callQuestion;
   private DungeonMaster callDungeonMaster;
 
   @FXML private TextArea textArea;
@@ -164,7 +163,8 @@ public class RoomController implements Controller {
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
     callDungeonMaster.createPopUp(popUp);
-    callDungeonMaster.getText("user", callQuestion);
+    String context = DungeonMaster.getDungeonMasterComment();
+    callDungeonMaster.getText("user", context);
     // Set style class
     popUp.getStyleClass().add("popUp");
     popUp.visibleProperty().set(true);
@@ -224,13 +224,6 @@ public class RoomController implements Controller {
     // Randomly select two colors from the array
     String secondPotion = colors[secondIndex];
     GameState.secondPotion = secondPotion + " Potion";
-    // Set the question
-    callQuestion =
-        "Congratulate a player for moving the boulder to get the key commenting on them mixing the "
-            + firstPotion
-            + " and the "
-            + secondPotion
-            + " to increase their strength. Keep this short";
     // Set the tiles and solution
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
@@ -420,7 +413,7 @@ public class RoomController implements Controller {
   @FXML
   private void onKey1Clicked(MouseEvent event) {
     GameState.hasKeyOne = true;
-    
+
     GameState.isKey1Collected = true;
 
     key1.visibleProperty().set(false);
