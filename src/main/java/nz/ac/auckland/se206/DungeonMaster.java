@@ -52,10 +52,24 @@ public class DungeonMaster {
     dungeonMasterRectangle.setWidth(60);
     dungeonMasterRectangle.setHeight(60);
     dungeonMasterRectangle.setStyle("-fx-fill: #ffffff");
+    dungeonMasterRectangle.setOpacity(0.25);
     ImageView dungeonMasterImage = new ImageView("images/dungeonMasterImageCrop.png");
     dungeonMasterImage.setFitHeight(60);
     dungeonMasterImage.setFitWidth(60);
-    dungeonMasterStack.getChildren().addAll(dungeonMasterRectangle, dungeonMasterImage);
+
+    // sets the thought bubble
+    ImageView dungeonMasterThought = new ImageView("images/thought.png");
+    dungeonMasterThought.setScaleX(-1);
+    dungeonMasterThought.setFitHeight(30);
+    dungeonMasterThought.setFitWidth(30);
+    dungeonMasterThought.setTranslateY(50);
+    dungeonMasterThought.setTranslateX(35);
+    TranslateTransition transition = GameState.translate(dungeonMasterThought);
+    transition.play();
+
+    dungeonMasterStack
+        .getChildren()
+        .addAll(dungeonMasterRectangle, dungeonMasterImage, dungeonMasterThought);
 
     // DIALOG BOX
     VBox dialogueBox = new VBox();
@@ -179,6 +193,13 @@ public class DungeonMaster {
    */
   public void nextMessage() {
     System.out.println("next message");
+    // ensures thoughtbubble doesnt popup after the first message
+    ImageView thoughtBubble =
+        (ImageView)
+            ((StackPane) ((HBox) popUp.getChildren().get(0)).getChildren().get(0))
+                .getChildren()
+                .get(2);
+    thoughtBubble.visibleProperty().set(false);
     // popup -> hbox -> dialog container -> dialog box -> text
     Text dialogue =
         (Text)
