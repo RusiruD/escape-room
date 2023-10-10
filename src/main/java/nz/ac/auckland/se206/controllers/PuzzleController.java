@@ -59,7 +59,6 @@ public class PuzzleController implements Controller {
   private ImageView secondSelection;
 
   private DungeonMaster callDungeonMaster;
-  private String callQuestion;
 
   @FXML private Label lblTime;
 
@@ -126,9 +125,6 @@ public class PuzzleController implements Controller {
           {"one", "two", "zero"}, {"four", "six", "three"}, {"eight", "five", "nine"}
         };
 
-    callQuestion =
-        "Congratulate the user on rearranging the tiles correctly and solving the puzzle.";
-
     callDungeonMaster = new DungeonMaster();
   }
 
@@ -144,7 +140,6 @@ public class PuzzleController implements Controller {
   private void clickedBack(MouseEvent event) throws IOException {
     App.setRoot(AppUi.PUZZLEROOM);
   }
-
 
   private void clicked(ImageView object) {
     // if there is no selection, select the object
@@ -232,7 +227,7 @@ public class PuzzleController implements Controller {
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
-    
+
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
     Duration duration = Duration.seconds(0.5);
     javafx.animation.Timeline timeline =
@@ -259,7 +254,8 @@ public class PuzzleController implements Controller {
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
     callDungeonMaster.createPopUp(popUp);
-    callDungeonMaster.getText("user", callQuestion);
+    String context = DungeonMaster.getDungeonMasterComment();
+    callDungeonMaster.getText("user", context);
     // Set style class
     popUp.getStyleClass().add("popUp");
     popUp.visibleProperty().set(true);
