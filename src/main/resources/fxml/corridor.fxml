@@ -85,11 +85,7 @@
       </ImageView>
       <Group layoutX="-47.0" layoutY="359.0">
          <children>
-            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/ChatBackground.jpeg" />
-               </image>
-            </ImageView>
+            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true" />
             <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onDisableHint" prefHeight="40.0" prefWidth="84.0" text="Close" />
             <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
             <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
@@ -103,7 +99,7 @@
             </Label>
          </children>
       </Group>
-      <VBox layoutX="700.0" layoutY="120.0" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
+      <VBox layoutX="700.0" layoutY="120.0" opacity="0.5" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
          <children>
             <VBox fx:id="inventoryKey1" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                <children>

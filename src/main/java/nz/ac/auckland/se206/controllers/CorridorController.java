@@ -526,6 +526,7 @@ public class CorridorController implements Controller {
 
   /** Initializes the chat and sets up the UI state after the game starts. */
   public void initialiseAfterStart() {
+
     // Initialise the chat
     state = AppUi.CORRIDOR;
     // Create a CompletableFuture for the background task
