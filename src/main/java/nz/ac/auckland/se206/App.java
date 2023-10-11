@@ -236,7 +236,9 @@ public class App extends Application {
     try {
       // Set the root view to the Untangle room
       App.setRoot(AppUi.UNTANGLE);
-
+      // get untangle room controller
+      UntangleRoomController untangleController = UntangleRoomController.getInstance();
+      untangleController.animation();
       // Get the Untangle room controller instance
 
     } catch (IOException e) {

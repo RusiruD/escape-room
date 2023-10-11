@@ -3,6 +3,7 @@ package nz.ac.auckland.se206.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.animation.PauseTransition;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -20,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -149,6 +151,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
+  @FXML private Pane cursorPane;
   @FXML private Pane instructionsDisplay;
   @FXML private Pane popUp;
   @FXML private Pane visualDungeonMaster;
@@ -157,7 +160,7 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView soundToggle;
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
-
+  @FXML private ImageView hand;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
   @FXML private Button showButton;
@@ -218,6 +221,46 @@ public class UntangleRoomController implements Controller {
     root.getChildren().add(polygon);
     root.getChildren().addAll(createControlAnchorsFor(polygon.getPoints()));
     pane.getChildren().add(root);
+  }
+
+  public void animation() {
+    Duration duration = Duration.millis(2500);
+    // Create new translate transition
+    TranslateTransition transition = new TranslateTransition(duration, hand);
+
+    // Play the delay first
+
+    // Move in X axis by +200
+
+    transition.setByX(150);
+    // Move in Y axis by +100
+    transition.setByY(-80);
+    // Go back to previous position after 2.5 seconds
+    transition.setAutoReverse(true);
+    // Repeat animation twice
+    transition.setCycleCount(2);
+    // Delay for .5 seconds
+
+    // Change the image after the delay
+    PauseTransition delay = new PauseTransition(Duration.millis(500)); // Delay for 2.5 seconds
+
+    // Change the image after the delay
+    delay.setOnFinished(
+        event -> {
+          Image newImage = new Image("images/hand2.png"); // Load the new image
+          hand.setImage(newImage);
+          transition.play();
+        });
+
+    // Play the delay, and when it's finished, start the translation animation
+
+    // Play the delay first
+    delay.play();
+    // Play the delay, and when it's finished, start the translation animation
+    transition.setOnFinished(
+        event -> {
+          untangleRoomAnchorPane.getChildren().remove(cursorPane);
+        });
   }
 
   // creates a triangle.
