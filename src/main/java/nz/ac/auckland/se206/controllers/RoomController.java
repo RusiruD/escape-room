@@ -107,7 +107,7 @@ public class RoomController implements Controller {
   @FXML private ImageView bluePotion;
   @FXML private ImageView greenPotion;
   @FXML private ImageView purplePotion;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private ImageView cauldron;
 
   @FXML private ImageView exclamationMark;
@@ -565,5 +565,10 @@ public class RoomController implements Controller {
   @FXML
   private void onChatViewChanged(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

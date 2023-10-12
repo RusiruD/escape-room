@@ -83,7 +83,7 @@ public class CorridorController implements Controller {
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private Pane instructionsDisplay;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
   @FXML private Button showButton;
@@ -378,6 +378,9 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onTreasureChestClicked(MouseEvent event) throws IOException {
+    ObjectiveMarker.setObjective("find keys");
+
+    ObjectiveMarker.update();
     // Handle click on treasure chest
     System.out.println("clicked");
     if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
@@ -596,5 +599,11 @@ public class CorridorController implements Controller {
       e.printStackTrace();
     }
     inputText.clear();
+  }
+
+  @Override
+  public void updateObjective() {
+    System.out.println("de");
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

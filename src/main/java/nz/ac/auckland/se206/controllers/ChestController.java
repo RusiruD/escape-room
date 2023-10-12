@@ -76,7 +76,7 @@ public class ChestController implements Controller {
   @FXML private Rectangle keyinlock4;
   @FXML private Rectangle keyinlock5;
   @FXML private Rectangle keyinlock6;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private ImageView exclamationMark;
   @FXML private ImageView soundToggle;
 
@@ -726,5 +726,10 @@ public class ChestController implements Controller {
     inventoryKey1.setStyle("-fx-border-color: transparent");
     inventoryKey2.setStyle("-fx-border-color: transparent");
     inventoryKey3.setStyle("-fx-border-color: #00ff00");
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

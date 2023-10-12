@@ -162,6 +162,11 @@
             </Label>
          </children>
       </Group>
+      <Label fx:id="lblObjectiveMarker" layoutX="246.0" layoutY="35.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
 
    </children>
 </Pane>

@@ -9,4 +9,6 @@ public interface Controller {
   public void updateMute();
 
   public void updateInventory();
+
+  public void updateObjective();
 }

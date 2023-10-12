@@ -169,6 +169,7 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+  @FXML private Label lblObjectiveMarker;
 
   @FXML private VBox inventoryKey1;
   @FXML private VBox inventoryKey2;
@@ -585,5 +586,10 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onSwitchChatView(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

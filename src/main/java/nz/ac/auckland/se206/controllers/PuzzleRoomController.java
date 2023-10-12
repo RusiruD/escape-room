@@ -42,7 +42,7 @@ public class PuzzleRoomController implements Controller {
 
   @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Pane instructionsDisplay;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
   @FXML private Button showButton;
@@ -94,7 +94,7 @@ public class PuzzleRoomController implements Controller {
     // change the key3's visibility and disable it
     key3.visibleProperty().unbind();
     key3.disableProperty().unbind();
-    
+
     key3.setVisible(false);
     key3.setDisable(true);
     // update the game state
@@ -169,6 +169,7 @@ public class PuzzleRoomController implements Controller {
     // Handle click on mute
     GameState.mute();
   }
+
   @FXML
   private void enlargeItem(MouseEvent event) {
     enlarge((ImageView) event.getSource());
@@ -178,6 +179,7 @@ public class PuzzleRoomController implements Controller {
   private void shrinkItem(MouseEvent event) {
     shrink((ImageView) event.getSource());
   }
+
   @FXML
   private void shrink(ImageView image) {
     image.setScaleX(1.0);
@@ -189,6 +191,7 @@ public class PuzzleRoomController implements Controller {
     image.setScaleX(1.5);
     image.setScaleY(1.5);
   }
+
   /**
    * Updates the mute button's appearance based on the current sound state (muted or unmuted). If
    * the sound is unmuted, it displays the audio-on icon; otherwise, it displays the audio-off icon.
@@ -268,5 +271,10 @@ public class PuzzleRoomController implements Controller {
   @FXML
   private void onChatViewSwitched(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

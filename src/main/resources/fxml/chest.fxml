@@ -211,5 +211,10 @@
             </VBox>
          </children>
       </VBox>
+      <Label fx:id="lblObjectiveMarker" layoutX="312.0" layoutY="112.0" text="Label" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
