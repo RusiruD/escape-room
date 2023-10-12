@@ -79,7 +79,7 @@ public class GameState {
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
   public static boolean hasSwordAndShield = false;
-
+  public static boolean previousKeyPress = false;
   public static Chat chat = null;
 
   public static SimpleBooleanProperty puzzleRoomSolved = new SimpleBooleanProperty(false);
