@@ -103,6 +103,11 @@
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
+      <Label fx:id="lblObjectiveMarker" alignment="CENTER" layoutX="250.0" layoutY="680.0" prefHeight="40.0" prefWidth="300.0" text="Label" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
       <VBox layoutX="700.0" layoutY="120.0" opacity="0.5" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
          <children>
             <VBox fx:id="inventoryKey1" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
@@ -152,7 +157,7 @@
             <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onDisableHint" prefHeight="40.0" prefWidth="84.0" text="Close" />
             <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
             <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
-            <TextField fx:id="inputText" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+            <TextField fx:id="inputText" layoutX="150.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
             <Button fx:id="switchButton" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatSwitch" text="Switch" />
             <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#onEnableHint" text="Chat" />
             <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
@@ -162,11 +167,6 @@
             </Label>
          </children>
       </Group>
-      <Label fx:id="lblObjectiveMarker" layoutX="246.0" layoutY="35.0" text="Label" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
 
    </children>
 </Pane>

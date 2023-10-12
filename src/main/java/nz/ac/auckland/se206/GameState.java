@@ -78,6 +78,7 @@ public class GameState {
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
+  public static boolean hasSwordAndShield = false;
 
   public static Chat chat = null;
 

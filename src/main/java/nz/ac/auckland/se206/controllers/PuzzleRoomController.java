@@ -107,13 +107,23 @@ public class PuzzleRoomController implements Controller {
     } else if (GameState.isKey1Collected == true && GameState.isKey2Collected == false) {
       ObjectiveMarker.setObjective("Find key 2");
     } else {
-      ObjectiveMarker.setObjective("Return to the corridor and open the chest");
+      ObjectiveMarker.setObjective("Return to the corridor");
     }
     ObjectiveMarker.update();
   }
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    if (GameState.isKey1Collected == true
+        && GameState.isKey2Collected == true
+        && GameState.isKey3Collected == true
+        && GameState.isChestOpened == false) {
+
+      ObjectiveMarker.setObjective("Open the Chest");
+
+      ObjectiveMarker.update();
+    }
+
     App.returnToCorridor();
     GameState.currentRoom = GameState.State.CHEST;
   }

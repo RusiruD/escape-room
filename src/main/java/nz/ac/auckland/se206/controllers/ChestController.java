@@ -240,7 +240,7 @@ public class ChestController implements Controller {
       // disable riddle button when finished
       riddleButton.visibleProperty().set(false);
       riddleButton.mouseTransparentProperty().set(true);
-      ObjectiveMarker.setObjective("Return to the corridor and use the treasure to fight the dungeon master");
+      ObjectiveMarker.setObjective("Return to the corridor");
       updateObjective();
       App.makeSwordAndShieldAppear();
       // open chest
@@ -367,11 +367,14 @@ public class ChestController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
-    if(GameState.isChestOpened==true){
-      ObjectiveMarker.setObjective("Use the treasure to fight the dungeon master");
-      updateInventory();
+    if (GameState.isChestOpened == true && GameState.hasSwordAndShield == false) {
+      ObjectiveMarker.setObjective("Equip the sword and shield");
+
+      ObjectiveMarker.update();
     }
+    System.out.println(ObjectiveMarker.getObjective());
     App.returnToCorridor();
+    System.out.println(ObjectiveMarker.getObjective());
   }
 
   /**

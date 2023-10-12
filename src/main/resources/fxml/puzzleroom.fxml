@@ -46,6 +46,11 @@
       </ImageView>
       <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How To Play" />
       <Pane fx:id="instructionsDisplay" layoutX="313.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/roomStylesheet.css" />
+      <Label fx:id="lblObjectiveMarker" alignment="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" text="Label" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Label>
       <Group layoutX="-45.0" layoutY="355.0">
          <children>
             <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
@@ -109,10 +114,5 @@
             </VBox>
          </children>
       </VBox>
-      <Label fx:id="lblObjectiveMarker" layoutX="313.0" layoutY="137.0" text="Label" textFill="WHITE">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
    </children>
 </Pane>

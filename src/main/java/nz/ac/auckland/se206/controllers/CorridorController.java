@@ -190,9 +190,11 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
+    GameState.hasSwordAndShield = true;
     CustomNotifications.generateNotification(
         "You've become stronger!", "Now you can fight the dungeon master!");
     Inventory.addToInventory("sword/shield");
+
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
     hasSword = true;
@@ -202,6 +204,8 @@ public class CorridorController implements Controller {
         new Image(
             "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
+    ObjectiveMarker.setObjective("Slay the dungeon master");
+    ObjectiveMarker.update();
   }
 
   /**
@@ -387,8 +391,7 @@ public class CorridorController implements Controller {
           "No Keys!", "The chest is locked, maybe you should come back after finding some...");
       return;
     }
-    ObjectiveMarker.setObjective("Unlock the chest by solving the riddle");
-    updateObjective();
+
     App.goToChest();
   }
 
@@ -536,7 +539,7 @@ public class CorridorController implements Controller {
 
   /** Initializes the chat and sets up the UI state after the game starts. */
   public void initialiseAfterStart() {
-    ObjectiveMarker.setObjective("find keys");
+    ObjectiveMarker.setObjective("Find the 3 keys");
 
     ObjectiveMarker.update();
     ImageView[] imageViews = new ImageView[4];
@@ -607,7 +610,8 @@ public class CorridorController implements Controller {
 
   @Override
   public void updateObjective() {
-
+    System.out.println("xde");
     lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
+    System.out.println(lblObjectiveMarker.getText());
   }
 }
