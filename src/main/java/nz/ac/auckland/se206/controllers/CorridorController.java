@@ -339,18 +339,23 @@ public class CorridorController implements Controller {
       case W:
         forwardPressed.set(true);
         fadeWASDImages(n);
+
+        GameState.previousKeyPress = true;
         break;
       case A:
         leftPressed.set(true);
         fadeWASDImages(n);
+        GameState.previousKeyPress = true;
         break;
       case S:
         backwardPressed.set(true);
         fadeWASDImages(n);
+        GameState.previousKeyPress = true;
         break;
       case D:
         rightPressed.set(true);
         fadeWASDImages(n);
+        GameState.previousKeyPress = true;
         break;
       default:
         break;
@@ -481,6 +486,7 @@ public class CorridorController implements Controller {
 
   private void fadeWASDImages(int n) {
     if (n == 1) {
+
       ImageView[] imageViews = new ImageView[4];
       imageViews[0] = wKey;
       imageViews[1] = aKey;
@@ -488,7 +494,7 @@ public class CorridorController implements Controller {
       imageViews[3] = dKey;
       FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
       for (int i = 0; i < imageViews.length; i++) {
-        fadeTransitions[i] = new FadeTransition(Duration.seconds(2.5), imageViews[i]);
+        fadeTransitions[i] = new FadeTransition(Duration.seconds(1.5), imageViews[i]);
         fadeTransitions[i].setToValue(0.0);
       }
 
