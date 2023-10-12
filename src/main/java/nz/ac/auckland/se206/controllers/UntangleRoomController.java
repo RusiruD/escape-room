@@ -224,7 +224,7 @@ public class UntangleRoomController implements Controller {
     pane.getChildren().add(root);
   }
 
-  public void animation() {
+  public void animateCursor() {
     Duration duration = Duration.millis(2500);
     // Create new translate transition
     TranslateTransition transition = new TranslateTransition(duration, hand);
@@ -431,11 +431,13 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onKey2Clicked(MouseEvent event) {
     GameState.hasKeyTwo = true;
-
+    // make key invisible and unclickable
     key2.setVisible(false);
     key2.setDisable(true);
     GameState.isKey2Collected = true;
     Inventory.update();
+
+    // depending on the past keys collected update the objective marker
     if (GameState.isKey1Collected == false && GameState.isKey3Collected == false) {
       ObjectiveMarker.setObjective("Find the other keys");
     } else if (GameState.isKey1Collected == true && GameState.isKey3Collected == false) {
@@ -450,6 +452,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    // if all the keys are collected and the chest isnt opened update the objective marker
     if (GameState.isKey1Collected == true
         && GameState.isKey2Collected == true
         && GameState.isKey3Collected == true

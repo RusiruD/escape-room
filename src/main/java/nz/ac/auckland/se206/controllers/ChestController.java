@@ -49,7 +49,7 @@ public class ChestController implements Controller {
   private HashMap<String, String> correctKeyMap = new HashMap<String, String>();
   private HashMap<String, Integer> keyMap = new HashMap<String, Integer>();
   private List<Integer> keys = Arrays.asList(1, 2, 3);
-  Rectangle[] keysInHoles = new Rectangle[6];
+  private Rectangle[] keysInHoles = new Rectangle[6];
 
   @FXML private Button riddleButton;
 
@@ -86,10 +86,6 @@ public class ChestController implements Controller {
   @FXML private Pane visualDungeonMaster;
 
   @FXML private Pane instructionsDisplay;
-
-  private final String defaultColour = "#1e90ff";
-  private final String correctColour = "#a8e6cf";
-  private final String incorrectColour = "#f38ba8";
 
   private String riddleQuestion;
   private String callQuestion;
@@ -708,6 +704,8 @@ public class ChestController implements Controller {
     if (!GameState.hasKeyOne) {
       return;
     }
+    // update the inventory style to show the key has been selected
+
     currentKey = 1;
     inventoryKey1.setStyle("-fx-border-color: #00ff00");
     inventoryKey2.setStyle("-fx-border-color: transparent");
@@ -719,6 +717,8 @@ public class ChestController implements Controller {
     if (!GameState.hasKeyTwo) {
       return;
     }
+    // update the inventory style to show the key has been selected
+
     currentKey = 2;
     inventoryKey1.setStyle("-fx-border-color: transparent");
     inventoryKey2.setStyle("-fx-border-color: #00ff00");
@@ -730,6 +730,7 @@ public class ChestController implements Controller {
     if (!GameState.hasKeyThree) {
       return;
     }
+    // update the inventory style to show the key has been selected
     currentKey = 3;
     inventoryKey1.setStyle("-fx-border-color: transparent");
     inventoryKey2.setStyle("-fx-border-color: transparent");
