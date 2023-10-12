@@ -159,6 +159,8 @@ public class GameState {
   }
 
   public static void setKeys(VBox key1, VBox key2, VBox key3) {
+    // sets the opacity of each key in the vbox to 1 if the player has collected them
+
     if (hasKeyOne) {
       key1.getChildren().get(1).setOpacity(1);
     } else {

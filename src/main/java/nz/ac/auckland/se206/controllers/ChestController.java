@@ -363,14 +363,15 @@ public class ChestController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    // if the chest is opened and the player doesnt have the sword and shield set the objective to
+    // equip the sword and shield
     if (GameState.isChestOpened == true && GameState.hasSwordAndShield == false) {
       ObjectiveMarker.setObjective("Equip the sword and shield");
 
       ObjectiveMarker.update();
     }
-    System.out.println(ObjectiveMarker.getObjective());
+
     App.returnToCorridor();
-    System.out.println(ObjectiveMarker.getObjective());
   }
 
   /**
@@ -668,6 +669,7 @@ public class ChestController implements Controller {
   }
 
   private void returnKey(int key) {
+    // add key back to inventory and update it in the UI by making opacity 1
     if (key == 1) {
       GameState.hasKeyOne = true;
       inventoryKey1.getChildren().get(1).setOpacity(1);
@@ -682,6 +684,7 @@ public class ChestController implements Controller {
   }
 
   private void removeKey(int key) {
+    // remove the key from inventory and make its image opaque in the UI
     currentKey = 0;
     if (key == 1) {
       GameState.hasKeyOne = false;

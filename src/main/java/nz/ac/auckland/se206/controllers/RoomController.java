@@ -338,9 +338,9 @@ public class RoomController implements Controller {
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
     Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline =
-        new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(
                 duration,
                 eventflash -> {
                   // Revert the CSS style to remove the shadow (or set it to the original style)
