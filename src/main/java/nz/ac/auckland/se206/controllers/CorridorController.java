@@ -340,22 +340,21 @@ public class CorridorController implements Controller {
         forwardPressed.set(true);
         fadeWASDImages(n);
 
-        GameState.previousKeyPress = true;
         break;
       case A:
         leftPressed.set(true);
         fadeWASDImages(n);
-        GameState.previousKeyPress = true;
+
         break;
       case S:
         backwardPressed.set(true);
         fadeWASDImages(n);
-        GameState.previousKeyPress = true;
+
         break;
       case D:
         rightPressed.set(true);
         fadeWASDImages(n);
-        GameState.previousKeyPress = true;
+
         break;
       default:
         break;
@@ -508,6 +507,7 @@ public class CorridorController implements Controller {
           });
 
       parallelTransition.play();
+      GameState.previousKeyPress = true;
     }
   }
 
