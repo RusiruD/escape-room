@@ -2,6 +2,8 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import javafx.animation.AnimationTimer;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -65,12 +67,16 @@ public class CorridorController implements Controller {
   @FXML private Rectangle player;
   @FXML private Rectangle treasureChest;
   @FXML private Rectangle door1;
+
   @FXML private Rectangle door2;
   @FXML private Rectangle border1;
   @FXML private Rectangle door3;
   @FXML private ImageView swordandshield;
-
-  @FXML private Pane room;
+  @FXML private ImageView wKey;
+  @FXML private ImageView aKey;
+  @FXML private ImageView sKey;
+  @FXML private ImageView dKey;
+  @FXML private Pane corridor;
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
   @FXML private Label lblTime;
@@ -494,13 +500,13 @@ public class CorridorController implements Controller {
   @FXML
   public double getCorridorWidth() {
 
-    return room.getPrefWidth();
+    return corridor.getPrefWidth();
   }
 
   @FXML
   public double getCorridorHeight() {
 
-    return room.getPrefHeight();
+    return corridor.getPrefHeight();
   }
 
   /** Updates the mute state and toggles the sound icon image accordingly. */
@@ -526,6 +532,28 @@ public class CorridorController implements Controller {
 
   /** Initializes the chat and sets up the UI state after the game starts. */
   public void initialiseAfterStart() {
+    ImageView[] imageViews = new ImageView[4];
+    imageViews[0] = wKey;
+    imageViews[1] = aKey;
+    imageViews[2] = sKey;
+    imageViews[3] = dKey;
+    FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
+    for (int i = 0; i < imageViews.length; i++) {
+      fadeTransitions[i] = new FadeTransition(Duration.seconds(2.5), imageViews[i]);
+      fadeTransitions[i].setToValue(0.0);
+    }
+
+    // Create a ParallelTransition to run all FadeTransitions concurrently
+    ParallelTransition parallelTransition = new ParallelTransition(fadeTransitions);
+
+    // Set an event handler to remove the images when the animation is complete
+    parallelTransition.setOnFinished(
+        event -> {
+          corridor.getChildren().removeAll(imageViews);
+        });
+
+    parallelTransition.play();
+    // Start the animation
 
     // Initialise the chat
     state = AppUi.CORRIDOR;
