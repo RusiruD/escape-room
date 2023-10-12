@@ -422,6 +422,16 @@ public class RoomController implements Controller {
     visualDungeonMaster.visibleProperty().set(true);
     visualDungeonMaster.mouseTransparentProperty().set(false);
     Inventory.update();
+    if (GameState.isKey2Collected == false && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find the other keys");
+    } else if (GameState.isKey2Collected == true && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find key 3");
+    } else if (GameState.isKey3Collected == true && GameState.isKey2Collected == false) {
+      ObjectiveMarker.setObjective("Find key 2");
+    } else {
+      ObjectiveMarker.setObjective("Return to the corridor and open the chest");
+    }
+    ObjectiveMarker.update();
   }
 
   @FXML

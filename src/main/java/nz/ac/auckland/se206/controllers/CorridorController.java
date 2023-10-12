@@ -277,6 +277,7 @@ public class CorridorController implements Controller {
 
       stopMovement();
       App.goToDoor1();
+
       GameState.currentRoom = GameState.State.RUSIRU;
     }
 
@@ -378,9 +379,7 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onTreasureChestClicked(MouseEvent event) throws IOException {
-    ObjectiveMarker.setObjective("find keys");
 
-    ObjectiveMarker.update();
     // Handle click on treasure chest
     System.out.println("clicked");
     if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
@@ -388,6 +387,8 @@ public class CorridorController implements Controller {
           "No Keys!", "The chest is locked, maybe you should come back after finding some...");
       return;
     }
+    ObjectiveMarker.setObjective("Unlock the chest by solving the riddle");
+    updateObjective();
     App.goToChest();
   }
 
@@ -535,6 +536,9 @@ public class CorridorController implements Controller {
 
   /** Initializes the chat and sets up the UI state after the game starts. */
   public void initialiseAfterStart() {
+    ObjectiveMarker.setObjective("find keys");
+
+    ObjectiveMarker.update();
     ImageView[] imageViews = new ImageView[4];
     imageViews[0] = wKey;
     imageViews[1] = aKey;
@@ -603,7 +607,7 @@ public class CorridorController implements Controller {
 
   @Override
   public void updateObjective() {
-    System.out.println("de");
+
     lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

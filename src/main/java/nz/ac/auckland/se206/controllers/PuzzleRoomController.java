@@ -100,6 +100,16 @@ public class PuzzleRoomController implements Controller {
     // update the game state
     GameState.isKey3Collected = true;
     Inventory.update();
+    if (GameState.isKey2Collected == false && GameState.isKey1Collected == false) {
+      ObjectiveMarker.setObjective("Find the other keys");
+    } else if (GameState.isKey2Collected == true && GameState.isKey1Collected == false) {
+      ObjectiveMarker.setObjective("Find key 1");
+    } else if (GameState.isKey1Collected == true && GameState.isKey2Collected == false) {
+      ObjectiveMarker.setObjective("Find key 2");
+    } else {
+      ObjectiveMarker.setObjective("Return to the corridor and open the chest");
+    }
+    ObjectiveMarker.update();
   }
 
   @FXML

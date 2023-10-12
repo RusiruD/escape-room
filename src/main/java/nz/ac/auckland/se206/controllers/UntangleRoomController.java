@@ -436,6 +436,16 @@ public class UntangleRoomController implements Controller {
     key2.setDisable(true);
     GameState.isKey2Collected = true;
     Inventory.update();
+    if (GameState.isKey1Collected == false && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find the other keys");
+    } else if (GameState.isKey1Collected == true && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find key 3");
+    } else if (GameState.isKey3Collected == true && GameState.isKey1Collected == false) {
+      ObjectiveMarker.setObjective("Find key 1");
+    } else {
+      ObjectiveMarker.setObjective("Return to the corridor and open the chest");
+    }
+    ObjectiveMarker.update();
   }
 
   @FXML
