@@ -416,12 +416,16 @@ public class RoomController implements Controller {
 
     GameState.isKey1Collected = true;
 
+    // make the key invisible and unclickable
     key1.visibleProperty().set(false);
     key1.mouseTransparentProperty().set(true);
 
     visualDungeonMaster.visibleProperty().set(true);
     visualDungeonMaster.mouseTransparentProperty().set(false);
+
     Inventory.update();
+
+    // update the objective marker depending on previous keys collected
     if (GameState.isKey2Collected == false && GameState.isKey3Collected == false) {
       ObjectiveMarker.setObjective("Find the other keys");
     } else if (GameState.isKey2Collected == true && GameState.isKey3Collected == false) {
@@ -436,6 +440,8 @@ public class RoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+
+    // if the chest isnt opened and all keys are collected update the objective marker
     if (GameState.isKey1Collected == true
         && GameState.isKey2Collected == true
         && GameState.isKey3Collected == true

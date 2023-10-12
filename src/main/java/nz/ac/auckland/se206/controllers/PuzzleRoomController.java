@@ -100,6 +100,7 @@ public class PuzzleRoomController implements Controller {
     // update the game state
     GameState.isKey3Collected = true;
     Inventory.update();
+    // depending on previous keys collected update the objective marker
     if (GameState.isKey2Collected == false && GameState.isKey1Collected == false) {
       ObjectiveMarker.setObjective("Find the other keys");
     } else if (GameState.isKey2Collected == true && GameState.isKey1Collected == false) {
@@ -114,6 +115,7 @@ public class PuzzleRoomController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    // if the chest isnt opened and the keys are collected update the objective marker
     if (GameState.isKey1Collected == true
         && GameState.isKey2Collected == true
         && GameState.isKey3Collected == true

@@ -72,10 +72,10 @@ public class CorridorController implements Controller {
   @FXML private Rectangle border1;
   @FXML private Rectangle door3;
   @FXML private ImageView swordandshield;
-  @FXML private ImageView wKey;
-  @FXML private ImageView aKey;
-  @FXML private ImageView sKey;
-  @FXML private ImageView dKey;
+  @FXML private ImageView forwardsKey;
+  @FXML private ImageView leftwardsKey;
+  @FXML private ImageView backwardsKey;
+  @FXML private ImageView rightwardsKey;
   @FXML private Pane corridor;
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
@@ -323,6 +323,7 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {
+    // for the first key press fade the key images displayed
     int n;
     if (GameState.previousKeyPress == false) {
       n = 1;
@@ -338,22 +339,21 @@ public class CorridorController implements Controller {
     switch (event.getCode()) {
       case W:
         forwardPressed.set(true);
-        fadeWASDImages(n);
+        fadeControlKeyImages(n);
 
         break;
       case A:
         leftPressed.set(true);
-        fadeWASDImages(n);
+        fadeControlKeyImages(n);
 
         break;
       case S:
         backwardPressed.set(true);
-        fadeWASDImages(n);
-
+        fadeControlKeyImages(n);
         break;
       case D:
         rightPressed.set(true);
-        fadeWASDImages(n);
+        fadeControlKeyImages(n);
 
         break;
       default:
@@ -483,14 +483,14 @@ public class CorridorController implements Controller {
     Utility.exitGame();
   }
 
-  private void fadeWASDImages(int n) {
+  private void fadeControlKeyImages(int n) {
     if (n == 1) {
 
       ImageView[] imageViews = new ImageView[4];
-      imageViews[0] = wKey;
-      imageViews[1] = aKey;
-      imageViews[2] = sKey;
-      imageViews[3] = dKey;
+      imageViews[0] = forwardsKey;
+      imageViews[1] = leftwardsKey;
+      imageViews[2] = backwardsKey;
+      imageViews[3] = rightwardsKey;
       FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
       for (int i = 0; i < imageViews.length; i++) {
         fadeTransitions[i] = new FadeTransition(Duration.seconds(1.5), imageViews[i]);
