@@ -23,11 +23,11 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
  * to the player. It handles dialogues, hints, and interactions with the player.
  */
 public class DungeonMaster {
+  private static boolean commentStrength = false;
   private Pane popUp;
 
   private boolean isSpeaking = false;
   private boolean messageFinished = false;
-  private static boolean commentStrength = false;
 
   private String message;
   private String[] messages;
@@ -323,6 +323,7 @@ public class DungeonMaster {
   }
 
   public static String getDungeonMasterComment() {
+    // comment on the players progress within the rooms of the dungeon so far
     String currentRoom = "";
     switch (GameState.currentRoom) {
       case MARCELLIN:
@@ -374,6 +375,7 @@ public class DungeonMaster {
   }
 
   public static String getDungeonMasterResponse() {
+    // depending on the state of the game modify the message sent to the dungeon master
     String response =
         "You are the master of a dungeon which I the player am trying to escape from. If the player"
             + " has all three keys then they should go to the chest and solve the final puzzle. ";
