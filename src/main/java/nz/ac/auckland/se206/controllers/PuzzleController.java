@@ -75,7 +75,7 @@ public class PuzzleController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private VBox inventoryKey1;
   @FXML private VBox inventoryKey2;
   @FXML private VBox inventoryKey3;
@@ -364,5 +364,10 @@ public class PuzzleController implements Controller {
   @FXML
   private void onReverseChat(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

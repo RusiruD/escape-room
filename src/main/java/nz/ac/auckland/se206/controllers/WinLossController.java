@@ -104,4 +104,10 @@ public class WinLossController implements Controller {
   public void updateMute() {
     // Implementation not provided, but should update the mute button
   }
+
+  @Override
+  public void updateObjective() {
+    // TODO Auto-generated method stub
+    throw new UnsupportedOperationException("Unimplemented method 'updateObjective'");
+  }
 }

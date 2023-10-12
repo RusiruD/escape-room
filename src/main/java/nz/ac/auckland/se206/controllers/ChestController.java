@@ -76,7 +76,7 @@ public class ChestController implements Controller {
   @FXML private Rectangle keyinlock4;
   @FXML private Rectangle keyinlock5;
   @FXML private Rectangle keyinlock6;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private ImageView exclamationMark;
   @FXML private ImageView soundToggle;
 
@@ -240,6 +240,8 @@ public class ChestController implements Controller {
       // disable riddle button when finished
       riddleButton.visibleProperty().set(false);
       riddleButton.mouseTransparentProperty().set(true);
+      ObjectiveMarker.setObjective("Return to the corridor");
+      updateObjective();
       App.makeSwordAndShieldAppear();
       // open chest
       System.out.println("chest opened");
@@ -365,8 +367,14 @@ public class ChestController implements Controller {
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    if (GameState.isChestOpened == true && GameState.hasSwordAndShield == false) {
+      ObjectiveMarker.setObjective("Equip the sword and shield");
 
+      ObjectiveMarker.update();
+    }
+    System.out.println(ObjectiveMarker.getObjective());
     App.returnToCorridor();
+    System.out.println(ObjectiveMarker.getObjective());
   }
 
   /**
@@ -726,5 +734,10 @@ public class ChestController implements Controller {
     inventoryKey1.setStyle("-fx-border-color: transparent");
     inventoryKey2.setStyle("-fx-border-color: transparent");
     inventoryKey3.setStyle("-fx-border-color: #00ff00");
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

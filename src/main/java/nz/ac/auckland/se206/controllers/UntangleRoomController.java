@@ -169,6 +169,7 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
+  @FXML private Label lblObjectiveMarker;
 
   @FXML private VBox inventoryKey1;
   @FXML private VBox inventoryKey2;
@@ -435,10 +436,29 @@ public class UntangleRoomController implements Controller {
     key2.setDisable(true);
     GameState.isKey2Collected = true;
     Inventory.update();
+    if (GameState.isKey1Collected == false && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find the other keys");
+    } else if (GameState.isKey1Collected == true && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find key 3");
+    } else if (GameState.isKey3Collected == true && GameState.isKey1Collected == false) {
+      ObjectiveMarker.setObjective("Find key 1");
+    } else {
+      ObjectiveMarker.setObjective("Return to the corridor ");
+    }
+    ObjectiveMarker.update();
   }
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    if (GameState.isKey1Collected == true
+        && GameState.isKey2Collected == true
+        && GameState.isKey3Collected == true
+        && GameState.isChestOpened == false) {
+
+      ObjectiveMarker.setObjective("Open the Chest");
+
+      ObjectiveMarker.update();
+    }
     App.returnToCorridor();
     GameState.currentRoom = GameState.State.CHEST;
   }
@@ -585,5 +605,10 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onSwitchChatView(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

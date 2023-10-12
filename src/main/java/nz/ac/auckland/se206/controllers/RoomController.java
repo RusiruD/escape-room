@@ -107,7 +107,7 @@ public class RoomController implements Controller {
   @FXML private ImageView bluePotion;
   @FXML private ImageView greenPotion;
   @FXML private ImageView purplePotion;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private ImageView cauldron;
 
   @FXML private ImageView exclamationMark;
@@ -422,10 +422,29 @@ public class RoomController implements Controller {
     visualDungeonMaster.visibleProperty().set(true);
     visualDungeonMaster.mouseTransparentProperty().set(false);
     Inventory.update();
+    if (GameState.isKey2Collected == false && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find the other keys");
+    } else if (GameState.isKey2Collected == true && GameState.isKey3Collected == false) {
+      ObjectiveMarker.setObjective("Find key 3");
+    } else if (GameState.isKey3Collected == true && GameState.isKey2Collected == false) {
+      ObjectiveMarker.setObjective("Find key 2");
+    } else {
+      ObjectiveMarker.setObjective("Return to the corridor ");
+    }
+    ObjectiveMarker.update();
   }
 
   @FXML
   private void onReturnToCorridorClicked(ActionEvent event) {
+    if (GameState.isKey1Collected == true
+        && GameState.isKey2Collected == true
+        && GameState.isKey3Collected == true
+        && GameState.isChestOpened == false) {
+
+      ObjectiveMarker.setObjective("Open the Chest");
+
+      ObjectiveMarker.update();
+    }
     App.returnToCorridor();
     GameState.currentRoom = GameState.State.CHEST;
   }
@@ -565,5 +584,10 @@ public class RoomController implements Controller {
   @FXML
   private void onChatViewChanged(ActionEvent event) {
     GameState.chat.lastHintToggle();
+  }
+
+  @Override
+  public void updateObjective() {
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
   }
 }

@@ -83,7 +83,7 @@ public class CorridorController implements Controller {
   @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private Pane instructionsDisplay;
-
+  @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
   @FXML private Button showButton;
@@ -190,9 +190,11 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
+    GameState.hasSwordAndShield = true;
     CustomNotifications.generateNotification(
         "You've become stronger!", "Now you can fight the dungeon master!");
     Inventory.addToInventory("sword/shield");
+
     swordandshield.setVisible(false);
     swordandshield.setDisable(true);
     hasSword = true;
@@ -202,6 +204,8 @@ public class CorridorController implements Controller {
         new Image(
             "/images/armouredCharacter.png", player.getWidth(), player.getHeight(), true, false);
     player.setFill(new ImagePattern(image2));
+    ObjectiveMarker.setObjective("Slay the dungeon master");
+    ObjectiveMarker.update();
   }
 
   /**
@@ -277,6 +281,7 @@ public class CorridorController implements Controller {
 
       stopMovement();
       App.goToDoor1();
+
       GameState.currentRoom = GameState.State.RUSIRU;
     }
 
@@ -318,6 +323,12 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onKeyPressed(KeyEvent event) {
+    int n;
+    if (GameState.previousKeyPress == false) {
+      n = 1;
+    } else {
+      n = 0;
+    }
 
     if (event.getCode() == KeyCode.ENTER) {
       doTextEntry();
@@ -327,15 +338,23 @@ public class CorridorController implements Controller {
     switch (event.getCode()) {
       case W:
         forwardPressed.set(true);
+        fadeWASDImages(n);
+
         break;
       case A:
         leftPressed.set(true);
+        fadeWASDImages(n);
+
         break;
       case S:
         backwardPressed.set(true);
+        fadeWASDImages(n);
+
         break;
       case D:
         rightPressed.set(true);
+        fadeWASDImages(n);
+
         break;
       default:
         break;
@@ -378,6 +397,7 @@ public class CorridorController implements Controller {
    */
   @FXML
   public void onTreasureChestClicked(MouseEvent event) throws IOException {
+
     // Handle click on treasure chest
     System.out.println("clicked");
     if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
@@ -385,6 +405,7 @@ public class CorridorController implements Controller {
           "No Keys!", "The chest is locked, maybe you should come back after finding some...");
       return;
     }
+
     App.goToChest();
   }
 
@@ -462,6 +483,34 @@ public class CorridorController implements Controller {
     Utility.exitGame();
   }
 
+  private void fadeWASDImages(int n) {
+    if (n == 1) {
+
+      ImageView[] imageViews = new ImageView[4];
+      imageViews[0] = wKey;
+      imageViews[1] = aKey;
+      imageViews[2] = sKey;
+      imageViews[3] = dKey;
+      FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
+      for (int i = 0; i < imageViews.length; i++) {
+        fadeTransitions[i] = new FadeTransition(Duration.seconds(1.5), imageViews[i]);
+        fadeTransitions[i].setToValue(0.0);
+      }
+
+      // Create a ParallelTransition to run all FadeTransitions concurrently
+      ParallelTransition parallelTransition = new ParallelTransition(fadeTransitions);
+
+      // Set an event handler to remove the images when the animation is complete
+      parallelTransition.setOnFinished(
+          d -> {
+            corridor.getChildren().removeAll(imageViews);
+          });
+
+      parallelTransition.play();
+      GameState.previousKeyPress = true;
+    }
+  }
+
   /**
    * Handles the mouse click event to display instructions. Sets the instructions pane to be visible
    * and not mouse transparent.
@@ -532,27 +581,10 @@ public class CorridorController implements Controller {
 
   /** Initializes the chat and sets up the UI state after the game starts. */
   public void initialiseAfterStart() {
-    ImageView[] imageViews = new ImageView[4];
-    imageViews[0] = wKey;
-    imageViews[1] = aKey;
-    imageViews[2] = sKey;
-    imageViews[3] = dKey;
-    FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
-    for (int i = 0; i < imageViews.length; i++) {
-      fadeTransitions[i] = new FadeTransition(Duration.seconds(2.5), imageViews[i]);
-      fadeTransitions[i].setToValue(0.0);
-    }
+    ObjectiveMarker.setObjective("Find the 3 keys");
 
-    // Create a ParallelTransition to run all FadeTransitions concurrently
-    ParallelTransition parallelTransition = new ParallelTransition(fadeTransitions);
+    ObjectiveMarker.update();
 
-    // Set an event handler to remove the images when the animation is complete
-    parallelTransition.setOnFinished(
-        event -> {
-          corridor.getChildren().removeAll(imageViews);
-        });
-
-    parallelTransition.play();
     // Start the animation
 
     // Initialise the chat
@@ -596,5 +628,12 @@ public class CorridorController implements Controller {
       e.printStackTrace();
     }
     inputText.clear();
+  }
+
+  @Override
+  public void updateObjective() {
+    System.out.println("xde");
+    lblObjectiveMarker.setText(ObjectiveMarker.getObjective());
+    System.out.println(lblObjectiveMarker.getText());
   }
 }
