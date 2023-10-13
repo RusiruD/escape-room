@@ -111,12 +111,15 @@ public class Chat {
 
   /** Enables the switch button and send button if they are disabled in any HintNode. */
   private void enableIfDisable() {
+    // Iterate through the list of HintNode groups and check if the switch button or send button is
+    // disabled
     boolean bool = false;
     for (HintNode hintNode : nodeList) {
       if (!bool && hintNode.getShowButton().isDisabled()) {
         bool = true;
       }
     }
+    // If either button is disabled, enable both buttons in all HintNode groups
     if (bool) {
       for (HintNode hintNode : nodeList) {
         enableNode(hintNode.getSwiButton());
@@ -255,8 +258,11 @@ public class Chat {
 
   /** Toggles the display of last hint only. Updates chat messages accordingly. */
   public void lastHintToggle() {
+    // Toggle the boolean variable
     showLastHintOnly = !showLastHintOnly;
+    // Update the chat messages
     updateChats();
+    // Update the text on the switch button
     for (HintNode hintNode : nodeList) {
       if (showLastHintOnly) {
         hintNode.getSwiButton().setText("Expand");
