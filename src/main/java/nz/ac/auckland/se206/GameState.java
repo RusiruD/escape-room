@@ -149,6 +149,10 @@ public class GameState {
     isKey1Collected = false;
     isKey2Collected = false;
     isKey3Collected = false;
+    previousKeyPress = false;
+    hasSwordAndShield = false;
+    isMuted = false;
+
     isChestOpened = false;
     isGameWon = false;
     difficultyLevel = "";
@@ -209,17 +213,18 @@ public class GameState {
     }
   }
 
-/**
- * Method to display the pop-up and hide the visual representation of the dungeon master.
- * @param popUp The pane containing the pop-up.
- * @param visualDungeonMaster The pane containing the visual representation of the dungeon master.
- */
-public static void popUpShow(Pane popUp, Pane visualDungeonMaster) {
-  popUp.setVisible(true);
-  popUp.mouseTransparentProperty().set(false);
-  popUp.toFront();
+  /**
+   * Method to display the pop-up and hide the visual representation of the dungeon master.
+   *
+   * @param popUp The pane containing the pop-up.
+   * @param visualDungeonMaster The pane containing the visual representation of the dungeon master.
+   */
+  public static void popUpShow(Pane popUp, Pane visualDungeonMaster) {
+    popUp.setVisible(true);
+    popUp.mouseTransparentProperty().set(false);
+    popUp.toFront();
 
-  visualDungeonMaster.visibleProperty().set(false);
-  visualDungeonMaster.mouseTransparentProperty().set(true);
-}
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
+  }
 }
