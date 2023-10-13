@@ -22,7 +22,7 @@
          </image>
       </ImageView>
       <Pane fx:id="pane" layoutX="122.0" layoutY="167.0" prefHeight="441.0" prefWidth="550.0" style="-fx-background-color: rgb(92, 95, 119, 0.4);" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="125.0" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="167.0" />
-      <Pane fx:id="cursorPane" layoutX="120.0" layoutY="228.0" prefHeight="149.0" prefWidth="131.0">
+      <Pane fx:id="cursorPane" layoutX="120.0" layoutY="228.0" mouseTransparent="true" prefHeight="149.0" prefWidth="131.0">
          <children>
             <ImageView fx:id="hand" fitHeight="80.0" fitWidth="52.0" layoutX="50.0" layoutY="57.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -33,7 +33,7 @@
       </Pane>
       <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="125.0" text="s" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="125.0" styleClass="white-text" text="s" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
@@ -73,7 +73,7 @@
          </children>
       </Pane>
       <Pane fx:id="instructionsDisplay" layoutX="251.0" layoutY="70.0" prefHeight="359.0" prefWidth="335.0" stylesheets="@../css/roomStylesheet.css" />
-      <Label fx:id="lblObjectiveMarker" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" text="Label" textFill="WHITE">
+      <Label fx:id="lblObjectiveMarker" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" styleClass="white-text" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>

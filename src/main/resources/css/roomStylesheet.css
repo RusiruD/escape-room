@@ -218,3 +218,13 @@
 .riddle StackPane ImageView:hover {
     -fx-cursor: hand;
 }
+
+.white-text {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.75), 10, 0.5, 0.0, 0.0);
+}
+
+.white-text.label .text {
+    -fx-fill: #ffffff;
+    -fx-stroke: #000000;
+    -fx-stroke-width: 0.25px;
+}
