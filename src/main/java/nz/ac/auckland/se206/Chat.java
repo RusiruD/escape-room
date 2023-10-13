@@ -109,19 +109,18 @@ public class Chat {
         });
   }
 
+  /** Enables the switch button and send button if they are disabled in any HintNode. */
   private void enableIfDisable() {
-    {
-      boolean bool = false;
-      for (HintNode hintNode : nodeList) {
-        if (!bool && hintNode.getShowButton().isDisabled()) {
-          bool = true;
-        }
+    boolean bool = false;
+    for (HintNode hintNode : nodeList) {
+      if (!bool && hintNode.getShowButton().isDisabled()) {
+        bool = true;
       }
-      if (bool) {
-        for (HintNode hintNode : nodeList) {
-          enableNode(hintNode.getSwiButton());
-          enableNode(hintNode.getSendButton());
-        }
+    }
+    if (bool) {
+      for (HintNode hintNode : nodeList) {
+        enableNode(hintNode.getSwiButton());
+        enableNode(hintNode.getSendButton());
       }
     }
   }
