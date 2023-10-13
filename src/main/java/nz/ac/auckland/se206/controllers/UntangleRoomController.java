@@ -224,6 +224,7 @@ public class UntangleRoomController implements Controller {
     pane.getChildren().add(root);
   }
 
+  /** Animates the cursor to move to the puzzle room. */
   public void animateCursor() {
     Duration duration = Duration.millis(2500);
     // Create new translate transition
@@ -475,16 +476,7 @@ public class UntangleRoomController implements Controller {
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline =
-        new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
-                duration,
-                event -> {
-                  // Revert the CSS style to remove the shadow (or set it to the original style)
-                  inventoryChoiceBox.setStyle("");
-                }));
-    timeline.play();
+    GameState.flashAnimation(inventoryChoiceBox).play();
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
