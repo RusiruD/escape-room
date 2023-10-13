@@ -12,9 +12,8 @@ public class GptPromptEngineering {
    */
   public static String getHint() {
 
-    return "You and & I are going to act like we're in a video game. You will act like a cruel"
-        + " dungeon master. I will act as a user trapped in your dungeon. Be unfriendly to"
-        + " the user and greet them with a short taunt.";
+    return "You are the dungeon presence of a digital escape room with a dungeon theme. Do not be"
+        + " friendly to the user. Greet the user with a short taunt. Do not reveal you are an AI.";
   }
 
   /**
