@@ -152,7 +152,6 @@ public class GameState {
     previousKeyPress = false;
     hasSwordAndShield = false;
     isMuted = false;
-    hintsUsed = 0;
 
     isChestOpened = false;
     isGameWon = false;
