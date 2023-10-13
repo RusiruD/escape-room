@@ -1,9 +1,12 @@
 package nz.ac.auckland.se206;
 
 import java.util.ArrayList;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
+import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
@@ -116,6 +119,26 @@ public class GameState {
   }
 
   /**
+   * Creates a timeline to flash the inventory choice box. This function changes an
+   * inventoryChoiceBox's style back to none after a set duration.
+   *
+   * @param inventoryChoiceBox The inventory choice box to flash.
+   * @return The timeline with flashing animation properties.
+   */
+  public static Timeline flashAnimation(ComboBox<String> inventoryChoiceBox) {
+    Duration duration = Duration.seconds(0.5);
+    Timeline timeline =
+        new Timeline(
+            new KeyFrame(
+                duration,
+                eventflash -> {
+                  // Revert the CSS style to remove the shadow (or set it to the original style)
+                  inventoryChoiceBox.setStyle("");
+                }));
+    return timeline;
+  }
+
+  /**
    * Static method to reset all the game state variables. It sets various game state variables to
    * their initial values.
    */
@@ -158,6 +181,13 @@ public class GameState {
     }
   }
 
+  /**
+   * Static method to set the opacity of each key in the vbox to 1 if the player has collected them.
+   *
+   * @param key1 the vbox of the first key
+   * @param key2 the vbox of the second key
+   * @param key3 the vbox of the third key
+   */
   public static void setKeys(VBox key1, VBox key2, VBox key3) {
     // sets the opacity of each key in the vbox to 1 if the player has collected them
 

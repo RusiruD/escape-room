@@ -32,6 +32,7 @@ public class Inventory {
     return inventory.contains(string);
   }
 
+  /** Updates the inventory for all controllers except the WinLossController. */
   public static void update() {
     for (Controller controller : SceneManager.getControllers()) {
       if (controller.equals(WinLossController.getInstance())) {

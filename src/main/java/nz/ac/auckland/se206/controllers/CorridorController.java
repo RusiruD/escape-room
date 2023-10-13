@@ -525,7 +525,7 @@ public class CorridorController implements Controller {
     instructionsDisplay.toFront();
   }
 
-  // Method to update inventory in the UI
+  /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
     inventoryChoiceBox.setItems(Inventory.getInventory());
 
@@ -534,16 +534,7 @@ public class CorridorController implements Controller {
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline =
-        new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
-                duration,
-                eventflash -> {
-                  // Revert the CSS style to remove the shadow (or set it to the original style)
-                  inventoryChoiceBox.setStyle("");
-                }));
-    timeline.play();
+    GameState.flashAnimation(inventoryChoiceBox).play();
   }
 
   @FXML

@@ -262,7 +262,7 @@ public class ChestController implements Controller {
     System.out.println("update keys");
   }
 
-  // Method to update inventory in the UI
+  /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
 
     inventoryChoiceBox.setItems(Inventory.getInventory());
