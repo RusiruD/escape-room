@@ -323,4 +323,15 @@ public class Chat {
     nodeMap.put(appUi, hintNode);
     nodeList.add(hintNode);
   }
+
+  /** Method to disable all nodes in the list of HintNode groups. */
+  public void disableAll() {
+    for (HintNode group : nodeList) {
+      for (Node hint : group.getNodeList()) {
+        disableNode(hint);
+      }
+      enableNode(group.getShowButton());
+      disableNode(group.getHintField());
+    }
+  }
 }

@@ -172,6 +172,7 @@ public class App extends Application {
 
   /** Redirects the user back to the corridor view. */
   public static void returnToCorridor() {
+    Chat.getInstance().disableAll();
     try {
       // Set the root view to the corridor
       App.setRoot(AppUi.CORRIDOR);
