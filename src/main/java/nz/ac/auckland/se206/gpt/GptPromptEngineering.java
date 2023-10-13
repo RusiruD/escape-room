@@ -1,15 +1,7 @@
 package nz.ac.auckland.se206.gpt;
 
-import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.GameState.Difficulty;
-
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
-
-  private static String easyMediumPrompt =
-      "You are to roleplay as the dungeon master of a dungeon. You will receive messages from a"
-          + " user role-playing as someone trapped in your dungeon Do not be friendly to the user."
-          + " Greet the user with a short taunt.";
 
   /**
    * Retrieves the hint prompt based on the current game difficulty level. If the game difficulty is
@@ -20,7 +12,9 @@ public class GptPromptEngineering {
    */
   public static String getHint() {
 
-    return easyMediumPrompt;
+    return "You and & I are going to act like we're in a video game. You will act like a cruel"
+        + " dungeon master. I will act as a user trapped in your dungeon. Be unfriendly to"
+        + " the user and greet them with a short taunt.";
   }
 
   /**
