@@ -104,20 +104,25 @@ public class Chat {
           isThinking = false;
           Platform.runLater(
               () -> {
-                boolean bool = false;
-                for (HintNode hintNode : nodeList) {
-                  if (!bool && hintNode.getShowButton().isDisabled()) {
-                    bool = true;
-                  }
-                }
-                if (bool) {
-                  for (HintNode hintNode : nodeList) {
-                    enableNode(hintNode.getSwiButton());
-                    enableNode(hintNode.getSendButton());
-                  }
-                }
+                enableIfDisable();
               });
         });
+  }
+
+  /** Enables the switch button and send button if they are disabled in any HintNode. */
+  private void enableIfDisable() {
+    boolean bool = false;
+    for (HintNode hintNode : nodeList) {
+      if (!bool && hintNode.getShowButton().isDisabled()) {
+        bool = true;
+      }
+    }
+    if (bool) {
+      for (HintNode hintNode : nodeList) {
+        enableNode(hintNode.getSwiButton());
+        enableNode(hintNode.getSendButton());
+      }
+    }
   }
 
   private void appendChatMessage(ChatMessage msg, String role) {
@@ -167,15 +172,14 @@ public class Chat {
     Button switchButton = hintNode.getSwiButton();
     Label hintField = hintNode.getHintField();
 
-    disableNode(sendButton);
-    disableNode(switchButton);
-    lastHintArea.clear();
-
     // If the message is empty, return early
     if (message.trim().isEmpty()) {
       return;
     }
 
+    disableNode(sendButton);
+    disableNode(switchButton);
+    lastHintArea.clear();
     // Append the fake message to the chat interface
     appendChatMessage(new ChatMessage("user", message), "Player");
 
@@ -224,7 +228,7 @@ public class Chat {
               () -> {
                 enableNode(switchButton);
                 enableNode(sendButton);
-
+                enableIfDisable();
                 int hintsLeft = 5 - GameState.hintsGiven;
                 if (hintsLeft < 0) {
                   hintsLeft = 0;
@@ -249,9 +253,17 @@ public class Chat {
     }
   }
 
+  /** Toggles the display of last hint only. Updates chat messages accordingly. */
   public void lastHintToggle() {
     showLastHintOnly = !showLastHintOnly;
     updateChats();
+    for (HintNode hintNode : nodeList) {
+      if (showLastHintOnly) {
+        hintNode.getSwiButton().setText("Expand");
+      } else {
+        hintNode.getSwiButton().setText("Shrink");
+      }
+    }
   }
 
   private void enableNode(Object node) {
@@ -322,5 +334,16 @@ public class Chat {
   public void addToMap(AppUi appUi, HintNode hintNode) {
     nodeMap.put(appUi, hintNode);
     nodeList.add(hintNode);
+  }
+
+  /** Method to disable all nodes in the list of HintNode groups. */
+  public void disableAll() {
+    for (HintNode group : nodeList) {
+      for (Node hint : group.getNodeList()) {
+        disableNode(hint);
+      }
+      enableNode(group.getShowButton());
+      disableNode(group.getHintField());
+    }
   }
 }

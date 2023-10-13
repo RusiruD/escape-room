@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPress" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
+<Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPress" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
    <children>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -44,7 +44,7 @@
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
-      <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How To Play" />
+      <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="instructionsDisplay" layoutX="313.0" layoutY="215.0" prefHeight="200.0" prefWidth="200.0" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblObjectiveMarker" alignment="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" styleClass="white-text" text="Label" textFill="WHITE">
          <font>
@@ -60,15 +60,15 @@
             </ImageView>
             <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onChatClosed" prefHeight="40.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Close" />
             <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-            <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMessageSent" prefHeight="37.0" prefWidth="86.0" stylesheets="@../css/roomStylesheet.css" text="Send" />
             <TextField fx:id="inputText" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
-            <Button fx:id="switchButton" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatViewSwitched" stylesheets="@../css/roomStylesheet.css" text="Switch" />
             <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatShown" stylesheets="@../css/roomStylesheet.css" text="Chat" />
             <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
                <font>
                   <Font name="Old English Text MT" size="28.0" />
                </font>
             </Label>
+            <Button fx:id="sendButton" layoutX="657.0" layoutY="318.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMessageSent" prefHeight="37.0" text="Send" />
+            <Button fx:id="switchButton" layoutX="739.0" layoutY="318.0" mnemonicParsing="false" onAction="#onChatViewSwitched" prefWidth="99.0" text="Expand" />
          </children>
       </Group>
       <VBox layoutX="700.0" layoutY="120.0" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
