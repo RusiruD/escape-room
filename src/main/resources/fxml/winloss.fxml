@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="winlossPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.WinLossController">
+<Pane fx:id="winlossPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.WinLossController">
    <children>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -15,14 +15,13 @@
          </image>
       </ImageView>
       <Button fx:id="exitGame" layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onExitGameClicked" prefHeight="40.0" prefWidth="70.0" text="Quit" />
-      <Button fx:id="replayGame" layoutX="200.0" layoutY="580.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReplayGameClicked" prefHeight="40.0" prefWidth="160.0" text="Replay Game" />
-      <Button fx:id="newGame" layoutX="400.0" layoutY="580.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="40.0" prefWidth="140.0" text="New Game" />
-      <Label fx:id="gameOutcome" alignment="CENTER" layoutX="199.0" layoutY="95.0" prefHeight="166.0" prefWidth="363.0" stylesheets="@../css/roomStylesheet.css" text="You Won" textFill="WHITE">
+      <Button fx:id="newGame" layoutX="331.0" layoutY="565.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="40.0" prefWidth="140.0" text="New Game" />
+      <Label fx:id="gameOutcome" alignment="CENTER" layoutX="219.0" layoutY="94.0" prefHeight="166.0" prefWidth="363.0" stylesheets="@../css/roomStylesheet.css" text="You Won" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="70.0" />
          </font>
       </Label>
-      <Label fx:id="gameOutcomeDescription" alignment="CENTER" layoutX="100.0" layoutY="283.0" prefHeight="159.0" prefWidth="600.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon&#10;and slayed the dungeon master" textAlignment="CENTER" textFill="WHITE">
+      <Label fx:id="gameOutcomeDescription" alignment="CENTER" layoutX="100.0" layoutY="286.0" prefHeight="159.0" prefWidth="600.0" stylesheets="@../css/roomStylesheet.css" text="You escaped the dungeon&#10;and slayed the dungeon master" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="Arial" size="42.0" />
          </font>
