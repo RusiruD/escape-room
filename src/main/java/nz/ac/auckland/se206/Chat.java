@@ -3,8 +3,10 @@ package nz.ac.auckland.se206;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -56,15 +58,17 @@ public class Chat {
   private boolean isThinking;
   private boolean showLastHintOnly;
   private Map<AppUi, HintNode> nodeMap;
+  private Set<HintNode> nodeList;
 
   /**
    * Constructs a Chat object. Initializes data structures and properties for chat functionality.
    */
   public Chat() {
+    nodeList = new HashSet<>();
     nodeMap = new HashMap<>();
     isThinking = true;
     instance = this;
-    showLastHintOnly = false;
+    showLastHintOnly = true;
     chatTextArea = new TextArea();
     lastHintArea = new TextArea();
     variousChatScreens = new ArrayList<>();
@@ -93,18 +97,24 @@ public class Chat {
                   .setN(1)
                   .setTemperature(0.7)
                   .setTopP(0.8)
-                  .setMaxTokens(100);
+                  .setMaxTokens(200);
 
           // Run GPT-3 with an initial hint request
           runGpt(new ChatMessage("user", GptPromptEngineering.getHint()));
           isThinking = false;
           Platform.runLater(
               () -> {
-                HintNode hintNode = nodeMap.get(AppUi.CORRIDOR);
-
-                if (!hintNode.getSwiButton().isDisabled()) {
-                  enableNode(hintNode.getSwiButton());
-                  enableNode(hintNode.getSendButton());
+                boolean bool = false;
+                for (HintNode hintNode : nodeList) {
+                  if (!bool && hintNode.getShowButton().isDisabled()) {
+                    bool = true;
+                  }
+                }
+                if (bool) {
+                  for (HintNode hintNode : nodeList) {
+                    enableNode(hintNode.getSwiButton());
+                    enableNode(hintNode.getSendButton());
+                  }
                 }
               });
         });
@@ -204,7 +214,7 @@ public class Chat {
 
           ChatMessage actualMessage = new ChatMessage("user", contextMsg);
 
-          if (runGpt(actualMessage).getContent().toLowerCase().substring(0, 4).equals("hint")) {
+          if (runGpt(actualMessage).getContent().toLowerCase().contains("hint")) {
             GameState.hintsGiven++;
             System.out.println("HINT DETECTED!");
           }
@@ -311,5 +321,6 @@ public class Chat {
 
   public void addToMap(AppUi appUi, HintNode hintNode) {
     nodeMap.put(appUi, hintNode);
+    nodeList.add(hintNode);
   }
 }

@@ -6,11 +6,18 @@ import nz.ac.auckland.se206.GameState.Difficulty;
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
+  // private static String easyMediumPrompt =
+  //     "You are the AI presence of a digital escape room with a dungeon theme that only has a
+  // potion"
+  //         + " brewing activity, untangling activity, and slide puzzle activity. Do not, no
+  // matter"
+  //         + " what, reveal what activities there are. If they mention an activity that is not in"
+  //         + " the game, tell them that it isn't in the game. Do not be friendly to the player.";
+
   private static String easyMediumPrompt =
-      "You are the AI presence of a digital escape room with a dungeon theme that only has a potion"
-          + " brewing activity, untangling activity, and slide puzzle activity. Do not, no matter"
-          + " what, reveal what activities there are. If they mention an activity that is not in"
-          + " the game, tell them that it isn't in the game. Do not be friendly to the player.";
+      "You are to roleplay as the dungeon master of a dungeon. You will receive messages from a"
+          + " user role-playing as someone trapped in your dungeon Do not be friendly to the user."
+          + " Greet the user with a short taunt. ";
 
   /**
    * Retrieves the hint prompt based on the current game difficulty level. If the game difficulty is
@@ -44,12 +51,12 @@ public class GptPromptEngineering {
    */
   public static String hintPrompt(String original, String hint) {
     // Gives a contextual hint based on the current room
-    return "The user has hints available. If the user is asking for a hint, give them a hint based"
+    return "If the user is asking for a hint, give them a hint based"
         + " on the following: "
         + hint
-        + " and make sure your response starts with the prefix \"Hint\" only if you provide a hint."
-        + " If the user is not asking for a hint, then respond normally. Under no circumstances"
-        + " givie the user the answer. The user's response was: \""
+        + " and make sure your response starts with the prefix \"Hint\" if you provide a hint."
+        + " If the user is not asking for a hint, then respond normally. The user's response was:"
+        + " \""
         + original
         + "\".";
   }
