@@ -104,20 +104,26 @@ public class Chat {
           isThinking = false;
           Platform.runLater(
               () -> {
-                boolean bool = false;
-                for (HintNode hintNode : nodeList) {
-                  if (!bool && hintNode.getShowButton().isDisabled()) {
-                    bool = true;
-                  }
-                }
-                if (bool) {
-                  for (HintNode hintNode : nodeList) {
-                    enableNode(hintNode.getSwiButton());
-                    enableNode(hintNode.getSendButton());
-                  }
-                }
+                enableIfDisable();
               });
         });
+  }
+
+  private void enableIfDisable() {
+    {
+      boolean bool = false;
+      for (HintNode hintNode : nodeList) {
+        if (!bool && hintNode.getShowButton().isDisabled()) {
+          bool = true;
+        }
+      }
+      if (bool) {
+        for (HintNode hintNode : nodeList) {
+          enableNode(hintNode.getSwiButton());
+          enableNode(hintNode.getSendButton());
+        }
+      }
+    }
   }
 
   private void appendChatMessage(ChatMessage msg, String role) {
@@ -224,7 +230,7 @@ public class Chat {
               () -> {
                 enableNode(switchButton);
                 enableNode(sendButton);
-
+                enableIfDisable();
                 int hintsLeft = 5 - GameState.hintsGiven;
                 if (hintsLeft < 0) {
                   hintsLeft = 0;
