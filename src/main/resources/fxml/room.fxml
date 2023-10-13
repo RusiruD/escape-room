@@ -42,7 +42,7 @@
             <Image url="@../images/boulder.png" />
          </image>
       </ImageView>
-      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" text="s" textFill="WHITE">
+      <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" prefHeight="25.0" prefWidth="125.0" styleClass="white-text" text="s" textFill="WHITE">
          <font>
             <Font name="Old English Text MT" size="40.0" />
          </font>
@@ -110,7 +110,7 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <Label fx:id="lblObjectiveMarker" alignment="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" text="Label" textFill="WHITE">
+      <Label fx:id="lblObjectiveMarker" alignment="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" styleClass="white-text" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
