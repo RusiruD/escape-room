@@ -172,15 +172,14 @@ public class Chat {
     Button switchButton = hintNode.getSwiButton();
     Label hintField = hintNode.getHintField();
 
-    disableNode(sendButton);
-    disableNode(switchButton);
-    lastHintArea.clear();
-
     // If the message is empty, return early
     if (message.trim().isEmpty()) {
       return;
     }
 
+    disableNode(sendButton);
+    disableNode(switchButton);
+    lastHintArea.clear();
     // Append the fake message to the chat interface
     appendChatMessage(new ChatMessage("user", message), "Player");
 
