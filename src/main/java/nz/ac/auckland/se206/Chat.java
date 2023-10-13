@@ -249,9 +249,17 @@ public class Chat {
     }
   }
 
+  /** Toggles the display of last hint only. Updates chat messages accordingly. */
   public void lastHintToggle() {
     showLastHintOnly = !showLastHintOnly;
     updateChats();
+    for (HintNode hintNode : nodeList) {
+      if (showLastHintOnly) {
+        hintNode.getSwiButton().setText("Expand");
+      } else {
+        hintNode.getSwiButton().setText("Shrink");
+      }
+    }
   }
 
   private void enableNode(Object node) {
