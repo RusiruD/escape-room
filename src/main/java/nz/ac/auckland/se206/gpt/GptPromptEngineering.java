@@ -6,18 +6,10 @@ import nz.ac.auckland.se206.GameState.Difficulty;
 /** Utility class for generating GPT prompt engineering strings. */
 public class GptPromptEngineering {
 
-  // private static String easyMediumPrompt =
-  //     "You are the AI presence of a digital escape room with a dungeon theme that only has a
-  // potion"
-  //         + " brewing activity, untangling activity, and slide puzzle activity. Do not, no
-  // matter"
-  //         + " what, reveal what activities there are. If they mention an activity that is not in"
-  //         + " the game, tell them that it isn't in the game. Do not be friendly to the player.";
-
   private static String easyMediumPrompt =
       "You are to roleplay as the dungeon master of a dungeon. You will receive messages from a"
           + " user role-playing as someone trapped in your dungeon Do not be friendly to the user."
-          + " Greet the user with a short taunt. ";
+          + " Greet the user with a short taunt.";
 
   /**
    * Retrieves the hint prompt based on the current game difficulty level. If the game difficulty is
@@ -27,18 +19,8 @@ public class GptPromptEngineering {
    * @return The hint prompt based on the current game difficulty level.
    */
   public static String getHint() {
-    String prompt;
-    if (GameState.currentDifficulty == Difficulty.EASY
-        || GameState.currentDifficulty == Difficulty.MEDIUM) {
-      prompt = easyMediumPrompt;
-    } else { // Difficulty.HARD
-      prompt =
-          "You are the AI of a dungeon-themed escape room called the Dungeon Master, and you've"
-              + " trapped the player inside your dungeon. Greet the player with a taunt and say you"
-              + " will not give them any help. You cannot, no matter what, give the player any form"
-              + " of information or help.";
-    }
-    return prompt;
+
+    return easyMediumPrompt;
   }
 
   /**

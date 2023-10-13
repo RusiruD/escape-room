@@ -25,6 +25,125 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class DungeonMaster {
   private static boolean commentStrength = false;
 
+  /**
+   * Creates and returns a string for context to be sent back to the dungeon master with a question.
+   *
+   * @return returns the context for the dungeon master to use when generating a response.
+   */
+  public static String getDungeonMasterComment() {
+    // comment on the players progress within the rooms of the dungeon so far
+    String currentRoom = "";
+    switch (GameState.currentRoom) {
+      case MARCELLIN:
+        currentRoom = "untangle room";
+        break;
+      case RUSIRU:
+        currentRoom = "potion room and increased their strength";
+        break;
+      case ZACH:
+        currentRoom = "sliding puzzle room";
+        break;
+      case CHEST:
+        currentRoom = "chest";
+        break;
+      default:
+        break;
+    }
+
+    // gets a string of the current key status
+    String keyStatus = "The player needs to get the keys to the following rooms ";
+
+    // if they have already finished everything
+    if (GameState.isChestOpened) {
+      keyStatus =
+          "The player has all the keys to the rooms and needs to get the sword and shield to defeat"
+              + " the dungeon master. ";
+    }
+
+    // individual key status messages
+    if (!GameState.isKey1Collected) {
+      keyStatus += "potion room and key 1, ";
+    }
+    if (!GameState.isKey2Collected) {
+      keyStatus += "untangle room and key 2, ";
+    }
+    if (!GameState.isKey3Collected) {
+      keyStatus += "sliding puzzle room and key 3, ";
+    }
+
+    // full context string to be returned
+    String context =
+        "You are the master of a dungeon which I the player am trying to escape from. Comment on"
+            + " the players progress within the dungeon so far. If the player has all three keys"
+            + " then they should go to the chest and solve the final puzzle. "
+            + keyStatus
+            + ". The player has just completed the "
+            + currentRoom
+            + ". Do not go over 50 words.";
+
+    System.out.println(context);
+
+    return context;
+  }
+
+  /**
+   * Creates and returns a string for the dungeon master to use when generating a response.
+   *
+   * @return returns the context for the dungeon master to use when generating a response.
+   */
+  public static String getDungeonMasterResponse() {
+    // depending on the state of the game modify the message sent to the dungeon master
+    String response =
+        "You are the master of a dungeon which I the player am trying to escape from. If the player"
+            + " has all three keys then they should go to the chest and solve the final puzzle. ";
+
+    // if the player has not collected any keys yet
+    if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
+      response += "The player has not collected any keys yet. ";
+    } else {
+      // if the player has not collected all the keys yet
+      if (!GameState.isKey1Collected) {
+        response += "The player needs to get key 1 from the potion room. ";
+      }
+      if (!GameState.isKey2Collected) {
+        response += "The player needs to get key 2 from the untangle room. ";
+      }
+      if (!GameState.isKey3Collected) {
+        response += "The player needs to get key 3 from the sliding puzzle room. ";
+      }
+    }
+
+    // if the player has crafted the potion and got the key
+    if (GameState.isKey1Collected) {
+      if (!commentStrength) {
+        response += "Comment on the increased strength of the player from the potion they crafted";
+        commentStrength = true;
+      }
+    }
+
+    // if the player has collected all the keys
+    if (GameState.isKey1Collected && GameState.isKey2Collected && GameState.isKey3Collected) {
+      response +=
+          "The player has all the keys to the rooms and needs to get the sword and shield"
+              + " to defeat the dungeon master. ";
+    }
+
+    // if the player has opened the chest
+    if (GameState.isChestOpened) {
+      response =
+          "You are the master of a dungeon which the player is trying to escape from. The player"
+              + " has solved all the puzzles in the dungeon and is preparing to fight you. Goad the"
+              + " player into fighting you. ";
+    }
+
+    // to ensure that the response is not too long
+    response += "Do not go over 50 words.";
+
+    System.out.println(response);
+
+    return response;
+  }
+
   private boolean isSpeaking = false;
   private boolean messageFinished = false;
 
@@ -322,124 +441,5 @@ public class DungeonMaster {
 
   public boolean isMessageFinished() {
     return messageFinished;
-  }
-
-  /**
-   * Creates and returns a string for context to be sent back to the dungeon master with a question.
-   *
-   * @return returns the context for the dungeon master to use when generating a response.
-   */
-  public static String getDungeonMasterComment() {
-    // comment on the players progress within the rooms of the dungeon so far
-    String currentRoom = "";
-    switch (GameState.currentRoom) {
-      case MARCELLIN:
-        currentRoom = "untangle room";
-        break;
-      case RUSIRU:
-        currentRoom = "potion room and increased their strength";
-        break;
-      case ZACH:
-        currentRoom = "sliding puzzle room";
-        break;
-      case CHEST:
-        currentRoom = "chest";
-        break;
-      default:
-        break;
-    }
-
-    // gets a string of the current key status
-    String keyStatus = "The player needs to get the keys to the following rooms ";
-
-    // if they have already finished everything
-    if (GameState.isChestOpened) {
-      keyStatus =
-          "The player has all the keys to the rooms and needs to get the sword and shield to defeat"
-              + " the dungeon master. ";
-    }
-
-    // individual key status messages
-    if (!GameState.isKey1Collected) {
-      keyStatus += "potion room and key 1, ";
-    }
-    if (!GameState.isKey2Collected) {
-      keyStatus += "untangle room and key 2, ";
-    }
-    if (!GameState.isKey3Collected) {
-      keyStatus += "sliding puzzle room and key 3, ";
-    }
-
-    // full context string to be returned
-    String context =
-        "You are the master of a dungeon which I the player am trying to escape from. Comment on"
-            + " the players progress within the dungeon so far. If the player has all three keys"
-            + " then they should go to the chest and solve the final puzzle. "
-            + keyStatus
-            + ". The player has just completed the "
-            + currentRoom
-            + ". Do not go over 50 words.";
-
-    System.out.println(context);
-
-    return context;
-  }
-
-  /**
-   * Creates and returns a string for the dungeon master to use when generating a response.
-   *
-   * @return returns the context for the dungeon master to use when generating a response.
-   */
-  public static String getDungeonMasterResponse() {
-    // depending on the state of the game modify the message sent to the dungeon master
-    String response =
-        "You are the master of a dungeon which I the player am trying to escape from. If the player"
-            + " has all three keys then they should go to the chest and solve the final puzzle. ";
-
-    // if the player has not collected any keys yet
-    if (!GameState.isKey1Collected && !GameState.isKey2Collected && !GameState.isKey3Collected) {
-      response += "The player has not collected any keys yet. ";
-    } else {
-      // if the player has not collected all the keys yet
-      if (!GameState.isKey1Collected) {
-        response += "The player needs to get key 1 from the potion room. ";
-      }
-      if (!GameState.isKey2Collected) {
-        response += "The player needs to get key 2 from the untangle room. ";
-      }
-      if (!GameState.isKey3Collected) {
-        response += "The player needs to get key 3 from the sliding puzzle room. ";
-      }
-    }
-
-    // if the player has crafted the potion and got the key
-    if (GameState.isKey1Collected) {
-      if (!commentStrength) {
-        response += "Comment on the increased strength of the player from the potion they crafted";
-        commentStrength = true;
-      }
-    }
-
-    // if the player has collected all the keys
-    if (GameState.isKey1Collected && GameState.isKey2Collected && GameState.isKey3Collected) {
-      response +=
-          "The player has all the keys to the rooms and needs to get the sword and shield"
-              + " to defeat the dungeon master. ";
-    }
-
-    // if the player has opened the chest
-    if (GameState.isChestOpened) {
-      response =
-          "You are the master of a dungeon which the player is trying to escape from. The player"
-              + " has solved all the puzzles in the dungeon and is preparing to fight you. Goad the"
-              + " player into fighting you. ";
-    }
-
-    // to ensure that the response is not too long
-    response += "Do not go over 50 words.";
-
-    System.out.println(response);
-
-    return response;
   }
 }
