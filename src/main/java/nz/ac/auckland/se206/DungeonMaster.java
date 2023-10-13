@@ -25,13 +25,13 @@ import nz.ac.auckland.se206.gpt.openai.ChatCompletionResult.Choice;
 public class DungeonMaster {
   private static boolean commentStrength = false;
 
-  private String message;
-  private String[] messages;
-
   private boolean isSpeaking = false;
   private boolean messageFinished = false;
 
   private int messageIndex = 0;
+
+  private String message;
+  private String[] messages;
 
   private Pane popUp;
 
@@ -325,7 +325,7 @@ public class DungeonMaster {
   }
 
   /**
-   * Creates and returns a string for context to be sent back to the dungeon master with a question
+   * Creates and returns a string for context to be sent back to the dungeon master with a question.
    *
    * @return returns the context for the dungeon master to use when generating a response.
    */

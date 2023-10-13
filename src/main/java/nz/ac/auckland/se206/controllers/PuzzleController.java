@@ -16,7 +16,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
@@ -228,20 +227,11 @@ public class PuzzleController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
     inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
-    // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline =
-        new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
-                duration,
-                event -> {
-                  // Revert the CSS style to remove the shadow (or set it to the original style)
-                  inventoryChoiceBox.setStyle("");
-                }));
-    timeline.play();
-
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
+
+    // Create a Timeline to revert the shadow back to its original state after 2 seconds
+    GameState.flashAnimation(inventoryChoiceBox).play();
   }
 
   /**
@@ -256,14 +246,15 @@ public class PuzzleController implements Controller {
     callDungeonMaster.createPopUp(popUp);
     String context = DungeonMaster.getDungeonMasterComment();
     callDungeonMaster.getText("user", context);
-    // Set style class
+    // sets popup styling and formatting
     popUp.getStyleClass().add("popUp");
-    popUp.visibleProperty().set(true);
-    popUp.mouseTransparentProperty().set(false);
-    popUp.toFront();
+    GameState.popUpShow(popUp, visualDungeonMaster);
+  }
 
-    visualDungeonMaster.visibleProperty().set(false);
-    visualDungeonMaster.mouseTransparentProperty().set(true);
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utility.exitGame();
   }
 
   /**
@@ -278,12 +269,6 @@ public class PuzzleController implements Controller {
     instructionsDisplay.visibleProperty().set(true);
     instructionsDisplay.mouseTransparentProperty().set(false);
     instructionsDisplay.toFront();
-  }
-
-  @FXML
-  private void clickExit(MouseEvent event) {
-    // Handle click on exit
-    Utility.exitGame();
   }
 
   @FXML
