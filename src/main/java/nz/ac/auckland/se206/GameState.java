@@ -8,6 +8,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableBooleanValue;
 import javafx.scene.control.ComboBox;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.SceneManager;
@@ -206,5 +207,14 @@ public class GameState {
     } else {
       key3.getChildren().get(1).setOpacity(0.35);
     }
+  }
+
+  public static void popUpShow(Pane popUp, Pane visualDungeonMaster) {
+    popUp.setVisible(true);
+    popUp.mouseTransparentProperty().set(false);
+    popUp.toFront();
+
+    visualDungeonMaster.visibleProperty().set(false);
+    visualDungeonMaster.mouseTransparentProperty().set(true);
   }
 }

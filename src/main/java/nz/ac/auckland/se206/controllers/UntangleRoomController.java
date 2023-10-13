@@ -494,13 +494,9 @@ public class UntangleRoomController implements Controller {
     callDungeonMaster.createPopUp(popUp);
     String context = DungeonMaster.getDungeonMasterComment();
     callDungeonMaster.getText("user", context);
-    // Set style class
+    // sets popup styling and formatting
     popUp.getStyleClass().add("popUp");
-    popUp.visibleProperty().set(true);
-    popUp.mouseTransparentProperty().set(false);
-    popUp.toFront();
-    visualDungeonMaster.visibleProperty().set(false);
-    visualDungeonMaster.mouseTransparentProperty().set(true);
+    GameState.popUpShow(popUp, visualDungeonMaster);
   }
 
   /**
