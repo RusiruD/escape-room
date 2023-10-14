@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
@@ -56,6 +57,8 @@ public class PuzzleRoomController implements Controller {
   @FXML private VBox inventoryKey2;
   @FXML private VBox inventoryKey3;
 
+  @FXML private Rectangle puzzleButton;
+
   private HintNode hintNode;
   private Chat.AppUi appUi;
 
@@ -81,6 +84,15 @@ public class PuzzleRoomController implements Controller {
     // Set the instructions pane to be invisible and mouse transparent
     instructionsDisplay.visibleProperty().set(false);
     instructionsDisplay.mouseTransparentProperty().set(true);
+    puzzleButton.getStyleClass().add("hover");
+    puzzleButton.setOnMouseEntered(
+        event -> {
+          puzzleButton.setOpacity(0.5);
+        });
+    puzzleButton.setOnMouseExited(
+        event -> {
+          puzzleButton.setOpacity(0);
+        });
   }
 
   @FXML

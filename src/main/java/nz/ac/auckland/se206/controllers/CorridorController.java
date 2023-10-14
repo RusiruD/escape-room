@@ -71,6 +71,10 @@ public class CorridorController implements Controller {
   @FXML private Rectangle door2;
   @FXML private Rectangle border1;
   @FXML private Rectangle door3;
+  @FXML private Rectangle treasureHoverRectangle;
+  @FXML private Rectangle dungeonMasterHoverRectangle;
+  @FXML private Group dungeonMasterHover;
+  @FXML private Group treasureHover;
   @FXML private ImageView swordandshield;
   @FXML private ImageView forwardsKey;
   @FXML private ImageView leftwardsKey;
@@ -232,6 +236,26 @@ public class CorridorController implements Controller {
 
     instructionsDisplay.visibleProperty().set(false);
     instructionsDisplay.mouseTransparentProperty().set(true);
+
+    dungeonMasterHover.getStyleClass().add("hover");
+    treasureHover.getStyleClass().add("hover");
+    dungeonMasterHover.setOnMouseEntered(
+        event -> {
+          dungeonMasterHoverRectangle.setOpacity(0.5);
+        });
+    dungeonMasterHover.setOnMouseExited(
+        event -> {
+          dungeonMasterHoverRectangle.setOpacity(0);
+        });
+
+    treasureHover.setOnMouseEntered(
+        event -> {
+          treasureHoverRectangle.setOpacity(0.5);
+        });
+    treasureHover.setOnMouseExited(
+        event -> {
+          treasureHoverRectangle.setOpacity(0);
+        });
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses

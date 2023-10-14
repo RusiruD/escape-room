@@ -14,14 +14,14 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPress" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
+<Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPress" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
    <children>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/PuzzleRoomBackground.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="puzzleButton" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="102.0" layoutX="362.0" layoutY="321.0" onMouseClicked="#clickPuzzle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="102.0" />
+      <Rectangle fx:id="puzzleButton" arcHeight="5.0" arcWidth="5.0" fill="#d3d3d3" height="409.0" layoutX="230.0" layoutY="183.0" onMouseClicked="#clickPuzzle" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="359.0" />
       <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="RIGHT" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="58.0" prefWidth="125.0" styleClass="white-text" text="s" textFill="WHITE">

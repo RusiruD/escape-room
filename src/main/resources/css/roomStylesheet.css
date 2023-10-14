@@ -228,3 +228,11 @@
     -fx-stroke: #000000;
     -fx-stroke-width: 0.25px;
 }
+
+.hover:hover {
+    -fx-cursor: hand;
+}
+
+Button:hover {
+    -fx-cursor: hand;
+}
