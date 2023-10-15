@@ -245,91 +245,15 @@ public class RoomController implements Controller {
     image.setScaleY(1.5);
   }
 
-  // When the cauldron is clicked, the potion is added to the cauldron
-  @FXML
-  private void onCauldronClicked(MouseEvent event) {
-
-    // Check if a potion is selected in the combo box
-    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-
-    // if a potion is selected it is made visible in the scene
-    if (selectedItem != null && selectedItem.contains("redPotion")) {
-      // if the potion is already in the cauldron, it is not added again
-      potionsincauldron.add("Red Potion");
-      // the potion is removed from the combo box
-      Inventory.removeFromInventory(selectedItem);
-      // the inventory is updated
-      updateInventory();
-
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("bluePotion")) {
-      potionsincauldron.add("Blue Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("greenPotion")) {
-      potionsincauldron.add("Green Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("yellowPotion")) {
-      potionsincauldron.add("Yellow Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("purplePotion")) {
-      potionsincauldron.add("Purple Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-    }
-    // if the two correct potions are in the cauldron, the boulder is made draggable
-    if (potionsincauldron.contains(GameState.firstPotion)
-        && potionsincauldron.contains(GameState.secondPotion)) {
-      tintScene(potionsRoomPane);
-      CustomNotifications.generateNotification(
-          "Something Happens!",
-          "You feel far stronger... like energy's coursing through you and you could move"
-              + " anything...");
-
-      allowImageToBeDragged(boulder);
-    }
-  }
-
+  
   @FXML
   private void shrink(ImageView image) {
     image.setScaleX(1.0);
     image.setScaleY(1.0);
   }
 
-  @FXML
-  private void addToInventory(ImageView image) {
-
-    image.setVisible(false);
-    image.setDisable(true);
-
-    Inventory.addToInventory(image.getId());
-    updateInventory();
-  }
-
-  @FXML
-  private void addToInventoryFromScene(MouseEvent event) {
-    onPotionClicked(event);
-    ImageView image = (ImageView) event.getSource();
-    // image.setVisible(false);
-    // image.setDisable(true);
-
-    Inventory.addToInventory(image.getId());
-    updateInventory();
-  }
+  
+  
 
   
   @FXML
@@ -416,7 +340,7 @@ public class RoomController implements Controller {
          
           if((cauldron.getBoundsInParent().intersects(image.getBoundsInParent())&&(image.getId().contains("Potion")))) {
           
-            addToInventory( image);
+           
             image.setVisible(false);
             image.setDisable(true);
             GameState.isPotionSelected = false;
@@ -459,7 +383,7 @@ public class RoomController implements Controller {
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
     // if a note is selected it is made visible in the scene
-    addToInventory(note);
+    
     btnHideNote.setDisable(false);
     btnHideNote.setVisible(true);
   }
@@ -538,24 +462,7 @@ public class RoomController implements Controller {
     timeline.play();
   }
 
-  @FXML
-  private void onTableClicked(MouseEvent event) {
-
-    // Check if a note is selected in the combo box
-    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-
-    if (selectedItem != null && selectedItem.contains("note")) {
-
-      Inventory.removeFromInventory(selectedItem);
-
-      showNoteWithoutButton();
-      return;
-    }
-    // if a parchment piece is selected it is made visible in the scene
-    // and the parchment piece is removed from the combo box
-    // if already three pieces are visible the note is shown instead
-
-  }
+  
 
   @FXML
   private void clickExit(MouseEvent event) {
