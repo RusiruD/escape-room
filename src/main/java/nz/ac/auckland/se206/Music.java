@@ -3,10 +3,12 @@ package nz.ac.auckland.se206;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+/** Utility class for managing music playback in the game. */
 public class Music {
 
   private static MediaPlayer mediaPlayer;
 
+  /** Starts playing the background music. */
   public static void begin() {
     try {
       Media sound =
@@ -14,7 +16,7 @@ public class Music {
       mediaPlayer = new MediaPlayer(sound);
       mediaPlayer.play();
     } catch (Exception e) {
-
+      System.out.println(e);
     }
   }
 
