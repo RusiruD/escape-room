@@ -30,17 +30,22 @@
             <Image url="@../images/numbers/N2.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="six" fitHeight="106.0" fitWidth="121.0" layoutX="479.0" layoutY="202.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+         <image>
+            <Image url="@../images/numbers/N3.png" />
+         </image>
+      </ImageView>
       <ImageView fx:id="four" fitHeight="106.0" fitWidth="121.0" layoutX="188.0" layoutY="321.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="five" fitHeight="106.0" fitWidth="121.0" layoutX="328.0" layoutY="321.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="eight" fitHeight="106.0" fitWidth="121.0" layoutX="328.0" layoutY="321.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="six" fitHeight="106.0" fitWidth="121.0" layoutX="479.0" layoutY="321.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="five" fitHeight="106.0" fitWidth="121.0" layoutX="479.0" layoutY="321.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N6.png" />
          </image>
@@ -50,7 +55,7 @@
             <Image url="@../images/numbers/N0.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="eight" fitHeight="106.0" fitWidth="121.0" layoutX="328.0" layoutY="457.0" onMouseClicked="#clickedTile" pickOnBounds="true">
+      <ImageView fx:id="seven" fitHeight="106.0" fitWidth="121.0" layoutX="328.0" layoutY="457.0" onMouseClicked="#clickedTile" pickOnBounds="true">
          <image>
             <Image url="@../images/numbers/N8.png" />
          </image>
@@ -96,11 +101,6 @@
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
-      <ImageView fx:id="three" fitHeight="106.0" fitWidth="121.0" layoutX="479.0" layoutY="202.0" onMouseClicked="#clickedTile" pickOnBounds="true">
-         <image>
-            <Image url="@../images/numbers/N3.png" />
-         </image>
-      </ImageView>
       <Pane fx:id="instructionsDisplay" layoutX="200.0" layoutY="233.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" />
       <VBox layoutX="700.0" layoutY="120.0" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">

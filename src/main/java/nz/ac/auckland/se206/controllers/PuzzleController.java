@@ -112,14 +112,33 @@ public class PuzzleController implements Controller {
     // set the tiles and solution
     tiles =
         new String[][] {
-          {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
+          {"one", "two", "six"}, {"four", "eight", "five"}, {"zero", "seven", "nine"}
         };
     solution =
         new String[][] {
-          {"one", "two", "zero"}, {"four", "six", "three"}, {"eight", "five", "nine"}
+          {"one", "two", "zero"}, {"four", "five", "six"}, {"seven", "eight", "nine"}
         };
 
     callDungeonMaster = new DungeonMaster();
+  }
+
+  private String[][] generateSetup() {
+
+    String[][] tiles = null;
+    int randNum = (int) (System.currentTimeMillis() % 1);
+
+    if (randNum == 0) {
+      tiles =
+          new String[][] {
+            {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
+          };
+    } else {
+      tiles =
+          new String[][] {
+            {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
+          };
+    }
+    return tiles;
   }
 
   public double getPuzzleWidth() {
@@ -153,28 +172,34 @@ public class PuzzleController implements Controller {
     // if the tiles are adjacent, swap them
     if ((apos[0] == bpos[0] && Math.abs(apos[1] - bpos[1]) == 1)
         ^ (apos[1] == bpos[1] && Math.abs(apos[0] - bpos[0]) == 1)) {
-      tiles[apos[0]][apos[1]] = zero.getId();
-      tiles[bpos[0]][bpos[1]] = object.getId();
-      swapImagePosition(object, zero);
+      swapImage(object, zero);
     }
     // check if the puzzle is solved
     checkSolution();
   }
 
   /**
-   * Swaps the position of two ImageView objects by exchanging their layout coordinates.
+   * Swaps the positions of two ImageView objects in the puzzle grid.
    *
-   * @param object The first ImageView object to be swapped.
-   * @param zero The second ImageView object to be swapped.
+   * @param object The first ImageView object.
+   * @param other The second ImageView object to swap with.
    */
-  private void swapImagePosition(ImageView object, ImageView zero) {
-    // Getting layout data for later swap
+  private void swapImage(ImageView object, ImageView other) {
+    // Find the positions of the ImageView objects in the grid.
+    int[] apos = findPos(object.getId());
+    int[] bpos = findPos(other.getId());
+
+    // Update the tile positions in the grid array.
+    tiles[apos[0]][apos[1]] = other.getId();
+    tiles[bpos[0]][bpos[1]] = object.getId();
+
+    // Swap the layout coordinates of the ImageView objects.
     double ax = object.getLayoutX();
     double ay = object.getLayoutY();
-    object.setLayoutX(zero.getLayoutX());
-    object.setLayoutY(zero.getLayoutY());
-    zero.setLayoutX(ax);
-    zero.setLayoutY(ay);
+    object.setLayoutX(other.getLayoutX());
+    object.setLayoutY(other.getLayoutY());
+    other.setLayoutX(ax);
+    other.setLayoutY(ay);
   }
 
   private int[] findPos(String s) {
