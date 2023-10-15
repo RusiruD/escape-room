@@ -214,14 +214,14 @@ public class RoomController implements Controller {
     // Randomly select two colors from the array
     int firstIndex = random.nextInt(colors.length);
     String firstPotion = colors[firstIndex];
-    GameState.firstPotion = "" + firstPotion + " Potion";
+    GameState.firstPotion = "" + firstPotion + "Potion";
     int secondIndex;
     do {
       secondIndex = random.nextInt(colors.length);
     } while (secondIndex == firstIndex); // Ensure the second color is different from the first
     // Randomly select two colors from the array
     String secondPotion = colors[secondIndex];
-    GameState.secondPotion = secondPotion + " Potion";
+    GameState.secondPotion = secondPotion + "Potion";
     // Set the tiles and solution
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
@@ -421,11 +421,25 @@ public class RoomController implements Controller {
             image.setDisable(true);
             GameState.isPotionSelected = false;
             cauldron.setEffect(null);
+           if ((image.getId().toLowerCase().contains(GameState.firstPotion.toLowerCase()) || (image.getId().toLowerCase().contains(GameState.secondPotion.toLowerCase()))))
+           {
+            GameState.correctPotions++;
+            if(GameState.correctPotions==2){
+              tintScene(potionsRoomPane);
+              CustomNotifications.generateNotification(
+                  "Something Happens!",
+                  "You feel far stronger... like energy's coursing through you and you could move"
+                      + " anything...");
+                      
+      allowImageToBeDragged(boulder);
+            }
+           }
+      
           }
      
-        
-      
         });
+      
+        
   }
 
   @FXML

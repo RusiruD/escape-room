@@ -78,7 +78,7 @@ public class GameState {
   public static int hintsUsed = 0;
   public static int totalTime = 0;
   public static int gamesWon = 0;
-
+  public static int correctPotions=0;
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
