@@ -79,7 +79,6 @@ public class PuzzleController implements Controller {
 
   private HintNode hintNode;
   private Chat.AppUi appUi;
-  private FadeTransition fadeTransition;
 
   /**
    * Initializes the PuzzleController. This method is automatically called after the FXML file has
@@ -135,7 +134,7 @@ public class PuzzleController implements Controller {
           {"one", "two", "six"}, {"four", "eight", "five"}, {"zero", "seven", "nine"}
         };
     if (randNum == 0) {
-
+      System.out.println("Type zero maze");
     } else if (randNum == 1) {
       // random pattern
       swapImage(eight, two);
