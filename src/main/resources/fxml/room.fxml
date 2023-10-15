@@ -68,7 +68,7 @@
          </font>
       </Label>
       <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" text="Back" />
-      <ImageView fx:id="cauldron" fitHeight="131.0" fitWidth="138.0" layoutX="629.0" layoutY="552.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cauldron" fitHeight="131.0" fitWidth="143.0" layoutX="629.0" layoutY="552.0" onMouseClicked="#onCauldronClicked" pickOnBounds="true">
          <image>
             <Image url="@../images/cauldron.png" />
          </image>

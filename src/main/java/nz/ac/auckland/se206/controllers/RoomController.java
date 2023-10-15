@@ -233,6 +233,9 @@ public class RoomController implements Controller {
     // Set the tiles and solution
 
     // Allow the boulder to be dragged and dropped
+    for (int i = 0; i <GameState.potionsSelected.length; i++) {
+       GameState.potionsSelected[i] = false;}
+       makePotionImageArray();
 
   }
 
@@ -328,20 +331,14 @@ public class RoomController implements Controller {
     updateInventory();
   }
 
+  
   @FXML
   private void onPotionClicked(MouseEvent event) {
     System.out.println(GameState.isPotionSelected);
       ImageView image = (ImageView) event.getSource();
     if((image.getEffect()==null)&&(GameState.isPotionSelected==false)){
   
-    if (image.getId().contains("redPotion")) {
-      CustomNotifications.generateNotification(
-          "Red Potion", "A red potion, it looks like it could be useful");
-    } else if (image.getId().contains("greenPotion")) {
-    } else if (image.getId().contains("yellowPotion")) {
-    } else if (image.getId().contains("bluePotion")) {
-    } else if (image.getId().contains("purplePotion")) {}
-
+   
       
       DropShadow dropShadow = new DropShadow();
       dropShadow.setHeight(60);
@@ -399,6 +396,7 @@ public class RoomController implements Controller {
   // Allow the image to be dragged and dropped
   @FXML
   private void allowImageToBeDragged(ImageView image) {
+   
     // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
@@ -412,6 +410,21 @@ public class RoomController implements Controller {
           double newY = event.getSceneY() - verticalOffset;
           image.setLayoutX(newX);
           image.setLayoutY(newY);
+        });
+        image.setOnMouseReleased((MouseEvent event) -> {
+       
+         
+          if(cauldron.getBoundsInParent().intersects(image.getBoundsInParent())) {
+          
+            addToInventory( image);
+            image.setVisible(false);
+            image.setDisable(true);
+            GameState.isPotionSelected = false;
+            cauldron.setEffect(null);
+          }
+     
+        
+      
         });
   }
 
@@ -565,6 +578,13 @@ public class RoomController implements Controller {
       e.printStackTrace();
     }
     inputText.clear();
+  }
+  @FXML 
+  private void makePotionImageArray(){
+    ImageView[] potionImages = {redPotion, bluePotion, greenPotion, yellowPotion, purplePotion};
+    for (int i = 0; i < potionImages.length; i++) {
+      allowImageToBeDragged(potionImages[i]);
+    }
   }
 
   @FXML

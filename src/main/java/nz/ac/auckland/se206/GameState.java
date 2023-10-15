@@ -73,7 +73,7 @@ public class GameState {
 
   public static Riddle riddle;
   public static TextToSpeech tts = new TextToSpeech();
-
+  public static boolean [] potionsSelected = new boolean[5];
   public static int hintsGiven = 0;
   public static int hintsUsed = 0;
   public static int totalTime = 0;
