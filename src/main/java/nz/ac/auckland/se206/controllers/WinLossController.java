@@ -74,7 +74,7 @@ public class WinLossController implements Controller {
   @FXML
   private void onNewGameClicked(ActionEvent event) {
     // Go back to the start screen
-    Music.begin();
+    Music.playBackgroundMusic();
     App.goToStartScreen();
     Inventory.clearInventory();
     App.resetPlayerImage();

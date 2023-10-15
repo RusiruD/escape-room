@@ -9,11 +9,18 @@ public class Music {
   private static MediaPlayer mediaPlayer;
 
   /** Starts playing the background music. */
-  public static void begin() {
+  public static void playBackgroundMusic() {
+    playMusic("music1");
+  }
+
+  public static void playWinMusic() {
+    playMusic("Win");
+  }
+
+  private static void playMusic(String name) {
     try {
-      Media sound =
-          new Media(App.class.getResource("/sounds/" + "music1" + ".mp3").toURI().toString());
-      mediaPlayer = new MediaPlayer(sound);
+      Media music = new Media(App.class.getResource("/sounds/" + name + ".mp3").toURI().toString());
+      mediaPlayer = new MediaPlayer(music);
       mediaPlayer.play();
     } catch (Exception e) {
       System.out.println(e);
