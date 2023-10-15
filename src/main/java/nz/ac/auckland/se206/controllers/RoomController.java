@@ -235,16 +235,14 @@ public class RoomController implements Controller {
     ImageView image = (ImageView) event.getSource();
     if (image.getId().contains("boulder")) {
       if ((image.getEffect() == null) && (GameState.isBoulderDraggable == true)) {
-
         DropShadow dropShadow = new DropShadow();
         dropShadow.setHeight(60);
         dropShadow.setWidth(60);
         dropShadow.setSpread(0.35);
         dropShadow.setColor(Color.WHITE);
         image.setEffect(dropShadow);
-      }
-      // else if there is an effect remove it
-      else {
+      } else {
+        // else if there is an effect remove it
         if (image.getEffect() != null) {
 
           image.setEffect(null);

@@ -149,6 +149,7 @@ public class GameState {
   public static void reset() {
     // reset all the game state variables
     isRiddleResolved = false;
+    // reset keys
     isKey1Collected = false;
     isKey2Collected = false;
     isKey3Collected = false;
@@ -156,17 +157,19 @@ public class GameState {
     previousKeyPress = false;
     hasSwordAndShield = false;
     isPotionSelected = false;
+    // change potion names
     firstPotionColour = "";
     secondPotionColour = "";
     isMuted = false;
     isPotionSelected = false;
     isChestOpened = false;
     isGameWon = false;
+    // change strings
     difficultyLevel = "";
     firstPotion = "";
     secondPotion = "";
     hintsGiven = 0;
-
+    // set items to false
     hasKeyOne = false;
     hasKeyTwo = false;
     hasKeyThree = false;
