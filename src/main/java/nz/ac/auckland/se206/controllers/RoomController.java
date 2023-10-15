@@ -15,11 +15,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -316,12 +319,38 @@ public class RoomController implements Controller {
 
   @FXML
   private void addToInventoryFromScene(MouseEvent event) {
+    onPotionClicked(event);
     ImageView image = (ImageView) event.getSource();
-    image.setVisible(false);
-    image.setDisable(true);
+    // image.setVisible(false);
+    // image.setDisable(true);
 
     Inventory.addToInventory(image.getId());
     updateInventory();
+  }
+
+  @FXML
+  private void onPotionClicked(MouseEvent event) {
+    ImageView image = (ImageView) event.getSource();
+    if (image.getId().contains("redPotion")) {
+      CustomNotifications.generateNotification(
+          "Red Potion", "A red potion, it looks like it could be useful");
+    } else if (image.getId().contains("greenPotion")) {
+    } else if (image.getId().contains("yellowPotion")) {
+    } else if (image.getId().contains("bluePotion")) {
+    } else if (image.getId().contains("purplePotion")) {
+
+      Glow glow = new Glow();
+      glow.setLevel(0.5);
+      DropShadow dropShadow = new DropShadow();
+      dropShadow.setHeight(60);
+      dropShadow.setWidth(60);
+      dropShadow.setSpread(0.35);
+      dropShadow.setColor(Color.WHITE);
+      image.setEffect(dropShadow);
+     
+
+    } else {
+    }
   }
 
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
