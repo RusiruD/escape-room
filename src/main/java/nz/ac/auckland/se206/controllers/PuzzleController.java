@@ -1,6 +1,7 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -41,7 +42,7 @@ public class PuzzleController implements Controller {
   @FXML private Pane puzzlePane;
   @FXML private ImageView one;
   @FXML private ImageView two;
-  @FXML private ImageView three;
+  @FXML private ImageView seven;
   @FXML private ImageView four;
   @FXML private ImageView five;
   @FXML private ImageView six;
@@ -115,18 +116,37 @@ public class PuzzleController implements Controller {
     callDungeonMaster = new DungeonMaster();
   }
 
+  /** Generates the initial setup for the puzzle by shuffling the tiles. */
   private void generateSetup() {
+    // use mod and current time to gen ran num
+    Random random = new Random();
+    int randNum = random.nextInt(3);
 
-    int randNum = (int) (System.currentTimeMillis() % 1);
-
-    tiles =
-        new String[][] {
-          {"one", "two", "six"}, {"four", "eight", "five"}, {"zero", "seven", "nine"}
-        };
+    // generate solution and tile set
     solution =
         new String[][] {
           {"one", "two", "zero"}, {"four", "five", "six"}, {"seven", "eight", "nine"}
         };
+    tiles =
+        new String[][] {
+          {"one", "two", "six"}, {"four", "eight", "five"}, {"zero", "seven", "nine"}
+        };
+    if (randNum == 0) {
+
+    } else if (randNum == 1) {
+      // random pattern
+      swapImage(eight, two);
+      swapImage(seven, eight);
+      swapImage(seven, four);
+      swapImage(four, one);
+    } else { // another generated pattern
+      swapImage(four, five);
+      swapImage(four, nine);
+      swapImage(four, eight);
+      swapImage(four, six);
+      swapImage(four, two);
+      swapImage(four, one);
+    }
   }
 
   public double getPuzzleWidth() {
