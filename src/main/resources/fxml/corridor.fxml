@@ -124,7 +124,7 @@
          </children>
       </Group>
       <Button layoutX="20.0" layoutY="70.0" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
-      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true" styleClass="white-text-small">
          <image>
             <Image url="@../images/sound/audioOn.png" />
          </image>

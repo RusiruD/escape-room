@@ -39,7 +39,7 @@
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
-      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true" styleClass="white-text-small">
          <image>
             <Image url="@../images/sound/audioOn.png" />
          </image>
