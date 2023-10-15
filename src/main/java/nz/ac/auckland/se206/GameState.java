@@ -85,6 +85,7 @@ public class GameState {
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
   public static boolean hasSwordAndShield = false;
+  public static boolean isBoulderDraggable=false;
   public static boolean previousKeyPress = false;
   public static Chat chat = null;
 
@@ -151,6 +152,7 @@ public class GameState {
     isKey1Collected = false;
     isKey2Collected = false;
     isKey3Collected = false;
+    isBoulderDraggable=false;
     previousKeyPress = false;
     hasSwordAndShield = false;
      isPotionSelected = false;

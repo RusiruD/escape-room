@@ -150,7 +150,7 @@ public class RoomController implements Controller {
 
     return potionsRoomPane.getPrefHeight();
   }
-
+  
   @FXML
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
@@ -219,9 +219,14 @@ public class RoomController implements Controller {
 
   @FXML
   private void enlarge(ImageView image) {
+    if(image.getId().contains("boulder")){
+      image.setScaleX(1.2);
+      image.setScaleY(1.2);
+    }
+    else{
     image.setScaleX(1.5);
     image.setScaleY(1.5);
-  }
+  }}
 
   
   @FXML
@@ -231,14 +236,38 @@ public class RoomController implements Controller {
   }
 
   
+  @FXML 
+  private void onBoulderClicked(MouseEvent event){
+    
+        ImageView image = (ImageView) event.getSource();
+        if(image.getId().contains("boulder")){
+    if((image.getEffect()==null)&&(GameState.isBoulderDraggable==true)){
   
+   
+      
+      DropShadow dropShadow = new DropShadow();
+      dropShadow.setHeight(60);
+      dropShadow.setWidth(60);
+      dropShadow.setSpread(0.35);
+      dropShadow.setColor(Color.WHITE);
+      image.setEffect(dropShadow);}
+     
+     
+      else{
+        if(image.getEffect()!=null){
+         
+          image.setEffect(null);
+        
+      }
+      }}
+  }
 
   
   @FXML
   private void onPotionClicked(MouseEvent event) {
    
       ImageView image = (ImageView) event.getSource();
-    if((image.getEffect()==null)&&(GameState.isPotionSelected==false)){
+    if((image.getEffect()==null)&&(GameState.isPotionSelected==false)&&(image.getId().contains("Potion"))){
   
    
       
@@ -292,7 +321,9 @@ public class RoomController implements Controller {
     // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
+        
           onPotionClicked(event);
+          onBoulderClicked(event);
           horizontalOffset = event.getSceneX() - image.getLayoutX();
           verticalOffset = event.getSceneY() - image.getLayoutY();
         });
@@ -326,6 +357,8 @@ public class RoomController implements Controller {
                       + " anything...");
                       
       allowImageToBeDragged(boulder);
+      GameState.isBoulderDraggable=true;
+        cauldron.setEffect(null);
             }
            }
       
@@ -338,12 +371,25 @@ public class RoomController implements Controller {
 
   @FXML
   private void enlargeItem(MouseEvent event) {
-    enlarge((ImageView) event.getSource());
+          ImageView image = (ImageView) event.getSource();
+          if(image.getId().contains("boulder")){
+            if(GameState.isBoulderDraggable==true){
+            enlarge((ImageView) event.getSource());}
+          }
+          else{
+
+    enlarge((ImageView) event.getSource());}
   }
 
   @FXML
   private void shrinkItem(MouseEvent event) {
-    shrink((ImageView) event.getSource());
+    ImageView image = (ImageView) event.getSource();
+          if(image.getId().contains("boulder")){
+            if(GameState.isBoulderDraggable==true){
+            shrink((ImageView) event.getSource());
+          }}
+          else{
+    shrink((ImageView) event.getSource());}
   }
 
   @FXML
