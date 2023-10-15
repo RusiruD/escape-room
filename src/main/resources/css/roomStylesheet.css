@@ -14,6 +14,10 @@
     /* Set the background color */
 }
 
+TextArea .text {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0.5, 0.0, 0.0);
+}
+
 .text-field {
     -fx-background-image: url("/images/parchmentbg1.jpg");
     -fx-background-color: rgba(0, 0, 0, 0.1);
@@ -29,6 +33,10 @@
     -fx-text-fill: black;
     /* Set text color to black */
 
+}
+
+.text-field .text {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
 
 
@@ -166,6 +174,7 @@
     -fx-alignment: center-left;
     -fx-padding: 10px;
     -fx-background-color: #45475a;
+    -fx-background-image: url("/images/parchmentbg1.jpg");
     -fx-pref-height: 80px;
     -fx-pref-width: 550px;
     -fx-max-width: 550px;
@@ -175,9 +184,10 @@
 }
 
 .popUp HBox .label {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
     -fx-font-size: 15px;
     -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0.0, 0.0);
 }
 
 .popUp HBox VBox {
@@ -186,8 +196,13 @@
 }
 
 .popUp HBox VBox Text {
-    -fx-text-fill: #ffffff;
+    -fx-text-fill: #000000;
     -fx-font-size: 15px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.35), 10, 0.5, 0.0, 0.0);
+}
+
+.popUp HBox StackPane ImageView {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0.0, 0.0);
 }
 
 .popUp HBox StackPane ImageView:hover {
@@ -196,14 +211,16 @@
 
 .riddle {
     -fx-background-color: #45475a;
+    -fx-background-image: url("/images/parchmentbg1.jpg");
     -fx-border-color: #ffffff;
     -fx-border-width: 1px;
     -fx-alignment: centre;
 }
 
-.riddle .label {
-    -fx-text-fill: #ffffff;
-    -fx-font-size: 15px;
+.riddle StackPane VBox Label {
+    -fx-text-fill: #000;
+    -fx-font-size: 25px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0.0, 0.0);
 }
 
 .riddle StackPane {
@@ -213,6 +230,15 @@
 .riddle StackPane VBox {
     -fx-alignment: center-left;
     -fx-padding: 10px;
+}
+
+.riddle StackPane VBox TextArea {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 10, 0.5, 0.0, 0.0);
+}
+
+.riddle StackPane VBox TextArea .text {
+    -fx-text-fill: #000000;
+    -fx-font-size: 15px;
 }
 
 .riddle StackPane ImageView:hover {
