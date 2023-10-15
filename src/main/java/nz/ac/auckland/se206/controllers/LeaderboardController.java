@@ -68,7 +68,7 @@ public class LeaderboardController {
     entry.setStyle("-fx-background-color: " + hexcode + "; -fx-padding: 15;");
     if (isFinal) {
       entry.setStyle(
-          "-fx-background-color: linear-gradient(to top, #3a404d, #181c26); -fx-padding: 15;");
+          "-fx-background-color: #d5b85a; -fx-padding: 15;");
     }
     entry.setAlignment(Pos.CENTER);
 
@@ -81,6 +81,7 @@ public class LeaderboardController {
 
     pos.getChildren().addAll(circle, posLabel);
     pos.setPadding(new Insets(0, 20, 0, 0));
+    pos.getStyleClass().add("white-text-small");
 
     // Add the position display to the first half
     firstHalf.getChildren().add(pos);
@@ -95,10 +96,12 @@ public class LeaderboardController {
     // Create labels for the player's name and time
     Label difficultyLabel = new Label(difficultyString);
     difficultyLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 0 0 20;");
+    difficultyLabel.getStyleClass().add("white-text-small");
     firstHalf.getChildren().add(difficultyLabel);
 
     Label timeLabel = new Label("Time Left: " + time);
     timeLabel.setStyle("-fx-text-fill: white; -fx-font-size: 20; -fx-padding: 0 15 0 10;");
+    timeLabel.getStyleClass().add("white-text-small");
     secondHalf.getChildren().add(timeLabel);
 
     // Add the two halves to the entry
@@ -159,42 +162,42 @@ public class LeaderboardController {
     switch (i % 10) {
       case 0:
         // red
-        return "#fa6855";
+        return "#E2CE31";
 
       case 1:
         // orange
-        return "#ed5f52";
+        return "#E3C631";
 
       case 2:
         // yellow
-        return "#e0574f";
+        return "#E3BF31";
 
       case 3:
         // green
-        return "#db544e";
+        return "#E4B731";
       case 4:
         // blue
-        return "#d7514d";
+        return "#E4B031";
 
       case 5:
         // purple
-        return "#d24e4c";
+        return "#E5A832";
 
       case 6:
         // pink
-        return "#cd4b4b";
+        return "#E5A132";
 
       case 7:
         // brown
-        return "#c74749";
+        return "#E69932";
 
       case 8:
         // grey
-        return "#c24448";
+        return "#E69232";
 
       case 9:
         // black
-        return "#b53f43";
+        return "#E78A32";
 
       default:
         // white
