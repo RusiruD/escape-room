@@ -65,24 +65,27 @@ public class GameState {
   public static boolean isMuted = false;
   public static String difficultyLevel = "";
   public static String gameTime = "";
-
+  public static boolean isPotionSelected = false;
   public static String firstPotion = "";
   public static String secondPotion = "";
+  public static String firstPotionColour="";
+  public static String secondPotionColour="";
 
   public static ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 
   public static Riddle riddle;
   public static TextToSpeech tts = new TextToSpeech();
-
+  public static boolean [] potionsSelected = new boolean[5];
   public static int hintsGiven = 0;
   public static int hintsUsed = 0;
   public static int totalTime = 0;
   public static int gamesWon = 0;
-
+  public static int correctPotions=0;
   public static boolean hasKeyOne = false;
   public static boolean hasKeyTwo = false;
   public static boolean hasKeyThree = false;
   public static boolean hasSwordAndShield = false;
+  public static boolean isBoulderDraggable=false;
   public static boolean previousKeyPress = false;
   public static Chat chat = null;
 
@@ -149,10 +152,14 @@ public class GameState {
     isKey1Collected = false;
     isKey2Collected = false;
     isKey3Collected = false;
+    isBoulderDraggable=false;
     previousKeyPress = false;
     hasSwordAndShield = false;
+     isPotionSelected = false;
+     firstPotionColour="";
+ secondPotionColour="";
     isMuted = false;
-
+    isPotionSelected=false;
     isChestOpened = false;
     isGameWon = false;
     difficultyLevel = "";

@@ -7,7 +7,6 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -60,7 +59,6 @@ public class PuzzleController implements Controller {
 
   @FXML private Pane popUp;
   @FXML private Pane visualDungeonMaster;
-  @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -249,14 +247,11 @@ public class PuzzleController implements Controller {
 
   /** Initializes the leaderboard by adding sample scores and sorting them. */
   public void updateInventory() {
-    inventoryChoiceBox.setItems(Inventory.getInventory());
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    GameState.flashAnimation(inventoryChoiceBox).play();
   }
 
   /**

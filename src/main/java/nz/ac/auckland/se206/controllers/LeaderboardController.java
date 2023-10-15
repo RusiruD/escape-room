@@ -67,8 +67,7 @@ public class LeaderboardController {
     // Set the style for the entry, including background color and padding
     entry.setStyle("-fx-background-color: " + hexcode + "; -fx-padding: 15;");
     if (isFinal) {
-      entry.setStyle(
-          "-fx-background-color: #d5b85a; -fx-padding: 15;");
+      entry.setStyle("-fx-background-color: #d5b85a; -fx-padding: 15;");
     }
     entry.setAlignment(Pos.CENTER);
 

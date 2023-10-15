@@ -11,7 +11,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -83,7 +82,6 @@ public class CorridorController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane riddleDisplay;
   @FXML private Label lblTime;
-  @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
@@ -210,9 +208,7 @@ public class CorridorController implements Controller {
     ObjectiveMarker.update();
   }
 
-  /**
-   * Initializes the CorridorController. Sets up timers, player character.
-   */
+  /** Initializes the CorridorController. Sets up timers, player character. */
   public void initialize() {
 
     TimerCounter.addTimerLabel(lblTime);
@@ -522,14 +518,11 @@ public class CorridorController implements Controller {
 
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
-    inventoryChoiceBox.setItems(Inventory.getInventory());
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    GameState.flashAnimation(inventoryChoiceBox).play();
   }
 
   @FXML

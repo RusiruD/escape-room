@@ -17,7 +17,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -157,7 +156,6 @@ public class UntangleRoomController implements Controller {
   @FXML private ImageView key2;
   @FXML private ImageView soundToggle;
   @FXML private Label lblTime;
-  @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private ImageView hand;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -198,7 +196,6 @@ public class UntangleRoomController implements Controller {
 
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
-
 
     // set the inventory choice box
     Polygon polygon = createStartingTriangle();
@@ -458,11 +455,6 @@ public class UntangleRoomController implements Controller {
    * shadow effect.
    */
   public void updateInventory() {
-    inventoryChoiceBox.setItems(Inventory.getInventory());
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
-
-    // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    GameState.flashAnimation(inventoryChoiceBox).play();
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
