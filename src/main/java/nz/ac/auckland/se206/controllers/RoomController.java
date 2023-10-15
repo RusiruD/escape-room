@@ -414,7 +414,7 @@ public class RoomController implements Controller {
         image.setOnMouseReleased((MouseEvent event) -> {
        
          
-          if(cauldron.getBoundsInParent().intersects(image.getBoundsInParent())) {
+          if((cauldron.getBoundsInParent().intersects(image.getBoundsInParent())&&(image.getId().contains("Potion")))) {
           
             addToInventory( image);
             image.setVisible(false);
