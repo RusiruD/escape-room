@@ -65,7 +65,7 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" text="Back" />
+      <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" text="Back" />
       <ImageView fx:id="cauldron" fitHeight="131.0" fitWidth="143.0" layoutX="629.0" layoutY="552.0" pickOnBounds="true">
          <image>
             <Image url="@../images/cauldron.png" />

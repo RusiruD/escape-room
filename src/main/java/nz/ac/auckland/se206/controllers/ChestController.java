@@ -10,7 +10,6 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -22,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat.AppUi;
 import nz.ac.auckland.se206.Controller;
@@ -51,8 +49,6 @@ public class ChestController implements Controller {
   private Rectangle[] keysInHoles = new Rectangle[6];
 
   @FXML private Button riddleButton;
-
-  @FXML private ComboBox<String> inventoryChoiceBox;
 
   @FXML private Label lblTime;
 
@@ -245,8 +241,6 @@ public class ChestController implements Controller {
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
 
-    inventoryChoiceBox.setItems(Inventory.getInventory());
-
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
@@ -417,16 +411,7 @@ public class ChestController implements Controller {
       }
 
       // Create a Timeline to revert the shadow back to its original state after 2 seconds
-      Duration duration = Duration.seconds(0.5);
-      javafx.animation.Timeline timeline =
-          new javafx.animation.Timeline(
-              new javafx.animation.KeyFrame(
-                  duration,
-                  event -> {
-                    // Revert the CSS style to remove the shadow (or set it to the original style)
-                    inventoryChoiceBox.setStyle("");
-                  }));
-      timeline.play();
+
       // sets to yellow for filled
     } else {
       // if its filled then set back to default (get back key) on click
@@ -450,21 +435,8 @@ public class ChestController implements Controller {
         returnKey(keyMap.get("hole" + num));
         setLabelKeyHole(num, "");
         System.out.println("got back key " + keyHoleMap.get("hole" + num));
-
-        // Create a Timeline to revert the shadow back to its original state after 2 seconds
-        Duration duration = Duration.seconds(0.5);
-        javafx.animation.Timeline timeline =
-            new javafx.animation.Timeline(
-                new javafx.animation.KeyFrame(
-                    duration,
-                    event -> {
-                      // Revert the CSS style to remove the shadow (or set it to the original style)
-                      inventoryChoiceBox.setStyle("");
-                    }));
-        timeline.play();
       }
     }
-    ;
   }
 
   /**

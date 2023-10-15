@@ -5,7 +5,6 @@ import javafx.beans.binding.BooleanExpression;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -16,7 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
@@ -40,7 +38,6 @@ public class PuzzleRoomController implements Controller {
   @FXML private ImageView key3;
   @FXML private ImageView soundToggle;
 
-  @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -137,20 +134,6 @@ public class PuzzleRoomController implements Controller {
    * shadow effect.
    */
   public void updateInventory() {
-    inventoryChoiceBox.setItems(Inventory.getInventory());
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
-
-    // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    Duration duration = Duration.seconds(0.5);
-    javafx.animation.Timeline timeline =
-        new javafx.animation.Timeline(
-            new javafx.animation.KeyFrame(
-                duration,
-                event -> {
-                  // Revert the CSS style to remove the shadow (or set it to the original style)
-                  inventoryChoiceBox.setStyle("");
-                }));
-    timeline.play();
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
