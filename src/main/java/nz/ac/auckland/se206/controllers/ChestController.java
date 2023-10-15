@@ -29,7 +29,6 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
@@ -85,8 +84,6 @@ public class ChestController implements Controller {
   @FXML private Pane riddleDisplay;
   @FXML private Pane visualDungeonMaster;
 
-  @FXML private Pane instructionsDisplay;
-
   private String riddleQuestion;
   private String callQuestion;
 
@@ -133,23 +130,6 @@ public class ChestController implements Controller {
 
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
-
-    String instructionsString =
-        "THE CHEST IS LOCKED!. \n \n"
-            + "You need to find the correct keys to unlock the chest. \n \n"
-            + "The keys are hidden in the dungeon. \n \n"
-            + "You need to find the keys and insert them into the correct key holes. \n \n"
-            + "The correct keys will open the lock. \n \n"
-            + "The incorrect keys will not. \n \n"
-            + "Once you have inserted the correct keys, the chest will open. \n \n"
-            + "Good luck!";
-    Instructions instructions = new Instructions(instructionsString);
-    Pane instructionsPane = instructions.getInstructionsPane();
-    instructionsDisplay.getChildren().add(instructionsPane);
-    instructionsPane.getStyleClass().add("riddle");
-
-    instructionsDisplay.visibleProperty().set(false);
-    instructionsDisplay.mouseTransparentProperty().set(true);
 
     // Set text for key labels
     lblKey1.setText("");
@@ -268,20 +248,6 @@ public class ChestController implements Controller {
     inventoryChoiceBox.setItems(Inventory.getInventory());
 
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
-  }
-
-  /**
-   * Displays the instructions pane when triggered by a mouse click event. Sets the pane to be
-   * visible and not mouse transparent, bringing it to the front.
-   *
-   * @param event The MouseEvent triggered by the mouse click.
-   */
-  @FXML
-  public void getInstructions(MouseEvent event) {
-    // Set the instructions pane to be visible and not mouse transparent
-    instructionsDisplay.visibleProperty().set(true);
-    instructionsDisplay.mouseTransparentProperty().set(false);
-    instructionsDisplay.toFront();
   }
 
   @FXML

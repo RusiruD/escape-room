@@ -42,7 +42,6 @@ import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -152,7 +151,6 @@ public class UntangleRoomController implements Controller {
   @FXML private AnchorPane untangleRoomAnchorPane;
   @FXML private Pane pane;
   @FXML private Pane cursorPane;
-  @FXML private Pane instructionsDisplay;
   @FXML private Pane popUp;
   @FXML private Pane visualDungeonMaster;
   @FXML private ImageView exclamationMark;
@@ -201,18 +199,6 @@ public class UntangleRoomController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
 
-    // set the key2's visibility and disable it
-    String instructionsString =
-        "The lines are tangled. \n\n"
-            + "Drag the points to move the lines. \n\n"
-            + "untangle them to solve the puzzle";
-    Instructions instructions = new Instructions(instructionsString);
-    Pane instructionsPane = instructions.getInstructionsPane();
-    instructionsDisplay.getChildren().add(instructionsPane);
-    instructionsPane.getStyleClass().add("riddle");
-
-    instructionsDisplay.visibleProperty().set(false);
-    instructionsDisplay.mouseTransparentProperty().set(true);
 
     // set the inventory choice box
     Polygon polygon = createStartingTriangle();
@@ -497,20 +483,6 @@ public class UntangleRoomController implements Controller {
     // sets popup styling and formatting
     popUp.getStyleClass().add("popUp");
     GameState.popUpShow(popUp, visualDungeonMaster);
-  }
-
-  /**
-   * Displays the instructions pane when the user clicks the instructions button. Sets the
-   * instructions pane to be visible and allows mouse interaction with it.
-   *
-   * @param event The MouseEvent triggered by clicking the instructions button.
-   */
-  @FXML
-  public void getInstructions(MouseEvent event) {
-    // Set the instructions pane to be visible and not mouse transparent
-    instructionsDisplay.visibleProperty().set(true);
-    instructionsDisplay.mouseTransparentProperty().set(false);
-    instructionsDisplay.toFront();
   }
 
   @FXML

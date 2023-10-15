@@ -30,7 +30,6 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -88,7 +87,6 @@ public class RoomController implements Controller {
 
   @FXML private Pane potionsRoomPane;
   @FXML private Pane popUp;
-  @FXML private Pane instructionsDisplay;
   @FXML private Pane visualDungeonMaster;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
@@ -151,15 +149,6 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  public void getInstructions(MouseEvent event) {
-    // Set the instructions pane to be visible and not mouse transparent
-
-    instructionsDisplay.visibleProperty().set(true);
-    instructionsDisplay.mouseTransparentProperty().set(false);
-    instructionsDisplay.toFront();
-  }
-
-  @FXML
   public void getAi(MouseEvent event) {
     popUp.visibleProperty().set(false);
     callDungeonMaster.createPopUp(popUp);
@@ -187,18 +176,7 @@ public class RoomController implements Controller {
     // Set the dungeon master to be invisible and mouse transparent
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
-    // Set the dungeon master to be invisible and mouse transparent
-    String instructionsString =
-        "Read the Note on the table and see what it has to say."
-            + " \n"
-            + "Mix potions together by selecting them and clicking the cauldron \n";
-    Instructions instructions = new Instructions(instructionsString);
-    Pane instructionsPane = instructions.getInstructionsPane();
-    instructionsDisplay.getChildren().add(instructionsPane);
-    instructionsPane.getStyleClass().add("riddle");
 
-    instructionsDisplay.visibleProperty().set(false);
-    instructionsDisplay.mouseTransparentProperty().set(true);
     // Set style sheets
     chatTextArea
         .getStylesheets()

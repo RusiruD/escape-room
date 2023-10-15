@@ -65,7 +65,7 @@
             <Image url="@../images/numbers/N9.png" />
          </image>
       </ImageView>
-      <Button layoutX="20.0" layoutY="117.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="40.0" prefWidth="80.0" text="Back">
+      <Button layoutX="20.0" layoutY="71.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickedBack" prefHeight="40.0" prefWidth="80.0" text="Back">
          <font>
             <Font size="24.0" />
          </font>
@@ -75,7 +75,6 @@
             <Font name="Old English Text MT" size="40.0" />
          </font>
       </Label>
-      <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="popUp" layoutX="125.0" layoutY="550.0" prefHeight="80.0" prefWidth="550.0" />
       <Pane fx:id="visualDungeonMaster" layoutY="189.0" onMouseClicked="#getAi" prefHeight="131.0" prefWidth="113.0">
          <children>
@@ -101,7 +100,6 @@
             <Font name="Old English Text MT" size="18.0" />
          </font>
       </Button>
-      <Pane fx:id="instructionsDisplay" layoutX="200.0" layoutY="233.0" prefHeight="350.0" prefWidth="400.0" stylesheets="@../css/roomStylesheet.css" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" />
       <VBox layoutX="700.0" layoutY="120.0" prefHeight="240.0" prefWidth="85.0" style="-fx-background-color: #d3d3d3; -fx-background-radius: 5px;">
          <children>

@@ -24,7 +24,6 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -59,7 +58,6 @@ public class PuzzleController implements Controller {
 
   @FXML private Label lblTime;
 
-  @FXML private Pane instructionsDisplay;
   @FXML private Pane popUp;
   @FXML private Pane visualDungeonMaster;
   @FXML private ComboBox<String> inventoryChoiceBox;
@@ -99,19 +97,6 @@ public class PuzzleController implements Controller {
     TranslateTransition translateTransition = GameState.translate(exclamationMark);
     translateTransition.play();
 
-    String instructionsString =
-        "The tiles are in the wrong order. \n\n"
-            + "Click on a tile to select it. Then click on the zero tile to swap the tiles. \n\n"
-            + "The zero tile can only be swapped with the tiles directly above, below, to the left,"
-            + " or to the right of it. \n\n"
-            + "The puzzle is solved when the tiles are in the correct order. \n\n";
-    Instructions instructions = new Instructions(instructionsString);
-    Pane instructionsPane = instructions.getInstructionsPane();
-    instructionsDisplay.getChildren().add(instructionsPane);
-    instructionsPane.getStyleClass().add("riddle");
-
-    instructionsDisplay.visibleProperty().set(false);
-    instructionsDisplay.mouseTransparentProperty().set(true);
     // set the tiles and solution
     generateSetup();
 
@@ -295,20 +280,6 @@ public class PuzzleController implements Controller {
   private void clickExit(MouseEvent event) {
     // Handle click on exit
     Utility.exitGame();
-  }
-
-  /**
-   * Displays the instructions pane when the user clicks the instructions button. Sets the
-   * instructions pane to be visible and allows mouse interaction with it.
-   *
-   * @param event The MouseEvent triggered by clicking the instructions button.
-   */
-  @FXML
-  public void getInstructions(MouseEvent event) {
-    // Set the instructions pane to be visible and not mouse transparent
-    instructionsDisplay.visibleProperty().set(true);
-    instructionsDisplay.mouseTransparentProperty().set(false);
-    instructionsDisplay.toFront();
   }
 
   @FXML

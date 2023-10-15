@@ -31,7 +31,7 @@
             </ImageView>
          </children>
       </Pane>
-      <Button fx:id="btnReturnToCorridor" layoutX="20.0" layoutY="117.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
+      <Button fx:id="btnReturnToCorridor" layoutX="21.0" layoutY="70.0" mnemonicParsing="false" onAction="#onReturnToCorridorClicked" prefHeight="40.0" prefWidth="80.0" stylesheets="@../css/roomStylesheet.css" text="Back" />
       <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblTime" alignment="CENTER" contentDisplay="CENTER" layoutX="338.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="125.0" styleClass="white-text" text="s" textAlignment="CENTER" textFill="WHITE">
          <font>
@@ -46,7 +46,6 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <Button layoutX="20.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#getInstructions" prefHeight="40.0" prefWidth="150.0" stylesheets="@../css/roomStylesheet.css" text="How to play" />
       <Pane fx:id="popUp" layoutX="125.0" layoutY="550.0" prefHeight="80.0" prefWidth="550.0" />
       <Button layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onMouseClicked="#clickExit" prefHeight="40.0" prefWidth="70.0" stylesheets="@../css/roomStylesheet.css" text="Quit">
          <font>
@@ -72,7 +71,6 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="instructionsDisplay" layoutX="251.0" layoutY="70.0" prefHeight="359.0" prefWidth="335.0" stylesheets="@../css/roomStylesheet.css" />
       <Label fx:id="lblObjectiveMarker" alignment="CENTER" contentDisplay="CENTER" layoutX="250.0" layoutY="680.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="300.0" styleClass="white-text" text="Label" textFill="WHITE">
          <font>
             <Font name="System Bold" size="20.0" />
