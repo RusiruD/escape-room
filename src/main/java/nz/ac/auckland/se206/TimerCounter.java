@@ -52,6 +52,7 @@ public class TimerCounter {
 
                       // Game over condition
                       if (timeCounter[0] == 0) {
+                        Music.playLossMusic();
                         this.cancel();
                         System.out.println("Timer stopped");
                         gameOver();
@@ -59,6 +60,7 @@ public class TimerCounter {
 
                       // Check if the game is won
                       if (GameState.isGameWon) {
+                        Music.playWinMusic();
                         System.out.println("Timer stopped");
                         this.cancel();
                       }

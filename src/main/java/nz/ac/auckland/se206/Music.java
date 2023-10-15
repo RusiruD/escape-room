@@ -7,24 +7,39 @@ import javafx.scene.media.MediaPlayer;
 public class Music {
 
   private static MediaPlayer mediaPlayer;
+  private static Media background = generateMedia("music1");
+  private static Media win = generateMedia("Win");
+  private static Media loss = generateMedia("Loss");
 
-  /** Starts playing the background music. */
   public static void playBackgroundMusic() {
-    playMusic("music1");
+    playMusic(background);
   }
 
   public static void playWinMusic() {
-    playMusic("Win");
+    playMusic(win);
   }
 
-  private static void playMusic(String name) {
+  public static void playLossMusic() {
+    playMusic(loss);
+  }
+
+  private static Media generateMedia(String name) {
     try {
       Media music = new Media(App.class.getResource("/sounds/" + name + ".mp3").toURI().toString());
-      mediaPlayer = new MediaPlayer(music);
-      mediaPlayer.play();
+      return music;
     } catch (Exception e) {
       System.out.println(e);
     }
+    return null;
+  }
+
+  /** Starts playing the music music. */
+  private static void playMusic(Media music) {
+    if (mediaPlayer != null) {
+      stop();
+    }
+    mediaPlayer = new MediaPlayer(music);
+    mediaPlayer.play();
   }
 
   public static void pause() {
