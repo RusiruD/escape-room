@@ -49,12 +49,12 @@
             <Image url="@../images/key.png" />
          </image>
       </ImageView>
-      <TextArea fx:id="chatTextArea" disable="true" editable="false" layoutX="264.0" layoutY="135.0" prefHeight="250.0" prefWidth="226.0" visible="false" wrapText="true">
+      <TextArea fx:id="chatTextArea" editable="false" layoutX="264.0" layoutY="135.0" prefHeight="250.0" prefWidth="226.0" visible="false" wrapText="true">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </TextArea>
-      <Button fx:id="btnHideNote" disable="true" layoutX="406.0" layoutY="348.0" mnemonicParsing="false" onAction="#onHideNote" prefHeight="38.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Hide" visible="false" />
+      <Button fx:id="btnHideNote" disable="true" layoutX="365.0" layoutY="346.0" mnemonicParsing="false" onAction="#onHideNote" prefHeight="38.0" prefWidth="125.0" stylesheets="@../css/roomStylesheet.css" text="Put Down" visible="false" />
       <ImageView fx:id="boulder" blendMode="SRC_ATOP" fitHeight="130.0" fitWidth="176.0" layoutX="325.0" layoutY="396.0" onMouseClicked="#onBoulderClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true" rotate="-20.0">
          <image>
             <Image url="@../images/boulder.png" />

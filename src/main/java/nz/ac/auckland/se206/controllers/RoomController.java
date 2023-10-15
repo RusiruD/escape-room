@@ -286,6 +286,8 @@ public class RoomController implements Controller {
 
   @FXML
   private void onHideNote() {
+    note.setVisible(true);
+    note.setDisable(false);
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -368,7 +370,8 @@ public class RoomController implements Controller {
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-
+    note.setVisible(false);
+    note.setDisable(true);
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
     // if a note is selected it is made visible in the scene
