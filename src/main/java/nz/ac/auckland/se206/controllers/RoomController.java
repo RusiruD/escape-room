@@ -212,6 +212,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void enlarge(ImageView image) {
+    // if the image is the boulder enlarge it less than the other items
     if (image.getId().contains("boulder")) {
       image.setScaleX(1.2);
       image.setScaleY(1.2);
