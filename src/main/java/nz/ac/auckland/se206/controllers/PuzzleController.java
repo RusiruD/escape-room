@@ -110,6 +110,15 @@ public class PuzzleController implements Controller {
     instructionsDisplay.visibleProperty().set(false);
     instructionsDisplay.mouseTransparentProperty().set(true);
     // set the tiles and solution
+    generateSetup();
+
+    callDungeonMaster = new DungeonMaster();
+  }
+
+  private void generateSetup() {
+
+    int randNum = (int) (System.currentTimeMillis() % 1);
+
     tiles =
         new String[][] {
           {"one", "two", "six"}, {"four", "eight", "five"}, {"zero", "seven", "nine"}
@@ -118,27 +127,6 @@ public class PuzzleController implements Controller {
         new String[][] {
           {"one", "two", "zero"}, {"four", "five", "six"}, {"seven", "eight", "nine"}
         };
-
-    callDungeonMaster = new DungeonMaster();
-  }
-
-  private String[][] generateSetup() {
-
-    String[][] tiles = null;
-    int randNum = (int) (System.currentTimeMillis() % 1);
-
-    if (randNum == 0) {
-      tiles =
-          new String[][] {
-            {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
-          };
-    } else {
-      tiles =
-          new String[][] {
-            {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
-          };
-    }
-    return tiles;
   }
 
   public double getPuzzleWidth() {
