@@ -1,6 +1,8 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
+import java.util.Random;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,13 +11,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
@@ -42,7 +44,7 @@ public class PuzzleController implements Controller {
   @FXML private Pane puzzlePane;
   @FXML private ImageView one;
   @FXML private ImageView two;
-  @FXML private ImageView three;
+  @FXML private ImageView seven;
   @FXML private ImageView four;
   @FXML private ImageView five;
   @FXML private ImageView six;
@@ -52,10 +54,6 @@ public class PuzzleController implements Controller {
 
   @FXML private ImageView exclamationMark;
   @FXML private ImageView soundToggle;
-
-  private boolean hasSelection = false;
-  private ImageView firstSelection;
-  private ImageView secondSelection;
 
   private DungeonMaster callDungeonMaster;
 
@@ -81,6 +79,7 @@ public class PuzzleController implements Controller {
 
   private HintNode hintNode;
   private Chat.AppUi appUi;
+  private FadeTransition fadeTransition;
 
   /**
    * Initializes the PuzzleController. This method is automatically called after the FXML file has
@@ -115,16 +114,42 @@ public class PuzzleController implements Controller {
     instructionsDisplay.visibleProperty().set(false);
     instructionsDisplay.mouseTransparentProperty().set(true);
     // set the tiles and solution
-    tiles =
-        new String[][] {
-          {"one", "two", "three"}, {"four", "five", "six"}, {"zero", "eight", "nine"}
-        };
-    solution =
-        new String[][] {
-          {"one", "two", "zero"}, {"four", "six", "three"}, {"eight", "five", "nine"}
-        };
+    generateSetup();
 
     callDungeonMaster = new DungeonMaster();
+  }
+
+  /** Generates the initial setup for the puzzle by shuffling the tiles. */
+  private void generateSetup() {
+    // use mod and current time to gen ran num
+    Random random = new Random();
+    int randNum = random.nextInt(3);
+
+    // generate solution and tile set
+    solution =
+        new String[][] {
+          {"one", "two", "zero"}, {"four", "five", "six"}, {"seven", "eight", "nine"}
+        };
+    tiles =
+        new String[][] {
+          {"one", "two", "six"}, {"four", "eight", "five"}, {"zero", "seven", "nine"}
+        };
+    if (randNum == 0) {
+
+    } else if (randNum == 1) {
+      // random pattern
+      swapImage(eight, two);
+      swapImage(seven, eight);
+      swapImage(seven, four);
+      swapImage(four, one);
+    } else { // another generated pattern
+      swapImage(four, five);
+      swapImage(four, nine);
+      swapImage(four, eight);
+      swapImage(four, six);
+      swapImage(four, two);
+      swapImage(four, one);
+    }
   }
 
   public double getPuzzleWidth() {
@@ -140,52 +165,68 @@ public class PuzzleController implements Controller {
     App.setRoot(AppUi.PUZZLEROOM);
   }
 
-  private void clicked(ImageView object) {
-    // if there is no selection, select the object
-    if (!hasSelection && !object.equals(zero)) {
-      // set the selection
-      hasSelection = true;
-      firstSelection = object;
-      firstSelection.setBlendMode(BlendMode.RED);
-      // if there is a selection, swap the tiles
-    } else if (hasSelection) {
-      // set the selection
-      hasSelection = false;
-      secondSelection = object;
-      swapTiles(firstSelection, secondSelection);
-      firstSelection.setBlendMode(BlendMode.SRC_OVER);
-    }
-  }
-
   @FXML
   private void clickedTile(MouseEvent event) throws IOException {
     clicked((ImageView) event.getSource());
   }
 
-  private void swapTiles(ImageView a, ImageView b) {
+  /**
+   * Handles the logic when an ImageView object is clicked in the puzzle game.
+   *
+   * @param object The ImageView object that was clicked.
+   */
+  private void clicked(ImageView object) {
     // find the positions of the tiles
-    int[] apos = findPos(a.getId());
-    int[] bpos = findPos(b.getId());
-
-    // if one of the tiles is the zero tile, then the other tile must be adjacent to it
-    if (!a.equals(zero) && !b.equals(zero)) {
-      return;
-    }
+    int[] apos = findPos(object.getId());
+    int[] bpos = findPos(zero.getId());
 
     // if the tiles are adjacent, swap them
     if ((apos[0] == bpos[0] && Math.abs(apos[1] - bpos[1]) == 1)
         ^ (apos[1] == bpos[1] && Math.abs(apos[0] - bpos[0]) == 1)) {
-      tiles[apos[0]][apos[1]] = b.getId();
-      tiles[bpos[0]][bpos[1]] = a.getId();
-      double ax = a.getLayoutX();
-      double ay = a.getLayoutY();
-      a.setLayoutX(b.getLayoutX());
-      a.setLayoutY(b.getLayoutY());
-      b.setLayoutX(ax);
-      b.setLayoutY(ay);
+      swapImage(object, zero);
     }
     // check if the puzzle is solved
     checkSolution();
+  }
+
+  /**
+   * Swaps the positions of two ImageView objects in the puzzle grid.
+   *
+   * @param object The first ImageView object.
+   * @param other The second ImageView object to swap with.
+   */
+  private void swapImage(ImageView object, ImageView other) {
+
+    double startOpacity = 0.5;
+    double durationTime = 0.1;
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(durationTime), object);
+    fadeTransition.setFromValue(startOpacity); // Starting opacity (completely transparent)
+    fadeTransition.setToValue(1.0); // Ending opacity (fully visible)
+
+    // Play the fade transition
+    fadeTransition.play();
+    fadeTransition = new FadeTransition(Duration.seconds(durationTime), other);
+    fadeTransition.setFromValue(startOpacity); // Starting opacity (completely transparent)
+    fadeTransition.setToValue(1.0); // Ending opacity (fully visible)
+
+    // Play the fade transition
+    fadeTransition.play();
+
+    // Find the positions of the ImageView objects in the grid.
+    int[] apos = findPos(object.getId());
+    int[] bpos = findPos(other.getId());
+
+    // Update the tile positions in the grid array.
+    tiles[apos[0]][apos[1]] = other.getId();
+    tiles[bpos[0]][bpos[1]] = object.getId();
+
+    // Swap the layout coordinates of the ImageView objects.
+    double ax = object.getLayoutX();
+    double ay = object.getLayoutY();
+    object.setLayoutX(other.getLayoutX());
+    object.setLayoutY(other.getLayoutY());
+    other.setLayoutX(ax);
+    other.setLayoutY(ay);
   }
 
   private int[] findPos(String s) {
