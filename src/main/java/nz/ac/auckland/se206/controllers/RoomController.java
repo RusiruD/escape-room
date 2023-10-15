@@ -16,13 +16,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Glow;
+
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
+
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -94,7 +94,7 @@ public class RoomController implements Controller {
   @FXML private Pane instructionsDisplay;
   @FXML private Pane visualDungeonMaster;
 
-  @FXML private ComboBox<String> inventoryChoiceBox;
+  
   @FXML private Button btnReturnToCorridor;
 
   @FXML private Label lblTime;
@@ -121,7 +121,7 @@ public class RoomController implements Controller {
   @FXML private Button btnHideNote;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
-  private List<String> potionsincauldron = new ArrayList<>();
+
 
   private DungeonMaster callDungeonMaster;
 
@@ -213,21 +213,21 @@ public class RoomController implements Controller {
     Random random = new Random();
     // Randomly select two colors from the array
     int firstIndex = random.nextInt(colors.length);
-    String firstPotion = colors[firstIndex];
-    GameState.firstPotion = "" + firstPotion + "Potion";
+   GameState.firstPotionColour = colors[firstIndex];
+    GameState.firstPotion = "" + GameState.firstPotionColour + "Potion";
     int secondIndex;
     do {
       secondIndex = random.nextInt(colors.length);
     } while (secondIndex == firstIndex); // Ensure the second color is different from the first
     // Randomly select two colors from the array
-    String secondPotion = colors[secondIndex];
-    GameState.secondPotion = secondPotion + "Potion";
+   GameState.secondPotionColour = colors[secondIndex];
+    GameState.secondPotion = GameState.secondPotionColour + "Potion";
     // Set the tiles and solution
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
-            + firstPotion
+            + GameState.firstPotionColour
             + " potion and "
-            + secondPotion
+            + GameState.secondPotionColour
             + " potion in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Set the tiles and solution
@@ -258,7 +258,7 @@ public class RoomController implements Controller {
   
   @FXML
   private void onPotionClicked(MouseEvent event) {
-    System.out.println(GameState.isPotionSelected);
+   
       ImageView image = (ImageView) event.getSource();
     if((image.getEffect()==null)&&(GameState.isPotionSelected==false)){
   
@@ -287,14 +287,12 @@ public class RoomController implements Controller {
 
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
-    inventoryChoiceBox.setItems(Inventory.getInventory());
+   
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    GameState.flashAnimation(inventoryChoiceBox).play();
   }
 
   @FXML
@@ -305,17 +303,9 @@ public class RoomController implements Controller {
     btnHideNote.setVisible(false);
   }
 
-  @FXML
-  private void showNote() {
-    note.setVisible(true);
-    note.setDisable(false);
-  }
 
-  @FXML
-  private void showNoteWithoutButton() {
-    note.setVisible(true);
-    note.setDisable(false);
-  }
+
+ 
 
   // Allow the image to be dragged and dropped
   @FXML
@@ -324,6 +314,7 @@ public class RoomController implements Controller {
     // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
+          onPotionClicked(event);
           horizontalOffset = event.getSceneX() - image.getLayoutX();
           verticalOffset = event.getSceneY() - image.getLayoutY();
         });
@@ -339,6 +330,7 @@ public class RoomController implements Controller {
        
          
           if((cauldron.getBoundsInParent().intersects(image.getBoundsInParent())&&(image.getId().contains("Potion")))) {
+            
           
            
             image.setVisible(false);
@@ -434,8 +426,8 @@ public class RoomController implements Controller {
   }
 
   private void tintScene(Pane potionsRoomPane) {
-    Color colour1 = convertStringToColor(GameState.firstPotion);
-    Color colour2 = convertStringToColor(GameState.secondPotion);
+    Color colour1 = convertStringToColor(GameState.firstPotionColour);
+    Color colour2 = convertStringToColor(GameState.secondPotionColour);
     Color colour3 = calculateAverageColor(colour1, colour2);
     // Create a colored rectangle to overlay the scene
 

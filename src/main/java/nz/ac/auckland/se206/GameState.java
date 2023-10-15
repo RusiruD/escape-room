@@ -68,6 +68,8 @@ public class GameState {
   public static boolean isPotionSelected = false;
   public static String firstPotion = "";
   public static String secondPotion = "";
+  public static String firstPotionColour="";
+  public static String secondPotionColour="";
 
   public static ArrayList<ScoreEntry> scores = new ArrayList<ScoreEntry>();
 

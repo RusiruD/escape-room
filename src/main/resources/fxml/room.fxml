@@ -3,7 +3,6 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Group?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
@@ -40,7 +39,6 @@
             <Image url="@../images/RoomBackground.jpg" />
          </image>
       </ImageView>
-      <ComboBox fx:id="inventoryChoiceBox" layoutX="20.0" layoutY="20.0" prefHeight="40.0" prefWidth="170.0" promptText="Inventory" styleClass="combo-box" stylesheets="@../css/roomStylesheet.css" />
       <ImageView fx:id="imgTable" fitHeight="100.0" fitWidth="258.0" layoutX="105.0" layoutY="518.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/table.png" />
@@ -73,27 +71,27 @@
             <Image url="@../images/cauldron.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="purplePotion" fitHeight="78.0" fitWidth="95.0" layoutX="116.0" layoutY="385.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purplePotion" fitHeight="67.0" fitWidth="29.0" layoutX="136.0" layoutY="393.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion5.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="greenPotion" fitHeight="78.0" fitWidth="64.0" layoutX="746.0" layoutY="408.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="greenPotion" fitHeight="67.0" fitWidth="23.0" layoutX="762.0" layoutY="420.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="redPotion" fitHeight="67.0" fitWidth="64.0" layoutX="698.0" layoutY="410.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="redPotion" fitHeight="57.0" fitWidth="42.0" layoutX="681.0" layoutY="406.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="bluePotion" fitHeight="67.0" fitWidth="42.0" layoutX="14.0" layoutY="429.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="bluePotion" fitHeight="64.0" fitWidth="39.0" layoutX="14.0" layoutY="432.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="yellowPotion" fitHeight="67.0" fitWidth="42.0" layoutX="67.0" layoutY="414.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="yellowPotion" fitHeight="62.0" fitWidth="29.0" layoutX="86.0" layoutY="424.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion3.png" />
          </image>
