@@ -95,6 +95,7 @@ public class App extends Application {
     stage.setScene(scene);
     stage.show();
     focus();
+    Music.begin();
   }
 
   public static void focus() {

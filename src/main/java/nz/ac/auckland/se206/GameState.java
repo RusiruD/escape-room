@@ -175,9 +175,11 @@ public class GameState {
     // mute the game
     if (isMuted) {
       System.out.println("unmute");
+      Music.unpause();
       isMuted = false;
     } else {
       System.out.println("mute");
+      Music.pause();
       tts.cancel();
       isMuted = true;
     }
