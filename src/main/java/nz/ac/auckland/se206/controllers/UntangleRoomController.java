@@ -468,29 +468,6 @@ public class UntangleRoomController implements Controller {
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
   }
 
-  /**
-   * Handles the event when the player interacts with the AI button, displaying a popup to
-   * communicate with the Dungeon Master.
-   *
-   * @param event The MouseEvent representing the player's interaction with the AI button.
-   */
-  @FXML
-  public void getAi(MouseEvent event) {
-    popUp.visibleProperty().set(false);
-    callDungeonMaster.createPopUp(popUp);
-    String context = DungeonMaster.getDungeonMasterComment();
-    callDungeonMaster.getText("user", context);
-    // sets popup styling and formatting
-    popUp.getStyleClass().add("popUp");
-    GameState.popUpShow(popUp, visualDungeonMaster);
-  }
-
-  @FXML
-  private void clickExit(MouseEvent event) {
-    // Handle click on exit
-    Utility.exitGame();
-  }
-
   @FXML
   private void mute() {
     // Handle click on mute
@@ -508,6 +485,12 @@ public class UntangleRoomController implements Controller {
       return;
     }
     soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utility.exitGame();
   }
 
   @FXML
@@ -539,6 +522,23 @@ public class UntangleRoomController implements Controller {
   @FXML
   private void onCloseChat(ActionEvent event) {
     GameState.chat.massDisable(appUi);
+  }
+
+  /**
+   * Handles the event when the player interacts with the AI button, displaying a popup to
+   * communicate with the Dungeon Master.
+   *
+   * @param event The MouseEvent representing the player's interaction with the AI button.
+   */
+  @FXML
+  public void getAi(MouseEvent event) {
+    popUp.visibleProperty().set(false);
+    callDungeonMaster.createPopUp(popUp);
+    String context = DungeonMaster.getDungeonMasterComment();
+    callDungeonMaster.getText("user", context);
+    // sets popup styling and formatting
+    popUp.getStyleClass().add("popUp");
+    GameState.popUpShow(popUp, visualDungeonMaster);
   }
 
   /**
