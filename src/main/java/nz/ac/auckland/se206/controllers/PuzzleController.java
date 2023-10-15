@@ -9,7 +9,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.effect.BlendMode;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -52,10 +51,6 @@ public class PuzzleController implements Controller {
 
   @FXML private ImageView exclamationMark;
   @FXML private ImageView soundToggle;
-
-  private boolean hasSelection = false;
-  private ImageView firstSelection;
-  private ImageView secondSelection;
 
   private DungeonMaster callDungeonMaster;
 
@@ -140,52 +135,46 @@ public class PuzzleController implements Controller {
     App.setRoot(AppUi.PUZZLEROOM);
   }
 
-  private void clicked(ImageView object) {
-    // if there is no selection, select the object
-    if (!hasSelection && !object.equals(zero)) {
-      // set the selection
-      hasSelection = true;
-      firstSelection = object;
-      firstSelection.setBlendMode(BlendMode.RED);
-      // if there is a selection, swap the tiles
-    } else if (hasSelection) {
-      // set the selection
-      hasSelection = false;
-      secondSelection = object;
-      swapTiles(firstSelection, secondSelection);
-      firstSelection.setBlendMode(BlendMode.SRC_OVER);
-    }
-  }
-
   @FXML
   private void clickedTile(MouseEvent event) throws IOException {
     clicked((ImageView) event.getSource());
   }
 
-  private void swapTiles(ImageView a, ImageView b) {
+  /**
+   * Handles the logic when an ImageView object is clicked in the puzzle game.
+   *
+   * @param object The ImageView object that was clicked.
+   */
+  private void clicked(ImageView object) {
     // find the positions of the tiles
-    int[] apos = findPos(a.getId());
-    int[] bpos = findPos(b.getId());
-
-    // if one of the tiles is the zero tile, then the other tile must be adjacent to it
-    if (!a.equals(zero) && !b.equals(zero)) {
-      return;
-    }
+    int[] apos = findPos(object.getId());
+    int[] bpos = findPos(zero.getId());
 
     // if the tiles are adjacent, swap them
     if ((apos[0] == bpos[0] && Math.abs(apos[1] - bpos[1]) == 1)
         ^ (apos[1] == bpos[1] && Math.abs(apos[0] - bpos[0]) == 1)) {
-      tiles[apos[0]][apos[1]] = b.getId();
-      tiles[bpos[0]][bpos[1]] = a.getId();
-      double ax = a.getLayoutX();
-      double ay = a.getLayoutY();
-      a.setLayoutX(b.getLayoutX());
-      a.setLayoutY(b.getLayoutY());
-      b.setLayoutX(ax);
-      b.setLayoutY(ay);
+      tiles[apos[0]][apos[1]] = zero.getId();
+      tiles[bpos[0]][bpos[1]] = object.getId();
+      swapImagePosition(object, zero);
     }
     // check if the puzzle is solved
     checkSolution();
+  }
+
+  /**
+   * Swaps the position of two ImageView objects by exchanging their layout coordinates.
+   *
+   * @param object The first ImageView object to be swapped.
+   * @param zero The second ImageView object to be swapped.
+   */
+  private void swapImagePosition(ImageView object, ImageView zero) {
+    // Getting layout data for later swap
+    double ax = object.getLayoutX();
+    double ay = object.getLayoutY();
+    object.setLayoutX(zero.getLayoutX());
+    object.setLayoutY(zero.getLayoutY());
+    zero.setLayoutX(ax);
+    zero.setLayoutY(ay);
   }
 
   private int[] findPos(String s) {
