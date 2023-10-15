@@ -41,6 +41,7 @@ import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -414,6 +415,7 @@ public class UntangleRoomController implements Controller {
 
   @FXML
   private void onKey2Clicked(MouseEvent event) {
+    Music.playEquipSound();
     GameState.hasKeyTwo = true;
     // make key invisible and unclickable
     key2.setVisible(false);
