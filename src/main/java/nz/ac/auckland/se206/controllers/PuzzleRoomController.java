@@ -21,7 +21,6 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -42,7 +41,6 @@ public class PuzzleRoomController implements Controller {
   @FXML private ImageView soundToggle;
 
   @FXML private ComboBox<String> inventoryChoiceBox;
-  @FXML private Pane instructionsDisplay;
   @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -75,15 +73,7 @@ public class PuzzleRoomController implements Controller {
     key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
     // Bind the inventory choice box to the inventory
     instance = this;
-    String instructionsString = "Click the center of the door to enter \n\n";
-    // Add the instructions to the pane
-    Instructions instructions = new Instructions(instructionsString);
-    Pane instructionsPane = instructions.getInstructionsPane();
-    instructionsDisplay.getChildren().add(instructionsPane);
-    instructionsPane.getStyleClass().add("riddle");
-    // Set the instructions pane to be invisible and mouse transparent
-    instructionsDisplay.visibleProperty().set(false);
-    instructionsDisplay.mouseTransparentProperty().set(true);
+
     puzzleButton.getStyleClass().add("hover");
     puzzleButton.setOnMouseEntered(
         event -> {
@@ -164,20 +154,6 @@ public class PuzzleRoomController implements Controller {
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
-  }
-
-  /**
-   * Displays the instructions pane when the user clicks the instructions button. Sets the
-   * instructions pane to be visible and allows mouse interaction with it.
-   *
-   * @param event The MouseEvent triggered by clicking the instructions button.
-   */
-  @FXML
-  public void getInstructions(MouseEvent event) {
-    // Set the instructions pane to be visible and not mouse transparent
-    instructionsDisplay.visibleProperty().set(true);
-    instructionsDisplay.mouseTransparentProperty().set(false);
-    instructionsDisplay.toFront();
   }
 
   @FXML

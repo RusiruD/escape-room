@@ -20,15 +20,18 @@ public class Riddle {
    * @return A Pane containing the riddle, hint button, and close button.
    */
   public static Pane riddlePane(String riddleText) {
-    // create a pane to hold the riddle
+    // create a pane to hold the riddle 
     Pane riddlePane = new Pane();
 
+    // create a stack pane to hold the riddle and close button
     StackPane stackPane = new StackPane();
 
+    // create a vbox to hold the riddle title and text
     VBox riddleBox = new VBox();
 
     Label title = new Label("Riddle");
 
+    // create a text area to display the riddle
     TextArea riddle = new TextArea(riddleText);
     riddle.setWrapText(true);
     riddle.setEditable(false);
@@ -37,12 +40,7 @@ public class Riddle {
 
     riddleBox.getChildren().addAll(title, riddle);
 
-    // add hint button add close button
-    ImageView hintButton = new ImageView("images/question.png");
-    hintButton.setFitHeight(20);
-    hintButton.setFitWidth(20);
-    hintButton.setOnMouseClicked(event -> {});
-
+    // create a close button
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
@@ -53,9 +51,9 @@ public class Riddle {
           riddlePane.getParent().toBack();
         });
 
-    stackPane.getChildren().addAll(riddleBox, hintButton, closeButton);
+    // add the riddle, hint button, and close button to the pane
+    stackPane.getChildren().addAll(riddleBox, closeButton);
     StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
-    StackPane.setAlignment(hintButton, Pos.BOTTOM_RIGHT);
 
     riddlePane.getChildren().add(stackPane);
     return riddlePane;

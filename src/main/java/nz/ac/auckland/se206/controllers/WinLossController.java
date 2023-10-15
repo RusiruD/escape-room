@@ -8,6 +8,7 @@ import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 
 /** Controller class for handling the win and loss outcomes of the game. */
 public class WinLossController implements Controller {
@@ -73,6 +74,7 @@ public class WinLossController implements Controller {
   @FXML
   private void onNewGameClicked(ActionEvent event) {
     // Go back to the start screen
+    Music.begin();
     App.goToStartScreen();
     Inventory.clearInventory();
     App.resetPlayerImage();
