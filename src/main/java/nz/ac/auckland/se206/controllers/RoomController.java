@@ -54,16 +54,16 @@ public class RoomController implements Controller {
    */
   public static Color convertStringToColor(String colorName) {
     switch (colorName) {
-      case "Red Potion":
+      case "Red":
         return Color.RED;
-      case "Green Potion":
+      case "Green":
         return Color.GREEN;
 
-      case "Blue Potion":
+      case "Blue":
         return Color.BLUE;
-      case "Purple Potion":
+      case "Purple":
         return Color.PURPLE;
-      case "Yellow Potion":
+      case "Yellow":
         return Color.YELLOW;
 
         // Add more color mappings as needed
