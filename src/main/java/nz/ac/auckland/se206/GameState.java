@@ -153,6 +153,9 @@ public class GameState {
     isKey3Collected = false;
     previousKeyPress = false;
     hasSwordAndShield = false;
+     isPotionSelected = false;
+     firstPotionColour="";
+ secondPotionColour="";
     isMuted = false;
     isPotionSelected=false;
     isChestOpened = false;
