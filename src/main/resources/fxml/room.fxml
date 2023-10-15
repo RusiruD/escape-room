@@ -7,7 +7,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -83,9 +82,6 @@
          <image>
             <Image url="@../images/potion4.png" />
          </image>
-         <effect>
-            <Glow level="0.0" />
-         </effect>
       </ImageView>
       <ImageView fx:id="redPotion" fitHeight="67.0" fitWidth="64.0" layoutX="698.0" layoutY="410.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -96,9 +92,6 @@
          <image>
             <Image url="@../images/potion2.png" />
          </image>
-         <effect>
-            <Glow level="0.0" />
-         </effect>
       </ImageView>
       <ImageView fx:id="yellowPotion" fitHeight="67.0" fitWidth="42.0" layoutX="67.0" layoutY="414.0" onMouseClicked="#addToInventoryFromScene" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>

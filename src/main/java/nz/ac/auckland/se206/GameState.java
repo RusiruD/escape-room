@@ -65,7 +65,7 @@ public class GameState {
   public static boolean isMuted = false;
   public static String difficultyLevel = "";
   public static String gameTime = "";
-
+  public static boolean isPotionSelected = false;
   public static String firstPotion = "";
   public static String secondPotion = "";
 
@@ -152,7 +152,7 @@ public class GameState {
     previousKeyPress = false;
     hasSwordAndShield = false;
     isMuted = false;
-
+    isPotionSelected=false;
     isChestOpened = false;
     isGameWon = false;
     difficultyLevel = "";
