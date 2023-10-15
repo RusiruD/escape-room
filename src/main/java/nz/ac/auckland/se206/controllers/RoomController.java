@@ -349,11 +349,13 @@ public class RoomController implements Controller {
       dropShadow.setSpread(0.35);
       dropShadow.setColor(Color.WHITE);
       image.setEffect(dropShadow);
+      cauldron.setEffect(dropShadow);
       GameState.isPotionSelected = true;}
       else{
         if(image.getEffect()!=null){
-          System.out.println(image.getEffect());
+         
           image.setEffect(null);
+          cauldron.setEffect(null);
         GameState.isPotionSelected = false;}
       }
      
