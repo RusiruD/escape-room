@@ -1,8 +1,6 @@
 package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -11,10 +9,10 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -51,16 +49,16 @@ public class RoomController implements Controller {
    */
   public static Color convertStringToColor(String colorName) {
     switch (colorName) {
-      case "Red Potion":
+      case "Red":
         return Color.RED;
-      case "Green Potion":
+      case "Green":
         return Color.GREEN;
 
-      case "Blue Potion":
+      case "Blue":
         return Color.BLUE;
-      case "Purple Potion":
+      case "Purple":
         return Color.PURPLE;
-      case "Yellow Potion":
+      case "Yellow":
         return Color.YELLOW;
 
         // Add more color mappings as needed
@@ -90,7 +88,6 @@ public class RoomController implements Controller {
   @FXML private Pane popUp;
   @FXML private Pane visualDungeonMaster;
 
-  @FXML private ComboBox<String> inventoryChoiceBox;
   @FXML private Button btnReturnToCorridor;
 
   @FXML private Label lblTime;
@@ -117,7 +114,6 @@ public class RoomController implements Controller {
   @FXML private Button btnHideNote;
   private double horizontalOffset = 0;
   private double verticalOffset = 0;
-  private List<String> potionsincauldron = new ArrayList<>();
 
   private DungeonMaster callDungeonMaster;
 
@@ -189,91 +185,41 @@ public class RoomController implements Controller {
     Random random = new Random();
     // Randomly select two colors from the array
     int firstIndex = random.nextInt(colors.length);
-    String firstPotion = colors[firstIndex];
-    GameState.firstPotion = "" + firstPotion + " Potion";
+    GameState.firstPotionColour = colors[firstIndex];
+    GameState.firstPotion = "" + GameState.firstPotionColour + "Potion";
     int secondIndex;
     do {
       secondIndex = random.nextInt(colors.length);
     } while (secondIndex == firstIndex); // Ensure the second color is different from the first
     // Randomly select two colors from the array
-    String secondPotion = colors[secondIndex];
-    GameState.secondPotion = secondPotion + " Potion";
+    GameState.secondPotionColour = colors[secondIndex];
+    GameState.secondPotion = GameState.secondPotionColour + "Potion";
     // Set the tiles and solution
     chatTextArea.appendText(
         "Dear Future Captives,\nI was close, so very close, to mastering the potion. \n Mix the "
-            + firstPotion
+            + GameState.firstPotionColour
             + " potion and "
-            + secondPotion
+            + GameState.secondPotionColour
             + " potion in the cauldron the fumes should give you incredible Power. \n"
             + "I pray you succeed where I couldn't. In fading memory,A Lost Soul");
     // Set the tiles and solution
 
     // Allow the boulder to be dragged and dropped
-
+    for (int i = 0; i < GameState.potionsSelected.length; i++) {
+      GameState.potionsSelected[i] = false;
+    }
+    makePotionImageArray();
   }
 
   @FXML
   private void enlarge(ImageView image) {
-    image.setScaleX(1.5);
-    image.setScaleY(1.5);
-  }
-
-  // When the cauldron is clicked, the potion is added to the cauldron
-  @FXML
-  private void onCauldronClicked(MouseEvent event) {
-
-    // Check if a potion is selected in the combo box
-    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-
-    // if a potion is selected it is made visible in the scene
-    if (selectedItem != null && selectedItem.contains("redPotion")) {
-      // if the potion is already in the cauldron, it is not added again
-      potionsincauldron.add("Red Potion");
-      // the potion is removed from the combo box
-      Inventory.removeFromInventory(selectedItem);
-      // the inventory is updated
-      updateInventory();
-
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("bluePotion")) {
-      potionsincauldron.add("Blue Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("greenPotion")) {
-      potionsincauldron.add("Green Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("yellowPotion")) {
-      potionsincauldron.add("Yellow Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-      // repeat for the other potions
-    } else if (selectedItem != null && selectedItem.contains("purplePotion")) {
-      potionsincauldron.add("Purple Potion");
-
-      Inventory.removeFromInventory(selectedItem);
-
-      updateInventory();
-    }
-    // if the two correct potions are in the cauldron, the boulder is made draggable
-    if (potionsincauldron.contains(GameState.firstPotion)
-        && potionsincauldron.contains(GameState.secondPotion)) {
-      tintScene(potionsRoomPane);
-      CustomNotifications.generateNotification(
-          "Something Happens!",
-          "You feel far stronger... like energy's coursing through you and you could move"
-              + " anything...");
-
-      allowImageToBeDragged(boulder);
+    // if the image is the boulder enlarge it less than the other items
+    if (image.getId().contains("boulder")) {
+      image.setScaleX(1.2);
+      image.setScaleY(1.2);
+    } else {
+      image.setScaleX(1.5);
+      image.setScaleY(1.5);
     }
   }
 
@@ -284,63 +230,88 @@ public class RoomController implements Controller {
   }
 
   @FXML
-  private void addToInventory(ImageView image) {
+  private void onBoulderClicked(MouseEvent event) {
+    // if the boulder is clicked and is draggable and has no effect add a dropshadow to it
+    ImageView image = (ImageView) event.getSource();
+    if (image.getId().contains("boulder")) {
+      if ((image.getEffect() == null) && (GameState.isBoulderDraggable == true)) {
 
-    image.setVisible(false);
-    image.setDisable(true);
+        DropShadow dropShadow = new DropShadow();
+        dropShadow.setHeight(60);
+        dropShadow.setWidth(60);
+        dropShadow.setSpread(0.35);
+        dropShadow.setColor(Color.WHITE);
+        image.setEffect(dropShadow);
+      }
+      // else if there is an effect remove it
+      else {
+        if (image.getEffect() != null) {
 
-    Inventory.addToInventory(image.getId());
-    updateInventory();
+          image.setEffect(null);
+        }
+      }
+    }
   }
 
   @FXML
-  private void addToInventoryFromScene(MouseEvent event) {
+  private void onPotionClicked(MouseEvent event) {
+    // if the potion is clicked and has no effect and no potion is selected add a dropshadow to it
     ImageView image = (ImageView) event.getSource();
-    image.setVisible(false);
-    image.setDisable(true);
+    if ((image.getEffect() == null)
+        && (GameState.isPotionSelected == false)
+        && (image.getId().contains("Potion"))) {
 
-    Inventory.addToInventory(image.getId());
-    updateInventory();
+      DropShadow dropShadow = new DropShadow();
+      dropShadow.setHeight(60);
+      dropShadow.setWidth(60);
+      dropShadow.setSpread(0.35);
+      dropShadow.setColor(Color.WHITE);
+      image.setEffect(dropShadow);
+      // add the effect to the cauldron as well
+      cauldron.setEffect(dropShadow);
+      GameState.isPotionSelected = true;
+    }
+    // else if there is an effect remove it
+    else {
+      if (image.getEffect() != null) {
+
+        image.setEffect(null);
+        cauldron.setEffect(null);
+        GameState.isPotionSelected = false;
+      }
+    }
   }
 
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
-    inventoryChoiceBox.setItems(Inventory.getInventory());
 
     // set key visibility
     GameState.setKeys(inventoryKey1, inventoryKey2, inventoryKey3);
-    inventoryChoiceBox.setStyle(" -fx-effect: dropshadow(gaussian, #ff00ff, 10, 0.5, 0, 0);");
 
     // Create a Timeline to revert the shadow back to its original state after 2 seconds
-    GameState.flashAnimation(inventoryChoiceBox).play();
   }
 
   @FXML
   private void onHideNote() {
+    // make the note visible and clickable
+    note.setVisible(true);
+    note.setDisable(false);
+    // make the text area invisible and unclickable
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
     btnHideNote.setVisible(false);
   }
 
-  @FXML
-  private void showNote() {
-    note.setVisible(true);
-    note.setDisable(false);
-  }
-
-  @FXML
-  private void showNoteWithoutButton() {
-    note.setVisible(true);
-    note.setDisable(false);
-  }
-
   // Allow the image to be dragged and dropped
   @FXML
   private void allowImageToBeDragged(ImageView image) {
+
     // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
+          onPotionClicked(event);
+          onBoulderClicked(event);
           horizontalOffset = event.getSceneX() - image.getLayoutX();
           verticalOffset = event.getSceneY() - image.getLayoutY();
         });
@@ -352,26 +323,74 @@ public class RoomController implements Controller {
           image.setLayoutX(newX);
           image.setLayoutY(newY);
         });
+    image.setOnMouseReleased(
+        (MouseEvent event) -> {
+          if ((cauldron.getBoundsInParent().intersects(image.getBoundsInParent())
+              && (image.getId().contains("Potion")))) {
+
+            image.setVisible(false);
+            image.setDisable(true);
+            GameState.isPotionSelected = false;
+            cauldron.setEffect(null);
+            if ((image.getId().toLowerCase().contains(GameState.firstPotion.toLowerCase())
+                || (image.getId().toLowerCase().contains(GameState.secondPotion.toLowerCase())))) {
+              GameState.correctPotions++;
+              if (GameState.correctPotions == 2) {
+                tintScene(potionsRoomPane);
+                CustomNotifications.generateNotification(
+                    "Something Happens!",
+                    "You feel far stronger... like energy's coursing through you and you could move"
+                        + " anything...");
+
+                allowImageToBeDragged(boulder);
+                GameState.isBoulderDraggable = true;
+                cauldron.setEffect(null);
+              }
+            }
+          }
+        });
   }
 
   @FXML
   private void enlargeItem(MouseEvent event) {
-    enlarge((ImageView) event.getSource());
+    // only enlarge the boulder if it is draggable
+    ImageView image = (ImageView) event.getSource();
+    if (image.getId().contains("boulder")) {
+      if (GameState.isBoulderDraggable == true) {
+        enlarge((ImageView) event.getSource());
+      }
+    }
+    // enlarge all other items
+    else {
+
+      enlarge((ImageView) event.getSource());
+    }
   }
 
   @FXML
   private void shrinkItem(MouseEvent event) {
-    shrink((ImageView) event.getSource());
+    // only shrink the boulder if it is draggable
+    ImageView image = (ImageView) event.getSource();
+    if (image.getId().contains("boulder")) {
+      if (GameState.isBoulderDraggable == true) {
+        shrink((ImageView) event.getSource());
+      }
+    }
+    // shrink all other items
+    else {
+      shrink((ImageView) event.getSource());
+    }
   }
 
   @FXML
   private void onNoteClicked(MouseEvent event) {
     // Check if a note is selected in the combo box
-
+    note.setVisible(false);
+    note.setDisable(true);
     chatTextArea.setVisible(true);
     chatTextArea.setDisable(false);
     // if a note is selected it is made visible in the scene
-    addToInventory(note);
+
     btnHideNote.setDisable(false);
     btnHideNote.setVisible(true);
   }
@@ -423,8 +442,8 @@ public class RoomController implements Controller {
   }
 
   private void tintScene(Pane potionsRoomPane) {
-    Color colour1 = convertStringToColor(GameState.firstPotion);
-    Color colour2 = convertStringToColor(GameState.secondPotion);
+    Color colour1 = convertStringToColor(GameState.firstPotionColour);
+    Color colour2 = convertStringToColor(GameState.secondPotionColour);
     Color colour3 = calculateAverageColor(colour1, colour2);
     // Create a colored rectangle to overlay the scene
 
@@ -449,25 +468,6 @@ public class RoomController implements Controller {
         });
     // Play the animation
     timeline.play();
-  }
-
-  @FXML
-  private void onTableClicked(MouseEvent event) {
-
-    // Check if a note is selected in the combo box
-    String selectedItem = inventoryChoiceBox.getSelectionModel().getSelectedItem();
-
-    if (selectedItem != null && selectedItem.contains("note")) {
-
-      Inventory.removeFromInventory(selectedItem);
-
-      showNoteWithoutButton();
-      return;
-    }
-    // if a parchment piece is selected it is made visible in the scene
-    // and the parchment piece is removed from the combo box
-    // if already three pieces are visible the note is shown instead
-
   }
 
   @FXML
@@ -505,6 +505,14 @@ public class RoomController implements Controller {
       e.printStackTrace();
     }
     inputText.clear();
+  }
+
+  @FXML
+  private void makePotionImageArray() {
+    ImageView[] potionImages = {redPotion, bluePotion, greenPotion, yellowPotion, purplePotion};
+    for (int i = 0; i < potionImages.length; i++) {
+      allowImageToBeDragged(potionImages[i]);
+    }
   }
 
   @FXML
