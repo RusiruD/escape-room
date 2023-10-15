@@ -37,12 +37,6 @@ public class Riddle {
 
     riddleBox.getChildren().addAll(title, riddle);
 
-    // add hint button add close button
-    ImageView hintButton = new ImageView("images/question.png");
-    hintButton.setFitHeight(20);
-    hintButton.setFitWidth(20);
-    hintButton.setOnMouseClicked(event -> {});
-
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
@@ -53,9 +47,8 @@ public class Riddle {
           riddlePane.getParent().toBack();
         });
 
-    stackPane.getChildren().addAll(riddleBox, hintButton, closeButton);
+    stackPane.getChildren().addAll(riddleBox, closeButton);
     StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
-    StackPane.setAlignment(hintButton, Pos.BOTTOM_RIGHT);
 
     riddlePane.getChildren().add(stackPane);
     return riddlePane;

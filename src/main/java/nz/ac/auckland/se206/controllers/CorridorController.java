@@ -32,7 +32,6 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
-import nz.ac.auckland.se206.Instructions;
 import nz.ac.auckland.se206.ScoreEntry;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
@@ -86,7 +85,6 @@ public class CorridorController implements Controller {
   @FXML private Label lblTime;
   @FXML private ComboBox<String> inventoryChoiceBox;
 
-  @FXML private Pane instructionsDisplay;
   @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -213,7 +211,7 @@ public class CorridorController implements Controller {
   }
 
   /**
-   * Initializes the CorridorController. Sets up timers, player character, and game instructions.
+   * Initializes the CorridorController. Sets up timers, player character.
    */
   public void initialize() {
 
@@ -223,19 +221,6 @@ public class CorridorController implements Controller {
 
     instance = this;
     Image image = new Image("/images/character.png");
-
-    String instructionsString =
-        "Use WASD to move around the room. \n\n"
-            + "The treasure chest needs keys to open it. \n\n"
-            + "Move into the rooms and solve their puzzles to get keys. \n\n";
-    Instructions instructions = new Instructions(instructionsString);
-    Pane instructionsPane = instructions.getInstructionsPane();
-    instructionsDisplay.getChildren().add(instructionsPane);
-    instructionsPane.getStyleClass().add("riddle");
-    instructionsDisplay.toFront();
-
-    instructionsDisplay.visibleProperty().set(false);
-    instructionsDisplay.mouseTransparentProperty().set(true);
 
     dungeonMasterHover.getStyleClass().add("hover");
     treasureHover.getStyleClass().add("hover");
@@ -533,20 +518,6 @@ public class CorridorController implements Controller {
       parallelTransition.play();
       GameState.previousKeyPress = true;
     }
-  }
-
-  /**
-   * Handles the mouse click event to display instructions. Sets the instructions pane to be visible
-   * and not mouse transparent.
-   *
-   * @param event The MouseEvent triggered by the mouse click.
-   */
-  @FXML
-  public void getInstructions(MouseEvent event) {
-    // Set the instructions pane to be visible and not mouse transparent
-    instructionsDisplay.visibleProperty().set(true);
-    instructionsDisplay.mouseTransparentProperty().set(false);
-    instructionsDisplay.toFront();
   }
 
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */

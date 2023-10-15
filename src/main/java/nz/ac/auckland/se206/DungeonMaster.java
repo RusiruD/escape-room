@@ -4,6 +4,7 @@ import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.concurrent.Task;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -175,6 +176,7 @@ public class DungeonMaster {
     dungeonMasterRectangle.setStyle("-fx-fill: #ffffff");
     dungeonMasterRectangle.setOpacity(0.25);
     ImageView dungeonMasterImage = new ImageView("images/dungeonMasterImageCrop.png");
+    dungeonMasterImage.scaleXProperty().set(-1);
     dungeonMasterImage.setFitHeight(60);
     dungeonMasterImage.setFitWidth(60);
 
@@ -218,9 +220,10 @@ public class DungeonMaster {
     translateTransition.setCycleCount(Animation.INDEFINITE);
     translateTransition.play();
 
-    Rectangle quitButton = new Rectangle();
-    quitButton.setWidth(20);
-    quitButton.setHeight(20);
+    ImageView quitButton = new ImageView();
+    quitButton.setImage(new Image("images/close.png"));
+    quitButton.setFitHeight(20);
+    quitButton.setFitWidth(20);
     quitButton.setStyle("-fx-fill: #f38ba8");
     quitButton.setOnMouseClicked(
         e -> {
@@ -379,8 +382,8 @@ public class DungeonMaster {
    */
   public void paneFormat(Pane dialogue) {
     // Retrieve and configure UI elements within the dialogue pane
-    Rectangle exitButton =
-        (Rectangle)
+    ImageView exitButton =
+        (ImageView)
             ((StackPane) ((HBox) dialogue.getChildren().get(0)).getChildren().get(1))
                 .getChildren()
                 .get(2);
