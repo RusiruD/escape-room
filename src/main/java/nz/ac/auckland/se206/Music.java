@@ -10,6 +10,8 @@ public class Music {
 
   /** Starts playing the background music. */
   public static void begin() {
+    // Starts playing the background music.
+
     try {
       Media sound =
           new Media(App.class.getResource("/sounds/" + "music1" + ".mp3").toURI().toString());

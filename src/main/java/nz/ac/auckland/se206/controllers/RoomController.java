@@ -212,6 +212,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void enlarge(ImageView image) {
+    // if the image is the boulder enlarge it less than the other items
     if (image.getId().contains("boulder")) {
       image.setScaleX(1.2);
       image.setScaleY(1.2);
@@ -229,7 +230,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onBoulderClicked(MouseEvent event) {
-
+    // if the boulder is clicked and is draggable and has no effect add a dropshadow to it
     ImageView image = (ImageView) event.getSource();
     if (image.getId().contains("boulder")) {
       if ((image.getEffect() == null) && (GameState.isBoulderDraggable == true)) {
@@ -240,7 +241,9 @@ public class RoomController implements Controller {
         dropShadow.setSpread(0.35);
         dropShadow.setColor(Color.WHITE);
         image.setEffect(dropShadow);
-      } else {
+      }
+      // else if there is an effect remove it
+      else {
         if (image.getEffect() != null) {
 
           image.setEffect(null);
@@ -251,7 +254,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onPotionClicked(MouseEvent event) {
-
+    // if the potion is clicked and has no effect and no potion is selected add a dropshadow to it
     ImageView image = (ImageView) event.getSource();
     if ((image.getEffect() == null)
         && (GameState.isPotionSelected == false)
@@ -263,9 +266,12 @@ public class RoomController implements Controller {
       dropShadow.setSpread(0.35);
       dropShadow.setColor(Color.WHITE);
       image.setEffect(dropShadow);
+      // add the effect to the cauldron as well
       cauldron.setEffect(dropShadow);
       GameState.isPotionSelected = true;
-    } else {
+    }
+    // else if there is an effect remove it
+    else {
       if (image.getEffect() != null) {
 
         image.setEffect(null);
@@ -286,8 +292,10 @@ public class RoomController implements Controller {
 
   @FXML
   private void onHideNote() {
+    // make the note visible and clickable
     note.setVisible(true);
     note.setDisable(false);
+    // make the text area invisible and unclickable
     chatTextArea.setVisible(false);
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
@@ -344,12 +352,15 @@ public class RoomController implements Controller {
 
   @FXML
   private void enlargeItem(MouseEvent event) {
+    // only enlarge the boulder if it is draggable
     ImageView image = (ImageView) event.getSource();
     if (image.getId().contains("boulder")) {
       if (GameState.isBoulderDraggable == true) {
         enlarge((ImageView) event.getSource());
       }
-    } else {
+    }
+    // enlarge all other items
+    else {
 
       enlarge((ImageView) event.getSource());
     }
@@ -357,12 +368,15 @@ public class RoomController implements Controller {
 
   @FXML
   private void shrinkItem(MouseEvent event) {
+    // only shrink the boulder if it is draggable
     ImageView image = (ImageView) event.getSource();
     if (image.getId().contains("boulder")) {
       if (GameState.isBoulderDraggable == true) {
         shrink((ImageView) event.getSource());
       }
-    } else {
+    }
+    // shrink all other items
+    else {
       shrink((ImageView) event.getSource());
     }
   }
