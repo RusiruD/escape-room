@@ -10,6 +10,7 @@ public class Music {
   private static Media background = generateMedia("music1");
   private static Media win = generateMedia("Win");
   private static Media loss = generateMedia("Loss");
+  private static Media equip = generateMedia("item");
 
   public static void playBackgroundMusic() {
     playMusic(background);
@@ -21,6 +22,15 @@ public class Music {
 
   public static void playLossMusic() {
     playMusic(loss);
+  }
+
+  public static void playEquipSound() {
+    playSimultaneousSound(equip);
+  }
+
+  private static void playSimultaneousSound(Media music) {
+    MediaPlayer newMedia = new MediaPlayer(music);
+    newMedia.play();
   }
 
   private static Media generateMedia(String name) {

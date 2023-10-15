@@ -30,6 +30,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
@@ -377,6 +378,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onKey1Clicked(MouseEvent event) {
+    Music.playEquipSound();
     GameState.hasKeyOne = true;
 
     GameState.isKey1Collected = true;

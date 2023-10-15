@@ -21,6 +21,7 @@ import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -92,6 +93,7 @@ public class PuzzleRoomController implements Controller {
 
   @FXML
   private void onKey3Clicked(MouseEvent event) {
+    Music.playEquipSound();
     GameState.hasKeyThree = true;
     // change the key3's visibility and disable it
     key3.visibleProperty().unbind();
