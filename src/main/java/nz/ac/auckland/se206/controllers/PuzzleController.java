@@ -2,6 +2,7 @@ package nz.ac.auckland.se206.controllers;
 
 import java.io.IOException;
 import java.util.Random;
+import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,6 +17,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Controller;
@@ -77,6 +79,7 @@ public class PuzzleController implements Controller {
 
   private HintNode hintNode;
   private Chat.AppUi appUi;
+  private FadeTransition fadeTransition;
 
   /**
    * Initializes the PuzzleController. This method is automatically called after the FXML file has
@@ -193,6 +196,22 @@ public class PuzzleController implements Controller {
    * @param other The second ImageView object to swap with.
    */
   private void swapImage(ImageView object, ImageView other) {
+
+    double startOpacity = 0.5;
+    double durationTime = 0.1;
+    FadeTransition fadeTransition = new FadeTransition(Duration.seconds(durationTime), object);
+    fadeTransition.setFromValue(startOpacity); // Starting opacity (completely transparent)
+    fadeTransition.setToValue(1.0); // Ending opacity (fully visible)
+
+    // Play the fade transition
+    fadeTransition.play();
+    fadeTransition = new FadeTransition(Duration.seconds(durationTime), other);
+    fadeTransition.setFromValue(startOpacity); // Starting opacity (completely transparent)
+    fadeTransition.setToValue(1.0); // Ending opacity (fully visible)
+
+    // Play the fade transition
+    fadeTransition.play();
+
     // Find the positions of the ImageView objects in the grid.
     int[] apos = findPos(object.getId());
     int[] bpos = findPos(other.getId());
