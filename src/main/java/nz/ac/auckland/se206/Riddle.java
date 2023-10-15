@@ -20,15 +20,18 @@ public class Riddle {
    * @return A Pane containing the riddle, hint button, and close button.
    */
   public static Pane riddlePane(String riddleText) {
-    // create a pane to hold the riddle
+    // create a pane to hold the riddle 
     Pane riddlePane = new Pane();
 
+    // create a stack pane to hold the riddle and close button
     StackPane stackPane = new StackPane();
 
+    // create a vbox to hold the riddle title and text
     VBox riddleBox = new VBox();
 
     Label title = new Label("Riddle");
 
+    // create a text area to display the riddle
     TextArea riddle = new TextArea(riddleText);
     riddle.setWrapText(true);
     riddle.setEditable(false);
@@ -37,6 +40,7 @@ public class Riddle {
 
     riddleBox.getChildren().addAll(title, riddle);
 
+    // create a close button
     ImageView closeButton = new ImageView("images/close.png");
     closeButton.setFitHeight(20);
     closeButton.setFitWidth(20);
@@ -47,6 +51,7 @@ public class Riddle {
           riddlePane.getParent().toBack();
         });
 
+    // add the riddle, hint button, and close button to the pane
     stackPane.getChildren().addAll(riddleBox, closeButton);
     StackPane.setAlignment(closeButton, Pos.TOP_RIGHT);
 
