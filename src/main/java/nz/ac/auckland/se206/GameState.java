@@ -12,6 +12,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.controllers.SceneManager;
+import nz.ac.auckland.se206.controllers.StartScreenController;
 import nz.ac.auckland.se206.speech.TextToSpeech;
 
 /** Represents the state of the game. */
@@ -193,6 +194,7 @@ public class GameState {
       tts.cancel();
       isMuted = true;
     }
+    StartScreenController.getInstance().updateMute();
     for (Controller controller : SceneManager.getControllers()) {
       controller.updateMute();
     }
