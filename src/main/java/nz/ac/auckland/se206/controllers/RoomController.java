@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
@@ -309,6 +310,9 @@ public class RoomController implements Controller {
     // When the mouse is pressed it records the offset from the top left corner
     image.setOnMousePressed(
         (MouseEvent event) -> {
+          Cursor cursor = Cursor.MOVE;
+
+          image.setCursor(cursor);
           onPotionClicked(event);
           onBoulderClicked(event);
           horizontalOffset = event.getSceneX() - image.getLayoutX();
@@ -342,6 +346,8 @@ public class RoomController implements Controller {
                         + " anything...");
 
                 allowImageToBeDragged(boulder);
+                Cursor cursor = Cursor.HAND;
+                boulder.setCursor(cursor);
                 GameState.isBoulderDraggable = true;
                 cauldron.setEffect(null);
               }
