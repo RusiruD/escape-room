@@ -233,6 +233,12 @@ public class App extends Application {
    * Navigate to Door 2 and enter the Untangle room. Adjust the stage size to fit the Untangle room
    * dimensions.
    */
+  @Override
+  public void stop() {
+    // Stop the timer when the application is closing
+    Utility.exitGame();
+  }
+
   public static void goToDoor2() {
 
     try {
