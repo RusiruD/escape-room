@@ -38,7 +38,7 @@ public class TimerCounter {
               @Override
               public void run() {
                 timeCounter[0]--;
-                System.out.println(timeCounter[0]);
+
                 // Formatting the seconds to be in a presentable/readable format
                 int min = timeCounter[0] / 60;
                 int sec = timeCounter[0] - min * 60;
