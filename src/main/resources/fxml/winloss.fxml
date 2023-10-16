@@ -26,5 +26,6 @@
             <Font name="Arial" size="42.0" />
          </font>
       </Label>
+      <Button layoutX="326.0" layoutY="640.0" mnemonicParsing="false" onMouseClicked="#toLeaderboard" text="Leaderboard" />
    </children>
 </Pane>

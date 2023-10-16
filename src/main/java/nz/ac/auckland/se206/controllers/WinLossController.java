@@ -31,6 +31,11 @@ public class WinLossController implements Controller {
     instance = this;
   }
 
+  @FXML
+  public void toLeaderboard() {
+    App.goToLeaderboard();
+  }
+
   /**
    * Checks the game status and updates the UI components accordingly. If the game is won, sets the
    * text to indicate a win and escaping the dungeon. If the game is lost, sets the text to indicate

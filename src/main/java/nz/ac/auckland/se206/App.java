@@ -24,7 +24,7 @@ import nz.ac.auckland.se206.controllers.WinLossController;
 public class App extends Application {
 
   public static SceneManager.AppUi oldScene = null;
-  public static SceneManager.AppUi newScene = AppUi.CORRIDOR;
+  public static SceneManager.AppUi newScene = AppUi.START;
 
   private static Scene scene;
 
