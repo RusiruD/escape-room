@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
+import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
@@ -14,6 +15,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -117,7 +119,7 @@ public class RoomController implements Controller {
   private double verticalOffset = 0;
 
   private DungeonMaster callDungeonMaster;
-
+  @FXML private Pane cursorPane;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
   @FXML private Button showButton;
@@ -126,7 +128,7 @@ public class RoomController implements Controller {
   @FXML private ImageView chatBackground;
   @FXML private Button switchButton;
   @FXML private Label hintField;
-
+  @FXML private ImageView hand;
   @FXML private VBox inventoryKey1;
   @FXML private VBox inventoryKey2;
   @FXML private VBox inventoryKey3;
@@ -281,6 +283,48 @@ public class RoomController implements Controller {
     }
   }
 
+  /** Animates the cursor to move to the puzzle room. */
+  public void animateCursor() {
+    hand.setVisible(true);
+    Duration duration = Duration.millis(1200);
+    // Create new translate transition
+    TranslateTransition transition = new TranslateTransition(duration, hand);
+
+    // Play the delay first
+
+    // Move in X axis by +200
+
+    transition.setByX(80);
+    // Move in Y axis by +100
+    transition.setByY(60);
+    // Go back to previous position after 2.5 seconds
+    transition.setAutoReverse(true);
+    // Repeat animation twice
+    transition.setCycleCount(2);
+    // Delay for .5 seconds
+
+    // Change the image after the delay
+    PauseTransition delay = new PauseTransition(Duration.millis(300)); // Delay for 2.5 seconds
+
+    // Change the image after the delay
+    delay.setOnFinished(
+        event -> {
+          Image newImage = new Image("images/hand2.png"); // Load the new image
+          hand.setImage(newImage);
+          transition.play();
+        });
+
+    // Play the delay, and when it's finished, start the translation animation
+
+    // Play the delay first
+    delay.play();
+    // Play the delay, and when it's finished, start the translation animation
+    transition.setOnFinished(
+        event -> {
+          potionsRoomPane.getChildren().remove(cursorPane);
+        });
+  }
+
   /** Updates the inventory choice box with the current inventory. Also sets the key visibility */
   public void updateInventory() {
 
@@ -300,6 +344,7 @@ public class RoomController implements Controller {
     chatTextArea.setDisable(true);
     btnHideNote.setDisable(true);
     btnHideNote.setVisible(false);
+    animateCursor();
   }
 
   // Allow the image to be dragged and dropped
