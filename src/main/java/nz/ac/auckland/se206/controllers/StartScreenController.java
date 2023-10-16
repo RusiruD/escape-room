@@ -4,9 +4,11 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
+import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.TimerCounter;
@@ -20,6 +22,7 @@ public class StartScreenController {
     return instance;
   }
 
+  @FXML private ImageView soundToggle;
   @FXML private Pane startScreenPane;
   @FXML private ChoiceBox<String> timerChoice;
   @FXML private ChoiceBox<String> difficultyChoice;
@@ -118,4 +121,21 @@ public class StartScreenController {
   public double getStartScreenWidth() {
     return startScreenPane.getPrefWidth();
   }
+
+    /** Updates the mute state and toggles the sound icon image accordingly. */
+  @FXML
+  public void updateMute() {
+    if (!GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.mute();
+  }
+
 }
