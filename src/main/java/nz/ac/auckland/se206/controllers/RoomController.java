@@ -310,7 +310,7 @@ public class RoomController implements Controller {
     image.setOnMousePressed(
         (MouseEvent event) -> {
           Cursor cursor = Cursor.MOVE;
-
+          // change the cursor to a hand
           image.setCursor(cursor);
           onPotionClicked(event);
           onBoulderClicked(event);
@@ -325,11 +325,13 @@ public class RoomController implements Controller {
           image.setLayoutX(newX);
           image.setLayoutY(newY);
         });
+    // When the mouse is released it checks if the image is intersecting with the cauldron
     image.setOnMouseReleased(
         (MouseEvent event) -> {
           if ((cauldron.getBoundsInParent().intersects(image.getBoundsInParent())
               && (image.getId().contains("Potion")))) {
-
+            // if the image is intersecting with the cauldron and is a potion it is made invisible
+            // and unclickable
             image.setVisible(false);
             image.setDisable(true);
             GameState.isPotionSelected = false;
@@ -343,7 +345,7 @@ public class RoomController implements Controller {
                     "Something Happens!",
                     "You feel far stronger... like energy's coursing through you and you could move"
                         + " anything...");
-
+                // make the boulder draggable
                 allowImageToBeDragged(boulder);
                 Cursor cursor = Cursor.HAND;
                 boulder.setCursor(cursor);

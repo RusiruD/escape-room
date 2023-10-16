@@ -8,7 +8,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
-import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.TimerCounter;
@@ -22,11 +21,16 @@ public class StartScreenController {
     return instance;
   }
 
-  @FXML private ImageView soundToggle;
-  @FXML private Pane startScreenPane;
-  @FXML private ChoiceBox<String> timerChoice;
-  @FXML private ChoiceBox<String> difficultyChoice;
-  @FXML private Button btnStart;
+  @FXML
+  private ImageView soundToggle;
+  @FXML
+  private Pane startScreenPane;
+  @FXML
+  private ChoiceBox<String> timerChoice;
+  @FXML
+  private ChoiceBox<String> difficultyChoice;
+  @FXML
+  private Button btnStart;
 
   @FXML
   private void initialize() {
@@ -79,9 +83,11 @@ public class StartScreenController {
   }
 
   /**
-   * Checks the chosen difficulty and time limit, then starts the game timer accordingly.
+   * Checks the chosen difficulty and time limit, then starts the game timer
+   * accordingly.
    *
-   * @param time The chosen time limit ("2 Minutes", "4 Minutes", or "6 Minutes").
+   * @param time       The chosen time limit ("2 Minutes", "4 Minutes", or "6
+   *                   Minutes").
    * @param difficulty The chosen difficulty level ("Easy", "Medium", or "Hard").
    */
   @FXML
@@ -122,7 +128,7 @@ public class StartScreenController {
     return startScreenPane.getPrefWidth();
   }
 
-    /** Updates the mute state and toggles the sound icon image accordingly. */
+  /** Updates the mute state and toggles the sound icon image accordingly. */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
