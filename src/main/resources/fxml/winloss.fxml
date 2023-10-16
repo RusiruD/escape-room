@@ -26,5 +26,11 @@
             <Font name="Arial" size="42.0" />
          </font>
       </Label>
+      <Button layoutX="326.0" layoutY="640.0" mnemonicParsing="false" onMouseClicked="#toLeaderboard" text="Leaderboard" />
+      <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/sound/audioOn.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

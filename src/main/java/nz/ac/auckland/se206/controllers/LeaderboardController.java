@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -205,7 +206,12 @@ public class LeaderboardController {
   }
 
   @FXML
-  public void toStartScreen() {
-    App.goToStartScreen();
+  public void toStartScreen(MouseEvent event) {
+
+    if (App.oldScene.equals(SceneManager.AppUi.START)) {
+      App.goToStartScreen();
+    } else if (App.oldScene.equals(SceneManager.AppUi.WINLOSS)) {
+      App.goToWinLoss();
+    }
   }
 }

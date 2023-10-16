@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Controller;
@@ -25,10 +26,16 @@ public class WinLossController implements Controller {
   @FXML private Button exitGame;
   @FXML private Button replayGame;
   @FXML private Button newGame;
+  @FXML private ImageView soundToggle;
 
   // Initialization method
   public void initialize() {
     instance = this;
+  }
+
+  @FXML
+  public void toLeaderboard() {
+    App.goToLeaderboard();
   }
 
   /**
@@ -54,6 +61,12 @@ public class WinLossController implements Controller {
   private void onExitGameClicked(ActionEvent event) {
     // Exit the application
     System.exit(0);
+  }
+
+  @FXML
+  private void mute() {
+    // Handle click on mute
+    GameState.mute();
   }
 
   @FXML
@@ -102,9 +115,13 @@ public class WinLossController implements Controller {
     // Implementation not provided, but should update the inventory
   }
 
-  @Override
+  @FXML
   public void updateMute() {
-    // Implementation not provided, but should update the mute button
+    if (!GameState.isMuted) {
+      soundToggle.setImage(new ImageView("images/sound/audioOn.png").getImage());
+      return;
+    }
+    soundToggle.setImage(new ImageView("images/sound/audioOff.png").getImage());
   }
 
   @Override
