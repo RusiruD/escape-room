@@ -210,7 +210,7 @@ public class UntangleRoomController implements Controller {
 
   /** Animates the cursor to move to the puzzle room. */
   public void animateCursor() {
-    Duration duration = Duration.millis(2500);
+    Duration duration = Duration.millis(1500);
     // Create new translate transition
     TranslateTransition transition = new TranslateTransition(duration, hand);
 
@@ -218,7 +218,7 @@ public class UntangleRoomController implements Controller {
 
     // Move in X axis by +200
 
-    transition.setByX(150);
+    transition.setByX(100);
     // Move in Y axis by +100
     transition.setByY(-80);
     // Go back to previous position after 2.5 seconds

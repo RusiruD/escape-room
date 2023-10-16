@@ -498,7 +498,7 @@ public class CorridorController implements Controller {
       imageViews[3] = rightwardsKey;
       FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
       for (int i = 0; i < imageViews.length; i++) {
-        fadeTransitions[i] = new FadeTransition(Duration.seconds(1.5), imageViews[i]);
+        fadeTransitions[i] = new FadeTransition(Duration.seconds(1.2), imageViews[i]);
         fadeTransitions[i].setToValue(0.0);
       }
 
