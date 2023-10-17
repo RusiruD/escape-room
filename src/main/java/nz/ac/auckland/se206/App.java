@@ -41,7 +41,6 @@ public class App extends Application {
    * @throws IOException If there is an error loading the FXML file for the specified AppUi.
    */
   public static void setRoot(SceneManager.AppUi appUi) throws IOException {
-
     oldScene = newScene;
     newScene = appUi;
 

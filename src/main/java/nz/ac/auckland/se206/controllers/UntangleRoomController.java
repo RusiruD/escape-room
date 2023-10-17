@@ -555,7 +555,7 @@ public class UntangleRoomController implements Controller {
             hintField);
     GameState.chat.addToMap(appUi, hintNode);
     // Set the current application UI to UNTANGLE
-    onCloseChat(null);
+    GameState.chat.massDisable(appUi);
     GameState.chat.addChat(textArea);
   }
 

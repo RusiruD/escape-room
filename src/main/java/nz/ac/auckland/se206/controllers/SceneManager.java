@@ -31,6 +31,7 @@ public class SceneManager {
   }
 
   public static Parent getUiRoot(AppUi ui) {
+
     return sceneMap.get(ui);
   }
 
