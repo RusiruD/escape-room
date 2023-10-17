@@ -127,7 +127,9 @@ public class LeaderboardController {
         String.format("%02d:%02d", GameState.totalTime / 60, GameState.totalTime % 60);
     labelPlayTime.setText(formatTime + " Time Spent");
     labelHintsUsed.setText(GameState.hintsUsed + " Hints Used");
-
+    if (GameState.scores.size() == 0) {
+      return;
+    }
     // Store the last (highest) score entry temporarily
     ScoreEntry temp = GameState.scores.get(GameState.scores.size() - 1);
 

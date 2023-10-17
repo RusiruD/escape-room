@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
+import nz.ac.auckland.se206.controllers.LeaderboardController;
 import nz.ac.auckland.se206.controllers.WinLossController;
 
 /** Utility class for managing game timers and updating timer labels across multiple screens. */
@@ -77,6 +78,17 @@ public class TimerCounter {
    * Handles the game over scenario, navigates to the Win/Loss screen, and checks the game status.
    */
   private void gameOver() {
+    // updates scoreboard
+    System.out.println("Game over");
+    if (GameState.currentTimeLimit == GameState.TimeLimit.TWO_MINUTES) {
+      GameState.totalTime += 120;
+    } else if (GameState.currentTimeLimit == GameState.TimeLimit.FOUR_MINUTES) {
+      GameState.totalTime += 240;
+    } else {
+      GameState.totalTime += 360;
+    }
+    GameState.hintsUsed += GameState.hintsGiven;
+    LeaderboardController.getInstance().sortScores();
     App.goToWinLoss();
     WinLossController.getInstance().checkGameStatus();
   }

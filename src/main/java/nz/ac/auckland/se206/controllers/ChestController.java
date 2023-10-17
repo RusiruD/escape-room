@@ -173,6 +173,14 @@ public class ChestController implements Controller {
             + " instead use synonyms. Do not, under no circumstance, give the user the answer to"
             + " the riddles. After every sentence do a line break. Make the riddle a few sentences"
             + " long. Do not go over 100 words.";
+    String riddleAnswer =
+        "the third solution is"
+            + solutions[0]
+            + ", the second solution is"
+            + solutions[1]
+            + " and the third solution is"
+            + solutions[2];
+    GameState.riddleAnswer = riddleAnswer;
     System.out.println(riddleQuestion);
 
     callQuestion =
