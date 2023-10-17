@@ -104,8 +104,9 @@ public class Music {
     }
     mediaPlayer = new MediaPlayer(music);
     mediaPlayer.setVolume(0.5);
-    if (!GameState.isMuted) {
-      mediaPlayer.play();
+    mediaPlayer.play();
+    if (GameState.isMuted) {
+      mediaPlayer.pause();
     }
   }
 
