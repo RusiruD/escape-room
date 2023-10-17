@@ -137,6 +137,14 @@
             </VBox>
          </children>
       </VBox>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="237.0" layoutY="107.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="331.0" styleClass="white-text" text="Untangle the shape" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Old English Text MT" size="25.0" />
+         </font>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
 
    </children>
 </AnchorPane>
