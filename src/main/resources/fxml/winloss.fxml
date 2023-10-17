@@ -15,7 +15,7 @@
          </image>
       </ImageView>
       <Button fx:id="exitGame" layoutX="710.0" layoutY="20.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onExitGameClicked" prefHeight="40.0" prefWidth="70.0" text="Quit" />
-      <Button fx:id="newGame" layoutX="331.0" layoutY="565.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="40.0" prefWidth="140.0" text="New Game" />
+      <Button fx:id="newGame" layoutX="330.0" layoutY="539.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onNewGameClicked" prefHeight="50.0" prefWidth="140.0" text="New Game" />
       <Label fx:id="gameOutcome" alignment="CENTER" layoutX="219.0" layoutY="94.0" prefHeight="166.0" prefWidth="363.0" styleClass="white-text" stylesheets="@../css/roomStylesheet.css" text="You Won" textFill="WHITE">
          <font>
             <Font name="Arial Bold" size="70.0" />
@@ -26,7 +26,7 @@
             <Font name="Arial" size="42.0" />
          </font>
       </Label>
-      <Button layoutX="326.0" layoutY="640.0" mnemonicParsing="false" onMouseClicked="#toLeaderboard" text="Leaderboard" />
+      <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#toLeaderboard" text="Leaderboard" />
       <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/sound/audioOn.png" />
