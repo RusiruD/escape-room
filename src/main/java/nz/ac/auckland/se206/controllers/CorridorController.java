@@ -28,6 +28,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import nz.ac.auckland.se206.App;
+import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.Chat.AppUi;
 import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
@@ -295,6 +296,7 @@ public class CorridorController implements Controller {
 
   // Method to stop player movement
   private void stopMovement() {
+    Chat.getInstance().disableAll();
     forwardPressed.set(false);
     leftPressed.set(false);
     backwardPressed.set(false);

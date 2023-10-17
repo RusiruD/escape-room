@@ -173,7 +173,6 @@ public class Chat {
 
     Button sendButton = hintNode.getSendButton();
     Button switchButton = hintNode.getSwiButton();
-    Label hintField = hintNode.getHintField();
 
     // If the message is empty, return early
     if (message.trim().isEmpty()) {
@@ -231,14 +230,19 @@ public class Chat {
           // Ensure that the UI updates on the JavaFX application thread
           Platform.runLater(
               () -> {
-                enableNode(switchButton);
-                enableNode(sendButton);
+                if (hintNode.getCloseButton().isVisible()) {
+                  enableNode(switchButton);
+                  enableNode(sendButton);
+                }
+
                 enableIfDisable();
                 int hintsLeft = 5 - GameState.hintsGiven;
                 if (hintsLeft < 0) {
                   hintsLeft = 0;
                 }
-                hintField.setText(hintsLeft + " Hints(s) Remaining");
+                for (HintNode node : nodeList) {
+                  node.getHintField().setText(hintsLeft + " Hints(s) Remaining");
+                }
               });
         });
   }
