@@ -99,12 +99,15 @@ public class Music {
 
   /** Starts playing the music music. */
   private static void playMusic(Media music) {
+    // This is a bit of a hack, but it works.
     if (mediaPlayer != null) {
       stop();
     }
+    // Set up
     mediaPlayer = new MediaPlayer(music);
     mediaPlayer.setVolume(0.5);
     mediaPlayer.play();
+    // In case of new game, pause music rather than playing it.
     if (GameState.isMuted) {
       mediaPlayer.pause();
     }
