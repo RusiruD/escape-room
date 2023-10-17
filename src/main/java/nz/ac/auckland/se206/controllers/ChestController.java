@@ -648,7 +648,7 @@ public class ChestController implements Controller {
     // update the inventory style to show the key has been selected
 
     currentKey = 1;
-    inventoryKey1.setStyle("-fx-border-color: #00ff00");
+    inventoryKey1.setStyle("-fx-border-color: #00ff00; -fx-border-width: 3px;");
     inventoryKey2.setStyle("-fx-border-color: transparent");
     inventoryKey3.setStyle("-fx-border-color: transparent");
   }
@@ -662,7 +662,7 @@ public class ChestController implements Controller {
 
     currentKey = 2;
     inventoryKey1.setStyle("-fx-border-color: transparent");
-    inventoryKey2.setStyle("-fx-border-color: #00ff00");
+    inventoryKey2.setStyle("-fx-border-color: #00ff00;-fx-border-width: 3px;");
     inventoryKey3.setStyle("-fx-border-color: transparent");
   }
 
@@ -675,7 +675,7 @@ public class ChestController implements Controller {
     currentKey = 3;
     inventoryKey1.setStyle("-fx-border-color: transparent");
     inventoryKey2.setStyle("-fx-border-color: transparent");
-    inventoryKey3.setStyle("-fx-border-color: #00ff00");
+    inventoryKey3.setStyle("-fx-border-color: #00ff00;-fx-border-width: 3px;");
   }
 
   @Override

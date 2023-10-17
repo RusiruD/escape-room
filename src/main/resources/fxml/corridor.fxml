@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -16,22 +17,6 @@
 
 <Pane fx:id="corridor" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressed" onKeyReleased="#onKeyReleased" prefHeight="730.0" prefWidth="798.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.CorridorController">
    <children>
-      <Group layoutX="-47.0" layoutY="359.0">
-         <children>
-            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true" />
-            <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onDisableHint" prefHeight="40.0" prefWidth="84.0" text="Close" />
-            <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-            <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
-            <TextField fx:id="inputText" layoutX="150.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
-            <Button fx:id="switchButton" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatSwitch" text="Switch" />
-            <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#onEnableHint" text="Chat" />
-            <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
-               <font>
-                  <Font name="Old English Text MT" size="28.0" />
-               </font>
-            </Label>
-         </children>
-      </Group>
       <ImageView fx:id="backgroundImage" fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/CorridorBackground.png" />
@@ -71,31 +56,24 @@
             <Rectangle fx:id="door2" arcHeight="5.0" arcWidth="5.0" fill="#ff1f1f" height="34.0" layoutX="-167.0" layoutY="-357.0" opacity="0.0" rotate="-37.9" stroke="BLACK" strokeType="INSIDE" width="54.0" />
             <Rectangle fx:id="door3" arcHeight="5.0" arcWidth="5.0" fill="#e821ff" height="43.0" layoutX="-59.0" layoutY="-404.0" opacity="0.0" rotate="-35.5" stroke="BLACK" strokeType="INSIDE" width="52.0" />
             <Rectangle fx:id="door1" arcHeight="5.0" arcWidth="5.0" fill="#48f242" height="58.0" layoutX="-332.0" layoutY="-263.0" opacity="0.0" rotate="54.5" stroke="BLACK" strokeType="INSIDE" width="23.0" />
-            <Group fx:id="treasureHover" layoutX="2.0" layoutY="-161.0">
-               <children>
-                  <ImageView fx:id="treasurechest" fitHeight="77.0" fitWidth="133.0" onMouseClicked="#onTreasureChestClicked" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/TreasureChest.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="treasureHoverRectangle" arcHeight="5.0" arcWidth="5.0" fill="LIGHTGRAY" height="75.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="121.0" />
-               </children>
-            </Group>
+            <ImageView fx:id="treasureChest" fitHeight="77.0" fitWidth="133.0" layoutX="2.0" layoutY="-167.0" onMouseClicked="#onTreasureChestClicked" onMouseEntered="#onImageHover" onMouseExited="#onImageHoverEnd" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/TreasureChest.png" />
+               </image>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </ImageView>
             <ImageView fx:id="swordandshield" disable="true" fitHeight="92.0" fitWidth="71.0" layoutX="-43.0" layoutY="-170.0" onMouseClicked="#onSwordAndShieldClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../images/swordandshield.png" />
                </image>
             </ImageView>
-            <Group fx:id="dungeonMasterHover" layoutX="109.0" layoutY="-426.0">
-               <children>
-                  <ImageView fitHeight="184.0" fitWidth="116.0" layoutX="-1.0" layoutY="-27.0" onMouseClicked="#clickDungeonMaster" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../images/dungeonMasterImage.png" />
-                     </image>
-                  </ImageView>
-                  <Rectangle fx:id="dungeonMasterHoverRectangle" arcHeight="5.0" arcWidth="5.0" fill="LIGHTGRAY" height="193.0" layoutY="-27.0" mouseTransparent="true" opacity="0.0" stroke="BLACK" strokeType="INSIDE" width="108.0" />
-               </children>
-            </Group>
+            <ImageView fitHeight="184.0" fitWidth="116.0" layoutX="91.0" layoutY="-432.0" onMouseClicked="#clickDungeonMaster" onMouseEntered="#onImageHover" onMouseExited="#onImageHoverEnd" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/dungeonMasterImage.png" />
+               </image>
+            </ImageView>
             <Rectangle fx:id="player" arcHeight="5.0" arcWidth="5.0" fill="#343536" focusTraversable="true" height="50.0" stroke="#f00000" strokeType="INSIDE" strokeWidth="0.0" width="50.0" />
             <ImageView fx:id="rightwardsKey" blendMode="SOFT_LIGHT" fitHeight="50.0" fitWidth="50.0" layoutX="60.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -173,6 +151,22 @@
             </VBox>
          </children>
       </VBox>
+      <Group layoutX="-47.0" layoutY="359.0">
+         <children>
+            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true" />
+            <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onDisableHint" prefHeight="40.0" prefWidth="84.0" text="Close" />
+            <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+            <Button fx:id="sendButton" layoutX="751.0" layoutY="319.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onSendMessage" prefHeight="37.0" prefWidth="86.0" text="Send" />
+            <TextField fx:id="inputText" layoutX="150.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+            <Button fx:id="switchButton" layoutX="661.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatSwitch" text="Switch" />
+            <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#onEnableHint" text="Chat" />
+            <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
+               <font>
+                  <Font name="Old English Text MT" size="28.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
 
    </children>
 </Pane>

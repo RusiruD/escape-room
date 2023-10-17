@@ -13,6 +13,7 @@ public class Music {
   private static Media equip = generateMedia("item");
 
   public static void playBackgroundMusic() {
+
     playMusic(background);
   }
 
@@ -30,7 +31,9 @@ public class Music {
 
   private static void playSimultaneousSound(Media music) {
     MediaPlayer newMedia = new MediaPlayer(music);
-    newMedia.play();
+    if (!GameState.isMuted) {
+      newMedia.play();
+    }
   }
 
   private static Media generateMedia(String name) {
@@ -49,7 +52,9 @@ public class Music {
       stop();
     }
     mediaPlayer = new MediaPlayer(music);
-    mediaPlayer.play();
+    if (!GameState.isMuted) {
+      mediaPlayer.play();
+    }
   }
 
   public static void pause() {

@@ -5,12 +5,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
 import nz.ac.auckland.se206.GameState;
 import nz.ac.auckland.se206.GameState.Difficulty;
 import nz.ac.auckland.se206.TimerCounter;
+import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.gpt.openai.ApiProxyException;
 
 /** Controller class for the game start screen. */
@@ -21,16 +23,11 @@ public class StartScreenController {
     return instance;
   }
 
-  @FXML
-  private ImageView soundToggle;
-  @FXML
-  private Pane startScreenPane;
-  @FXML
-  private ChoiceBox<String> timerChoice;
-  @FXML
-  private ChoiceBox<String> difficultyChoice;
-  @FXML
-  private Button btnStart;
+  @FXML private ImageView soundToggle;
+  @FXML private Pane startScreenPane;
+  @FXML private ChoiceBox<String> timerChoice;
+  @FXML private ChoiceBox<String> difficultyChoice;
+  @FXML private Button btnStart;
 
   @FXML
   private void initialize() {
@@ -83,11 +80,9 @@ public class StartScreenController {
   }
 
   /**
-   * Checks the chosen difficulty and time limit, then starts the game timer
-   * accordingly.
+   * Checks the chosen difficulty and time limit, then starts the game timer accordingly.
    *
-   * @param time       The chosen time limit ("2 Minutes", "4 Minutes", or "6
-   *                   Minutes").
+   * @param time The chosen time limit ("2 Minutes", "4 Minutes", or "6 Minutes").
    * @param difficulty The chosen difficulty level ("Easy", "Medium", or "Hard").
    */
   @FXML
@@ -144,4 +139,9 @@ public class StartScreenController {
     GameState.mute();
   }
 
+  @FXML
+  private void clickExit(MouseEvent event) {
+    // Handle click on exit
+    Utility.exitGame();
+  }
 }

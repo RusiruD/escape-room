@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="startScreenPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartScreenController">
+<Pane fx:id="startScreenPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.StartScreenController">
    <children>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
@@ -16,7 +16,7 @@
          </image>
       </ImageView>
       <ChoiceBox fx:id="timerChoice" layoutX="338.0" layoutY="454.0" prefWidth="150.0" />
-      <Button fx:id="btnStart" layoutX="372.0" layoutY="649.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="51.0" prefWidth="83.0" styleClass="start-button" stylesheets="@../css/roomStylesheet.css" text="Start" />
+      <Button fx:id="btnStart" layoutX="373.0" layoutY="650.0" mnemonicParsing="false" onAction="#onStartGame" prefHeight="50.0" prefWidth="80.0" styleClass="start-button" stylesheets="@../css/roomStylesheet.css" text="Start" />
       <Label layoutX="339.0" layoutY="404.0" styleClass="white-text" stylesheets="@../css/roomStylesheet.css" text="Time to complete" textFill="WHITE">
          <font>
             <Font name="Arial" size="22.0" />
@@ -36,11 +36,12 @@
             <Font name="Arial" size="22.0" />
          </font>
       </Label>
-      <Button layoutX="520.0" layoutY="656.0" mnemonicParsing="false" onMouseClicked="#toLeaderboard" text="Leaderboard" />
+      <Button layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#toLeaderboard" prefHeight="40.0" prefWidth="160.0" text="Leaderboard" />
       <ImageView fx:id="soundToggle" fitHeight="40.0" fitWidth="40.0" layoutX="650.0" layoutY="20.0" onMouseClicked="#mute" pickOnBounds="true" preserveRatio="true" styleClass="white-text-small">
          <image>
             <Image url="@../images/sound/audioOn.png" />
          </image>
       </ImageView>
+      <Button layoutX="710.0" layoutY="20.0" mnemonicParsing="false" onMouseClicked="#clickExit" text="Quit" />
    </children>
 </Pane>

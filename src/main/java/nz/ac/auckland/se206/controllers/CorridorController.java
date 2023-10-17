@@ -14,6 +14,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -21,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
@@ -63,16 +65,13 @@ public class CorridorController implements Controller {
   @FXML private Polygon polygon;
   @FXML private Group group;
   @FXML private Rectangle player;
-  @FXML private Rectangle treasureChest;
+  @FXML private ImageView treasureChest;
   @FXML private Rectangle door1;
 
   @FXML private Rectangle door2;
   @FXML private Rectangle border1;
   @FXML private Rectangle door3;
-  @FXML private Rectangle treasureHoverRectangle;
-  @FXML private Rectangle dungeonMasterHoverRectangle;
-  @FXML private Group dungeonMasterHover;
-  @FXML private Group treasureHover;
+
   @FXML private ImageView swordandshield;
   @FXML private ImageView forwardsKey;
   @FXML private ImageView leftwardsKey;
@@ -217,26 +216,6 @@ public class CorridorController implements Controller {
 
     instance = this;
     Image image = new Image("/images/character.png");
-
-    dungeonMasterHover.getStyleClass().add("hover");
-    treasureHover.getStyleClass().add("hover");
-    dungeonMasterHover.setOnMouseEntered(
-        event -> {
-          dungeonMasterHoverRectangle.setOpacity(0.5);
-        });
-    dungeonMasterHover.setOnMouseExited(
-        event -> {
-          dungeonMasterHoverRectangle.setOpacity(0);
-        });
-
-    treasureHover.setOnMouseEntered(
-        event -> {
-          treasureHoverRectangle.setOpacity(0.5);
-        });
-    treasureHover.setOnMouseExited(
-        event -> {
-          treasureHoverRectangle.setOpacity(0);
-        });
 
     player.setFill(new ImagePattern(image));
     // Listener to start/stop timers based on key presses
@@ -414,6 +393,29 @@ public class CorridorController implements Controller {
     App.goToChest();
   }
 
+  @FXML
+  private void shadowEffect(ImageView image) {
+    DropShadow dropShadow = new DropShadow();
+    dropShadow.setHeight(60);
+    dropShadow.setWidth(60);
+    dropShadow.setSpread(0.35);
+    dropShadow.setColor(Color.WHITE);
+
+    image.setEffect(dropShadow);
+  }
+
+  @FXML
+  private void onImageHover(MouseEvent event) {
+    ImageView image = (ImageView) event.getSource();
+    shadowEffect(image);
+  }
+
+  @FXML
+  private void onImageHoverEnd(MouseEvent event) {
+    ImageView image = (ImageView) event.getSource();
+    image.setEffect(null);
+  }
+
   /**
    * Handles the logic when the treasure chest is unlocked. If the chest is opened, the
    * "swordandshield" item is made visible and enabled if it is not already in the inventory. This
@@ -498,7 +500,7 @@ public class CorridorController implements Controller {
       imageViews[3] = rightwardsKey;
       FadeTransition[] fadeTransitions = new FadeTransition[imageViews.length];
       for (int i = 0; i < imageViews.length; i++) {
-        fadeTransitions[i] = new FadeTransition(Duration.seconds(1.5), imageViews[i]);
+        fadeTransitions[i] = new FadeTransition(Duration.seconds(1.2), imageViews[i]);
         fadeTransitions[i].setToValue(0.0);
       }
 

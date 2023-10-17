@@ -8,12 +8,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import nz.ac.auckland.se206.App;
 import nz.ac.auckland.se206.Chat;
@@ -38,7 +41,7 @@ public class PuzzleRoomController implements Controller {
   @FXML private Label lblTime;
   @FXML private ImageView key3;
   @FXML private ImageView soundToggle;
-
+  @FXML private Polygon doorPolygon;
   @FXML private Label lblObjectiveMarker;
   @FXML private TextArea textArea;
   @FXML private TextField inputText;
@@ -71,16 +74,6 @@ public class PuzzleRoomController implements Controller {
     key3.disableProperty().bind(((BooleanExpression) GameState.getPuzzleRoomSolved()).not());
     // Bind the inventory choice box to the inventory
     instance = this;
-
-    puzzleButton.getStyleClass().add("hover");
-    puzzleButton.setOnMouseEntered(
-        event -> {
-          puzzleButton.setOpacity(0.5);
-        });
-    puzzleButton.setOnMouseExited(
-        event -> {
-          puzzleButton.setOpacity(0);
-        });
   }
 
   @FXML
@@ -112,6 +105,29 @@ public class PuzzleRoomController implements Controller {
       ObjectiveMarker.setObjective("Return to the corridor");
     }
     ObjectiveMarker.update();
+  }
+
+  @FXML
+  private void shadowEffect(Polygon image) {
+    DropShadow dropShadow = new DropShadow();
+    dropShadow.setHeight(40);
+    dropShadow.setWidth(40);
+    dropShadow.setSpread(0.95);
+    dropShadow.setColor(Color.WHITE);
+
+    image.setEffect(dropShadow);
+  }
+
+  @FXML
+  private void onImageHover(MouseEvent event) {
+    Polygon image = (Polygon) event.getSource();
+    shadowEffect(image);
+  }
+
+  @FXML
+  private void onImageHoverEnd(MouseEvent event) {
+    Polygon image = (Polygon) event.getSource();
+    image.setEffect(null);
   }
 
   @FXML
