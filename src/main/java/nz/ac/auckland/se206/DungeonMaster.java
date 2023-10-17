@@ -72,11 +72,17 @@ public class DungeonMaster {
       keyStatus += "sliding puzzle room and key 3, ";
     }
 
+    if (GameState.isKey1Collected && GameState.isKey2Collected && GameState.isKey3Collected) {
+      keyStatus =
+          "The player has all the keys to the rooms and needs to get the sword and shield"
+              + " to defeat the dungeon master. ";
+    }
+
     // full context string to be returned
     String context =
         "You are the master of a dungeon which I the player am trying to escape from. Comment on"
-            + " the players progress within the dungeon so far. If the player has all three keys"
-            + " then they should go to the chest and solve the final puzzle. "
+            + " the players progress within the dungeon so far. The player needs to go to the"
+            + " following rooms "
             + keyStatus
             + ". The player has just completed the "
             + currentRoom
