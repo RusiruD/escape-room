@@ -27,6 +27,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 import nz.ac.auckland.se206.Riddle;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
@@ -387,6 +388,7 @@ public class ChestController implements Controller {
       // check if correct key
       if (keyHoleMap.get("hole" + num).equals(currentKey)) {
         System.out.println("correct key");
+        Music.playCorrectKey();
         // sets the key states
         Image newImage = new Image("/images/unlockedlock.png");
         keyHole.setImage(newImage);

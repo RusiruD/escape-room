@@ -33,6 +33,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 import nz.ac.auckland.se206.ScoreEntry;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
@@ -190,6 +191,7 @@ public class CorridorController implements Controller {
   @FXML
   public void onSwordAndShieldClicked(MouseEvent event) {
     GameState.hasSwordAndShield = true;
+    Music.playSwordDraw();
     CustomNotifications.generateNotification(
         "You've become stronger!", "Now you can fight the dungeon master!");
     Inventory.addToInventory("sword/shield");
@@ -444,6 +446,7 @@ public class CorridorController implements Controller {
     if (hasSword) {
       // win game
       //
+      Music.playSwordHit();
       GameState.isGameWon = true;
       // Calculate time taken to win
       String time = lblTime.getText();

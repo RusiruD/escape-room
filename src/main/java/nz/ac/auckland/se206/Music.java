@@ -11,6 +11,12 @@ public class Music {
   private static Media win = generateMedia("Win");
   private static Media loss = generateMedia("Loss");
   private static Media equip = generateMedia("item");
+  private static Media unlock = generateMedia("unlock");
+  private static Media swordDraw = generateMedia("swordDraw");
+  private static Media swordHit = generateMedia("swordHit");
+  private static Media potionMove = generateMedia("movePotion");
+  private static Media potionDrop = generateMedia("potionDrop");
+  private static Media pageTurn = generateMedia("pageTurn");
 
   public static void playBackgroundMusic() {
 
@@ -26,11 +32,36 @@ public class Music {
   }
 
   public static void playEquipSound() {
-    playSimultaneousSound(equip);
+    playSimultaneousSound(equip, 1);
   }
 
-  private static void playSimultaneousSound(Media music) {
+  public static void playCorrectKey() {
+    playSimultaneousSound(unlock, 1);
+  }
+
+  public static void playSwordDraw() {
+    playSimultaneousSound(swordDraw, 1);
+  }
+
+  public static void playSwordHit() {
+    playSimultaneousSound(swordHit, 1);
+  }
+
+  public static void playMovePotion() {
+    playSimultaneousSound(potionMove, 2.0);
+  }
+
+  public static void playDropPotion() {
+    playSimultaneousSound(potionDrop, 0.75);
+  }
+
+  public static void playPageTurn() {
+    playSimultaneousSound(pageTurn, 1);
+  }
+
+  private static void playSimultaneousSound(Media music, double volume) {
     MediaPlayer newMedia = new MediaPlayer(music);
+    newMedia.setVolume(volume);
     if (!GameState.isMuted) {
       newMedia.play();
     }
