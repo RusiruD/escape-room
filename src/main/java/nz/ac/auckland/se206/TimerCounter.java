@@ -80,6 +80,7 @@ public class TimerCounter {
   private void gameOver() {
     // updates scoreboard
     System.out.println("Game over");
+    GameState.tts.cancel();
     if (GameState.currentTimeLimit == GameState.TimeLimit.TWO_MINUTES) {
       GameState.totalTime += 120;
     } else if (GameState.currentTimeLimit == GameState.TimeLimit.FOUR_MINUTES) {
