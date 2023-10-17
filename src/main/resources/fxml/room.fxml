@@ -14,7 +14,7 @@
 
 <Pane fx:id="potionsRoomPane" focusTraversable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onKeyPressEvent" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.RoomController">
    <children>
-      <ImageView fx:id="imgBackground" fitHeight="730.0" fitWidth="800.0" layoutY="-5.0" pickOnBounds="true">
+      <ImageView fx:id="imgBackground" fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/RoomBackground.jpg" />
          </image>
