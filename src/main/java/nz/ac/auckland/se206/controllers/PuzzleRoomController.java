@@ -108,9 +108,9 @@ public class PuzzleRoomController implements Controller {
   }
 
   /**
-   * creates a drop shadow for the image to highlight it when hovered over
+   * Applies a drop shadow effect to the specified polygon image when hovered over.
    *
-   * @param image
+   * @param image The polygon image to which the shadow effect is applied.
    */
   @FXML
   private void shadowEffect(Polygon image) {

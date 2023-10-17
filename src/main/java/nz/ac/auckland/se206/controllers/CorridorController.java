@@ -426,12 +426,7 @@ public class CorridorController implements Controller {
     image.setEffect(null);
   }
 
-  /**
-   * Handles the logic when the treasure chest is unlocked. If the chest is opened, the
-   * "swordandshield" item is made visible and enabled if it is not already in the inventory. This
-   * method is typically triggered in response to a user action indicating the successful unlocking
-   * of the treasure chest.
-   */
+  /** Handles the event when the treasure chest is unlocked. */
   @FXML
   public void onTreasureChestUnlocked() {
     // Check if the chest is opened, the "swordandshield" item is not in inventory, and it is
