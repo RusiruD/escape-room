@@ -75,6 +75,7 @@ public class PuzzleController implements Controller {
 
   private HintNode hintNode;
   private Chat.AppUi appUi;
+  private boolean firstSolve;
 
   /**
    * Initializes the PuzzleController. This method is automatically called after the FXML file has
@@ -235,7 +236,8 @@ public class PuzzleController implements Controller {
       }
     }
     // if all the tiles are in the correct position, the puzzle is solved
-    if (counter == 9) {
+    if (counter == 9 && !firstSolve) {
+      firstSolve = true;
       CustomNotifications.generateNotification(
           "Something Happens!", "You hear something fall to the ground...");
       GameState.setPuzzleRoomSolved(true);
