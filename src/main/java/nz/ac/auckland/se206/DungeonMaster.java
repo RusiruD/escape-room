@@ -259,6 +259,7 @@ public class DungeonMaster {
    * @param message The message sent to the GPT model for generating a response.
    */
   public void getText(String role, String message) {
+    Music.playThink();
     System.out.println("getting text");
     messages = null;
     messageIndex = 0;

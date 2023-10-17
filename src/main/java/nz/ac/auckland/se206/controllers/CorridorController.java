@@ -450,6 +450,7 @@ public class CorridorController implements Controller {
       // win game
       //
       Music.playSwordHit();
+      Music.playPerish();
       GameState.tts.cancel();
       GameState.isGameWon = true;
       // Calculate time taken to win

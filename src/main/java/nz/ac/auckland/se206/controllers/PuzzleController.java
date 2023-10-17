@@ -23,6 +23,7 @@ import nz.ac.auckland.se206.Controller;
 import nz.ac.auckland.se206.CustomNotifications;
 import nz.ac.auckland.se206.DungeonMaster;
 import nz.ac.auckland.se206.GameState;
+import nz.ac.auckland.se206.Music;
 import nz.ac.auckland.se206.TimerCounter;
 import nz.ac.auckland.se206.Utility;
 import nz.ac.auckland.se206.controllers.SceneManager.AppUi;
@@ -150,6 +151,7 @@ public class PuzzleController implements Controller {
 
   @FXML
   private void clickedTile(MouseEvent event) throws IOException {
+    Music.playTileSlide();
     clicked((ImageView) event.getSource());
   }
 
