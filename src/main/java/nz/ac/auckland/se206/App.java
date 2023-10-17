@@ -229,16 +229,7 @@ public class App extends Application {
     focus();
   }
 
-  /**
-   * Navigate to Door 2 and enter the Untangle room. Adjust the stage size to fit the Untangle room
-   * dimensions.
-   */
-  @Override
-  public void stop() {
-    // Stop the timer when the application is closing
-    Utility.exitGame();
-  }
-
+  /** Navigate to Door 2 and sets the scene to be the untangle room. */
   public static void goToDoor2() {
 
     try {
@@ -311,5 +302,15 @@ public class App extends Application {
 
     // Set the focus to an unspecified method.
     focus();
+  }
+
+  /**
+   * Navigate to Door 2 and enter the Untangle room. Adjust the stage size to fit the Untangle room
+   * dimensions.
+   */
+  @Override
+  public void stop() {
+    // Stop the timer when the application is closing
+    Utility.exitGame();
   }
 }

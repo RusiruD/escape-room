@@ -107,8 +107,14 @@ public class PuzzleRoomController implements Controller {
     ObjectiveMarker.update();
   }
 
+  /**
+   * creates a drop shadow for the image to highlight it when hovered over
+   *
+   * @param image
+   */
   @FXML
   private void shadowEffect(Polygon image) {
+    // create a drop shadow for the image when its hovered over
     DropShadow dropShadow = new DropShadow();
     dropShadow.setHeight(40);
     dropShadow.setWidth(40);

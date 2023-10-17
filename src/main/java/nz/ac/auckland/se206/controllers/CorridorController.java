@@ -395,8 +395,14 @@ public class CorridorController implements Controller {
     App.goToChest();
   }
 
+  /**
+   * creates a drop shadow for the image to highlight it when hovered over
+   *
+   * @param image
+   */
   @FXML
   private void shadowEffect(ImageView image) {
+    // creates a drop shadow for the image to highlight it when hovered over
     DropShadow dropShadow = new DropShadow();
     dropShadow.setHeight(60);
     dropShadow.setWidth(60);

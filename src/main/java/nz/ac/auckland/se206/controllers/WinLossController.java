@@ -115,6 +115,7 @@ public class WinLossController implements Controller {
     // Implementation not provided, but should update the inventory
   }
 
+  /** Updates the mute button to reflect the current mute status of the game. */
   @FXML
   public void updateMute() {
     if (!GameState.isMuted) {
