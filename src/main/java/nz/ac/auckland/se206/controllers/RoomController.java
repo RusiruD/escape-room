@@ -257,6 +257,7 @@ public class RoomController implements Controller {
   @FXML
   private void onPotionClicked(MouseEvent event) {
     // if the potion is clicked and has no effect and no potion is selected add a dropshadow to it
+    Music.playMovePotion();
     ImageView image = (ImageView) event.getSource();
     if ((image.getEffect() == null)
         && (GameState.isPotionSelected == false)
@@ -337,6 +338,7 @@ public class RoomController implements Controller {
   @FXML
   private void onHideNote() {
     // make the note visible and clickable
+    Music.playPageTurn();
     note.setVisible(true);
     note.setDisable(false);
     // make the text area invisible and unclickable
@@ -377,6 +379,7 @@ public class RoomController implements Controller {
               && (image.getId().contains("Potion")))) {
             // if the image is intersecting with the cauldron and is a potion it is made invisible
             // and unclickable
+            Music.playDropPotion();
             image.setVisible(false);
             image.setDisable(true);
             GameState.isPotionSelected = false;
@@ -435,6 +438,7 @@ public class RoomController implements Controller {
 
   @FXML
   private void onNoteClicked(MouseEvent event) {
+    Music.playPageTurn();
     // Check if a note is selected in the combo box
     note.setVisible(false);
     note.setDisable(true);

@@ -15,26 +15,6 @@
 
 <Pane fx:id="puzzleRoomPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" onKeyPressed="#onKeyPress" prefHeight="730.0" prefWidth="800.0" stylesheets="@../css/roomStylesheet.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="nz.ac.auckland.se206.controllers.PuzzleRoomController">
    <children>
-      <Group layoutX="-45.0" layoutY="355.0">
-         <children>
-            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
-               <image>
-                  <Image url="@../images/ChatBackground.jpeg" />
-               </image>
-            </ImageView>
-            <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onChatClosed" prefHeight="40.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Close" />
-            <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
-            <TextField fx:id="inputText" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
-            <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatShown" stylesheets="@../css/roomStylesheet.css" text="Chat" />
-            <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
-               <font>
-                  <Font name="Old English Text MT" size="28.0" />
-               </font>
-            </Label>
-            <Button fx:id="sendButton" layoutX="657.0" layoutY="318.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMessageSent" prefHeight="37.0" text="Send" />
-            <Button fx:id="switchButton" layoutX="739.0" layoutY="318.0" mnemonicParsing="false" onAction="#onChatViewSwitched" prefWidth="99.0" text="Expand" />
-         </children>
-      </Group>
       <ImageView fitHeight="730.0" fitWidth="800.0" pickOnBounds="true">
          <image>
             <Image url="@../images/PuzzleRoomBackground.png" />
@@ -111,5 +91,25 @@
          </children>
       </VBox>
       <Polygon fx:id="doorPolygon" fill="TRANSPARENT" layoutX="288.0" layoutY="381.0" onMouseClicked="#clickPuzzle" onMouseEntered="#onImageHover" onMouseExited="#onImageHoverEnd" opacity="0.35" points="116.0, -182.0, 193.0, -167.0, 249.0, -136.0, 283.0, -79.0, 292.0, 0.0, 283.0, 204.0, -30.0, 204.0, -41.0, 42.0, -50.0, -43.0, -24.0, -114.0, 18.0, -152.0, 74.0, -176.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="OUTSIDE" />
+      <Group layoutX="-45.0" layoutY="355.0">
+         <children>
+            <ImageView fx:id="chatBackground" fitHeight="270.0" fitWidth="801.0" layoutX="45.0" layoutY="103.0" pickOnBounds="true">
+               <image>
+                  <Image url="@../images/ChatBackground.jpeg" />
+               </image>
+            </ImageView>
+            <Button fx:id="closeButton" layoutX="58.0" layoutY="57.0" mnemonicParsing="false" onAction="#onChatClosed" prefHeight="40.0" prefWidth="84.0" stylesheets="@../css/roomStylesheet.css" text="Close" />
+            <TextArea fx:id="textArea" editable="false" layoutX="56.0" layoutY="103.0" prefHeight="207.0" prefWidth="782.0" styleClass="text-area" stylesheets="@../css/roomStylesheet.css" wrapText="true" />
+            <TextField fx:id="inputText" layoutX="57.0" layoutY="318.0" prefHeight="40.0" prefWidth="592.0" styleClass="text-field" stylesheets="@../css/roomStylesheet.css" />
+            <Button fx:id="showButton" layoutX="58.0" layoutY="319.0" mnemonicParsing="false" onAction="#onChatShown" stylesheets="@../css/roomStylesheet.css" text="Chat" />
+            <Label fx:id="hintField" alignment="CENTER" contentDisplay="RIGHT" layoutX="142.0" layoutY="57.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="294.0" text="5 Hint(s) Remaining" textFill="WHITE">
+               <font>
+                  <Font name="Old English Text MT" size="28.0" />
+               </font>
+            </Label>
+            <Button fx:id="sendButton" layoutX="657.0" layoutY="318.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onMessageSent" prefHeight="37.0" text="Send" />
+            <Button fx:id="switchButton" layoutX="739.0" layoutY="318.0" mnemonicParsing="false" onAction="#onChatViewSwitched" prefWidth="99.0" text="Expand" />
+         </children>
+      </Group>
    </children>
 </Pane>
