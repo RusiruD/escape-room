@@ -398,9 +398,9 @@ public class CorridorController implements Controller {
   }
 
   /**
-   * creates a drop shadow for the image to highlight it when hovered over
+   * creates a drop shadow for the image to highlight it when hovered over.
    *
-   * @param image
+   * @param image The ImageView to which the shadow effect is applied.
    */
   @FXML
   private void shadowEffect(ImageView image) {
