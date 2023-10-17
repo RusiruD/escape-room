@@ -257,12 +257,11 @@ public class RoomController implements Controller {
   @FXML
   private void onPotionClicked(MouseEvent event) {
     // if the potion is clicked and has no effect and no potion is selected add a dropshadow to it
-    Music.playMovePotion();
     ImageView image = (ImageView) event.getSource();
     if ((image.getEffect() == null)
         && (GameState.isPotionSelected == false)
         && (image.getId().contains("Potion"))) {
-
+      Music.playMovePotion();
       DropShadow dropShadow = new DropShadow();
       dropShadow.setHeight(60);
       dropShadow.setWidth(60);
@@ -389,6 +388,7 @@ public class RoomController implements Controller {
               GameState.correctPotions++;
               if (GameState.correctPotions == 2) {
                 tintScene(potionsRoomPane);
+                Music.playPowerUp();
                 CustomNotifications.generateNotification(
                     "Something Happens!",
                     "You feel far stronger... like energy's coursing through you and you could move"

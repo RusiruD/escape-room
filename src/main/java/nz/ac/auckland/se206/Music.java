@@ -17,6 +17,10 @@ public class Music {
   private static Media potionMove = generateMedia("movePotion");
   private static Media potionDrop = generateMedia("potionDrop");
   private static Media pageTurn = generateMedia("pageTurn");
+  private static Media perish = generateMedia("perish");
+  private static Media think = generateMedia("think");
+  private static Media tileSlide = generateMedia("tileSlide");
+  private static Media powerUp = generateMedia("powerUp");
 
   public static void playBackgroundMusic() {
 
@@ -48,15 +52,31 @@ public class Music {
   }
 
   public static void playMovePotion() {
-    playSimultaneousSound(potionMove, 2.0);
+    playSimultaneousSound(potionMove, 1);
   }
 
   public static void playDropPotion() {
-    playSimultaneousSound(potionDrop, 0.75);
+    playSimultaneousSound(potionDrop, 0.25);
   }
 
   public static void playPageTurn() {
     playSimultaneousSound(pageTurn, 1);
+  }
+
+  public static void playPerish() {
+    playSimultaneousSound(perish, 1);
+  }
+
+  public static void playThink() {
+    playSimultaneousSound(think, 1);
+  }
+
+  public static void playTileSlide() {
+    playSimultaneousSound(tileSlide, 1);
+  }
+
+  public static void playPowerUp() {
+    playSimultaneousSound(powerUp, 1);
   }
 
   private static void playSimultaneousSound(Media music, double volume) {
@@ -83,6 +103,7 @@ public class Music {
       stop();
     }
     mediaPlayer = new MediaPlayer(music);
+    mediaPlayer.setVolume(0.5);
     if (!GameState.isMuted) {
       mediaPlayer.play();
     }
