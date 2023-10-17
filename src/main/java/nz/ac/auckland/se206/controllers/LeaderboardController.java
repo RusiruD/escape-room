@@ -208,9 +208,9 @@ public class LeaderboardController {
   }
 
   /**
-   * Returns to the start screen when the back button is clicked.
+   * Handles the event when the user clicks the button to return to the start screen.
    *
-   * @param event
+   * @param event The MouseEvent representing the click event.
    */
   @FXML
   public void toStartScreen(MouseEvent event) {
