@@ -209,7 +209,8 @@ public class Chat {
 
           String contextMsg;
           if (GameState.currentDifficulty == GameState.Difficulty.HARD) {
-            contextMsg = message;
+
+            contextMsg = message + "(If this message is a question, coldly rebuke me.)";
           } else if (GameState.currentDifficulty == GameState.Difficulty.EASY) {
             contextMsg = GptPromptEngineering.hintPrompt(message, hint);
           } else {
