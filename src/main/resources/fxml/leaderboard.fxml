@@ -23,7 +23,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" maxHeight="40.0" maxWidth="630.0" prefHeight="40.0" prefWidth="630.0">
                <children>
-                  <Label prefHeight="30.0" prefWidth="189.0" styleClass="white-text-small" text=" Performance overview" textFill="WHITE">
+                  <Label prefHeight="30.0" prefWidth="243.0" styleClass="white-text-small" text=" Performance overview" textFill="WHITE">
                      <font>
                         <Font size="20.0" />
                      </font>
