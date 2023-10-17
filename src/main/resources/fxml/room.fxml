@@ -51,7 +51,7 @@
             <Image url="@../images/cauldron.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="purplePotion" fitHeight="67.0" fitWidth="29.0" layoutX="136.0" layoutY="393.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="purplePotion" fitHeight="67.0" fitWidth="29.0" layoutX="131.0" layoutY="404.0" onMouseClicked="#onPotionClicked" onMouseEntered="#enlargeItem" onMouseExited="#shrinkItem" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/potion5.png" />
          </image>
@@ -81,7 +81,7 @@
             <Image url="@../images/parchment.jpg" />
          </image>
       </ImageView>
-      <Pane fx:id="cursorPane" layoutX="162.0" layoutY="446.0" prefHeight="78.0" prefWidth="146.0">
+      <Pane fx:id="cursorPane" layoutX="178.0" layoutY="444.0" prefHeight="80.0" prefWidth="137.0">
          <children>
             <ImageView fx:id="hand" fitHeight="57.0" fitWidth="40.0" layoutX="7.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
