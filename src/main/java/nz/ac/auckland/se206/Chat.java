@@ -193,8 +193,10 @@ public class Chat {
           // Clear the input field and create actual and fake chat messages
           String hint = "";
           if (GameState.currentRoom == GameState.State.CHEST) {
-            if (GameState.hasKeyOne && GameState.hasKeyTwo && GameState.hasKeyThree) {
-              hint = "\"The riddle gives the information of the keys unlock the chest\"";
+            if (GameState.isKey1Collected
+                && GameState.isKey2Collected
+                && GameState.isKey3Collected) {
+              hint = "\"The answers are hiddne within the riddle. Pay attention to the order.\"";
             } else {
               hint = "\"Search the dungeon for three keys\"";
             }
