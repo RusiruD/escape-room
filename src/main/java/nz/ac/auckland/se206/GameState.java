@@ -169,6 +169,7 @@ public class GameState {
     isPotionSelected = false;
     isChestOpened = false;
     isGameWon = false;
+    correctPotions = 0;
     // change strings
     difficultyLevel = "";
     firstPotion = "";
